@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compound Interest Calculator — Calcuvelo</title>
+  <meta name="description" content="Free compound interest calculator with monthly contributions. See your ending balance, total interest earned, and a chart of principal vs. interest growth over time." />
+  <link rel="canonical" href="https://calcuvelo.com/compound-interest.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Compound Interest Calculator — Calcuvelo" />
+  <meta property="og:description" content="See your ending balance, total interest earned, and a chart of principal vs. interest growth over time." />
+  <meta property="og:url" content="https://calcuvelo.com/compound-interest.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Tailwind CSS + Forms + Typography plugins (no build step) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <!-- Chart.js, then the shared calculator logic, then Alpine (order matters) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <!-- Structured data: helps Google show this tool + FAQ rich results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Compound Interest Calculator",
+        "url": "https://calcuvelo.com/compound-interest.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a good interest rate to assume?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Be conservative. Over long periods the S&P 500 has returned roughly 10% per year before inflation and about 7% after inflation. For cash savings, 4-5% is realistic in a higher-rate environment. Using a lower number builds in a safety margin." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much difference does compounding frequency make?",
+            "acceptedAnswer": { "@type": "Answer", "text": "More frequent compounding always helps, but the effect is modest at ordinary rates. $10,000 at 7% for 30 years grows to about $76,123 compounded annually versus about $81,165 compounded monthly. This tool uses monthly compounding, matching most savings and brokerage accounts." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this account for taxes and inflation?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The result is a nominal, pre-tax figure. Use the Inflation / Purchasing Power calculator to see the value in today's dollars, and the Real ROI calculator to factor in capital-gains tax." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="no-print hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= AD SLOT 1 — TOP LEADERBOARD ================= -->
+  <!-- Paste your AdSense <ins class="adsbygoogle"> unit inside this box -->
+  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
+
+      <!-- ---------- SIDEBAR NAVIGATION (real <a> links → separate pages) ---------- -->
+      <aside class="site-nav mb-6 lg:mb-0" aria-label="Calculator navigation">
+        <div class="lg:sticky lg:top-24">
+          <nav class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+            <p class="nav-group hidden lg:block">Financial</p>
+            <a href="compound-interest.html" data-nav class="nav-link"><span class="nav-badge">1</span><span>Compound Interest</span></a>
+            <a href="mortgage-calculator.html" data-nav class="nav-link"><span class="nav-badge">2</span><span>Mortgage</span></a>
+            <a href="retirement-calculator.html" data-nav class="nav-link"><span class="nav-badge">3</span><span>Retirement / 401(k)</span></a>
+            <a href="auto-loan.html" data-nav class="nav-link"><span class="nav-badge">4</span><span>Auto Loan</span></a>
+            <a href="debt-payoff.html" data-nav class="nav-link"><span class="nav-badge">5</span><span>Debt Payoff</span></a>
+            <p class="nav-group hidden lg:block">Economic</p>
+            <a href="inflation-calculator.html" data-nav class="nav-link"><span class="nav-badge">6</span><span>Inflation</span></a>
+            <a href="present-value.html" data-nav class="nav-link"><span class="nav-badge">7</span><span>Present / Future Value</span></a>
+            <a href="real-roi.html" data-nav class="nav-link"><span class="nav-badge">8</span><span>Real ROI</span></a>
+            <a href="salary-converter.html" data-nav class="nav-link"><span class="nav-badge">9</span><span>Salary → Hourly</span></a>
+            <a href="rule-of-72.html" data-nav class="nav-link"><span class="nav-badge">10</span><span>Rule of 72</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- ---------- MAIN COLUMN + RIGHT RAIL ---------- -->
+      <div class="min-w-0">
+        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+          <main class="min-w-0">
+
+            <!-- ================= CALCULATOR CARD ================= -->
+            <section x-data="compound()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Compound Interest Calculator</h1>
+              <p class="calc-sub">See how monthly contributions and compounding growth stack up over time.</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <!-- ----- Inputs ----- -->
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="ci-p">Initial principal</label>
+                  <div class="relative">
+                    <span class="affix affix-left">$</span>
+                    <input id="ci-p" type="number" min="0" step="500" x-model.number="principal" class="field with-prefix" />
+                  </div>
+                  <input type="range" min="0" max="250000" step="1000" x-model.number="principal" class="range" aria-label="Initial principal" />
+                </div>
+                <div>
+                  <label class="label" for="ci-m">Monthly contribution</label>
+                  <div class="relative">
+                    <span class="affix affix-left">$</span>
+                    <input id="ci-m" type="number" min="0" step="50" x-model.number="monthly" class="field with-prefix" />
+                  </div>
+                  <input type="range" min="0" max="5000" step="50" x-model.number="monthly" class="range" aria-label="Monthly contribution" />
+                </div>
+                <div>
+                  <label class="label" for="ci-r">Annual interest rate</label>
+                  <div class="relative">
+                    <input id="ci-r" type="number" min="0" step="0.1" x-model.number="rate" class="field with-suffix" />
+                    <span class="affix affix-right">%</span>
+                  </div>
+                  <input type="range" min="0" max="15" step="0.1" x-model.number="rate" class="range" aria-label="Annual interest rate" />
+                </div>
+                <div>
+                  <label class="label" for="ci-y">Time horizon</label>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="relative">
+                      <input id="ci-y" type="number" min="0" max="60" step="1" x-model.number="years" class="field with-suffix" aria-label="Years" />
+                      <span class="affix affix-right">yr</span>
+                    </div>
+                    <div class="relative">
+                      <input id="ci-mo" type="number" min="0" max="11" step="1" x-model.number="months" class="field with-suffix" aria-label="Months" />
+                      <span class="affix affix-right">mo</span>
+                    </div>
+                  </div>
+                  <input type="range" min="0" max="50" step="1" x-model.number="years" class="range" aria-label="Years" />
+                </div>
+              </div>
+
+              <!-- ----- Results toolbar: view toggle + print ----- -->
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+
+              <!-- ----- Summary numbers ----- -->
+              <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                <div class="stat"><p class="stat-label">Ending balance</p><p class="stat-value" x-text="money(out.balance)"></p></div>
+                <div class="stat"><p class="stat-label">Total contributed</p><p class="stat-value" x-text="money(out.contributed)"></p></div>
+                <div class="stat"><p class="stat-label">Interest earned</p><p class="stat-value stat-pos" x-text="money(out.interest)"></p></div>
+              </div>
+
+              <!-- ===== AD SLOT 3 — IN-CONTENT (between inputs and chart) ===== -->
+              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+              <!-- ===== GRAPH VIEW (updates live as sliders move) ===== -->
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Chart of contributions versus interest over time"></canvas></div>
+
+              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Set a time horizon above to see the year-by-year breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="disclaimer">Assumes monthly compounding with contributions made at month-end. Estimates only — not financial advice.</p>
+            </section>
+
+            <!-- ================= SEO CONTENT ================= -->
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>How to Use This Calculator</h2>
+              <ol>
+                <li><strong>Enter your initial principal</strong> — the amount you are investing today.</li>
+                <li><strong>Set your monthly contribution</strong> — money you will add automatically every month.</li>
+                <li><strong>Enter the expected annual return.</strong> A diversified stock portfolio has historically returned about 7% per year after inflation; high-yield savings accounts currently pay roughly 4–5%.</li>
+                <li><strong>Choose your time horizon</strong> in years and months.</li>
+                <li><strong>Read the results.</strong> The tiles show your ending balance, how much of it came from your own deposits, and how much is pure compound interest. Use <strong>View Graph</strong> to see contributions and interest stacked over time (and spot the "crossover" year when growth outpaces your deposits), or <strong>View Table</strong> for the exact year-by-year numbers. <strong>Print / Save PDF</strong> produces a clean one-page report of your inputs, the summary and the current view.</li>
+              </ol>
+
+              <h2>The Formula Explained</h2>
+              <p>This calculator compounds <strong>monthly</strong>. Each month the running balance earns one-twelfth of the annual rate, and then your contribution is added:</p>
+              <div class="not-prose my-4"><div class="formula">balanceₙₑw = balanceₒₗd × (1 + r ÷ 12) + PMT</div></div>
+              <p>Repeated over <em>n</em> compounding periods, this is equivalent to the future value of a lump sum plus the future value of an ordinary annuity:</p>
+              <div class="not-prose my-4"><div class="formula">FV = P (1 + i)ⁿ  +  PMT × [ ((1 + i)ⁿ − 1) ÷ i ]</div></div>
+              <ul>
+                <li><strong>P</strong> — initial principal</li>
+                <li><strong>PMT</strong> — monthly contribution</li>
+                <li><strong>i</strong> — monthly rate = annual rate ÷ 12</li>
+                <li><strong>n</strong> — total months = (years × 12) + months</li>
+              </ul>
+              <p>Interest earned is simply <strong>FV − (P + PMT × n)</strong>: the ending balance minus every dollar you put in.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>What is a good interest rate to assume?</h3>
+              <p>Be conservative. Over long periods the S&amp;P 500 has returned roughly 10% per year before inflation and about 7% after inflation. For cash savings, 4–5% is realistic in a higher-rate environment. Using a lower number builds in a safety margin — and if reality turns out better, that is a bonus rather than a shortfall.</p>
+              <h3>How much difference does compounding frequency make?</h3>
+              <p>More frequent compounding always helps, but the effect is modest at ordinary rates. $10,000 at 7% for 30 years grows to about $76,123 compounded annually versus about $81,165 compounded monthly. This tool uses monthly compounding, which matches how most brokerage and savings accounts actually credit growth.</p>
+              <h3>Does this account for taxes and inflation?</h3>
+              <p>No. The result is a nominal, pre-tax figure. To see what your future balance is worth in today's dollars, use the <a href="inflation-calculator.html">Inflation / Purchasing Power calculator</a>. To factor in capital-gains tax on your gains, use the <a href="real-roi.html">Real ROI calculator</a>.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="retirement-calculator.html">Retirement / 401(k) Estimator</a> — apply compounding to a full career of contributions.</li>
+                <li><a href="rule-of-72.html">Rule of 72</a> — a quick estimate of how long your money takes to double.</li>
+                <li><a href="present-value.html">Present &amp; Future Value</a> — the general time-value-of-money formula.</li>
+              </ul>
+            </article>
+
+          </main>
+
+          <!-- ================= AD SLOT 2 — RIGHT SIDEBAR ================= -->
+          <!-- On mobile this stacks neatly below the calculator (grid collapses) -->
+          <aside class="site-rail mt-6 lg:mt-0">
+            <div class="lg:sticky lg:top-24">
+              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

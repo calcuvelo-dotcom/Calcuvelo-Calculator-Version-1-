@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salary to Hourly Wage Converter — Calcuvelo</title>
+  <meta name="description" content="Free salary to hourly calculator. Convert an annual salary to hourly, daily, weekly, bi-weekly and monthly pay — or work backwards from an hourly rate." />
+  <link rel="canonical" href="https://calcuvelo.com/salary-converter.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Salary to Hourly Wage Converter — Calcuvelo" />
+  <meta property="og:description" content="Convert an annual salary into every pay cadence, or an hourly rate into an annual salary." />
+  <meta property="og:url" content="https://calcuvelo.com/salary-converter.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Salary to Hourly Wage Converter",
+        "url": "https://calcuvelo.com/salary-converter.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How many working hours are in a year?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The standard assumption is 2,080 hours: 40 hours per week times 52 weeks. Subtracting two weeks of unpaid time off would give 2,000 hours. This calculator lets you set hours per week, weeks per year and paid time off so the effective hourly rate matches your situation." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is paid time off included in the hourly rate?",
+            "acceptedAnswer": { "@type": "Answer", "text": "For a salaried employee, paid vacation and holidays are still paid, so your paycheck figures use the full year. The 'effective hourly' rate divides your salary by the hours you actually work, which is slightly higher because you are paid for weeks you take off." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I convert an hourly wage to an annual salary?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Multiply the hourly rate by the hours you work per week and then by the number of weeks you work per year. At 40 hours a week for 52 weeks, multiply by 2,080. Switch this tool to 'Hourly to annual' mode to do it automatically." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="no-print hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
+
+      <aside class="site-nav mb-6 lg:mb-0" aria-label="Calculator navigation">
+        <div class="lg:sticky lg:top-24">
+          <nav class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+            <p class="nav-group hidden lg:block">Financial</p>
+            <a href="compound-interest.html" data-nav class="nav-link"><span class="nav-badge">1</span><span>Compound Interest</span></a>
+            <a href="mortgage-calculator.html" data-nav class="nav-link"><span class="nav-badge">2</span><span>Mortgage</span></a>
+            <a href="retirement-calculator.html" data-nav class="nav-link"><span class="nav-badge">3</span><span>Retirement / 401(k)</span></a>
+            <a href="auto-loan.html" data-nav class="nav-link"><span class="nav-badge">4</span><span>Auto Loan</span></a>
+            <a href="debt-payoff.html" data-nav class="nav-link"><span class="nav-badge">5</span><span>Debt Payoff</span></a>
+            <p class="nav-group hidden lg:block">Economic</p>
+            <a href="inflation-calculator.html" data-nav class="nav-link"><span class="nav-badge">6</span><span>Inflation</span></a>
+            <a href="present-value.html" data-nav class="nav-link"><span class="nav-badge">7</span><span>Present / Future Value</span></a>
+            <a href="real-roi.html" data-nav class="nav-link"><span class="nav-badge">8</span><span>Real ROI</span></a>
+            <a href="salary-converter.html" data-nav class="nav-link"><span class="nav-badge">9</span><span>Salary → Hourly</span></a>
+            <a href="rule-of-72.html" data-nav class="nav-link"><span class="nav-badge">10</span><span>Rule of 72</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="min-w-0">
+        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+          <main class="min-w-0">
+
+            <section x-data="wage()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Salary to Hourly Wage Converter</h1>
+              <p class="calc-sub">Break an annual salary into every pay cadence — or work backwards from an hourly rate.</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="seg mt-5">
+                <button type="button" class="seg-btn" :class="mode === 'annual' && 'seg-btn-active'" @click="mode = 'annual'">Annual → rates</button>
+                <button type="button" class="seg-btn" :class="mode === 'hourly' && 'seg-btn-active'" @click="mode = 'hourly'">Hourly → annual</button>
+              </div>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div x-show="mode === 'annual'">
+                  <label class="label" for="wa-annual">Annual salary</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="wa-annual" type="number" min="0" step="1000" x-model.number="annual" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="400000" step="1000" x-model.number="annual" class="range" aria-label="Annual salary" />
+                </div>
+                <div x-show="mode === 'hourly'">
+                  <label class="label" for="wa-hourly">Hourly rate</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="wa-hourly" type="number" min="0" step="0.5" x-model.number="hourly" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="200" step="0.5" x-model.number="hourly" class="range" aria-label="Hourly rate" />
+                </div>
+                <div>
+                  <label class="label" for="wa-hw">Hours per week</label>
+                  <input id="wa-hw" type="number" min="1" max="80" step="1" x-model.number="hoursWeek" class="field" />
+                </div>
+                <div>
+                  <label class="label" for="wa-dw">Days per week</label>
+                  <input id="wa-dw" type="number" min="1" max="7" step="1" x-model.number="daysWeek" class="field" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="label" for="wa-wy">Weeks / year</label>
+                    <input id="wa-wy" type="number" min="1" max="53" step="1" x-model.number="weeksYear" class="field" />
+                  </div>
+                  <div>
+                    <label class="label" for="wa-pto">PTO weeks</label>
+                    <input id="wa-pto" type="number" min="0" max="20" step="1" x-model.number="ptoWeeks" class="field" />
+                  </div>
+                </div>
+              </div>
+              <!-- ----- Results toolbar: view toggle + print ----- -->
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+
+              <div class="mt-4 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Hourly (effective)</p><p class="stat-value" x-text="money(out.hourly, 2)"></p></div>
+                <div class="stat"><p class="stat-label">Weekly</p><p class="stat-value" x-text="money(out.weekly, 2)"></p></div>
+                <div class="stat"><p class="stat-label">Monthly</p><p class="stat-value" x-text="money(out.monthly, 2)"></p></div>
+                <div class="stat"><p class="stat-label">Annual</p><p class="stat-value" x-text="money(out.annual)"></p></div>
+              </div>
+
+              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Bar chart of pay by cadence: hourly, daily, weekly, bi-weekly and monthly"></canvas></div>
+              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="disclaimer">Effective hourly uses weeks actually worked (weeks per year minus PTO). All figures are gross, before taxes and deductions.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>How to Use This Calculator</h2>
+              <ol>
+                <li><strong>Choose a direction.</strong> "Annual → rates" starts from a salary; "Hourly → annual" starts from an hourly wage.</li>
+                <li><strong>Enter the salary or hourly rate.</strong></li>
+                <li><strong>Set your schedule:</strong> hours per week, days per week, weeks per year, and paid time-off weeks.</li>
+                <li><strong>Read the breakdown.</strong> You get effective hourly, daily, weekly, bi-weekly, monthly and annual figures. The bar chart lines them up so you can see the scale of each pay period at a glance.</li>
+              </ol>
+
+              <h2>The Formula Explained</h2>
+              <p>Let <strong>workedWeeks = weeksPerYear − ptoWeeks</strong>. Then:</p>
+              <div class="not-prose my-4"><div class="formula">annual   = hourly × hoursPerWeek × workedWeeks      (hourly → annual)
+hourly   = annual ÷ (hoursPerWeek × workedWeeks)
+weekly   = annual ÷ weeksPerYear
+daily    = weekly ÷ daysPerWeek
+biweekly = weekly × 2
+monthly  = annual ÷ 12</div></div>
+              <p>Paycheck figures (weekly, bi-weekly, monthly) use the full <strong>weeksPerYear</strong> because paid time off is still paid. The <strong>effective hourly</strong> rate uses only the weeks you actually work, so it comes out slightly higher.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>How many working hours are in a year?</h3>
+              <p>The standard figure is <strong>2,080 hours</strong> — 40 hours × 52 weeks. Removing two unpaid weeks gives 2,000. Adjust the hours-per-week, weeks-per-year and PTO inputs to match your real schedule.</p>
+              <h3>Is paid time off included in the hourly rate?</h3>
+              <p>For a salaried role, vacation and holidays are paid, so the paycheck figures are based on the full year. The <strong>effective hourly</strong> number divides salary by the hours you truly work, which is a little higher because you are paid for the weeks you take off.</p>
+              <h3>How do I convert an hourly wage to an annual salary?</h3>
+              <p>Multiply the hourly rate by weekly hours, then by the weeks you work per year — at 40 hours for 52 weeks, that is × 2,080. The "Hourly → annual" mode does this for you and also shows every other cadence.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="compound-interest.html">Compound Interest</a> — turn part of each paycheck into long-term savings.</li>
+                <li><a href="retirement-calculator.html">Retirement / 401(k)</a> — project what a contribution percentage becomes.</li>
+                <li><a href="inflation-calculator.html">Inflation Calculator</a> — how much of a raise is real after price increases.</li>
+              </ul>
+            </article>
+
+          </main>
+
+          <aside class="site-rail mt-6 lg:mt-0">
+            <div class="lg:sticky lg:top-24">
+              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

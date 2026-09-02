@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mortgage Calculator with Amortization — Calcuvelo</title>
+  <meta name="description" content="Free mortgage calculator. Estimate your monthly principal &amp; interest payment, total interest over the life of the loan, and see a principal-vs-interest breakdown chart." />
+  <link rel="canonical" href="https://calcuvelo.com/mortgage-calculator.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mortgage Calculator with Amortization — Calcuvelo" />
+  <meta property="og:description" content="Estimate your monthly payment and total interest, with a principal-vs-interest breakdown chart." />
+  <meta property="og:url" content="https://calcuvelo.com/mortgage-calculator.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Mortgage Calculator with Amortization",
+        "url": "https://calcuvelo.com/mortgage-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much of a down payment do I need?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A 20% down payment lets you avoid private mortgage insurance (PMI) on a conventional loan. Conventional loans can go as low as 3-5% down, and FHA loans as low as 3.5%, but a smaller down payment means a larger loan, PMI, and more interest paid overall." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is included in my monthly mortgage payment?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Lenders call it PITI: Principal, Interest, property Taxes and homeowners Insurance, often collected together in an escrow account. HOA dues and, if your down payment is under 20%, PMI are additional. This calculator shows principal and interest plus optional tax, insurance and HOA lines." }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I choose a 15-year or 30-year mortgage?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A 15-year loan has a higher monthly payment but a lower rate and dramatically less total interest. A 30-year loan has a lower, more flexible payment but costs far more over time. Many borrowers take a 30-year loan and make extra principal payments when they can." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="no-print hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
+
+      <aside class="site-nav mb-6 lg:mb-0" aria-label="Calculator navigation">
+        <div class="lg:sticky lg:top-24">
+          <nav class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+            <p class="nav-group hidden lg:block">Financial</p>
+            <a href="compound-interest.html" data-nav class="nav-link"><span class="nav-badge">1</span><span>Compound Interest</span></a>
+            <a href="mortgage-calculator.html" data-nav class="nav-link"><span class="nav-badge">2</span><span>Mortgage</span></a>
+            <a href="retirement-calculator.html" data-nav class="nav-link"><span class="nav-badge">3</span><span>Retirement / 401(k)</span></a>
+            <a href="auto-loan.html" data-nav class="nav-link"><span class="nav-badge">4</span><span>Auto Loan</span></a>
+            <a href="debt-payoff.html" data-nav class="nav-link"><span class="nav-badge">5</span><span>Debt Payoff</span></a>
+            <p class="nav-group hidden lg:block">Economic</p>
+            <a href="inflation-calculator.html" data-nav class="nav-link"><span class="nav-badge">6</span><span>Inflation</span></a>
+            <a href="present-value.html" data-nav class="nav-link"><span class="nav-badge">7</span><span>Present / Future Value</span></a>
+            <a href="real-roi.html" data-nav class="nav-link"><span class="nav-badge">8</span><span>Real ROI</span></a>
+            <a href="salary-converter.html" data-nav class="nav-link"><span class="nav-badge">9</span><span>Salary → Hourly</span></a>
+            <a href="rule-of-72.html" data-nav class="nav-link"><span class="nav-badge">10</span><span>Rule of 72</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="min-w-0">
+        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+          <main class="min-w-0">
+
+            <!-- ================= CALCULATOR CARD ================= -->
+            <section x-data="mortgage()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Mortgage Calculator with Amortization</h1>
+              <p class="calc-sub">Estimate your monthly payment and how much of the loan goes to interest.</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="mo-price">Home price</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="mo-price" type="number" min="0" step="5000" x-model.number="price" class="field with-prefix" /></div>
+                  <input type="range" min="50000" max="2000000" step="5000" x-model.number="price" class="range" aria-label="Home price" />
+                </div>
+                <div>
+                  <label class="label" for="mo-down">Down payment</label>
+                  <div class="relative">
+                    <input id="mo-down" type="number" min="0" max="100" step="1" x-model.number="downPct" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="50" step="1" x-model.number="downPct" class="range" aria-label="Down payment percent" />
+                  <p class="mt-1 text-xs text-slate-400" x-text="'= ' + money(out.down) + ' down · ' + money(out.loan) + ' financed'"></p>
+                </div>
+                <div>
+                  <label class="label" for="mo-rate">Interest rate</label>
+                  <div class="relative">
+                    <input id="mo-rate" type="number" min="0" step="0.05" x-model.number="rate" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="12" step="0.05" x-model.number="rate" class="range" aria-label="Interest rate" />
+                </div>
+                <div>
+                  <label class="label" for="mo-term">Loan term</label>
+                  <select id="mo-term" x-model.number="term" class="field">
+                    <option :value="30">30 years</option>
+                    <option :value="20">20 years</option>
+                    <option :value="15">15 years</option>
+                    <option :value="10">10 years</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="label" for="mo-tax">Property tax (per year)</label>
+                  <div class="relative">
+                    <input id="mo-tax" type="number" min="0" step="0.05" x-model.number="propTax" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="label" for="mo-ins">Insurance / yr</label>
+                    <div class="relative"><span class="affix affix-left">$</span>
+                      <input id="mo-ins" type="number" min="0" step="100" x-model.number="insurance" class="field with-prefix" /></div>
+                  </div>
+                  <div>
+                    <label class="label" for="mo-hoa">HOA / mo</label>
+                    <div class="relative"><span class="affix affix-left">$</span>
+                      <input id="mo-hoa" type="number" min="0" step="10" x-model.number="hoa" class="field with-prefix" /></div>
+                  </div>
+                </div>
+              </div>
+              <!-- ----- Results toolbar: view toggle + print ----- -->
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+
+              <div class="mt-4 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Payment (P&amp;I)</p><p class="stat-value" x-text="money(out.payment, 2)"></p></div>
+                <div class="stat"><p class="stat-label">Monthly all-in</p><p class="stat-value" x-text="money(out.monthlyAllIn, 2)"></p></div>
+                <div class="stat"><p class="stat-label">Total interest</p><p class="stat-value stat-neg" x-text="money(out.totalInterest)"></p></div>
+                <div class="stat"><p class="stat-label">Total of payments</p><p class="stat-value" x-text="money(out.totalPaid)"></p></div>
+              </div>
+
+              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+              <div x-show="view === 'chart'" class="chart-box is-pie"><canvas x-ref="cv" role="img" aria-label="Doughnut chart of lifetime principal versus interest"></canvas></div>
+              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="disclaimer">The chart shows lifetime principal vs. interest on the financed amount. Estimates only — not financial advice.</p>
+            </section>
+
+            <!-- ================= SEO CONTENT ================= -->
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>How to Use This Calculator</h2>
+              <ol>
+                <li><strong>Enter the home price</strong> you are considering.</li>
+                <li><strong>Set your down payment</strong> as a percentage. The helper text shows the dollar amount and the resulting loan size.</li>
+                <li><strong>Enter the interest rate</strong> your lender quoted and pick a <strong>loan term</strong>.</li>
+                <li><strong>Add property tax, insurance and HOA</strong> if you want a full "all-in" monthly figure.</li>
+                <li><strong>Review the results.</strong> "Payment (P&amp;I)" is principal and interest only; "Monthly all-in" adds taxes, insurance and HOA. The doughnut chart shows how much of every dollar you repay over the life of the loan is principal versus interest.</li>
+              </ol>
+
+              <h2>The Formula Explained</h2>
+              <p>The monthly principal-and-interest payment comes from the standard amortizing-loan formula:</p>
+              <div class="not-prose my-4"><div class="formula">M = L × [ i (1 + i)ⁿ ] ÷ [ (1 + i)ⁿ − 1 ]</div></div>
+              <ul>
+                <li><strong>M</strong> — monthly principal &amp; interest payment</li>
+                <li><strong>L</strong> — loan amount = home price − down payment</li>
+                <li><strong>i</strong> — monthly interest rate = annual rate ÷ 12</li>
+                <li><strong>n</strong> — number of payments = term in years × 12</li>
+              </ul>
+              <p>Total interest is <strong>(M × n) − L</strong>. Property tax is applied as a percentage of the home price and divided by 12; insurance and HOA are added directly to the monthly figure.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>How much of a down payment do I need?</h3>
+              <p>A 20% down payment lets you avoid private mortgage insurance (PMI) on a conventional loan. Conventional loans can go as low as 3–5% down, and FHA loans as low as 3.5%, but a smaller down payment means a larger loan balance, an added PMI premium, and more interest over the life of the loan.</p>
+              <h3>What is included in my monthly mortgage payment?</h3>
+              <p>Lenders call it <strong>PITI</strong>: Principal, Interest, property Taxes, and homeowners Insurance — the last two often collected in an escrow account. HOA dues and, if you put down less than 20%, PMI are on top of that. This calculator breaks out principal &amp; interest and lets you add tax, insurance and HOA lines.</p>
+              <h3>Should I choose a 15-year or 30-year mortgage?</h3>
+              <p>A 15-year loan has a higher monthly payment but a lower rate and dramatically less total interest. A 30-year loan keeps the required payment low and flexible but costs far more over time. A common middle path is a 30-year loan with extra principal payments whenever your budget allows.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="debt-payoff.html">Debt Payoff Timeframe</a> — see how extra payments shorten any loan.</li>
+                <li><a href="compound-interest.html">Compound Interest</a> — what the down payment could earn if invested instead.</li>
+                <li><a href="inflation-calculator.html">Inflation Calculator</a> — how a fixed mortgage payment shrinks in real terms over 30 years.</li>
+              </ul>
+            </article>
+
+          </main>
+
+          <aside class="site-rail mt-6 lg:mt-0">
+            <div class="lg:sticky lg:top-24">
+              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

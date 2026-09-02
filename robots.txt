@@ -1,0 +1,5 @@
+# Calcuvelo — production domain
+User-agent: *
+Allow: /
+
+Sitemap: https://calcuvelo.com/sitemap.xml

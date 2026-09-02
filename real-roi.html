@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real Rate of Return (Real ROI) Calculator — Calcuvelo</title>
+  <meta name="description" content="Free real ROI calculator. Convert a nominal investment return into your true return after capital-gains tax and inflation, with an annualized real rate and a chart." />
+  <link rel="canonical" href="https://calcuvelo.com/real-roi.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Real Rate of Return (Real ROI) Calculator — Calcuvelo" />
+  <meta property="og:description" content="Your true investment return after capital-gains tax and the drag of inflation." />
+  <meta property="og:url" content="https://calcuvelo.com/real-roi.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Real Rate of Return Calculator",
+        "url": "https://calcuvelo.com/real-roi.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the difference between a nominal and a real return?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A nominal return is the raw percentage gain. A real return subtracts inflation, so it measures how much more your money can actually buy. If an investment returns 8% in a year when inflation is 3%, the real return is roughly 5%." }
+          },
+          {
+            "@type": "Question",
+            "name": "How are capital gains taxed?",
+            "acceptedAnswer": { "@type": "Answer", "text": "In the United States, assets held longer than a year are taxed at long-term capital-gains rates of 0%, 15% or 20% depending on income, sometimes plus a 3.8% net investment income tax. Assets held a year or less are taxed as ordinary income. Rates and rules vary by country and account type." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this calculator include dividends and fees?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Enter a return figure that already reflects reinvested dividends and is net of fund fees. The calculator then applies capital-gains tax to the total gain and discounts the result for inflation." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="no-print hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
+
+      <aside class="site-nav mb-6 lg:mb-0" aria-label="Calculator navigation">
+        <div class="lg:sticky lg:top-24">
+          <nav class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+            <p class="nav-group hidden lg:block">Financial</p>
+            <a href="compound-interest.html" data-nav class="nav-link"><span class="nav-badge">1</span><span>Compound Interest</span></a>
+            <a href="mortgage-calculator.html" data-nav class="nav-link"><span class="nav-badge">2</span><span>Mortgage</span></a>
+            <a href="retirement-calculator.html" data-nav class="nav-link"><span class="nav-badge">3</span><span>Retirement / 401(k)</span></a>
+            <a href="auto-loan.html" data-nav class="nav-link"><span class="nav-badge">4</span><span>Auto Loan</span></a>
+            <a href="debt-payoff.html" data-nav class="nav-link"><span class="nav-badge">5</span><span>Debt Payoff</span></a>
+            <p class="nav-group hidden lg:block">Economic</p>
+            <a href="inflation-calculator.html" data-nav class="nav-link"><span class="nav-badge">6</span><span>Inflation</span></a>
+            <a href="present-value.html" data-nav class="nav-link"><span class="nav-badge">7</span><span>Present / Future Value</span></a>
+            <a href="real-roi.html" data-nav class="nav-link"><span class="nav-badge">8</span><span>Real ROI</span></a>
+            <a href="salary-converter.html" data-nav class="nav-link"><span class="nav-badge">9</span><span>Salary → Hourly</span></a>
+            <a href="rule-of-72.html" data-nav class="nav-link"><span class="nav-badge">10</span><span>Rule of 72</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="min-w-0">
+        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+          <main class="min-w-0">
+
+            <section x-data="realRoi()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Real Rate of Return (Real ROI) Calculator</h1>
+              <p class="calc-sub">Your true return after capital-gains tax and the drag of inflation.</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="rr-init">Initial investment</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="rr-init" type="number" min="0" step="500" x-model.number="initial" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="250000" step="500" x-model.number="initial" class="range" aria-label="Initial investment" />
+                </div>
+                <div>
+                  <label class="label" for="rr-ret">Nominal annual return</label>
+                  <div class="relative">
+                    <input id="rr-ret" type="number" min="0" step="0.1" x-model.number="ret" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="20" step="0.1" x-model.number="ret" class="range" aria-label="Nominal annual return" />
+                </div>
+                <div>
+                  <label class="label" for="rr-yrs">Time held</label>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="relative">
+                      <input id="rr-yrs" type="number" min="0" max="60" step="1" x-model.number="years" class="field with-suffix" aria-label="Years held" />
+                      <span class="affix affix-right">yr</span>
+                    </div>
+                    <div class="relative">
+                      <input id="rr-mo" type="number" min="0" max="11" step="1" x-model.number="months" class="field with-suffix" aria-label="Months held" />
+                      <span class="affix affix-right">mo</span>
+                    </div>
+                  </div>
+                  <input type="range" min="0" max="40" step="1" x-model.number="years" class="range" aria-label="Years held" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="label" for="rr-infl">Inflation</label>
+                    <div class="relative">
+                      <input id="rr-infl" type="number" min="0" step="0.1" x-model.number="infl" class="field with-suffix" />
+                      <span class="affix affix-right">%</span></div>
+                  </div>
+                  <div>
+                    <label class="label" for="rr-tax">Cap-gains tax</label>
+                    <div class="relative">
+                      <input id="rr-tax" type="number" min="0" max="60" step="1" x-model.number="tax" class="field with-suffix" />
+                      <span class="affix affix-right">%</span></div>
+                  </div>
+                </div>
+              </div>
+              <!-- ----- Results toolbar: view toggle + print ----- -->
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+
+              <div class="mt-4 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Nominal ending value</p><p class="stat-value" x-text="money(out.nominalEnd)"></p></div>
+                <div class="stat"><p class="stat-label">After-tax value</p><p class="stat-value" x-text="money(out.afterTax)"></p></div>
+                <div class="stat"><p class="stat-label">Real value (today's $)</p><p class="stat-value" x-text="money(out.real)"></p></div>
+                <div class="stat"><p class="stat-label">Real annualized return</p><p class="stat-value" :class="out.realCagr >= 0 ? 'stat-pos' : 'stat-neg'" x-text="pct(out.realCagr, 2)"></p></div>
+              </div>
+
+              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Bar chart comparing nominal, after-tax and inflation-adjusted ending values"></canvas></div>
+              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="disclaimer">Assumes tax is paid on the full gain at sale and a constant inflation rate. Estimates only — not financial or tax advice.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>How to Use This Calculator</h2>
+              <ol>
+                <li><strong>Enter your initial investment</strong> and the <strong>nominal annual return</strong> you expect (or achieved).</li>
+                <li><strong>Enter how many years</strong> the money is invested.</li>
+                <li><strong>Enter your expected inflation rate</strong> and your <strong>capital-gains tax rate</strong>.</li>
+                <li><strong>Read the results.</strong> "Nominal ending value" ignores tax and inflation. "After-tax value" subtracts tax on the gain. "Real value" restates that in today's purchasing power. "Real annualized return" is the compound yearly rate that actually matters. The bar chart lines up all three ending values.</li>
+              </ol>
+
+              <h2>The Formula Explained</h2>
+              <p>Grow the investment, tax the gain, then deflate for inflation:</p>
+              <div class="not-prose my-4"><div class="formula">NominalEnd  = P × (1 + g)ʸ
+Tax         = (NominalEnd − P) × taxRate
+AfterTax    = NominalEnd − Tax
+RealEnd     = AfterTax ÷ (1 + f)ʸ
+RealCAGR    = (RealEnd ÷ P)^(1 / y) − 1</div></div>
+              <ul>
+                <li><strong>P</strong> — initial investment</li>
+                <li><strong>g</strong> — nominal annual return</li>
+                <li><strong>f</strong> — annual inflation rate</li>
+                <li><strong>y</strong> — years held</li>
+              </ul>
+              <p>A quick shortcut, the Fisher approximation, is <strong>real ≈ nominal − inflation</strong>; the calculator uses the exact division above.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>What is the difference between a nominal and a real return?</h3>
+              <p>A nominal return is the raw percentage gain. A <strong>real return</strong> removes inflation, so it measures how much more your money can actually buy. An 8% nominal return in a year of 3% inflation is roughly a 5% real return.</p>
+              <h3>How are capital gains taxed?</h3>
+              <p>In the U.S., assets held over a year are taxed at long-term rates of <strong>0%, 15% or 20%</strong> depending on income (sometimes plus a 3.8% surtax); assets held a year or less are taxed as ordinary income. Rules differ by country and by account type — tax-advantaged accounts may owe nothing at sale.</p>
+              <h3>Does this calculator include dividends and fees?</h3>
+              <p>No. Enter a return that already reflects reinvested dividends and is net of fund fees. The tool then applies capital-gains tax to the total gain and adjusts for inflation.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="inflation-calculator.html">Inflation Calculator</a> — isolate the inflation piece.</li>
+                <li><a href="compound-interest.html">Compound Interest</a> — the nominal growth engine on its own.</li>
+                <li><a href="present-value.html">Present &amp; Future Value</a> — discount any future cash flow to today.</li>
+              </ul>
+            </article>
+
+          </main>
+
+          <aside class="site-rail mt-6 lg:mt-0">
+            <div class="lg:sticky lg:top-24">
+              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

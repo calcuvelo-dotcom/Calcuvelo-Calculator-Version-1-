@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inflation &amp; Purchasing Power Calculator — Calcuvelo</title>
+  <meta name="description" content="Free inflation calculator. See how much a fixed sum of money will be worth in the future after X years of Y% inflation, and how much you would need to keep pace." />
+  <link rel="canonical" href="https://calcuvelo.com/inflation-calculator.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Inflation &amp; Purchasing Power Calculator — Calcuvelo" />
+  <meta property="og:description" content="How much a fixed sum of money will actually be worth after years of inflation." />
+  <meta property="og:url" content="https://calcuvelo.com/inflation-calculator.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Inflation and Purchasing Power Calculator",
+        "url": "https://calcuvelo.com/inflation-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a normal rate of inflation?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Many central banks, including the U.S. Federal Reserve, target about 2% annual inflation. The long-run historical average in the United States is closer to 3%. Individual years can be far higher or lower, and the price of specific things like healthcare or tuition often rises faster than the overall average." }
+          },
+          {
+            "@type": "Question",
+            "name": "How is inflation measured?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The most common gauge is the Consumer Price Index (CPI), which tracks the price of a fixed basket of goods and services that a typical household buys. The percentage change in that index over a year is the headline inflation rate." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I protect my savings from inflation?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Holding only cash guarantees a loss of purchasing power over time. Historically, owning a diversified mix of stocks and real assets has outpaced inflation over long periods. Inflation-protected government bonds such as TIPS and I-bonds are designed specifically to keep up with the CPI." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="no-print hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
+
+      <aside class="site-nav mb-6 lg:mb-0" aria-label="Calculator navigation">
+        <div class="lg:sticky lg:top-24">
+          <nav class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+            <p class="nav-group hidden lg:block">Financial</p>
+            <a href="compound-interest.html" data-nav class="nav-link"><span class="nav-badge">1</span><span>Compound Interest</span></a>
+            <a href="mortgage-calculator.html" data-nav class="nav-link"><span class="nav-badge">2</span><span>Mortgage</span></a>
+            <a href="retirement-calculator.html" data-nav class="nav-link"><span class="nav-badge">3</span><span>Retirement / 401(k)</span></a>
+            <a href="auto-loan.html" data-nav class="nav-link"><span class="nav-badge">4</span><span>Auto Loan</span></a>
+            <a href="debt-payoff.html" data-nav class="nav-link"><span class="nav-badge">5</span><span>Debt Payoff</span></a>
+            <p class="nav-group hidden lg:block">Economic</p>
+            <a href="inflation-calculator.html" data-nav class="nav-link"><span class="nav-badge">6</span><span>Inflation</span></a>
+            <a href="present-value.html" data-nav class="nav-link"><span class="nav-badge">7</span><span>Present / Future Value</span></a>
+            <a href="real-roi.html" data-nav class="nav-link"><span class="nav-badge">8</span><span>Real ROI</span></a>
+            <a href="salary-converter.html" data-nav class="nav-link"><span class="nav-badge">9</span><span>Salary → Hourly</span></a>
+            <a href="rule-of-72.html" data-nav class="nav-link"><span class="nav-badge">10</span><span>Rule of 72</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="min-w-0">
+        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+          <main class="min-w-0">
+
+            <section x-data="inflation()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Inflation &amp; Purchasing Power Calculator</h1>
+              <p class="calc-sub">See how much a fixed sum of money will actually be worth in the future.</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-3">
+                <div>
+                  <label class="label" for="in-amt">Amount today</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="in-amt" type="number" min="0" step="500" x-model.number="amount" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="200000" step="500" x-model.number="amount" class="range" aria-label="Amount today" />
+                </div>
+                <div>
+                  <label class="label" for="in-yrs">Time horizon</label>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="relative">
+                      <input id="in-yrs" type="number" min="0" max="80" step="1" x-model.number="years" class="field with-suffix" aria-label="Years" />
+                      <span class="affix affix-right">yr</span>
+                    </div>
+                    <div class="relative">
+                      <input id="in-mo" type="number" min="0" max="11" step="1" x-model.number="months" class="field with-suffix" aria-label="Months" />
+                      <span class="affix affix-right">mo</span>
+                    </div>
+                  </div>
+                  <input type="range" min="0" max="60" step="1" x-model.number="years" class="range" aria-label="Years" />
+                </div>
+                <div>
+                  <label class="label" for="in-rate">Average inflation</label>
+                  <div class="relative">
+                    <input id="in-rate" type="number" min="0" step="0.1" x-model.number="rate" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="15" step="0.1" x-model.number="rate" class="range" aria-label="Average inflation" />
+                </div>
+              </div>
+              <!-- ----- Results toolbar: view toggle + print ----- -->
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+
+              <div class="mt-4 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Future purchasing power</p><p class="stat-value" x-text="money(out.power)"></p></div>
+                <div class="stat"><p class="stat-label">Value lost</p><p class="stat-value stat-neg" x-text="money(out.lost)"></p></div>
+                <div class="stat"><p class="stat-label">% lost</p><p class="stat-value stat-neg" x-text="pct(out.lostPct, 1)"></p></div>
+                <div class="stat"><p class="stat-label">Needed to keep pace</p><p class="stat-value" x-text="money(out.needed)"></p></div>
+              </div>
+
+              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Line chart of purchasing power declining over time"></canvas></div>
+              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="disclaimer">Assumes a constant annual inflation rate. Estimates only — not financial advice.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>How to Use This Calculator</h2>
+              <ol>
+                <li><strong>Enter the amount of money</strong> you want to track — for example a savings balance, a fixed pension, or a price.</li>
+                <li><strong>Enter the number of years</strong> into the future.</li>
+                <li><strong>Set an average annual inflation rate.</strong> Around 2–3% reflects long-run norms; try a higher figure to stress-test.</li>
+                <li><strong>Read the results.</strong> "Future purchasing power" is what today's amount will buy in future dollars. "Value lost" and "% lost" quantify the erosion. "Needed to keep pace" is how large the sum must grow just to stand still. The chart shows the decline year by year.</li>
+              </ol>
+
+              <h2>The Formula Explained</h2>
+              <p>Inflation compounds, just like interest. The future purchasing power of a fixed amount is:</p>
+              <div class="not-prose my-4"><div class="formula">PurchasingPower = A ÷ (1 + f)ʸ</div></div>
+              <p>And the amount you would need in the future to buy what <strong>A</strong> buys today is:</p>
+              <div class="not-prose my-4"><div class="formula">AmountNeeded = A × (1 + f)ʸ</div></div>
+              <ul>
+                <li><strong>A</strong> — amount of money today</li>
+                <li><strong>f</strong> — average annual inflation rate (as a decimal)</li>
+                <li><strong>y</strong> — number of years</li>
+              </ul>
+              <p>The share of value lost is <strong>1 − 1 ÷ (1 + f)ʸ</strong>.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>What is a normal rate of inflation?</h3>
+              <p>Many central banks, including the U.S. Federal Reserve, target about <strong>2%</strong>. The long-run historical average in the United States is closer to <strong>3%</strong>. Individual years vary widely, and categories like healthcare and tuition often rise faster than the overall index.</p>
+              <h3>How is inflation measured?</h3>
+              <p>The headline figure usually comes from the <strong>Consumer Price Index (CPI)</strong>, which tracks the cost of a fixed basket of goods and services a typical household buys. The year-over-year percentage change in that index is the inflation rate.</p>
+              <h3>How do I protect my savings from inflation?</h3>
+              <p>Holding only cash locks in a slow loss of purchasing power. Over long periods a diversified mix of stocks and real assets has outpaced inflation, and <strong>TIPS</strong> and <strong>I-bonds</strong> are government bonds designed specifically to track the CPI.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="real-roi.html">Real ROI</a> — combine inflation with taxes to find your true investment return.</li>
+                <li><a href="present-value.html">Present &amp; Future Value</a> — discount future cash flows to today's dollars.</li>
+                <li><a href="rule-of-72.html">Rule of 72</a> — divide 72 by the inflation rate to see how fast prices double.</li>
+              </ul>
+            </article>
+
+          </main>
+
+          <aside class="site-rail mt-6 lg:mt-0">
+            <div class="lg:sticky lg:top-24">
+              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

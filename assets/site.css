@@ -1,0 +1,258 @@
+/* ==========================================================================
+   Calcuvelo — shared styles for every calculator page
+   --------------------------------------------------------------------------
+   Tailwind (via CDN) handles all utility classes used in the markup.
+   This file defines the reusable component classes, form controls, range
+   sliders, nav, ad placeholders and the SEO "formula" block.
+   Plain CSS only — no build step required.
+   ========================================================================== */
+
+[x-cloak] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+
+/* ---------- Card / layout ---------- */
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow:
+    0 0 0 1px rgba(226, 232, 240, 0.9),
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px -12px rgba(15, 23, 42, 0.12);
+}
+@media (min-width: 640px) { .card { padding: 1.75rem; } }
+
+.calc-title { font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; letter-spacing: -0.01em; color: #0f172a; }
+@media (min-width: 640px) { .calc-title { font-size: 1.5rem; line-height: 2rem; } }
+.calc-sub { margin-top: 0.35rem; font-size: 0.875rem; color: #64748b; }
+.disclaimer { margin-top: 0.75rem; font-size: 0.75rem; line-height: 1.1rem; color: #94a3b8; }
+
+/* ---------- Form controls ---------- */
+.label { display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 0.375rem; }
+
+input.field,
+select.field,
+textarea.field {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  color: #0f172a;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+textarea.field { min-height: 8rem; resize: vertical; }
+input.field:focus,
+select.field:focus,
+textarea.field:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+/* $ prefix / % suffix spacing (higher specificity than Tailwind utilities) */
+input.field.with-prefix { padding-left: 1.9rem; }
+input.field.with-suffix { padding-right: 2.1rem; }
+
+/* Remove number-input spinners for a cleaner look */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+.affix {
+  position: absolute; top: 0; bottom: 0; display: flex; align-items: center;
+  color: #94a3b8; font-size: 0.875rem; pointer-events: none;
+}
+.affix-left { left: 0.75rem; }
+.affix-right { right: 0.75rem; }
+
+/* ---------- Range slider ---------- */
+input[type="range"].range {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 0.5rem; margin-top: 0.75rem;
+  border-radius: 9999px; background: #e2e8f0; cursor: pointer;
+}
+input[type="range"].range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  height: 1.15rem; width: 1.15rem; border-radius: 9999px;
+  background: #4f46e5; border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+}
+input[type="range"].range::-moz-range-thumb {
+  height: 1.15rem; width: 1.15rem; border-radius: 9999px;
+  background: #4f46e5; border: 2px solid #fff;
+}
+input[type="range"].range:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
+
+/* ---------- Stat tiles ---------- */
+.stat { border-radius: 0.75rem; background: #f8fafc; box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.9); padding: 1rem; }
+.stat-label { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #64748b; }
+.stat-value { margin-top: 0.25rem; font-size: 1rem; font-weight: 600; color: #0f172a; font-variant-numeric: tabular-nums; }
+@media (min-width: 640px) { .stat-value { font-size: 1.125rem; } }
+.stat-pos { color: #059669; }
+.stat-neg { color: #e11d48; }
+
+/* ---------- Segmented control ---------- */
+.seg { display: flex; gap: 0.25rem; background: #f1f5f9; border-radius: 0.75rem; padding: 0.25rem; }
+.seg-btn { flex: 1; border: 0; background: transparent; border-radius: 0.5rem; padding: 0.4rem 0.6rem; font-size: 0.8125rem; font-weight: 500; color: #475569; text-align: center; cursor: pointer; }
+.seg-btn-active { background: #fff; color: #4338ca; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12); }
+
+/* ---------- Sidebar navigation ---------- */
+.nav-link {
+  display: flex; align-items: center; gap: 0.75rem;
+  border-radius: 0.75rem; padding: 0.5rem 0.75rem;
+  font-size: 0.875rem; font-weight: 500; color: #475569;
+  white-space: nowrap; text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link:hover { background: #f1f5f9; color: #0f172a; }
+.nav-link-active,
+.nav-link-active:hover { background: #4f46e5; color: #fff; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15); }
+.nav-badge {
+  display: flex; height: 1.5rem; width: 1.5rem; flex: none;
+  align-items: center; justify-content: center;
+  border-radius: 0.5rem; font-size: 0.6875rem; font-weight: 700;
+  background: #e2e8f0; color: #475569; font-variant-numeric: tabular-nums;
+}
+.nav-link-active .nav-badge { background: rgba(255, 255, 255, 0.2); color: #fff; }
+.nav-group { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #94a3b8; padding: 0.5rem 0.75rem 0.25rem; }
+
+/* ---------- Chart container ----------
+   Explicit dimensions live here (not in Tailwind classes) because the
+   Tailwind Play CDN injects its styles asynchronously — without this the
+   chart canvas would measure 0px tall on first paint. */
+.chart-box { position: relative; width: 100%; height: 16rem; }
+@media (min-width: 640px) { .chart-box { height: 20rem; } }
+.chart-box.is-pie { max-width: 22rem; margin-left: auto; margin-right: auto; height: 16rem; }
+@media (min-width: 640px) { .chart-box.is-pie { height: 18rem; } }
+
+/* ---------- Advertisement placeholders ---------- */
+.ad-slot {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 0.75rem; border: 1px dashed #cbd5e1; background: #f1f5f9;
+  color: #94a3b8; font-size: 0.625rem; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase; user-select: none;
+  text-align: center;
+}
+.ad-leaderboard { height: 90px; }
+.ad-inline { height: 100px; margin-top: 1.5rem; margin-bottom: 1.5rem; }
+.ad-rail { height: 600px; }
+
+/* ---------- SEO content block ---------- */
+.formula {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #4f46e5;
+  border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; line-height: 1.6;
+  color: #0f172a; overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+}
+.seo :where(h2) { scroll-margin-top: 5rem; }
+
+/* ---------- Results view toggle + data table ---------- */
+.result-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.seg.seg-inline { display: inline-flex; width: auto; }
+.seg.seg-inline .seg-btn { flex: 0 0 auto; }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.data-table thead th {
+  position: sticky; top: 0; background: #f8fafc; z-index: 1;
+  padding: 0.6rem 0.9rem; text-align: right; white-space: nowrap;
+  font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+}
+.data-table thead th:first-child { text-align: left; }
+.data-table tbody td {
+  padding: 0.55rem 0.9rem; text-align: right; white-space: nowrap;
+  font-variant-numeric: tabular-nums; color: #334155; border-bottom: 1px solid #f1f5f9;
+}
+.data-table tbody td:first-child { text-align: left; font-weight: 500; color: #0f172a; }
+.data-table tbody tr:nth-child(even) { background: #fafcff; }
+.data-table .col-interest { color: #059669; }   /* growth / interest earned (good) */
+.data-table .col-neg { color: #e11d48; }         /* interest / cost paid (bad) */
+.data-table .col-end { font-weight: 600; color: #0f172a; }
+.table-wrap { max-height: 26rem; overflow: auto; border-radius: 0.75rem; box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.9); }
+
+.btn-print {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border-radius: 0.75rem; border: 0; cursor: pointer;
+  background: #0f172a; color: #fff; padding: 0.5rem 0.9rem;
+  font-size: 0.8125rem; font-weight: 500; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15);
+  transition: background 0.15s;
+}
+.btn-print:hover { background: #334155; }
+
+/* ---------- Homepage hub ---------- */
+.hub-hero h1 { font-size: 1.75rem; line-height: 2.1rem; font-weight: 700; letter-spacing: -0.02em; color: #0f172a; }
+@media (min-width: 640px) { .hub-hero h1 { font-size: 2.25rem; line-height: 2.6rem; } }
+.hub-hero p { margin-top: 0.75rem; font-size: 1rem; line-height: 1.6; color: #475569; max-width: 42rem; }
+
+.hub-section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; }
+
+.calc-grid { display: grid; gap: 0.9rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .calc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .calc-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.calc-card {
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  background: #fff; border-radius: 1rem; padding: 1.1rem 1.2rem; text-decoration: none;
+  box-shadow: 0 0 0 1px rgba(226, 232, 240, 0.9), 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.calc-card:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(199, 210, 254, 0.9), 0 14px 28px -14px rgba(79, 70, 229, 0.3); }
+.calc-card:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
+.calc-card .num {
+  flex: none; display: flex; height: 2.25rem; width: 2.25rem;
+  align-items: center; justify-content: center; border-radius: 0.75rem;
+  background: #eef2ff; color: #4f46e5; font-weight: 700; font-size: 0.85rem;
+}
+.calc-card h3 { margin: 0; font-size: 0.95rem; font-weight: 600; color: #0f172a; }
+.calc-card p  { margin: 0.2rem 0 0; font-size: 0.8125rem; line-height: 1.45; color: #64748b; }
+.calc-card .go { margin-top: 0.4rem; font-size: 0.75rem; font-weight: 600; color: #4f46e5; }
+
+/* ==========================================================================
+   PRINT — produce a clean one-page report:
+   keep the logo, the user's inputs, the summary numbers and the active view
+   (chart OR table); drop the sidebar nav, all ad slots, the SEO copy and the
+   footer.
+   ========================================================================== */
+@media print {
+  @page { margin: 1.4cm; }
+
+  html, body { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  /* Hide site chrome */
+  .no-print,
+  .ad-slot,
+  .site-nav,
+  .site-rail,
+  .seo,
+  footer,
+  noscript { display: none !important; }
+
+  /* Header: keep the logo, drop stickiness and borders */
+  header { position: static !important; border: 0 !important; background: transparent !important; backdrop-filter: none !important; }
+
+  /* Collapse the responsive grid shells to a single column */
+  .print-block { display: block !important; }
+
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0;
+    padding: 0 !important;
+    break-inside: avoid;
+  }
+
+  .chart-box { height: 320px !important; break-inside: avoid; }
+  .chart-box.is-pie { max-width: 20rem; }
+
+  .table-wrap { max-height: none !important; overflow: visible !important; box-shadow: none !important; }
+  .data-table thead th { position: static !important; }
+  .data-table { font-size: 10px !important; }
+  .data-table tbody tr { break-inside: avoid; }
+
+  .result-toolbar { display: none !important; }
+  a[href]::after { content: "" !important; }
+}

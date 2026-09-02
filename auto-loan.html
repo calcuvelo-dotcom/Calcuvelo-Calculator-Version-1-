@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto Loan Calculator with Tax &amp; Fees — Calcuvelo</title>
+  <meta name="description" content="Free auto loan calculator. Roll sales tax, fees and a trade-in into the loan to see your monthly car payment, total interest, and the full cost of financing." />
+  <link rel="canonical" href="https://calcuvelo.com/auto-loan.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Auto Loan Calculator with Tax &amp; Fees — Calcuvelo" />
+  <meta property="og:description" content="See your monthly car payment and the full cost of financing, including tax, fees and interest." />
+  <meta property="og:url" content="https://calcuvelo.com/auto-loan.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Auto Loan Calculator with Tax and Fees",
+        "url": "https://calcuvelo.com/auto-loan.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How long should my auto loan be?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Shorter is cheaper. A common guideline is to finance a car for no more than 60 months. Longer terms of 72 or 84 months lower the monthly payment but you pay much more interest and are likely to owe more than the car is worth for years." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a trade-in reduce the sales tax I pay?",
+            "acceptedAnswer": { "@type": "Answer", "text": "In most U.S. states, yes — sales tax is charged on the price of the new vehicle minus the trade-in allowance, not the full sticker price. A few states tax the full price. This calculator applies tax to price minus trade-in." }
+          },
+          {
+            "@type": "Question",
+            "name": "What APR can I expect on a car loan?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Your rate depends mostly on your credit score, the loan term, and whether the car is new or used. Borrowers with excellent credit often see single-digit rates on new cars, while subprime borrowers can pay 15% or more. Get pre-approved by a bank or credit union before visiting the dealer." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="no-print hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
+
+      <aside class="site-nav mb-6 lg:mb-0" aria-label="Calculator navigation">
+        <div class="lg:sticky lg:top-24">
+          <nav class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+            <p class="nav-group hidden lg:block">Financial</p>
+            <a href="compound-interest.html" data-nav class="nav-link"><span class="nav-badge">1</span><span>Compound Interest</span></a>
+            <a href="mortgage-calculator.html" data-nav class="nav-link"><span class="nav-badge">2</span><span>Mortgage</span></a>
+            <a href="retirement-calculator.html" data-nav class="nav-link"><span class="nav-badge">3</span><span>Retirement / 401(k)</span></a>
+            <a href="auto-loan.html" data-nav class="nav-link"><span class="nav-badge">4</span><span>Auto Loan</span></a>
+            <a href="debt-payoff.html" data-nav class="nav-link"><span class="nav-badge">5</span><span>Debt Payoff</span></a>
+            <p class="nav-group hidden lg:block">Economic</p>
+            <a href="inflation-calculator.html" data-nav class="nav-link"><span class="nav-badge">6</span><span>Inflation</span></a>
+            <a href="present-value.html" data-nav class="nav-link"><span class="nav-badge">7</span><span>Present / Future Value</span></a>
+            <a href="real-roi.html" data-nav class="nav-link"><span class="nav-badge">8</span><span>Real ROI</span></a>
+            <a href="salary-converter.html" data-nav class="nav-link"><span class="nav-badge">9</span><span>Salary → Hourly</span></a>
+            <a href="rule-of-72.html" data-nav class="nav-link"><span class="nav-badge">10</span><span>Rule of 72</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="min-w-0">
+        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+          <main class="min-w-0">
+
+            <section x-data="autoLoan()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Auto Loan Calculator</h1>
+              <p class="calc-sub">Roll taxes and fees into the loan and see the full cost of financing.</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="au-price">Vehicle price</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="au-price" type="number" min="0" step="500" x-model.number="price" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="120000" step="500" x-model.number="price" class="range" aria-label="Vehicle price" />
+                </div>
+                <div>
+                  <label class="label" for="au-down">Down payment</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="au-down" type="number" min="0" step="250" x-model.number="down" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="40000" step="250" x-model.number="down" class="range" aria-label="Down payment" />
+                </div>
+                <div>
+                  <label class="label" for="au-trade">Trade-in value</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="au-trade" type="number" min="0" step="250" x-model.number="tradeIn" class="field with-prefix" /></div>
+                </div>
+                <div>
+                  <label class="label" for="au-tax">Sales tax</label>
+                  <div class="relative">
+                    <input id="au-tax" type="number" min="0" step="0.1" x-model.number="taxRate" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                </div>
+                <div>
+                  <label class="label" for="au-fees">Fees (title, doc, registration)</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="au-fees" type="number" min="0" step="50" x-model.number="fees" class="field with-prefix" /></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="label" for="au-term">Term</label>
+                    <select id="au-term" x-model.number="term" class="field">
+                      <option :value="36">36 mo</option>
+                      <option :value="48">48 mo</option>
+                      <option :value="60">60 mo</option>
+                      <option :value="72">72 mo</option>
+                      <option :value="84">84 mo</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="label" for="au-apr">APR</label>
+                    <div class="relative">
+                      <input id="au-apr" type="number" min="0" step="0.1" x-model.number="apr" class="field with-suffix" />
+                      <span class="affix affix-right">%</span></div>
+                  </div>
+                </div>
+              </div>
+              <!-- ----- Results toolbar: view toggle + print ----- -->
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+
+              <div class="mt-4 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Monthly payment</p><p class="stat-value" x-text="money(out.payment, 2)"></p></div>
+                <div class="stat"><p class="stat-label">Amount financed</p><p class="stat-value" x-text="money(out.financed)"></p></div>
+                <div class="stat"><p class="stat-label">Total interest</p><p class="stat-value stat-neg" x-text="money(out.interest)"></p></div>
+                <div class="stat"><p class="stat-label">Total cash cost</p><p class="stat-value" x-text="money(out.totalCost)"></p></div>
+              </div>
+
+              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+              <div x-show="view === 'chart'" class="chart-box is-pie"><canvas x-ref="cv" role="img" aria-label="Doughnut chart of vehicle cost broken into price, tax, fees and interest"></canvas></div>
+              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="disclaimer">Sales tax is applied to price minus trade-in. Estimates only — not financial advice.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>How to Use This Calculator</h2>
+              <ol>
+                <li><strong>Enter the negotiated vehicle price</strong> (not the sticker price).</li>
+                <li><strong>Add your down payment and any trade-in value.</strong> Both reduce the amount you finance; the trade-in also reduces the taxable amount.</li>
+                <li><strong>Enter your state/local sales-tax rate and any dealer fees</strong> for title, documentation and registration.</li>
+                <li><strong>Pick a loan term and enter the APR</strong> from your lender or pre-approval.</li>
+                <li><strong>Review the results.</strong> You get the monthly payment, the amount financed, total interest, and total cash cost (down payment plus every scheduled payment). The doughnut chart splits that total cash cost into the car, taxes, fees, and interest.</li>
+              </ol>
+
+              <h2>The Formula Explained</h2>
+              <p>First the amount financed is assembled:</p>
+              <div class="not-prose my-4"><div class="formula">Financed = Price + SalesTax + Fees − DownPayment − TradeIn
+SalesTax = (Price − TradeIn) × taxRate</div></div>
+              <p>Then the monthly payment uses the same amortizing-loan formula as a mortgage:</p>
+              <div class="not-prose my-4"><div class="formula">M = Financed × [ i (1 + i)ⁿ ] ÷ [ (1 + i)ⁿ − 1 ]</div></div>
+              <ul>
+                <li><strong>i</strong> — monthly rate = APR ÷ 12</li>
+                <li><strong>n</strong> — number of monthly payments (the term)</li>
+              </ul>
+              <p>Total interest is <strong>(M × n) − Financed</strong>, and total cash cost is <strong>DownPayment + (M × n)</strong>.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>How long should my auto loan be?</h3>
+              <p>Shorter is cheaper. A common guideline is to finance a car for <strong>no more than 60 months</strong>. Terms of 72 or 84 months shrink the monthly payment but add a lot of interest, and you are likely to be "upside down" — owing more than the car is worth — for years.</p>
+              <h3>Does a trade-in reduce the sales tax I pay?</h3>
+              <p>In most U.S. states, yes: tax is charged on the new vehicle's price <em>minus</em> the trade-in allowance. A handful of states tax the full price. This calculator uses the more common price-minus-trade-in method.</p>
+              <h3>What APR can I expect on a car loan?</h3>
+              <p>Rate depends mostly on your credit score, the term, and whether the vehicle is new or used. Strong credit can mean single-digit rates on a new car; subprime borrowers may pay 15% or more. Getting pre-approved by a bank or credit union first gives you a benchmark to negotiate against.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="debt-payoff.html">Debt Payoff Timeframe</a> — model paying the loan off faster.</li>
+                <li><a href="mortgage-calculator.html">Mortgage Calculator</a> — the same amortization math for a home.</li>
+                <li><a href="real-roi.html">Real ROI</a> — the opportunity cost of a big down payment vs. investing it.</li>
+              </ul>
+            </article>
+
+          </main>
+
+          <aside class="site-rail mt-6 lg:mt-0">
+            <div class="lg:sticky lg:top-24">
+              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

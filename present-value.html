@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Present Value &amp; Future Value Calculator — Calcuvelo</title>
+  <meta name="description" content="Free time value of money calculator. Solve for present value or future value with an optional recurring payment, and see the value grow period by period on a chart." />
+  <link rel="canonical" href="https://calcuvelo.com/present-value.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Present Value &amp; Future Value Calculator — Calcuvelo" />
+  <meta property="og:description" content="Solve for present or future value with an optional recurring payment." />
+  <meta property="og:url" content="https://calcuvelo.com/present-value.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Present Value and Future Value Calculator",
+        "url": "https://calcuvelo.com/present-value.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What discount rate should I use?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Use the return you could earn on a comparable alternative investment — your opportunity cost. For personal decisions that is often the expected return of a diversified portfolio (around 6-8%). A business typically uses its weighted average cost of capital. A higher discount rate makes future money worth less today." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between present value and net present value?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Present value discounts a single future amount or a stream of equal payments back to today. Net present value (NPV) does the same for an irregular series of cash flows and then subtracts the upfront cost, giving a single number that is positive when an investment adds value." }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is a dollar today worth more than a dollar tomorrow?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Three reasons: a dollar today can be invested and earn a return, inflation erodes the buying power of future dollars, and a promised future payment carries the risk it may not arrive. Together these make money have a time value." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="no-print hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
+
+      <aside class="site-nav mb-6 lg:mb-0" aria-label="Calculator navigation">
+        <div class="lg:sticky lg:top-24">
+          <nav class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+            <p class="nav-group hidden lg:block">Financial</p>
+            <a href="compound-interest.html" data-nav class="nav-link"><span class="nav-badge">1</span><span>Compound Interest</span></a>
+            <a href="mortgage-calculator.html" data-nav class="nav-link"><span class="nav-badge">2</span><span>Mortgage</span></a>
+            <a href="retirement-calculator.html" data-nav class="nav-link"><span class="nav-badge">3</span><span>Retirement / 401(k)</span></a>
+            <a href="auto-loan.html" data-nav class="nav-link"><span class="nav-badge">4</span><span>Auto Loan</span></a>
+            <a href="debt-payoff.html" data-nav class="nav-link"><span class="nav-badge">5</span><span>Debt Payoff</span></a>
+            <p class="nav-group hidden lg:block">Economic</p>
+            <a href="inflation-calculator.html" data-nav class="nav-link"><span class="nav-badge">6</span><span>Inflation</span></a>
+            <a href="present-value.html" data-nav class="nav-link"><span class="nav-badge">7</span><span>Present / Future Value</span></a>
+            <a href="real-roi.html" data-nav class="nav-link"><span class="nav-badge">8</span><span>Real ROI</span></a>
+            <a href="salary-converter.html" data-nav class="nav-link"><span class="nav-badge">9</span><span>Salary → Hourly</span></a>
+            <a href="rule-of-72.html" data-nav class="nav-link"><span class="nav-badge">10</span><span>Rule of 72</span></a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="min-w-0">
+        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+          <main class="min-w-0">
+
+            <section x-data="tvm()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Present Value &amp; Future Value Calculator</h1>
+              <p class="calc-sub">The time value of money, with an optional recurring payment.</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="seg mt-5">
+                <button type="button" class="seg-btn" :class="mode === 'fv' && 'seg-btn-active'" @click="mode = 'fv'">Grow a lump sum → FV</button>
+                <button type="button" class="seg-btn" :class="mode === 'pv' && 'seg-btn-active'" @click="mode = 'pv'">Discount a future sum → PV</button>
+              </div>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="tv-amt" x-text="mode === 'fv' ? 'Present value (starting amount)' : 'Future value (target)'"></label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="tv-amt" type="number" min="0" step="500" x-model.number="amount" class="field with-prefix" /></div>
+                </div>
+                <div>
+                  <label class="label" for="tv-pmt">Payment each period</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="tv-pmt" type="number" min="0" step="50" x-model.number="pmt" class="field with-prefix" /></div>
+                </div>
+                <div>
+                  <label class="label" for="tv-rate">Annual rate</label>
+                  <div class="relative">
+                    <input id="tv-rate" type="number" min="0" step="0.1" x-model.number="rate" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="20" step="0.1" x-model.number="rate" class="range" aria-label="Annual rate" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="label" for="tv-n"># of periods</label>
+                    <input id="tv-n" type="number" min="1" step="1" x-model.number="periods" class="field" />
+                  </div>
+                  <div>
+                    <label class="label" for="tv-freq">Compounding</label>
+                    <select id="tv-freq" x-model.number="freq" class="field">
+                      <option :value="12">Monthly</option>
+                      <option :value="4">Quarterly</option>
+                      <option :value="1">Annually</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- ----- Results toolbar: view toggle + print ----- -->
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+
+              <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                <div class="stat">
+                  <p class="stat-label" x-text="mode === 'fv' ? 'Future value' : 'Present value needed'"></p>
+                  <p class="stat-value" x-text="money(out.result)"></p>
+                </div>
+                <div class="stat"><p class="stat-label">Total contributions</p><p class="stat-value" x-text="money(out.contributions)"></p></div>
+                <div class="stat"><p class="stat-label">Interest / growth</p><p class="stat-value stat-pos" x-text="money(out.interest)"></p></div>
+              </div>
+
+              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Line chart of the account value growing each period"></canvas></div>
+              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="disclaimer">Payments are assumed at the end of each period (ordinary annuity). Estimates only — not financial advice.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>How to Use This Calculator</h2>
+              <ol>
+                <li><strong>Pick what to solve for.</strong> "Grow a lump sum → FV" turns a starting amount into a future value. "Discount a future sum → PV" tells you what a future target is worth today.</li>
+                <li><strong>Enter the amount</strong> — a starting balance in FV mode, or the future target in PV mode.</li>
+                <li><strong>Add a payment per period</strong> if money is added (FV) or set aside (PV) every period. Leave it at 0 for a pure lump-sum calculation.</li>
+                <li><strong>Enter the annual rate, the number of periods, and the compounding frequency.</strong></li>
+                <li><strong>Read the results:</strong> the solved value, your total contributions, and the portion that is interest or growth. The chart traces the running value over every period.</li>
+              </ol>
+
+              <h2>The Formula Explained</h2>
+              <p>Future value of a present amount plus an ordinary annuity of payments:</p>
+              <div class="not-prose my-4"><div class="formula">FV = PV (1 + i)ⁿ  +  PMT × [ ((1 + i)ⁿ − 1) ÷ i ]</div></div>
+              <p>Rearranged to solve for the present value that reaches a future target:</p>
+              <div class="not-prose my-4"><div class="formula">PV = ( FV − PMT × [ ((1 + i)ⁿ − 1) ÷ i ] ) ÷ (1 + i)ⁿ</div></div>
+              <ul>
+                <li><strong>i</strong> — rate per period = annual rate ÷ compounding frequency</li>
+                <li><strong>n</strong> — total number of periods</li>
+                <li><strong>PMT</strong> — payment made at the end of each period</li>
+              </ul>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>What discount rate should I use?</h3>
+              <p>Use your <strong>opportunity cost</strong> — the return available on a comparable alternative. For personal decisions that is often the expected return of a diversified portfolio (roughly 6–8%); a business usually uses its weighted average cost of capital. A higher rate makes future dollars worth less today.</p>
+              <h3>What is the difference between present value and net present value?</h3>
+              <p>Present value discounts one future amount or a stream of equal payments to today. <strong>Net present value (NPV)</strong> does this for an irregular series of cash flows and subtracts the upfront cost, producing one number that is positive when a project adds value.</p>
+              <h3>Why is a dollar today worth more than a dollar tomorrow?</h3>
+              <p>A dollar today can be invested and earn a return, inflation eats into the buying power of future dollars, and any promised future payment carries some risk of not arriving. Those three forces give money its time value.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="compound-interest.html">Compound Interest</a> — the FV case with a friendlier, savings-focused interface.</li>
+                <li><a href="inflation-calculator.html">Inflation Calculator</a> — discounting driven purely by rising prices.</li>
+                <li><a href="real-roi.html">Real ROI</a> — turn a nominal return into an inflation- and tax-adjusted one.</li>
+              </ul>
+            </article>
+
+          </main>
+
+          <aside class="site-rail mt-6 lg:mt-0">
+            <div class="lg:sticky lg:top-24">
+              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

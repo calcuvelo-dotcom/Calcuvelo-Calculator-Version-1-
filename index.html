@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calcuvelo — Free Financial &amp; Economic Calculators</title>
+  <meta name="description" content="Ten free, privacy-friendly calculators for compound interest, mortgages, retirement, auto loans, debt payoff, inflation, present value, real ROI, salary conversion and the Rule of 72. Everything runs in your browser." />
+  <link rel="canonical" href="https://calcuvelo.com/" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Calcuvelo — Free Financial &amp; Economic Calculators" />
+  <meta property="og:description" content="Ten free, privacy-friendly calculators. Everything runs in your browser." />
+  <meta property="og:url" content="https://calcuvelo.com/" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "Calcuvelo",
+        "url": "https://calcuvelo.com/",
+        "description": "Free financial and economic calculators that run entirely in your browser."
+      },
+      {
+        "@type": "ItemList",
+        "name": "Calcuvelo calculators",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1,  "name": "Compound Interest Calculator", "url": "https://calcuvelo.com/compound-interest.html" },
+          { "@type": "ListItem", "position": 2,  "name": "Mortgage Calculator", "url": "https://calcuvelo.com/mortgage-calculator.html" },
+          { "@type": "ListItem", "position": 3,  "name": "Retirement / 401(k) Calculator", "url": "https://calcuvelo.com/retirement-calculator.html" },
+          { "@type": "ListItem", "position": 4,  "name": "Auto Loan Calculator", "url": "https://calcuvelo.com/auto-loan.html" },
+          { "@type": "ListItem", "position": 5,  "name": "Debt Payoff Calculator", "url": "https://calcuvelo.com/debt-payoff.html" },
+          { "@type": "ListItem", "position": 6,  "name": "Inflation Calculator", "url": "https://calcuvelo.com/inflation-calculator.html" },
+          { "@type": "ListItem", "position": 7,  "name": "Present & Future Value Calculator", "url": "https://calcuvelo.com/present-value.html" },
+          { "@type": "ListItem", "position": 8,  "name": "Real ROI Calculator", "url": "https://calcuvelo.com/real-roi.html" },
+          { "@type": "ListItem", "position": 9,  "name": "Salary to Hourly Converter", "url": "https://calcuvelo.com/salary-converter.html" },
+          { "@type": "ListItem", "position": 10, "name": "Rule of 72 Calculator", "url": "https://calcuvelo.com/rule-of-72.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity="0.9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block text-sm font-semibold text-slate-900">Calcuvelo</span>
+            <span class="block text-xs text-slate-500">Financial &amp; economic calculators</span>
+          </span>
+        </a>
+        <span class="hidden text-xs font-medium text-slate-400 sm:inline">Free · No sign-up · Private</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= AD SLOT 1 — TOP LEADERBOARD ================= -->
+  <!-- Paste your AdSense <ins class="adsbygoogle"> unit inside this box -->
+  <div class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+
+    <!-- ---------- HERO ---------- -->
+    <section class="hub-hero">
+      <h1>Free financial &amp; economic calculators</h1>
+      <p>
+        Ten focused tools for the numbers that matter — savings growth, mortgages, retirement, debt, inflation and more.
+        Every calculation runs entirely in your browser: nothing you type is uploaded, stored, or shared.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500">
+        <span>✓ Real-time results &amp; charts</span>
+        <span>✓ Year-by-year data tables</span>
+        <span>✓ Print or save to PDF</span>
+        <span>✓ No account, no tracking of your inputs</span>
+      </div>
+    </section>
+
+    <!-- ---------- FINANCIAL ---------- -->
+    <section class="mt-10">
+      <h2 class="hub-section-title">Financial calculators</h2>
+      <div class="calc-grid mt-3">
+        <a href="compound-interest.html" class="calc-card">
+          <span class="num">1</span>
+          <span>
+            <h3>Compound Interest Calculator</h3>
+            <p>Project savings growth with monthly contributions and watch interest overtake your deposits.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="mortgage-calculator.html" class="calc-card">
+          <span class="num">2</span>
+          <span>
+            <h3>Mortgage Calculator</h3>
+            <p>Monthly payment, lifetime interest, and a full year-by-year amortization schedule.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="retirement-calculator.html" class="calc-card">
+          <span class="num">3</span>
+          <span>
+            <h3>Retirement / 401(k) Calculator</h3>
+            <p>Project your balance at retirement from your contribution rate, employer match and expected return.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="auto-loan.html" class="calc-card">
+          <span class="num">4</span>
+          <span>
+            <h3>Auto Loan Calculator</h3>
+            <p>Roll tax, fees and a trade-in into the loan to see the true monthly cost of a car.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="debt-payoff.html" class="calc-card">
+          <span class="num">5</span>
+          <span>
+            <h3>Debt Payoff Calculator</h3>
+            <p>How many months to clear a credit-card balance — and what an extra payment saves you.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= AD SLOT 3 — IN-CONTENT ================= -->
+    <div class="ad-slot ad-inline mx-auto w-full max-w-4xl" data-ad="in-content" aria-hidden="true">Advertisement</div>
+
+    <!-- ---------- ECONOMIC ---------- -->
+    <section>
+      <h2 class="hub-section-title">Economic calculators</h2>
+      <div class="calc-grid mt-3">
+        <a href="inflation-calculator.html" class="calc-card">
+          <span class="num">6</span>
+          <span>
+            <h3>Inflation Calculator</h3>
+            <p>How much a fixed sum of money will be worth after years of rising prices.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="present-value.html" class="calc-card">
+          <span class="num">7</span>
+          <span>
+            <h3>Present &amp; Future Value</h3>
+            <p>The time value of money — solve for present or future value, with optional recurring payments.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="real-roi.html" class="calc-card">
+          <span class="num">8</span>
+          <span>
+            <h3>Real ROI Calculator</h3>
+            <p>Your true investment return after capital-gains tax and the drag of inflation.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="salary-converter.html" class="calc-card">
+          <span class="num">9</span>
+          <span>
+            <h3>Salary to Hourly Converter</h3>
+            <p>Convert an annual salary to hourly, weekly and monthly pay — or work backwards from a rate.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="rule-of-72.html" class="calc-card">
+          <span class="num">10</span>
+          <span>
+            <h3>Rule of 72 Calculator</h3>
+            <p>Estimate how long money, an economy or a population takes to double at a steady growth rate.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ---------- SUPPORTING CONTENT ---------- -->
+    <section class="card seo prose prose-slate mt-12 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3">
+      <h2>About Calcuvelo</h2>
+      <p>
+        Calcuvelo is an independent, ad-supported project that publishes free financial and economic calculators.
+        The tools are split into two groups. The <strong>financial calculators</strong> handle the everyday money
+        decisions most households face — growing savings, comparing mortgages, projecting a 401(k), financing a car and
+        paying down debt. The <strong>economic calculators</strong> deal with the forces that shape wealth over the long
+        run — inflation, the time value of money, real (after-tax, after-inflation) returns, converting salaries to hourly
+        wages, and the Rule of 72.
+      </p>
+      <p>
+        Every result updates the moment you change an input or drag a slider. Each tool includes a chart so you can see
+        the trajectory rather than just a final number, a year-by-year data table for the exact figures, and a
+        Print / Save&nbsp;PDF button that produces a clean one-page report.
+      </p>
+
+      <h2>Your privacy</h2>
+      <p>
+        The site is a set of static pages with no backend and no database. Your inputs are processed by JavaScript in
+        your own browser and never leave your device. We do show third-party advertising, which may use cookies — see the
+        <a href="privacy.html">Privacy Policy</a> for details and opt-out links.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Are these calculators financial advice?</h3>
+      <p>No. They are educational tools that apply standard formulas to the assumptions you provide. They cannot see your
+        full financial picture. Consult a licensed financial, tax or legal professional before making decisions.</p>
+      <h3>How accurate are the results?</h3>
+      <p>The math is exact for the inputs you enter, but the inputs themselves — future returns, inflation, tax rates — are
+        uncertain. Treat every output as an estimate and try a range of scenarios.</p>
+      <h3>Do the calculators work on mobile?</h3>
+      <p>Yes. The layout is designed mobile-first and the charts and tables are fully responsive, so every tool works on
+        phones, tablets and desktops.</p>
+    </section>
+
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="mt-4 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>
