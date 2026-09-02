@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
   <title>Real Rate of Return (Real ROI) Calculator — Calcuvelo</title>
   <meta name="description" content="Free real ROI calculator. Convert a nominal investment return into your true return after capital-gains tax and inflation, with an annualized real rate and a chart." />
   <link rel="canonical" href="https://calcuvelo.com/real-roi.html" />
@@ -85,10 +88,6 @@
     </div>
   </header>
 
-  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
-  </div>
-
   <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
 
@@ -112,7 +111,7 @@
       </aside>
 
       <div class="min-w-0">
-        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+        <div class="print-block">
           <main class="min-w-0">
 
             <section x-data="realRoi()" x-effect="update()" x-cloak class="card">
@@ -183,8 +182,6 @@
                 <div class="stat"><p class="stat-label">Real annualized return</p><p class="stat-value" :class="out.realCagr >= 0 ? 'stat-pos' : 'stat-neg'" x-text="pct(out.realCagr, 2)"></p></div>
               </div>
 
-              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
-
               <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Bar chart comparing nominal, after-tax and inflation-adjusted ending values"></canvas></div>
               <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
               <div x-show="view === 'table'" class="table-wrap">
@@ -243,13 +240,6 @@ RealCAGR    = (RealEnd ÷ P)^(1 / y) − 1</div></div>
             </article>
 
           </main>
-
-          <aside class="site-rail mt-6 lg:mt-0">
-            <div class="lg:sticky lg:top-24">
-              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
-            </div>
-          </aside>
-
         </div>
       </div>
     </div>

@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
   <title>Retirement &amp; 401(k) Calculator — Calcuvelo</title>
   <meta name="description" content="Free retirement calculator. Project your 401(k) balance at retirement from your age, salary, contribution rate and employer match, with a growth chart by age." />
   <link rel="canonical" href="https://calcuvelo.com/retirement-calculator.html" />
@@ -85,10 +88,6 @@
     </div>
   </header>
 
-  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
-  </div>
-
   <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
 
@@ -112,7 +111,7 @@
       </aside>
 
       <div class="min-w-0">
-        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+        <div class="print-block">
           <main class="min-w-0">
 
             <section x-data="retirement()" x-effect="update()" x-cloak class="card">
@@ -189,8 +188,6 @@
                 <div class="stat"><p class="stat-label" x-text="'Income @ ' + nfmt(withdrawRate,1) + '% / mo'"></p><p class="stat-value" x-text="money(out.monthlyIncome, 0)"></p></div>
               </div>
 
-              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
-
               <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Line chart of projected 401(k) balance by age"></canvas></div>
               <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
               <div x-show="view === 'table'" class="table-wrap">
@@ -245,13 +242,6 @@
             </article>
 
           </main>
-
-          <aside class="site-rail mt-6 lg:mt-0">
-            <div class="lg:sticky lg:top-24">
-              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
-            </div>
-          </aside>
-
         </div>
       </div>
     </div>

@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
   <title>Compound Interest Calculator — Calcuvelo</title>
   <meta name="description" content="Free compound interest calculator with monthly contributions. See your ending balance, total interest earned, and a chart of principal vs. interest growth over time." />
   <link rel="canonical" href="https://calcuvelo.com/compound-interest.html" />
@@ -89,12 +92,6 @@
     </div>
   </header>
 
-  <!-- ================= AD SLOT 1 — TOP LEADERBOARD ================= -->
-  <!-- Paste your AdSense <ins class="adsbygoogle"> unit inside this box -->
-  <div class="no-print mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-    <div class="ad-slot ad-leaderboard mx-auto w-full max-w-4xl" data-ad="leaderboard" aria-hidden="true">Advertisement</div>
-  </div>
-
   <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="print-block lg:grid lg:grid-cols-[248px_1fr] lg:gap-8">
 
@@ -118,9 +115,9 @@
         </div>
       </aside>
 
-      <!-- ---------- MAIN COLUMN + RIGHT RAIL ---------- -->
+      <!-- ---------- MAIN COLUMN ---------- -->
       <div class="min-w-0">
-        <div class="print-block lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+        <div class="print-block">
           <main class="min-w-0">
 
             <!-- ================= CALCULATOR CARD ================= -->
@@ -191,9 +188,6 @@
                 <div class="stat"><p class="stat-label">Interest earned</p><p class="stat-value stat-pos" x-text="money(out.interest)"></p></div>
               </div>
 
-              <!-- ===== AD SLOT 3 — IN-CONTENT (between inputs and chart) ===== -->
-              <div class="ad-slot ad-inline no-print w-full" data-ad="in-content" aria-hidden="true">Advertisement</div>
-
               <!-- ===== GRAPH VIEW (updates live as sliders move) ===== -->
               <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Chart of contributions versus interest over time"></canvas></div>
 
@@ -254,15 +248,6 @@
             </article>
 
           </main>
-
-          <!-- ================= AD SLOT 2 — RIGHT SIDEBAR ================= -->
-          <!-- On mobile this stacks neatly below the calculator (grid collapses) -->
-          <aside class="site-rail mt-6 lg:mt-0">
-            <div class="lg:sticky lg:top-24">
-              <div class="ad-slot ad-rail w-full" data-ad="sidebar" aria-hidden="true">Advertisement</div>
-            </div>
-          </aside>
-
         </div>
       </div>
     </div>
