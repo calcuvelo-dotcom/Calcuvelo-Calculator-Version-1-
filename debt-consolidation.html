@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>try{if(localStorage.getItem('cv-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
+  <title>High-Interest Debt Consolidation Calculator — Calcuvelo</title>
+  <meta name="description" content="Compare a 0% intro-APR balance-transfer card against a 401(k) loan for consolidating high-interest credit card debt. See total cost, fees and payoff timelines side by side." />
+  <link rel="canonical" href="https://calcuvelo.com/debt-consolidation.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="High-Interest Debt Consolidation Calculator — Calcuvelo" />
+  <meta property="og:description" content="0% balance-transfer card vs. a 401(k) loan — compare total cost and payoff time." />
+  <meta property="og:url" content="https://calcuvelo.com/debt-consolidation.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <link rel="stylesheet" href="assets/header.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="assets/header.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "High-Interest Debt Consolidation Calculator",
+        "url": "https://calcuvelo.com/debt-consolidation.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Will opening a balance-transfer card hurt my credit score?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A new account and credit inquiry typically dock a score by roughly 10-20 points in the short term, mostly from the hard inquiry and a lower average account age. Scores usually recover within several months as you make on-time payments and the balance drops." }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if I don't pay off the card before the 0% period ends?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Any balance left when the promotional window expires starts accruing interest at the card's regular go-to APR, which is often as high as the debt you were trying to escape. Set the payoff period at or below the promo length to avoid this." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is a 401(k) loan risk-free since I'm borrowing from myself?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The money stops growing tax-deferred while it's out, and most plans require the full balance to be repaid quickly if you leave or lose your job — often within 60-90 days. An unpaid balance is then treated as a taxable distribution, plus a 10% early-withdrawal penalty if you're under 59½." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ===================== UNIVERSAL HEADER  (assets/header.css + assets/header.js) ===================== -->
+  <header class="site-header">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="site-brand">Calcuvelo</span>
+      </a>
+
+      <div class="site-nav" data-dropdown>
+        <button type="button" class="site-nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-menu">
+          Calculators
+          <svg class="site-nav-caret" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="site-nav-menu" id="site-nav-menu" role="menu">
+          <div class="site-nav-cols">
+            <div>
+              <p class="site-nav-heading">Financial</p>
+              <a href="compound-interest.html" data-nav class="site-nav-link" role="menuitem">Compound Interest</a>
+              <a href="mortgage-calculator.html" data-nav class="site-nav-link" role="menuitem">Mortgage</a>
+              <a href="retirement-calculator.html" data-nav class="site-nav-link" role="menuitem">Retirement / 401(k)</a>
+              <a href="auto-loan.html" data-nav class="site-nav-link" role="menuitem">Auto Loan</a>
+              <a href="debt-payoff.html" data-nav class="site-nav-link" role="menuitem">Debt Payoff</a>
+              <a href="debt-consolidation.html" data-nav class="site-nav-link" role="menuitem">Debt Consolidation</a>
+              <a href="payoff-vs-interest.html" data-nav class="site-nav-link" role="menuitem">Payoff vs. Interest</a>
+              <a href="mortgage-affordability.html" data-nav class="site-nav-link" role="menuitem">Mortgage Affordability</a>
+              <a href="401k-split-distribution.html" data-nav class="site-nav-link" role="menuitem">401(k) Split Distribution</a>
+              <a href="debt-snowball.html" data-nav class="site-nav-link" role="menuitem">Debt Snowball &amp; EF</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Economic</p>
+              <a href="inflation-calculator.html" data-nav class="site-nav-link" role="menuitem">Inflation</a>
+              <a href="present-value.html" data-nav class="site-nav-link" role="menuitem">Present &amp; Future Value</a>
+              <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
+              <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
+              <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+              <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
+            </div>
+          </div>
+          <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle-knob">
+            <svg class="theme-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <svg class="theme-ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block">
+
+      <div class="min-w-0">
+        <div class="print-block">
+          <main class="min-w-0">
+
+            <section x-data="debtConsolidation()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">High-Interest Debt Consolidation Calculator</h1>
+              <p class="calc-sub">A 0% intro-APR balance-transfer card vs. a 401(k) loan — which actually costs less?</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="dc-debt">Current credit-card debt</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="dc-debt" type="number" min="0" step="100" x-model.number="debt" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="50000" step="100" x-model.number="debt" class="range" aria-label="Current debt" />
+                </div>
+                <div>
+                  <label class="label" for="dc-apr">Current card APR</label>
+                  <div class="relative">
+                    <input id="dc-apr" type="number" min="0" step="0.1" x-model.number="apr" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="36" step="0.1" x-model.number="apr" class="range" aria-label="Current APR" />
+                </div>
+                <div>
+                  <label class="label" for="dc-payoff">Desired payoff period</label>
+                  <div class="relative">
+                    <input id="dc-payoff" type="number" min="1" step="1" x-model.number="payoffMonths" class="field with-suffix" />
+                    <span class="affix affix-right">mo</span></div>
+                  <input type="range" min="1" max="36" step="1" x-model.number="payoffMonths" class="range" aria-label="Desired payoff period" />
+                </div>
+                <div>
+                  <label class="label" for="dc-score">Expected credit-score impact</label>
+                  <div class="relative">
+                    <input id="dc-score" type="number" min="0" step="1" x-model.number="scoreImpact" class="field with-suffix" />
+                    <span class="affix affix-right">pts</span></div>
+                  <input type="range" min="0" max="40" step="1" x-model.number="scoreImpact" class="range" aria-label="Expected credit score impact" />
+                </div>
+              </div>
+
+              <h2 class="mt-7 text-sm font-semibold text-slate-700">Option 1 — 0% APR balance-transfer card</h2>
+              <div class="mt-3 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="dc-promo">Promo (0% APR) window</label>
+                  <div class="relative">
+                    <input id="dc-promo" type="number" min="0" step="1" x-model.number="promoMonths" class="field with-suffix" />
+                    <span class="affix affix-right">mo</span></div>
+                  <input type="range" min="0" max="24" step="1" x-model.number="promoMonths" class="range" aria-label="Promo window" />
+                </div>
+                <div>
+                  <label class="label" for="dc-fee">Balance-transfer fee</label>
+                  <div class="relative">
+                    <input id="dc-fee" type="number" min="0" step="0.1" x-model.number="transferFee" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="5" step="0.1" x-model.number="transferFee" class="range" aria-label="Balance transfer fee" />
+                </div>
+              </div>
+
+              <h2 class="mt-7 text-sm font-semibold text-slate-700">Option 2 — 401(k) loan</h2>
+              <div class="mt-3 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="dc-avail">401(k) loan available</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="dc-avail" type="number" min="0" step="500" x-model.number="loanAvailable" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="53000" step="500" x-model.number="loanAvailable" class="range" aria-label="401k loan available" />
+                </div>
+                <div>
+                  <label class="label" for="dc-k401rate">401(k) loan rate (paid to yourself)</label>
+                  <div class="relative">
+                    <input id="dc-k401rate" type="number" min="0" step="0.1" x-model.number="k401Rate" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="15" step="0.1" x-model.number="k401Rate" class="range" aria-label="401k loan rate" />
+                </div>
+                <div>
+                  <label class="label" for="dc-k401term">401(k) loan term</label>
+                  <div class="relative">
+                    <input id="dc-k401term" type="number" min="1" step="1" x-model.number="k401Term" class="field with-suffix" />
+                    <span class="affix affix-right">mo</span></div>
+                  <input type="range" min="1" max="60" step="1" x-model.number="k401Term" class="range" aria-label="401k loan term" />
+                </div>
+                <div>
+                  <label class="label" for="dc-origfee">Origination fee</label>
+                  <div class="relative">
+                    <input id="dc-origfee" type="number" min="0" step="0.1" x-model.number="originationFee" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="5" step="0.1" x-model.number="originationFee" class="range" aria-label="Origination fee" />
+                </div>
+              </div>
+
+              <div x-show="!out.loanFeasible" class="mt-5 rounded-xl bg-amber-50 p-4 text-sm text-amber-800 ring-1 ring-amber-200">
+                The 401(k) loan available doesn't cover the full balance — you'd need to combine it with another source of funds.
+              </div>
+
+              <div class="mt-7 grid gap-4 sm:grid-cols-2">
+                <div class="rounded-xl border border-slate-200 p-4" :class="out.cheaper === 'card' && 'ring-2 ring-emerald-400'">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Option 1 — Balance-transfer card</p>
+                  <div class="mt-3 grid gap-2 text-sm">
+                    <div class="flex justify-between"><span class="text-slate-500">Monthly payment</span><span class="font-semibold" x-text="money(out.payment1)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Transfer fee</span><span class="font-semibold" x-text="money(out.fee)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Total interest</span><span class="font-semibold text-rose-600" x-text="money(out.interest1)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Total paid</span><span class="font-semibold" x-text="money(out.totalPaid1)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Credit-score impact</span><span class="font-semibold text-amber-600">&minus;<span x-text="scoreImpact"></span> pts (est.)</span></div>
+                  </div>
+                </div>
+                <div class="rounded-xl border border-slate-200 p-4" :class="out.cheaper === 'k401' && 'ring-2 ring-emerald-400'">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Option 2 — 401(k) loan</p>
+                  <div class="mt-3 grid gap-2 text-sm">
+                    <div class="flex justify-between"><span class="text-slate-500">Monthly payment</span><span class="font-semibold" x-text="money(out.payment2)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Origination fee</span><span class="font-semibold" x-text="money(out.originationAmt)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Total interest (paid to yourself)</span><span class="font-semibold text-emerald-600" x-text="money(out.interest2)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Total paid</span><span class="font-semibold" x-text="money(out.totalPaid2)"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Repayment period</span><span class="font-semibold" x-text="out.n2 + ' mo'"></span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-5 rounded-xl bg-indigo-50 p-4 text-sm text-indigo-900 ring-1 ring-indigo-200">
+                <strong x-text="out.cheaper === 'card' ? 'The balance-transfer card' : 'The 401(k) loan'"></strong>
+                is the lower-cost option by about <strong x-text="money(out.diff)"></strong> under these assumptions —
+                but the card carries a credit-score hit and the 401(k) loan carries job-change and lost-growth risk. See the notes below.
+              </div>
+
+              <p class="disclaimer">Illustrative estimates only, not financial advice. 401(k) loan terms, balance-transfer offers and credit-score effects vary by plan, issuer and individual credit profile.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>What is the High-Interest Debt Consolidation Calculator?</h2>
+              <p>This calculator compares two common ways to escape a high-APR credit-card balance: transferring it to a new card with a 0% introductory APR for a limited promotional window, or borrowing against a 401(k) to pay it off in one shot. It lines up the total cost, fees, and payoff timeline for both so you can see which one is actually cheaper for your numbers — not just which one feels simpler.</p>
+
+              <h2>How does the underlying math work?</h2>
+              <p>For the balance-transfer card, the calculator adds the one-time transfer fee to the balance, then simulates equal monthly payments across your chosen payoff period. If that period is within the 0% promo window, no interest accrues at all; any months beyond the promo window accrue interest at your current card's APR, since most issuers send an unpaid transferred balance back to a standard rate. For the 401(k) loan, it uses the standard installment-loan formula — the same one behind the site's <a href="auto-loan.html">Auto Loan Calculator</a> — to amortize the loan amount over your chosen term at the rate your plan charges, then adds a one-time origination fee.</p>
+
+              <h2>Real-world practical application</h2>
+              <p>People facing a large card balance use this to decide between two options that feel similar ("borrow to pay off debt") but carry very different risks: a 0% card risks a go-to APR if the balance isn't cleared in time and dings your credit score with a new account, while a 401(k) loan avoids a credit check entirely but must usually be repaid in full within 60&ndash;90 days of leaving your job or it becomes a taxable, penalized distribution. Running both scenarios side by side turns an emotional decision into a numbers-first one.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>Will opening a balance-transfer card hurt my credit score?</h3>
+              <p>A new account and credit inquiry typically dock a score by roughly 10&ndash;20 points in the short term, mostly from the hard inquiry and a lower average account age. Scores usually recover within several months as you make on-time payments and the balance drops.</p>
+              <h3>What happens if I don't pay off the card before the 0% period ends?</h3>
+              <p>Any balance left when the promotional window expires starts accruing interest at the card's regular go-to APR, which is often as high as the debt you were trying to escape. Set the payoff period at or below the promo length to avoid this.</p>
+              <h3>Is a 401(k) loan risk-free since I'm borrowing from myself?</h3>
+              <p>No. The money stops growing tax-deferred while it's out, and most plans require the full balance to be repaid quickly if you leave or lose your job &mdash; often within 60&ndash;90 days. An unpaid balance is then treated as a taxable distribution, plus a 10% early-withdrawal penalty if you're under 59&frac12;.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="debt-payoff.html">Debt Payoff Calculator</a> — the payoff math for a single fixed-rate balance.</li>
+                <li><a href="debt-snowball.html">Debt Snowball &amp; Emergency Fund Calculator</a> — a plan for paying off several debts at once.</li>
+                <li><a href="retirement-calculator.html">Retirement / 401(k) Calculator</a> — see the long-run cost of pausing contributions.</li>
+              </ul>
+            </article>
+
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

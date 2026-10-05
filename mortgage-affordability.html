@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>try{if(localStorage.getItem('cv-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
+  <title>Mortgage Affordability Calculator — Calcuvelo</title>
+  <meta name="description" content="Free mortgage affordability calculator. Check your home purchase against standard front-end and back-end debt-to-income guidelines, and whether your savings cover the down payment and closing costs." />
+  <link rel="canonical" href="https://calcuvelo.com/mortgage-affordability.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mortgage Affordability Calculator — Calcuvelo" />
+  <meta property="og:description" content="Check a home purchase against standard income and debt-to-income affordability guidelines." />
+  <meta property="og:url" content="https://calcuvelo.com/mortgage-affordability.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <link rel="stylesheet" href="assets/header.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/calculators.js"></script>
+  <script defer src="assets/header.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Mortgage Affordability Calculator",
+        "url": "https://calcuvelo.com/mortgage-affordability.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a good front-end and back-end debt-to-income ratio?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Lenders commonly use 28% as the comfortable ceiling for housing costs alone (front-end ratio) and 36% for total debt including housing (back-end ratio, or DTI). Many conventional loan programs will approve a DTI up to 43%, and some government-backed programs go higher, but staying under 36% leaves more breathing room." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this calculator check if I'll actually get approved for a mortgage?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. It checks your numbers against the general guidelines lenders use, not a specific lender's underwriting rules, which also weigh credit score, employment history, assets and loan program. Treat the result as a sanity check before you apply, not a pre-approval." }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do closing costs matter if I already have the down payment saved?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Closing costs — lender fees, title insurance, appraisal, taxes and more — typically run 2%-5% of the purchase price and are due on top of the down payment at closing. Savings that cover the down payment alone can still leave you short of the cash actually needed to close." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ===================== UNIVERSAL HEADER  (assets/header.css + assets/header.js) ===================== -->
+  <header class="site-header">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="site-brand">Calcuvelo</span>
+      </a>
+
+      <div class="site-nav" data-dropdown>
+        <button type="button" class="site-nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-menu">
+          Calculators
+          <svg class="site-nav-caret" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="site-nav-menu" id="site-nav-menu" role="menu">
+          <div class="site-nav-cols">
+            <div>
+              <p class="site-nav-heading">Financial</p>
+              <a href="compound-interest.html" data-nav class="site-nav-link" role="menuitem">Compound Interest</a>
+              <a href="mortgage-calculator.html" data-nav class="site-nav-link" role="menuitem">Mortgage</a>
+              <a href="retirement-calculator.html" data-nav class="site-nav-link" role="menuitem">Retirement / 401(k)</a>
+              <a href="auto-loan.html" data-nav class="site-nav-link" role="menuitem">Auto Loan</a>
+              <a href="debt-payoff.html" data-nav class="site-nav-link" role="menuitem">Debt Payoff</a>
+              <a href="debt-consolidation.html" data-nav class="site-nav-link" role="menuitem">Debt Consolidation</a>
+              <a href="payoff-vs-interest.html" data-nav class="site-nav-link" role="menuitem">Payoff vs. Interest</a>
+              <a href="mortgage-affordability.html" data-nav class="site-nav-link" role="menuitem">Mortgage Affordability</a>
+              <a href="401k-split-distribution.html" data-nav class="site-nav-link" role="menuitem">401(k) Split Distribution</a>
+              <a href="debt-snowball.html" data-nav class="site-nav-link" role="menuitem">Debt Snowball &amp; EF</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Economic</p>
+              <a href="inflation-calculator.html" data-nav class="site-nav-link" role="menuitem">Inflation</a>
+              <a href="present-value.html" data-nav class="site-nav-link" role="menuitem">Present &amp; Future Value</a>
+              <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
+              <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
+              <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+              <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
+            </div>
+          </div>
+          <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle-knob">
+            <svg class="theme-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <svg class="theme-ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block">
+
+      <div class="min-w-0">
+        <div class="print-block">
+          <main class="min-w-0">
+
+            <section x-data="mortgageAffordability()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Mortgage Affordability Calculator</h1>
+              <p class="calc-sub">Can you afford this home, based on standard income and debt-to-income guidelines?</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="label" for="ma-income">Annual household income</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="ma-income" type="number" min="0" step="1000" x-model.number="income" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="400000" step="1000" x-model.number="income" class="range" aria-label="Annual income" />
+                </div>
+                <div>
+                  <label class="label" for="ma-debt">Other monthly debt payments</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="ma-debt" type="number" min="0" step="10" x-model.number="otherDebt" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="5000" step="10" x-model.number="otherDebt" class="range" aria-label="Other monthly debt" />
+                </div>
+                <div>
+                  <label class="label" for="ma-savings">Available savings</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="ma-savings" type="number" min="0" step="500" x-model.number="savings" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="300000" step="500" x-model.number="savings" class="range" aria-label="Available savings" />
+                </div>
+                <div>
+                  <label class="label" for="ma-price">Target home price</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="ma-price" type="number" min="0" step="1000" x-model.number="homePrice" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="1500000" step="1000" x-model.number="homePrice" class="range" aria-label="Target home price" />
+                </div>
+                <div>
+                  <label class="label" for="ma-down">Down payment</label>
+                  <div class="relative">
+                    <input id="ma-down" type="number" min="0" step="1" x-model.number="downPct" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="50" step="1" x-model.number="downPct" class="range" aria-label="Down payment percent" />
+                </div>
+                <div>
+                  <label class="label" for="ma-rate">Fixed interest rate</label>
+                  <div class="relative">
+                    <input id="ma-rate" type="number" min="0" step="0.05" x-model.number="rate" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="12" step="0.05" x-model.number="rate" class="range" aria-label="Interest rate" />
+                </div>
+                <div>
+                  <label class="label" for="ma-term">Amortization period</label>
+                  <div class="relative">
+                    <input id="ma-term" type="number" min="1" step="1" x-model.number="amortYears" class="field with-suffix" />
+                    <span class="affix affix-right">yrs</span></div>
+                  <input type="range" min="5" max="30" step="1" x-model.number="amortYears" class="range" aria-label="Amortization period" />
+                </div>
+                <div>
+                  <label class="label" for="ma-tax">Property tax rate</label>
+                  <div class="relative">
+                    <input id="ma-tax" type="number" min="0" step="0.05" x-model.number="propTaxPct" class="field with-suffix" />
+                    <span class="affix affix-right">%/yr</span></div>
+                  <input type="range" min="0" max="3" step="0.05" x-model.number="propTaxPct" class="range" aria-label="Property tax rate" />
+                </div>
+                <div>
+                  <label class="label" for="ma-ins">Homeowners insurance (annual)</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="ma-ins" type="number" min="0" step="50" x-model.number="insuranceAnnual" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="8000" step="50" x-model.number="insuranceAnnual" class="range" aria-label="Insurance" />
+                </div>
+                <div>
+                  <label class="label" for="ma-hoa">HOA dues (monthly)</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="ma-hoa" type="number" min="0" step="10" x-model.number="hoaMonthly" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="1000" step="10" x-model.number="hoaMonthly" class="range" aria-label="HOA" />
+                </div>
+              </div>
+
+              <div class="mt-7 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Est. monthly mortgage (P&amp;I)</p><p class="stat-value" x-text="money(out.payment)"></p></div>
+                <div class="stat"><p class="stat-label">Total monthly housing cost</p><p class="stat-value" x-text="money(out.totalHousing)"></p></div>
+                <div class="stat"><p class="stat-label">Housing-to-income ratio</p><p class="stat-value" x-text="pct(out.frontEnd)"></p></div>
+                <div class="stat"><p class="stat-label">Total debt-to-income (DTI)</p><p class="stat-value" x-text="pct(out.backEnd)"></p></div>
+              </div>
+
+              <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                <div class="stat"><p class="stat-label">Down payment</p><p class="stat-value" x-text="money(out.down)"></p></div>
+                <div class="stat"><p class="stat-label">Est. closing costs</p><p class="stat-value" x-text="money(out.closingCosts)"></p></div>
+                <div class="stat"><p class="stat-label">Cash needed to close</p><p class="stat-value" x-text="money(out.cashNeeded)"></p></div>
+              </div>
+
+              <div class="mt-5 rounded-xl p-4 text-sm ring-1"
+                   :class="out.verdictTone === 'pos' ? 'bg-emerald-50 text-emerald-900 ring-emerald-200' : (out.verdictTone === 'warn' ? 'bg-amber-50 text-amber-900 ring-amber-200' : 'bg-rose-50 text-rose-700 ring-rose-200')">
+                <strong x-text="out.verdictTone === 'pos' ? 'Yes. ' : (out.verdictTone === 'warn' ? 'Maybe. ' : 'Not yet. ')"></strong>
+                <span x-text="out.verdict"></span>
+              </div>
+
+              <p class="disclaimer">Based on standard conventional-loan guidelines (28% front-end, 36%&ndash;43% back-end DTI). Actual approval depends on your lender, credit score, loan program and assets. Estimates only — not financial advice.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+              <h2>What is the Mortgage Affordability Calculator?</h2>
+              <p>This calculator checks whether a specific home purchase fits comfortably within your income by applying the same front-end and back-end debt-to-income ratios mortgage lenders use during underwriting. It also checks whether your available savings actually cover the down payment plus closing costs — a step many "can I afford it" estimates skip.</p>
+
+              <h2>How does the underlying math work?</h2>
+              <p>The calculator first computes the monthly principal-and-interest payment with the standard amortization formula used across the site's <a href="mortgage-calculator.html">Mortgage Calculator</a>, then adds estimated property tax, homeowners insurance and HOA dues to get your total monthly housing cost. The <strong>front-end ratio</strong> divides that housing cost by your gross monthly income; the <strong>back-end ratio (DTI)</strong> adds in your other monthly debt payments before dividing by income. A home is flagged as affordable when the front-end ratio stays at or under 28%, the back-end ratio stays at or under 36%, and your savings cover the down payment plus an estimated 3% of the price in closing costs.</p>
+
+              <h2>Real-world practical application</h2>
+              <p>Buyers use this before house-hunting to set a realistic price ceiling, before making an offer to sanity-check a listing against their own numbers (not just what a lender pre-approved), and to see how much a larger down payment or a shorter amortization period changes the monthly cost and the ratios. It's also a quick way to see whether a tempting price range is being driven more by income or by other existing debt.</p>
+
+              <h2>Frequently Asked Questions</h2>
+              <h3>What is a good front-end and back-end debt-to-income ratio?</h3>
+              <p>Lenders commonly use 28% as the comfortable ceiling for housing costs alone (front-end ratio) and 36% for total debt including housing (back-end ratio, or DTI). Many conventional loan programs will approve a DTI up to 43%, and some government-backed programs go higher, but staying under 36% leaves more breathing room.</p>
+              <h3>Does this calculator check if I'll actually get approved for a mortgage?</h3>
+              <p>No. It checks your numbers against the general guidelines lenders use, not a specific lender's underwriting rules, which also weigh credit score, employment history, assets and loan program. Treat the result as a sanity check before you apply, not a pre-approval.</p>
+              <h3>Why do closing costs matter if I already have the down payment saved?</h3>
+              <p>Closing costs — lender fees, title insurance, appraisal, taxes and more — typically run 2%-5% of the purchase price and are due on top of the down payment at closing. Savings that cover the down payment alone can still leave you short of the cash actually needed to close.</p>
+
+              <h2>Related Calculators</h2>
+              <ul>
+                <li><a href="mortgage-calculator.html">Mortgage Calculator</a> — full year-by-year amortization for a given loan.</li>
+                <li><a href="debt-snowball.html">Debt Snowball &amp; Emergency Fund Calculator</a> — clear other debt before taking on a mortgage.</li>
+                <li><a href="rule-of-72.html">Rule of 72</a> — how fast a down-payment fund could grow while you save.</li>
+              </ul>
+            </article>
+
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

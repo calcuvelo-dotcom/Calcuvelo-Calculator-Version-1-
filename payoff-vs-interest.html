@@ -7,16 +7,16 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Present Value &amp; Future Value Calculator — Calcuvelo</title>
-  <meta name="description" content="Free time value of money calculator. Solve for present value or future value with an optional recurring payment, and see the value grow period by period on a chart." />
-  <link rel="canonical" href="https://calcuvelo.com/present-value.html" />
+  <title>Payoff vs. Interest Calculator (Auto Loan) — Calcuvelo</title>
+  <meta name="description" content="Should you pay off your car loan today or keep riding the payment schedule? Compare the interest you'd save against what that lump sum could earn invested elsewhere." />
+  <link rel="canonical" href="https://calcuvelo.com/payoff-vs-interest.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Present Value &amp; Future Value Calculator — Calcuvelo" />
-  <meta property="og:description" content="Solve for present or future value with an optional recurring payment." />
-  <meta property="og:url" content="https://calcuvelo.com/present-value.html" />
+  <meta property="og:title" content="Payoff vs. Interest Calculator — Calcuvelo" />
+  <meta property="og:description" content="Pay off your car loan today, or keep riding the payments? Compare the two." />
+  <meta property="og:url" content="https://calcuvelo.com/payoff-vs-interest.html" />
   <meta name="twitter:card" content="summary" />
 
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
@@ -41,8 +41,8 @@
     "@graph": [
       {
         "@type": "WebApplication",
-        "name": "Present Value and Future Value Calculator",
-        "url": "https://calcuvelo.com/present-value.html",
+        "name": "Payoff vs. Interest Calculator",
+        "url": "https://calcuvelo.com/payoff-vs-interest.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -52,18 +52,18 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What discount rate should I use?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Use the return you could earn on a comparable alternative investment — your opportunity cost. For personal decisions that is often the expected return of a diversified portfolio (around 6-8%). A business typically uses its weighted average cost of capital. A higher discount rate makes future money worth less today." }
+            "name": "Is paying off a car loan early always the right move?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Paying off the loan guarantees you avoid every dollar of remaining interest, which is a certain, risk-free return equal to the loan's APR. It is usually the right move unless you could reliably earn a higher after-tax return elsewhere, or you'd be left without any cash cushion." }
           },
           {
             "@type": "Question",
-            "name": "What is the difference between present value and net present value?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Present value discounts a single future amount or a stream of equal payments back to today. Net present value (NPV) does the same for an irregular series of cash flows and then subtracts the upfront cost, giving a single number that is positive when an investment adds value." }
+            "name": "What does it mean to be \"upside-down\" on a car loan?",
+            "acceptedAnswer": { "@type": "Answer", "text": "You're upside-down when the loan balance is higher than the car's current market value. It doesn't change the math on whether to pay off the loan, but it matters if you're considering selling or trading the car in, since you'd owe more than a buyer or dealer would pay for it." }
           },
           {
             "@type": "Question",
-            "name": "Why is a dollar today worth more than a dollar tomorrow?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Three reasons: a dollar today can be invested and earn a return, inflation erodes the buying power of future dollars, and a promised future payment carries the risk it may not arrive. Together these make money have a time value." }
+            "name": "Are there early-payoff penalties on auto loans?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most modern auto loans don't charge a prepayment penalty, but a small number of older or subprime contracts do. Check your loan agreement for a \"prepayment penalty\" or \"rule of 78s\" clause before paying it off in full." }
           }
         ]
       }
@@ -120,7 +120,6 @@
       </div>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
-        <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
         <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
 
         <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
@@ -140,50 +139,55 @@
         <div class="print-block">
           <main class="min-w-0">
 
-            <section x-data="tvm()" x-effect="update()" x-cloak class="card">
-              <h1 class="calc-title">Present Value &amp; Future Value Calculator</h1>
-              <p class="calc-sub">The time value of money, with an optional recurring payment.</p>
+            <section x-data="payoffVsInterest()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Payoff vs. Interest Calculator</h1>
+              <p class="calc-sub">Pay off your car loan today, or keep riding the payments?</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
-              <div class="seg mt-5">
-                <button type="button" class="seg-btn" :class="mode === 'fv' && 'seg-btn-active'" @click="mode = 'fv'">Grow a lump sum → FV</button>
-                <button type="button" class="seg-btn" :class="mode === 'pv' && 'seg-btn-active'" @click="mode = 'pv'">Discount a future sum → PV</button>
-              </div>
-
               <div class="mt-6 grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label class="label" for="tv-amt" x-text="mode === 'fv' ? 'Present value (starting amount)' : 'Future value (target)'"></label>
+                  <label class="label" for="pv-bal">Remaining loan balance</label>
                   <div class="relative"><span class="affix affix-left">$</span>
-                    <input id="tv-amt" type="number" min="0" step="500" x-model.number="amount" class="field with-prefix" /></div>
+                    <input id="pv-bal" type="number" min="0" step="100" x-model.number="balance" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="60000" step="100" x-model.number="balance" class="range" aria-label="Remaining balance" />
                 </div>
                 <div>
-                  <label class="label" for="tv-pmt">Payment each period</label>
+                  <label class="label" for="pv-value">Car's current market value</label>
                   <div class="relative"><span class="affix affix-left">$</span>
-                    <input id="tv-pmt" type="number" min="0" step="50" x-model.number="pmt" class="field with-prefix" /></div>
+                    <input id="pv-value" type="number" min="0" step="100" x-model.number="carValue" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="80000" step="100" x-model.number="carValue" class="range" aria-label="Car value" />
                 </div>
                 <div>
-                  <label class="label" for="tv-rate">Annual rate</label>
+                  <label class="label" for="pv-apr">Loan APR</label>
                   <div class="relative">
-                    <input id="tv-rate" type="number" min="0" step="0.1" x-model.number="rate" class="field with-suffix" />
+                    <input id="pv-apr" type="number" min="0" step="0.1" x-model.number="apr" class="field with-suffix" />
                     <span class="affix affix-right">%</span></div>
-                  <input type="range" min="0" max="20" step="0.1" x-model.number="rate" class="range" aria-label="Annual rate" />
+                  <input type="range" min="0" max="24" step="0.1" x-model.number="apr" class="range" aria-label="APR" />
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                  <div>
-                    <label class="label" for="tv-n"># of periods</label>
-                    <input id="tv-n" type="number" min="1" step="1" x-model.number="periods" class="field" />
-                  </div>
-                  <div>
-                    <label class="label" for="tv-freq">Compounding</label>
-                    <select id="tv-freq" x-model.number="freq" class="field">
-                      <option :value="12">Monthly</option>
-                      <option :value="4">Quarterly</option>
-                      <option :value="1">Annually</option>
-                    </select>
-                  </div>
+                <div>
+                  <label class="label" for="pv-pay">Monthly payment</label>
+                  <div class="relative"><span class="affix affix-left">$</span>
+                    <input id="pv-pay" type="number" min="0" step="10" x-model.number="payment" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="1500" step="10" x-model.number="payment" class="range" aria-label="Monthly payment" />
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="label" for="pv-alt">If invested elsewhere instead, expected annual return</label>
+                  <div class="relative">
+                    <input id="pv-alt" type="number" min="0" step="0.1" x-model.number="altReturn" class="field with-suffix" />
+                    <span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="15" step="0.1" x-model.number="altReturn" class="range" aria-label="Alternative investment return" />
                 </div>
               </div>
+
+              <div x-show="!out.feasible" class="mt-5 rounded-xl bg-rose-50 p-4 text-sm text-rose-700 ring-1 ring-rose-200">
+                Your monthly payment is lower than the monthly interest charge, so the balance would never be paid off. Increase the payment above the interest that accrues each month.
+              </div>
+
+              <div x-show="out.equity < 0 && out.feasible" class="mt-5 rounded-xl bg-amber-50 p-4 text-sm text-amber-800 ring-1 ring-amber-200">
+                You're upside-down by <strong x-text="money(Math.abs(out.equity))"></strong> &mdash; the loan balance is higher than the car's market value.
+              </div>
+
               <!-- ----- Results toolbar: view toggle + print ----- -->
               <div class="result-toolbar no-print mt-6">
                 <div class="seg seg-inline" role="tablist" aria-label="Result view">
@@ -196,17 +200,28 @@
                 </button>
               </div>
 
-              <div class="mt-4 grid gap-3 sm:grid-cols-3">
-                <div class="stat">
-                  <p class="stat-label" x-text="mode === 'fv' ? 'Future value' : 'Present value needed'"></p>
-                  <p class="stat-value" x-text="money(out.result)"></p>
-                </div>
-                <div class="stat"><p class="stat-label">Total contributions</p><p class="stat-value" x-text="money(out.contributions)"></p></div>
-                <div class="stat"><p class="stat-label">Interest / growth</p><p class="stat-value stat-pos" x-text="money(out.interest)"></p></div>
+              <div class="mt-4 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Payoff amount (today)</p><p class="stat-value" x-text="money(out.payoffAmount)"></p></div>
+                <div class="stat"><p class="stat-label">Interest saved by paying off</p><p class="stat-value stat-pos" x-text="out.feasible ? money(out.savings) : '—'"></p></div>
+                <div class="stat"><p class="stat-label">Time left if you keep riding</p><p class="stat-value" x-text="monthsToText(out.months)"></p></div>
+                <div class="stat"><p class="stat-label">Estimated payoff date (riding)</p><p class="stat-value" x-text="out.payoffDate"></p></div>
               </div>
 
-              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Line chart of the account value growing each period"></canvas></div>
-              <!-- ===== TABLE VIEW (period-by-period breakdown) ===== -->
+              <div class="mt-5 rounded-xl p-4 text-sm ring-1" :class="out.investmentWins ? 'bg-sky-50 text-sky-900 ring-sky-200' : 'bg-emerald-50 text-emerald-900 ring-emerald-200'">
+                <template x-if="out.feasible && altReturn > 0">
+                  <span>
+                    <strong x-text="out.investmentWins ? 'Investing the lump sum could win: ' : 'Paying off today still wins: '"></strong>
+                    investing <span x-text="money(out.payoffAmount)"></span> at <span x-text="nfmt(altReturn)"></span>% for <span x-text="out.months"></span> months could grow to roughly
+                    <strong x-text="money(out.payoffAmount + out.investGain)"></strong> (a gain of <span x-text="money(out.investGain)"></span>), versus
+                    <strong x-text="money(out.savings)"></strong> in guaranteed interest saved by paying off now.
+                  </span>
+                </template>
+                <template x-if="!(out.feasible && altReturn > 0)">
+                  <span>Paying off today guarantees you avoid <strong x-text="money(out.savings)"></strong> in future interest — a certain, risk-free return equal to the loan's APR.</span>
+                </template>
+              </div>
+
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Bar chart comparing total cost of paying off today versus riding the loan to term"></canvas></div>
               <div x-show="view === 'table'" class="table-wrap">
                 <table class="data-table">
                   <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
@@ -214,54 +229,37 @@
                     <template x-for="(row, i) in rows" :key="i">
                       <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
                     </template>
-                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the month-by-month breakdown.</td></tr>
                   </tbody>
                 </table>
               </div>
 
-              <p class="disclaimer">Payments are assumed at the end of each period (ordinary annuity). Estimates only — not financial advice.</p>
+              <p class="disclaimer">Assumes a fixed rate and payment with no new charges, and that any alternative investment return is not guaranteed. Estimates only — not financial advice.</p>
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Present &amp; Future Value Calculator?</h2>
-              <p>The Present &amp; Future Value Calculator applies the core time-value-of-money formula: grow a lump sum, plus an optional recurring payment, forward to a future value &mdash; or discount a future target back to what it is worth today.</p>
-
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Pick what to solve for.</strong> "Grow a lump sum → FV" turns a starting amount into a future value. "Discount a future sum → PV" tells you what a future target is worth today.</li>
-                <li><strong>Enter the amount</strong> — a starting balance in FV mode, or the future target in PV mode.</li>
-                <li><strong>Add a payment per period</strong> if money is added (FV) or set aside (PV) every period. Leave it at 0 for a pure lump-sum calculation.</li>
-                <li><strong>Enter the annual rate, the number of periods, and the compounding frequency.</strong></li>
-                <li><strong>Read the results:</strong> the solved value, your total contributions, and the portion that is interest or growth. The chart traces the running value over every period.</li>
-              </ol>
+              <h2>What is the Payoff vs. Interest Calculator?</h2>
+              <p>This calculator helps you decide whether to pay off a car loan in a single lump-sum payment today or keep making the scheduled monthly payments. It shows exactly how much interest you'd avoid by paying off now, and — if you'd rather use that cash elsewhere — compares it against what the same lump sum could grow to if invested instead.</p>
 
               <h2>How does the underlying math work?</h2>
-              <p>Future value of a present amount plus an ordinary annuity of payments:</p>
-              <div class="not-prose my-4"><div class="formula">FV = PV (1 + i)ⁿ  +  PMT × [ ((1 + i)ⁿ − 1) ÷ i ]</div></div>
-              <p>Rearranged to solve for the present value that reaches a future target:</p>
-              <div class="not-prose my-4"><div class="formula">PV = ( FV − PMT × [ ((1 + i)ⁿ − 1) ÷ i ] ) ÷ (1 + i)ⁿ</div></div>
-              <ul>
-                <li><strong>i</strong> — rate per period = annual rate ÷ compounding frequency</li>
-                <li><strong>n</strong> — total number of periods</li>
-                <li><strong>PMT</strong> — payment made at the end of each period</li>
-              </ul>
+              <p>The calculator first simulates your loan month by month at the current balance, APR and payment to find how long it would take to reach zero and how much total interest that accrues — the same amortization logic behind the site's <a href="debt-payoff.html">Debt Payoff Calculator</a>. Paying off today eliminates every remaining interest charge, so the guaranteed savings equal that projected total interest. For the investment comparison, it grows today's payoff amount at your entered rate, compounded monthly, over the same number of months the loan would otherwise run, then compares the gain to the interest you'd save.</p>
 
               <h2>Real-world practical application</h2>
-              <p>It is the tool behind comparing a lump-sum settlement to a stream of payments, valuing a future obligation such as a balloon payment or a tuition bill, and working out how much to invest today to reach a specific dollar target by a specific date.</p>
+              <p>This comes up whenever a windfall arrives — a bonus, tax refund, or inheritance — and you're deciding what to do with it. It's also useful for comparing a low-rate auto loan against a higher-rate debt elsewhere (pay off the higher-rate debt first) or against a savings account or investment with a meaningfully higher expected return, where keeping the loan and investing the cash can sometimes come out ahead.</p>
 
               <h2>Frequently Asked Questions</h2>
-              <h3>What discount rate should I use?</h3>
-              <p>Use your <strong>opportunity cost</strong> — the return available on a comparable alternative. For personal decisions that is often the expected return of a diversified portfolio (roughly 6–8%); a business usually uses its weighted average cost of capital. A higher rate makes future dollars worth less today.</p>
-              <h3>What is the difference between present value and net present value?</h3>
-              <p>Present value discounts one future amount or a stream of equal payments to today. <strong>Net present value (NPV)</strong> does this for an irregular series of cash flows and subtracts the upfront cost, producing one number that is positive when a project adds value.</p>
-              <h3>Why is a dollar today worth more than a dollar tomorrow?</h3>
-              <p>A dollar today can be invested and earn a return, inflation eats into the buying power of future dollars, and any promised future payment carries some risk of not arriving. Those three forces give money its time value.</p>
+              <h3>Is paying off a car loan early always the right move?</h3>
+              <p>Paying off the loan guarantees you avoid every dollar of remaining interest, which is a certain, risk-free return equal to the loan's APR. It is usually the right move unless you could reliably earn a higher after-tax return elsewhere, or you'd be left without any cash cushion.</p>
+              <h3>What does it mean to be "upside-down" on a car loan?</h3>
+              <p>You're upside-down when the loan balance is higher than the car's current market value. It doesn't change the math on whether to pay off the loan, but it matters if you're considering selling or trading the car in, since you'd owe more than a buyer or dealer would pay for it.</p>
+              <h3>Are there early-payoff penalties on auto loans?</h3>
+              <p>Most modern auto loans don't charge a prepayment penalty, but a small number of older or subprime contracts do. Check your loan agreement for a "prepayment penalty" or "rule of 78s" clause before paying it off in full.</p>
 
               <h2>Related Calculators</h2>
               <ul>
-                <li><a href="compound-interest.html">Compound Interest</a> — the FV case with a friendlier, savings-focused interface.</li>
-                <li><a href="inflation-calculator.html">Inflation Calculator</a> — discounting driven purely by rising prices.</li>
-                <li><a href="real-roi.html">Real ROI</a> — turn a nominal return into an inflation- and tax-adjusted one.</li>
+                <li><a href="auto-loan.html">Auto Loan Calculator</a> — the true monthly cost of financing a vehicle.</li>
+                <li><a href="debt-payoff.html">Debt Payoff Calculator</a> — the same payoff math for a credit-card balance.</li>
+                <li><a href="real-roi.html">Real ROI Calculator</a> — your true after-tax, after-inflation return on an investment.</li>
               </ul>
             </article>
 

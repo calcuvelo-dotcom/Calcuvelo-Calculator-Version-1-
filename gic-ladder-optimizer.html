@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Canadian Cash &amp; GIC Ladder Yield Optimizer — Calcuvelo</title>
+  <meta name="description" content="Compare a high-interest savings account against a GIC ladder for your Canadian cash. After-tax, CDIC-aware, with a liquidity-release timeline. Benchmark rates as of September 2026." />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Apply saved theme before first paint (default = light) -->
+  <script>
+    try { if (localStorage.getItem('cv-theme') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}
+  </script>
+
+  <!-- Tailwind CSS via CDN — no build step -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/header.css" />
+  <script defer src="assets/header.js"></script>
+
+  <style>
+    :root { color-scheme: light; }
+    :root.dark { color-scheme: dark; }
+
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* clean number inputs */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type="number"] { -moz-appearance: textfield; }
+
+    /* range slider — blue-600 thumb, theme-aware track */
+    input[type="range"] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px; border-radius: 9999px; background: #e2e8f0; cursor: pointer;
+    }
+    .dark input[type="range"] { background: #1e293b; }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      height: 20px; width: 20px; border-radius: 9999px;
+      background: #2563eb; border: 3px solid #ffffff;
+      box-shadow: 0 0 0 1px #2563eb; cursor: pointer; margin-top: -7px;
+    }
+    .dark input[type="range"]::-webkit-slider-thumb { border-color: #0f172a; }
+    input[type="range"]::-moz-range-thumb {
+      height: 18px; width: 18px; border-radius: 9999px;
+      background: #2563eb; border: 3px solid #ffffff; cursor: pointer;
+    }
+    .dark input[type="range"]::-moz-range-thumb { border-color: #0f172a; }
+    input[type="range"]:focus-visible { outline: 2px solid rgb(59 130 246 / 0.5); outline-offset: 4px; }
+
+    /* explicit focus ring — Tailwind CDN's ring-* compositing is unreliable at runtime */
+    #panel input:focus, #panel select:focus {
+      outline: none;
+      border-color: #3b82f6;                       /* blue-500 */
+      box-shadow: 0 0 0 3px rgb(59 130 246 / 0.5); /* ring-blue-500/50 */
+    }
+
+    .tl-scroll::-webkit-scrollbar { height: 8px; }
+    .tl-scroll::-webkit-scrollbar-track { background: transparent; }
+    .tl-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    .dark .tl-scroll::-webkit-scrollbar-thumb { background: #334155; }
+
+    .tnum { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-700 antialiased selection:bg-blue-500/20 dark:bg-slate-950 dark:text-slate-200 dark:selection:bg-emerald-500/30">
+
+  <!-- ===================== UNIVERSAL HEADER  (assets/header.css + assets/header.js) ===================== -->
+  <header class="site-header">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="site-brand">Calcuvelo</span>
+      </a>
+
+      <div class="site-nav" data-dropdown>
+        <button type="button" class="site-nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-menu">
+          Calculators
+          <svg class="site-nav-caret" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="site-nav-menu" id="site-nav-menu" role="menu">
+          <div class="site-nav-cols">
+            <div>
+              <p class="site-nav-heading">Financial</p>
+              <a href="compound-interest.html" data-nav class="site-nav-link" role="menuitem">Compound Interest</a>
+              <a href="mortgage-calculator.html" data-nav class="site-nav-link" role="menuitem">Mortgage</a>
+              <a href="retirement-calculator.html" data-nav class="site-nav-link" role="menuitem">Retirement / 401(k)</a>
+              <a href="auto-loan.html" data-nav class="site-nav-link" role="menuitem">Auto Loan</a>
+              <a href="debt-payoff.html" data-nav class="site-nav-link" role="menuitem">Debt Payoff</a>
+              <a href="debt-consolidation.html" data-nav class="site-nav-link" role="menuitem">Debt Consolidation</a>
+              <a href="payoff-vs-interest.html" data-nav class="site-nav-link" role="menuitem">Payoff vs. Interest</a>
+              <a href="mortgage-affordability.html" data-nav class="site-nav-link" role="menuitem">Mortgage Affordability</a>
+              <a href="401k-split-distribution.html" data-nav class="site-nav-link" role="menuitem">401(k) Split Distribution</a>
+              <a href="debt-snowball.html" data-nav class="site-nav-link" role="menuitem">Debt Snowball &amp; EF</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Economic</p>
+              <a href="inflation-calculator.html" data-nav class="site-nav-link" role="menuitem">Inflation</a>
+              <a href="present-value.html" data-nav class="site-nav-link" role="menuitem">Present &amp; Future Value</a>
+              <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
+              <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
+              <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+              <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
+            </div>
+          </div>
+          <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <span class="site-badge-pill"><i></i>Benchmark data &middot; Sept&nbsp;2026</span>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle-knob">
+            <svg class="theme-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <svg class="theme-ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-10">
+
+    <!-- ---------- TITLE ---------- -->
+    <div class="max-w-3xl">
+      <h1 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-slate-50">Canadian Cash &amp; GIC Ladder Yield Optimizer</h1>
+      <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+        Compare parking your savings in a high-interest savings account (HISA) against building a GIC ladder — on an
+        after-tax basis, with CDIC coverage and a liquidity-release timeline. All rates are Canadian
+        alternative/digital-bank sector benchmarks
+        <span class="font-medium text-slate-700 dark:text-slate-300">as of September&nbsp;2026</span> and will change.
+      </p>
+    </div>
+
+    <noscript>
+      <p class="mt-6 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200">
+        This calculator needs JavaScript enabled to run.
+      </p>
+    </noscript>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-[minmax(300px,360px)_1fr]">
+
+      <!-- ================= INPUT PANEL ================= -->
+      <form id="panel" onsubmit="return false"
+            class="lg:sticky lg:top-20 lg:self-start rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Your situation</h2>
+
+        <!-- Initial savings -->
+        <div class="mt-5">
+          <label for="initial" class="block text-sm font-medium text-slate-600 dark:text-slate-300">Total initial savings</label>
+          <div class="relative mt-1.5">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 dark:text-slate-500">$</span>
+            <input id="initial" type="number" inputmode="decimal" min="0" step="1000" value="50000"
+                   class="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-7 pr-3 text-slate-900 tnum focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" />
+          </div>
+          <p data-warn="initial" class="mt-1 hidden text-xs text-rose-600 dark:text-rose-400"></p>
+        </div>
+
+        <!-- Monthly contribution -->
+        <div class="mt-4">
+          <label for="monthly" class="block text-sm font-medium text-slate-600 dark:text-slate-300">Monthly recurring contribution</label>
+          <div class="relative mt-1.5">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 dark:text-slate-500">$</span>
+            <input id="monthly" type="number" inputmode="decimal" min="0" step="50" value="500"
+                   class="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-7 pr-3 text-slate-900 tnum focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" />
+          </div>
+          <p data-warn="monthly" class="mt-1 hidden text-xs text-rose-600 dark:text-rose-400"></p>
+        </div>
+
+        <!-- Time horizon -->
+        <div class="mt-5">
+          <div class="flex items-baseline justify-between">
+            <label for="years" class="block text-sm font-medium text-slate-600 dark:text-slate-300">Maximum time horizon</label>
+            <span class="text-sm font-semibold text-blue-600 dark:text-blue-400"><span id="yearsOut">3</span> yr</span>
+          </div>
+          <input id="years" type="range" min="1" max="5" step="1" value="3" class="mt-3" />
+          <div class="mt-1 flex justify-between text-[11px] text-slate-400 dark:text-slate-500">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+          </div>
+        </div>
+
+        <!-- Liquidity preference -->
+        <div class="mt-5">
+          <span class="block text-sm font-medium text-slate-600 dark:text-slate-300">Liquidity / lock-in preference</span>
+          <div id="liqGroup" class="mt-2 flex flex-col gap-2">
+            <button type="button" data-liq="liquid" class="liq-btn rounded-lg border px-3 py-2 text-left transition">
+              <span class="block text-sm font-semibold">Fully liquid</span>
+              <span class="block text-[11px] opacity-70">Need access soon</span>
+            </button>
+            <button type="button" data-liq="balanced" class="liq-btn rounded-lg border px-3 py-2 text-left transition">
+              <span class="block text-sm font-semibold">Balanced</span>
+              <span class="block text-[11px] opacity-70">Partial ladder</span>
+            </button>
+            <button type="button" data-liq="maxyield" class="liq-btn rounded-lg border px-3 py-2 text-left transition">
+              <span class="block text-sm font-semibold">Maximum yield</span>
+              <span class="block text-[11px] opacity-70">Can lock entirely</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tax environment -->
+        <div class="mt-5">
+          <label for="taxEnv" class="block text-sm font-medium text-slate-600 dark:text-slate-300">Tax environment</label>
+          <select id="taxEnv"
+                  class="mt-1.5 w-full appearance-none rounded-lg border border-slate-300 bg-white py-2.5 px-3 text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
+            <option value="tfsa">Registered — TFSA</option>
+            <option value="rrsp">Registered — RRSP</option>
+            <option value="nonreg">Non-registered (taxable)</option>
+          </select>
+        </div>
+
+        <!-- Marginal tax rate (conditional) -->
+        <div id="marginalWrap" class="mt-4 hidden">
+          <label for="marginal" class="block text-sm font-medium text-slate-600 dark:text-slate-300">Marginal tax rate</label>
+          <div class="relative mt-1.5">
+            <input id="marginal" type="number" inputmode="decimal" min="0" max="60" step="1" value="30"
+                   class="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-3 pr-8 text-slate-900 tnum focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" />
+            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 dark:text-slate-500">%</span>
+          </div>
+          <p data-warn="marginal" class="mt-1 hidden text-xs text-rose-600 dark:text-rose-400"></p>
+          <p class="mt-1.5 text-[11px] text-slate-500 dark:text-slate-500">Applied to interest income only. Registered accounts assume no tax drag during accumulation.</p>
+        </div>
+      </form>
+
+      <!-- ================= RESULTS ================= -->
+      <section id="results" class="min-w-0 space-y-6">
+
+        <!-- empty state -->
+        <div id="emptyState" class="hidden rounded-lg border border-slate-200 bg-white p-8 text-center text-sm text-slate-500 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:shadow-none">
+          Enter a starting amount or a monthly contribution to see projections.
+        </div>
+
+        <div id="output" class="space-y-6">
+
+          <!-- CDIC alert -->
+          <div id="cdicAlert" class="hidden rounded-lg border border-amber-300 bg-amber-50 p-4 dark:border-amber-500/40 dark:bg-amber-500/10">
+            <div class="flex gap-3">
+              <svg class="mt-0.5 h-5 w-5 flex-none text-amber-500 dark:text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <div>
+                <p class="text-sm font-semibold text-amber-800 dark:text-amber-200">CDIC Limit Alert</p>
+                <p class="mt-1 text-sm leading-relaxed text-amber-800/90 dark:text-amber-100/90">
+                  Balance exceeds the standard $100k federal deposit insurance threshold for a single institution.
+                  Consider splitting funds across multiple CDIC-insured partners.
+                </p>
+                <p id="cdicDetail" class="mt-2 text-xs text-amber-700/90 dark:text-amber-200/80"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison cards -->
+          <div class="grid gap-4 sm:grid-cols-2">
+            <!-- HISA card -->
+            <div id="cardHisa" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100">HISA only</h3>
+                  <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">Fully liquid · promo + base blended</p>
+                </div>
+                <span data-badge-winner class="hidden shrink-0 rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-500/30">Higher projected value</span>
+              </div>
+              <div class="mt-4">
+                <div class="text-[11px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-500">Ending portfolio value <span class="normal-case">(after tax)</span></div>
+                <div data-end class="mt-1 text-2xl font-bold text-slate-900 tnum dark:text-slate-50">$0</div>
+              </div>
+              <dl class="mt-4 space-y-2.5 text-sm">
+                <div class="flex items-center justify-between">
+                  <dt class="text-slate-600 dark:text-slate-400">Net interest earned</dt>
+                  <dd data-net class="font-semibold text-emerald-600 tnum dark:text-emerald-400">$0</dd>
+                </div>
+                <div class="flex items-center justify-between">
+                  <dt class="text-slate-600 dark:text-slate-400">Effective after-tax yield</dt>
+                  <dd data-yield class="font-semibold text-slate-900 tnum dark:text-slate-100">—</dd>
+                </div>
+                <div data-taxrow class="hidden items-center justify-between text-xs">
+                  <dt class="text-slate-500 dark:text-slate-500">Gross interest · tax paid</dt>
+                  <dd class="text-slate-500 tnum dark:text-slate-400"><span data-gross>$0</span> · <span data-taxpaid>$0</span></dd>
+                </div>
+              </dl>
+              <p data-badge-cdic class="mt-3 hidden rounded-md bg-amber-50 px-2.5 py-1.5 text-[11px] font-medium text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/25">Over $100k at a single institution</p>
+            </div>
+
+            <!-- Ladder card -->
+            <div id="cardLadder" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100">GIC ladder</h3>
+                  <p data-sub class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">—</p>
+                </div>
+                <span data-badge-winner class="hidden shrink-0 rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-500/30">Higher projected value</span>
+              </div>
+              <div class="mt-4">
+                <div class="text-[11px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-500">Ending portfolio value <span class="normal-case">(after tax)</span></div>
+                <div data-end class="mt-1 text-2xl font-bold text-slate-900 tnum dark:text-slate-50">$0</div>
+              </div>
+              <dl class="mt-4 space-y-2.5 text-sm">
+                <div class="flex items-center justify-between">
+                  <dt class="text-slate-600 dark:text-slate-400">Net interest earned</dt>
+                  <dd data-net class="font-semibold text-emerald-600 tnum dark:text-emerald-400">$0</dd>
+                </div>
+                <div class="flex items-center justify-between">
+                  <dt class="text-slate-600 dark:text-slate-400">Effective after-tax yield</dt>
+                  <dd data-yield class="font-semibold text-slate-900 tnum dark:text-slate-100">—</dd>
+                </div>
+                <div data-taxrow class="hidden items-center justify-between text-xs">
+                  <dt class="text-slate-500 dark:text-slate-500">Gross interest · tax paid</dt>
+                  <dd class="text-slate-500 tnum dark:text-slate-400"><span data-gross>$0</span> · <span data-taxpaid>$0</span></dd>
+                </div>
+              </dl>
+              <p data-badge-cdic class="mt-3 hidden rounded-md bg-amber-50 px-2.5 py-1.5 text-[11px] font-medium text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/25">Over $100k at a single institution</p>
+            </div>
+          </div>
+
+          <!-- Delta callout -->
+          <p id="delta" class="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300 dark:shadow-none"></p>
+
+          <!-- Liquidity timeline -->
+          <div class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100">Liquidity release timeline</h3>
+              <div class="flex items-center gap-4 text-[11px] text-slate-500 dark:text-slate-400">
+                <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-emerald-500"></span>Accessible</span>
+                <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-slate-300 dark:bg-slate-600"></span>Locked in GIC</span>
+              </div>
+            </div>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-500">
+              At each 6-month and annual checkpoint, how much capital is accessible without penalty (emerald) vs still
+              locked in a GIC (grey), on a <span class="text-slate-600 dark:text-slate-400">no-renewal</span> path. The
+              yield projection above instead assumes you reinvest maturing rungs, so its ending value is higher.
+            </p>
+            <div class="tl-scroll mt-4 overflow-x-auto pb-1">
+              <div id="tlBars" class="flex items-end gap-1.5 sm:gap-2" style="min-width:520px"></div>
+            </div>
+            <ul id="tlEvents" class="mt-4 space-y-1.5 border-t border-slate-200 pt-3 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400"></ul>
+          </div>
+
+          <!-- Recommendation -->
+          <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-500/25 dark:bg-emerald-500/5">
+            <div class="flex items-center gap-2">
+              <svg class="h-5 w-5 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              <h3 id="recoTitle" class="text-base font-semibold text-emerald-800 dark:text-emerald-200">Product &amp; institution match</h3>
+            </div>
+            <p id="recoBody" class="mt-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300"></p>
+            <ul id="recoProducts" class="mt-3 space-y-1.5 text-sm text-slate-800 dark:text-slate-200"></ul>
+            <p id="recoTax" class="mt-3 rounded-md bg-white/70 px-3 py-2 text-xs leading-relaxed text-slate-600 dark:bg-slate-900/70 dark:text-slate-400"></p>
+            <p class="mt-3 text-[11px] text-slate-500 dark:text-slate-500">
+              Institution names are illustrative examples of where September&nbsp;2026 benchmark rates were available and
+              are not endorsements. Confirm current rates, terms and CDIC coverage with each provider before acting.
+            </p>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- ---------- ASSUMPTIONS / DISCLAIMER ---------- -->
+    <section class="mt-10 rounded-lg border border-slate-200 bg-white p-5 text-sm text-slate-600 shadow-sm dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-400 dark:shadow-none">
+      <h2 class="text-sm font-semibold text-slate-700 dark:text-slate-300">Benchmark dataset &amp; assumptions — September&nbsp;2026</h2>
+      <div class="mt-3 grid gap-4 sm:grid-cols-2">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-500">High-interest savings (HISA)</p>
+          <ul class="mt-1.5 space-y-1 text-xs">
+            <li>Base rate: <span class="font-medium text-slate-700 dark:text-slate-300">2.75%</span> (EQ Bank / Neo everyday benchmark)</li>
+            <li>Promotional new-money rate: <span class="font-medium text-slate-700 dark:text-slate-300">~4.55%</span> for the first <span class="font-medium text-slate-700 dark:text-slate-300">5 months</span> (Tangerine / Simplii range 4.5%–4.6%), then reverts to base</li>
+            <li>Compounded monthly, fully liquid, no term</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-500">GIC ladder (top alternative / digital)</p>
+          <ul class="mt-1.5 space-y-1 text-xs">
+            <li>1-year <span class="font-medium text-slate-700 dark:text-slate-300">3.40%</span> · 2-year <span class="font-medium text-slate-700 dark:text-slate-300">3.65%</span> · 3-year <span class="font-medium text-slate-700 dark:text-slate-300">3.80%</span> · 4-year <span class="font-medium text-slate-700 dark:text-slate-300">3.90%</span> · 5-year <span class="font-medium text-slate-700 dark:text-slate-300">4.00%</span></li>
+            <li>Compounded annually, principal locked until maturity</li>
+            <li>Maturing rungs assumed reinvested to fill the remaining horizon</li>
+          </ul>
+        </div>
+      </div>
+      <ul class="mt-4 space-y-1 text-xs">
+        <li><span class="font-medium text-slate-700 dark:text-slate-300">After-tax:</span> non-registered interest is reduced by your marginal tax rate; TFSA and RRSP assume 0% tax drag during accumulation.</li>
+        <li><span class="font-medium text-slate-700 dark:text-slate-300">CDIC:</span> eligible deposits are insured up to $100,000 per depositor, per insured category, per member institution. Provincial credit-union coverage differs.</li>
+        <li><span class="font-medium text-slate-700 dark:text-slate-300">Effective after-tax yield</span> is the constant annual rate that grows your deposit schedule to the projected after-tax ending value (money-weighted).</li>
+      </ul>
+      <p class="mt-4 border-t border-slate-200 pt-3 text-xs leading-relaxed text-slate-500 dark:border-slate-800 dark:text-slate-500">
+        This tool is general educational information relevant <span class="font-medium text-slate-600 dark:text-slate-400">as of September&nbsp;2026</span> and is
+        <span class="font-medium text-slate-600 dark:text-slate-400">not financial, investment, or tax advice</span>. Interest rates, promotions and deposit-insurance
+        rules change frequently. Figures are estimates for the assumptions you enter, not guarantees. Verify current rates and coverage directly
+        with each institution and with CDIC (cdic.ca), and consult a licensed advisor before making decisions.
+      </p>
+    </section>
+
+    <!-- ---------- EDUCATIONAL CONTENT ---------- -->
+    <section class="mt-10 rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+      <h2 class="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">What is the GIC &amp; Cash Ladder Yield Optimizer?</h2>
+      <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">The Canadian Cash &amp; GIC Ladder Yield Optimizer compares the after-tax return of keeping your emergency fund or short-term savings in a high-interest savings account (HISA) against spreading it across GICs with staggered maturities &mdash; a GIC ladder. It accounts for promotional HISA rates that expire, the exact rate each GIC rung pays, your marginal tax rate, and whether the money sits inside a TFSA, RRSP, or a regular taxable account, then reports which approach actually leaves you with more money and how liquid it stays along the way.</p>
+
+      <h2 class="mt-6 text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">How does the underlying math work?</h2>
+      <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Behind the scenes, the calculator treats each GIC rung and the HISA balance as its own cash-flow schedule. A HISA earns its promotional rate compounded monthly for the promo window, then reverts to the base rate for the rest of your horizon; each GIC rung compounds annually at its posted term rate until maturity, and maturing rungs are assumed reinvested to keep filling the time you have left. Outside a registered account, every dollar of interest is reduced by your marginal tax rate before it is added back to the running balance. The &ldquo;effective after-tax yield&rdquo; shown in your results is not a simple average of the posted rates &mdash; it is the single constant annual rate that would have grown your actual deposit schedule, after tax, to the same ending balance, weighted by how much money was earning interest and for how long (a money-weighted return).</p>
+
+      <h2 class="mt-6 text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Real-world practical application</h2>
+      <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Savers use this tool to decide whether locking part of an emergency fund into a 1- or 2-year GIC rung is worth the lost liquidity once a promotional HISA rate expires, to see how much a TFSA or RRSP wrapper is worth in after-tax dollars compared with a taxable account, and to build a ladder that releases a rung every few months so cash keeps becoming available without ever needing to break a long-term GIC early. It is also useful for checking CDIC coverage limits before splitting a large balance across institutions.</p>
+
+      <h2 class="mt-6 text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
+      <div class="mt-3 space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200">Is my money safe in a GIC ladder?</h3>
+          <p class="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Eligible deposits at CDIC member institutions are insured up to $100,000 per depositor, per insured category, per institution. Splitting a ladder across more than one institution, or across registered and non-registered accounts, can extend that protection further. Always confirm an institution's CDIC membership directly before depositing.</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200">What happens if I need to withdraw a GIC early?</h3>
+          <p class="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Most non-redeemable GICs do not allow early withdrawal without forfeiting most or all of the accrued interest, which is why a ladder staggers maturities instead of locking everything into one long term. A HISA or a short 30&ndash;90 day cashable GIC rung is typically kept alongside the ladder to cover true emergencies.</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200">Why does a TFSA or RRSP change the result so much?</h3>
+          <p class="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">Interest earned inside a TFSA or RRSP is not taxed in the year it is earned, so the full posted rate compounds every year. Outside a registered account, your marginal tax rate takes a bite out of every interest payment before it can compound, and that gap widens the longer the ladder runs.</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200">How often should I rebuild the ladder?</h3>
+          <p class="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">As each rung matures, reinvest it into a new rung at the far end of your ladder &mdash; for example, a new 5-year GIC &mdash; to keep the staggered schedule going, or redirect it to whichever option, HISA or GIC, currently offers the better effective after-tax yield for your remaining time horizon.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-8 flex flex-col gap-2 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:text-slate-500">
+      <p>&copy; <span id="yr">2026</span> Calcuvelo. Data as of September&nbsp;2026.</p>
+      <nav class="flex flex-wrap gap-x-5 gap-y-1">
+        <a href="index.html" class="hover:text-slate-700 dark:hover:text-slate-300">All calculators</a>
+        <a href="privacy.html" class="hover:text-slate-700 dark:hover:text-slate-300">Privacy</a>
+        <a href="terms.html" class="hover:text-slate-700 dark:hover:text-slate-300">Terms</a>
+      </nav>
+    </footer>
+  </main>
+
+  <!-- Theme toggle + dropdown are handled by assets/header.js -->
+
+  <!-- ============================ CALCULATION ENGINE ============================ -->
+  <script>
+  /* ======================================================================
+     CANADIAN CASH & GIC LADDER YIELD OPTIMIZER
+     Vanilla JS calculation engine. To update the benchmark dataset later,
+     edit DATA below — every projection flows from it.
+
+     NOTE: the calculation logic, input bindings, GIC ladder simulation and
+     Canadian bank rates below are unchanged from the previous version — only
+     the presentation class names in the render helpers were re-tokenised for
+     the light/dark design system.
+     ====================================================================== */
+  (function () {
+    'use strict';
+
+    /* ---------------- September 2026 benchmark dataset ---------------- */
+    const DATA = {
+      asOf: 'September 2026',
+      hisa: {
+        baseRate: 0.0275,     // EQ Bank / Neo everyday HISA benchmark (annual)
+        promoRate: 0.0455,    // Tangerine / Simplii new-money promo, midpoint of 4.5%–4.6%
+        promoMonths: 5        // promo window before reverting to base
+      },
+      // top alternative / digital-bank GIC benchmarks by term (years -> annual rate)
+      gic: { 1: 0.0340, 2: 0.0365, 3: 0.0380, 4: 0.0390, 5: 0.0400 },
+      cdicLimit: 100000
+    };
+
+    /* ---------------- formatting helpers ---------------- */
+    const cad  = (n) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(Number.isFinite(n) ? n : 0);
+    const cad2 = (n) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Number.isFinite(n) ? n : 0);
+    const pctOf = (r, d = 2) => (Number.isFinite(r) ? (r * 100).toFixed(d) + '%' : '—');
+    const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+    const monthLabel = (m) => m === 0 ? 'Start' : (m % 12 === 0 ? 'Yr ' + (m / 12) : m + ' mo');
+
+    /* ---------------- core math ---------------- */
+
+    // HISA annual rate that applies in a given (1-based) month
+    function hisaMonthlyRate(monthIndex) {
+      const annual = monthIndex <= DATA.hisa.promoMonths ? DATA.hisa.promoRate : DATA.hisa.baseRate;
+      return annual / 12;
+    }
+
+    // Monthly-compounded HISA projection with optional recurring contribution
+    function hisaProject(initial, monthly, months) {
+      let bal = Math.max(0, initial);
+      let contributed = 0, interest = 0;
+      const path = [bal];
+      for (let m = 1; m <= months; m++) {
+        const i = bal * hisaMonthlyRate(m);
+        interest += i;
+        bal += i + Math.max(0, monthly);
+        contributed += Math.max(0, monthly);
+        path.push(bal);
+      }
+      return { ending: bal, contributed, interest, path };
+    }
+
+    // A single laddered position and its reinvestment chain, held over `horizonYears`.
+    //   mode 'roll1'  -> reinvest each maturity into a fresh 1-year GIC (keeps it short)
+    //   mode 'fill'   -> reinvest each maturity for the remaining horizon (classic ladder)
+    function gicChain(principal, firstTermYears, horizonYears, mode) {
+      const legs = [];
+      let p = Math.max(0, principal);
+      let startYear = 0;
+      let term = Math.min(firstTermYears, horizonYears);
+      while (startYear < horizonYears && term >= 1) {
+        const rate = DATA.gic[term] || DATA.gic[5];
+        const endValue = p * Math.pow(1 + rate, term);
+        legs.push({
+          startMonth: startYear * 12,
+          maturityMonth: (startYear + term) * 12,
+          termYears: term,
+          rate: rate,
+          principal: p,
+          endValue: endValue
+        });
+        p = endValue;
+        startYear += term;
+        const remaining = horizonYears - startYear;
+        if (remaining < 1) break;
+        term = (mode === 'roll1') ? 1 : remaining;
+      }
+      return { legs: legs, finalValue: p };
+    }
+
+    // Split the initial lump sum into a liquidity buffer + GIC rungs, by preference
+    function allocateInitial(initial, N, liquidity) {
+      const chains = [];
+      let bufferPct = 0;
+
+      if (liquidity === 'liquid') {
+        bufferPct = 0.40;
+        const invest = initial * (1 - bufferPct);
+        const terms = N >= 2 ? [1, 2] : [1];
+        terms.forEach((t) => chains.push(Object.assign(gicChain(invest / terms.length, t, N, 'roll1'), { label: t + '-yr rung' })));
+
+      } else if (liquidity === 'balanced') {
+        bufferPct = 0.10;
+        const invest = initial * (1 - bufferPct);
+        const terms = [];
+        for (let t = 1; t <= N; t++) terms.push(t);
+        terms.forEach((t) => chains.push(Object.assign(gicChain(invest / terms.length, t, N, 'fill'), { label: t + '-yr rung' })));
+
+      } else { // maxyield
+        bufferPct = 0;
+        if (N >= 3) {
+          chains.push(Object.assign(gicChain(initial * 0.5, N - 1, N, 'fill'), { label: (N - 1) + '-yr rung' }));
+          chains.push(Object.assign(gicChain(initial * 0.5, N, N, 'fill'), { label: N + '-yr rung' }));
+        } else {
+          chains.push(Object.assign(gicChain(initial, N, N, 'fill'), { label: N + '-yr GIC' }));
+        }
+      }
+      return { chains: chains, bufferInitial: initial * bufferPct, bufferPct: bufferPct };
+    }
+
+    // Recurring contributions. For balanced / max-yield with a multi-year horizon,
+    // accumulated contributions are swept once a year into a GIC for the remaining term.
+    function projectContributions(monthly, N, liquidity) {
+      const H = N * 12;
+      const feederPath = [0];
+      const swept = [];
+      let feeder = 0, contributed = 0;
+      const doSweep = (liquidity === 'balanced' || liquidity === 'maxyield') && N >= 2;
+
+      for (let m = 1; m <= H; m++) {
+        feeder = feeder * (1 + hisaMonthlyRate(m)) + Math.max(0, monthly);
+        contributed += Math.max(0, monthly);
+        if (doSweep && m % 12 === 0 && m < H) {
+          const term = N - (m / 12);            // integer years remaining, >= 1
+          const rate = DATA.gic[term];
+          swept.push({
+            startMonth: m,
+            maturityMonth: m + term * 12,
+            termYears: term,
+            rate: rate,
+            principal: feeder,
+            endValue: feeder * Math.pow(1 + rate, term)
+          });
+          feeder = 0;
+        }
+        feederPath.push(feeder);
+      }
+      const sweptEnding = swept.reduce((s, x) => s + x.endValue, 0);
+      return { ending: feeder + sweptEnding, contributed: contributed, feederPath: feederPath, feederEnding: feeder, swept: swept };
+    }
+
+    // Constant annual rate that grows the deposit schedule to `targetFV` (money-weighted).
+    function solveYield(initial, monthly, months, targetFV) {
+      if (initial <= 0 && monthly <= 0) return NaN;
+      const fvAt = (annual) => {
+        let v = initial;
+        const mr = annual / 12;
+        for (let m = 1; m <= months; m++) v = v * (1 + mr) + monthly;
+        return v;
+      };
+      let lo = -0.5, hi = 1.0;                 // -50% .. +100% annual brackets the answer
+      for (let i = 0; i < 100; i++) {
+        const mid = (lo + hi) / 2;
+        if (fvAt(mid) > targetFV) hi = mid; else lo = mid;
+      }
+      return (lo + hi) / 2;
+    }
+
+    /* ---------------- liquidity timeline ---------------- */
+    function buildTimeline(N, alloc, monthly) {
+      const H = N * 12;
+      const checkpoints = [];
+      for (let m = 0; m <= H; m += 6) checkpoints.push(m);
+      if (checkpoints[checkpoints.length - 1] !== H) checkpoints.push(H);
+
+      // simple liquid feeder (ignore annual sweeps — this view is about access, not yield)
+      const feederAt = (m) => {
+        let f = 0;
+        for (let k = 1; k <= m; k++) f = f * (1 + hisaMonthlyRate(k)) + Math.max(0, monthly);
+        return f;
+      };
+      const bufferAt = (m) => {
+        let b = alloc.bufferInitial;
+        for (let k = 1; k <= m; k++) b = b * (1 + hisaMonthlyRate(k));
+        return b;
+      };
+
+      const rows = checkpoints.map((m) => {
+        let liquid = bufferAt(m) + feederAt(m);
+        let locked = 0;
+        alloc.chains.forEach((c) => {
+          const first = c.legs[0];
+          if (!first) return;
+          if (m >= first.maturityMonth) {
+            liquid += first.endValue;                                   // matured — you could take it
+          } else {
+            locked += first.principal * Math.pow(1 + first.rate, m / 12); // still locked, accruing
+          }
+        });
+        return { month: m, liquid: liquid, locked: locked, total: liquid + locked };
+      });
+
+      const maxTotal = Math.max(1, ...rows.map((r) => r.total));
+
+      const events = [{ month: DATA.hisa.promoMonths, amount: null, desc: 'Promotional HISA rate ends, reverts to ~2.75% base' }];
+      alloc.chains.forEach((c) => {
+        const first = c.legs[0];
+        if (first && first.principal > 0) {
+          events.push({ month: first.maturityMonth, amount: first.endValue, desc: c.label + ' matures — capital becomes accessible' });
+        }
+      });
+      events.sort((a, b) => a.month - b.month);
+
+      return { rows: rows, maxTotal: maxTotal, events: events };
+    }
+
+    /* ---------------- recommendation ---------------- */
+    function buildReco(liquidity, N, taxEnv, taxRate) {
+      const shortH = N <= 2;
+      const g = (t) => (DATA.gic[t] * 100).toFixed(2) + '%';
+      let title, body, products;
+
+      if (liquidity === 'liquid') {
+        title = 'Stay liquid: promo HISA core + a short GIC sleeve';
+        body = 'Keep roughly 40% instantly accessible and ladder only the surplus in 1–2 year terms. You trade a little yield for the ability to move quickly.';
+        products = shortH
+          ? ['Tangerine or Simplii 5-month promotional HISA (~4.55% on new money)',
+             'EQ Bank Personal Account or Neo HISA (2.75% base) for the balance',
+             'EQ Bank 1-year GIC (' + g(1) + ') for the slice you are sure you will not touch']
+          : ['Tangerine / Simplii promo HISA (~4.55%), rotated as promotions allow',
+             'EQ Bank / Neo base HISA (2.75%) as the always-on core',
+             'EQ Bank 1- and 2-year GICs (' + g(1) + '–' + g(2) + ') so cash frees up every year'];
+
+      } else if (liquidity === 'balanced') {
+        title = 'Classic annual GIC ladder + a small cash buffer';
+        body = 'Split the core evenly across ' + N + ' rung' + (N > 1 ? 's' : '') + ' (1 to ' + N + ' year' + (N > 1 ? 's' : '') + '). One rung matures each year, giving you a yearly decision point with almost no yield sacrifice. Renew maturing rungs at the ' + N + '-year rate to keep the ladder rolling.';
+        products = [];
+        for (let t = 1; t <= N; t++) {
+          const inst = t <= 2 ? 'EQ Bank' : (t === 3 ? 'Oaken Financial' : 'Peoples Trust');
+          products.push(inst + ' ' + t + '-year GIC (' + g(t) + ')');
+        }
+        products.push('~10% in a Simplii / Tangerine promo HISA as the liquidity buffer');
+
+      } else {
+        title = 'Maximum yield: lock the core in long GICs';
+        if (N >= 3) {
+          body = 'You capture the top of the benchmark curve (' + g(N) + ') but principal is locked for the full term. A small split into the ' + (N - 1) + '-year term gives one earlier access point.';
+          products = ['Oaken Financial or Peoples Trust ' + N + '-year GIC (' + g(N) + ')',
+                      'A second ' + (N - 1) + '-year GIC (' + g(N - 1) + ') for a partial-access point at year ' + (N - 1)];
+        } else {
+          body = 'You capture the top available rate (' + g(N) + ') but the principal is locked for the full ' + N + ' year' + (N > 1 ? 's' : '') + '. Only choose this if the money is genuinely surplus.';
+          products = ['Oaken Financial or Peoples Trust ' + N + '-year GIC (' + g(N) + ')'];
+        }
+        products.push('Keep your emergency fund liquid and separate — not modelled here');
+      }
+
+      let tax;
+      if (taxEnv === 'tfsa') {
+        tax = 'Hold every GIC and HISA dollar inside your TFSA — all interest is completely tax-free. Contribution room permitting, prioritise your highest-yield GICs for this account.';
+      } else if (taxEnv === 'rrsp') {
+        tax = 'Inside your RRSP the ~4% yield compounds tax-deferred and is only taxed on withdrawal. Deploying the ladder here shelters the interest from your marginal rate during accumulation.';
+      } else {
+        const net4 = (4 * (1 - taxRate)).toFixed(2);
+        tax = 'Non-registered interest is taxed every year as ordinary income (T5 slip). At a ' + Math.round(taxRate * 100) + '% marginal rate, a 4.00% GIC nets roughly ' + net4 + '%. Fill available TFSA room first; a cashable GIC or a HISA ETF can add flexibility.';
+      }
+
+      return { title: title, body: body, products: products, tax: tax };
+    }
+
+    /* ---------------- top-level model ---------------- */
+    function computeModel(inp) {
+      const N = inp.years;
+      const H = N * 12;
+      const taxRate = inp.taxEnv === 'nonreg' ? clamp(inp.marginalRate, 0, 0.6) : 0;
+
+      // Strategy A — HISA only
+      const hisa = hisaProject(inp.initial, inp.monthly, H);
+      const hisaGross = hisa.interest;
+      const hisaTax = hisaGross * taxRate;
+      const hisaEndAfterTax = hisa.ending - hisaTax;
+      const hisaYield = solveYield(inp.initial, inp.monthly, H, hisaEndAfterTax);
+
+      // Strategy B — GIC ladder
+      const alloc = allocateInitial(inp.initial, N, inp.liquidity);
+      const bufferProj = hisaProject(alloc.bufferInitial, 0, H);
+      const contrib = projectContributions(inp.monthly, N, inp.liquidity);
+      const chainsEnding = alloc.chains.reduce((s, c) => s + c.finalValue, 0);
+      const ladderEnding = bufferProj.ending + chainsEnding + contrib.ending;
+      const ladderGross = ladderEnding - inp.initial - contrib.contributed;
+      const ladderTax = ladderGross * taxRate;
+      const ladderEndAfterTax = ladderEnding - ladderTax;
+      const ladderYield = solveYield(inp.initial, inp.monthly, H, ladderEndAfterTax);
+
+      // CDIC — largest single-institution exposure
+      const hisaCdic = hisa.ending > DATA.cdicLimit;
+      const ladderExposures = [bufferProj.ending + contrib.feederEnding]
+        .concat(alloc.chains.map((c) => c.finalValue))
+        .concat(contrib.swept.map((s) => s.endValue));
+      const ladderMaxExposure = Math.max(0, ...ladderExposures);
+      const ladderCdic = ladderMaxExposure > DATA.cdicLimit;
+
+      const rungCount = alloc.chains.filter((c) => c.finalValue > 0).length;
+      const liqLabel = inp.liquidity === 'liquid' ? 'Fully liquid' : (inp.liquidity === 'balanced' ? 'Balanced' : 'Maximum yield');
+      const ladderSub = liqLabel + ' · ' + rungCount + ' rung' + (rungCount === 1 ? '' : 's') +
+        (alloc.bufferPct > 0 ? ' + ' + Math.round(alloc.bufferPct * 100) + '% buffer' : '');
+
+      return {
+        N: N, taxRate: taxRate,
+        hisa: {
+          endAfterTax: hisaEndAfterTax,
+          netInterest: hisaGross - hisaTax,
+          grossInterest: hisaGross,
+          taxPaid: hisaTax,
+          yield: hisaYield,
+          cdic: hisaCdic,
+          cdicPeak: hisa.ending
+        },
+        ladder: {
+          endAfterTax: ladderEndAfterTax,
+          netInterest: ladderGross - ladderTax,
+          grossInterest: ladderGross,
+          taxPaid: ladderTax,
+          yield: ladderYield,
+          cdic: ladderCdic,
+          cdicPeak: ladderMaxExposure,
+          sub: ladderSub
+        },
+        timeline: buildTimeline(N, alloc, inp.monthly),
+        reco: buildReco(inp.liquidity, N, inp.taxEnv, taxRate)
+      };
+    }
+
+    /* ---------------- DOM wiring ---------------- */
+    const $ = (sel, root) => (root || document).querySelector(sel);
+    const el = {
+      panel: $('#panel'),
+      initial: $('#initial'),
+      monthly: $('#monthly'),
+      years: $('#years'),
+      yearsOut: $('#yearsOut'),
+      taxEnv: $('#taxEnv'),
+      marginal: $('#marginal'),
+      marginalWrap: $('#marginalWrap'),
+      liqGroup: $('#liqGroup'),
+      emptyState: $('#emptyState'),
+      output: $('#output'),
+      cdicAlert: $('#cdicAlert'),
+      cdicDetail: $('#cdicDetail'),
+      cardHisa: $('#cardHisa'),
+      cardLadder: $('#cardLadder'),
+      delta: $('#delta'),
+      tlBars: $('#tlBars'),
+      tlEvents: $('#tlEvents'),
+      recoTitle: $('#recoTitle'),
+      recoBody: $('#recoBody'),
+      recoProducts: $('#recoProducts'),
+      recoTax: $('#recoTax')
+    };
+
+    const state = { liquidity: 'balanced' };
+
+    // segmented control styling — blue-600 primary when active, neutral card when not
+    const LIQ_ON = ['bg-blue-600', 'border-blue-600', 'text-white', 'shadow-sm'];
+    const LIQ_OFF = ['bg-white', 'border-slate-200', 'text-slate-600', 'hover:bg-slate-50',
+                     'dark:bg-slate-800', 'dark:border-slate-700', 'dark:text-slate-300', 'dark:hover:bg-slate-700'];
+    function paintLiq() {
+      el.liqGroup.querySelectorAll('.liq-btn').forEach((b) => {
+        const on = b.dataset.liq === state.liquidity;
+        b.classList.remove(...LIQ_ON, ...LIQ_OFF);
+        b.classList.add(...(on ? LIQ_ON : LIQ_OFF));
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
+    el.liqGroup.addEventListener('click', (e) => {
+      const btn = e.target.closest('.liq-btn');
+      if (!btn) return;
+      state.liquidity = btn.dataset.liq;
+      paintLiq();
+      recalc();
+    });
+
+    function showWarn(key, msg) {
+      const node = document.querySelector('[data-warn="' + key + '"]');
+      if (!node) return;
+      if (msg) { node.textContent = msg; node.classList.remove('hidden'); }
+      else { node.textContent = ''; node.classList.add('hidden'); }
+    }
+
+    // read + validate inputs
+    function readInputs() {
+      const errors = {};
+
+      let initial = parseFloat(el.initial.value);
+      if (!Number.isFinite(initial) || initial < 0) { errors.initial = 'Enter a non-negative amount.'; initial = Math.max(0, Number.isFinite(initial) ? initial : 0); }
+
+      let monthly = parseFloat(el.monthly.value);
+      if (!Number.isFinite(monthly) || monthly < 0) { errors.monthly = 'Enter a non-negative amount.'; monthly = Math.max(0, Number.isFinite(monthly) ? monthly : 0); }
+
+      let years = parseInt(el.years.value, 10);
+      if (!(years >= 1 && years <= 5)) years = 3;
+
+      const taxEnv = el.taxEnv.value;
+      let marginal = 30;
+      if (taxEnv === 'nonreg') {
+        const raw = parseFloat(el.marginal.value);
+        if (!Number.isFinite(raw) || raw < 0 || raw > 60) errors.marginal = 'Enter a rate between 0 and 60.';
+        marginal = clamp(Number.isFinite(raw) ? raw : 30, 0, 60);
+      }
+
+      showWarn('initial', errors.initial);
+      showWarn('monthly', errors.monthly);
+      showWarn('marginal', errors.marginal);
+
+      return {
+        initial: initial, monthly: monthly, years: years,
+        liquidity: state.liquidity, taxEnv: taxEnv, marginalRate: marginal / 100,
+        empty: initial === 0 && monthly === 0
+      };
+    }
+
+    // render a single comparison card
+    function renderCard(root, m, isWinner) {
+      $('[data-end]', root).textContent = cad(m.endAfterTax);
+      $('[data-net]', root).textContent = cad(m.netInterest);
+      $('[data-yield]', root).textContent = pctOf(m.yield);
+
+      const taxRow = $('[data-taxrow]', root);
+      if (m.taxPaid > 0.5) {
+        taxRow.classList.remove('hidden'); taxRow.classList.add('flex');
+        $('[data-gross]', root).textContent = cad(m.grossInterest);
+        $('[data-taxpaid]', root).textContent = '−' + cad(m.taxPaid);
+      } else {
+        taxRow.classList.add('hidden'); taxRow.classList.remove('flex');
+      }
+
+      const win = $('[data-badge-winner]', root);
+      win.classList.toggle('hidden', !isWinner);
+
+      // winner emphasis: emerald ring (kept clear of the slate border in both themes)
+      root.classList.toggle('ring-2', isWinner);
+      root.classList.toggle('ring-emerald-500/60', isWinner);
+
+      const cdic = $('[data-badge-cdic]', root);
+      cdic.classList.toggle('hidden', !m.cdic);
+    }
+
+    function renderTimeline(tl) {
+      // bars
+      el.tlBars.innerHTML = '';
+      tl.rows.forEach((r) => {
+        const liquidPct = (r.liquid / tl.maxTotal) * 100;
+        const lockedPct = (r.locked / tl.maxTotal) * 100;
+        const sharePct = r.total > 0 ? Math.round((r.liquid / r.total) * 100) : 0;
+        const col = document.createElement('div');
+        col.className = 'flex flex-1 flex-col items-center gap-2';
+        col.style.minWidth = '44px';
+        col.innerHTML =
+          '<div class="text-center leading-tight">' +
+            '<div class="text-[10px] font-semibold text-emerald-600 tnum dark:text-emerald-400">' + cad(r.liquid) + '</div>' +
+            '<div class="text-[9px] text-slate-500 tnum dark:text-slate-400">' + sharePct + '% liquid</div>' +
+          '</div>' +
+          '<div class="flex h-40 w-full flex-col-reverse overflow-hidden rounded-md bg-slate-100 ring-1 ring-slate-200 dark:bg-slate-800/40 dark:ring-slate-800">' +
+            '<div class="bg-emerald-500" style="height:' + liquidPct.toFixed(2) + '%"></div>' +
+            '<div class="bg-slate-300 dark:bg-slate-600" style="height:' + lockedPct.toFixed(2) + '%"></div>' +
+          '</div>' +
+          '<div class="text-center text-[10px] leading-tight text-slate-500 dark:text-slate-400">' + monthLabel(r.month) + '</div>';
+        el.tlBars.appendChild(col);
+      });
+
+      // events
+      el.tlEvents.innerHTML = '';
+      tl.events.forEach((ev) => {
+        const li = document.createElement('li');
+        li.className = 'flex items-baseline gap-2';
+        li.innerHTML =
+          '<span class="inline-block w-14 shrink-0 font-medium text-slate-700 tnum dark:text-slate-300">' + monthLabel(ev.month) + '</span>' +
+          '<span class="text-slate-500 dark:text-slate-400">' + ev.desc + (ev.amount != null ? ' <span class="text-emerald-600 tnum dark:text-emerald-400">(' + cad(ev.amount) + ')</span>' : '') + '</span>';
+        el.tlEvents.appendChild(li);
+      });
+    }
+
+    function renderReco(reco) {
+      el.recoTitle.textContent = reco.title;
+      el.recoBody.textContent = reco.body;
+      el.recoProducts.innerHTML = '';
+      reco.products.forEach((p) => {
+        const li = document.createElement('li');
+        li.className = 'flex gap-2';
+        li.innerHTML = '<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-400"></span><span>' + p + '</span>';
+        el.recoProducts.appendChild(li);
+      });
+      el.recoTax.textContent = reco.tax;
+    }
+
+    /* ---------------- main recalc ---------------- */
+    function recalc() {
+      el.yearsOut.textContent = el.years.value;
+      el.marginalWrap.classList.toggle('hidden', el.taxEnv.value !== 'nonreg');
+
+      const inp = readInputs();
+
+      if (inp.empty) {
+        el.emptyState.classList.remove('hidden');
+        el.output.classList.add('hidden');
+        return;
+      }
+      el.emptyState.classList.add('hidden');
+      el.output.classList.remove('hidden');
+
+      const model = computeModel(inp);
+      const ladderWins = model.ladder.endAfterTax >= model.hisa.endAfterTax;
+
+      renderCard(el.cardHisa, model.hisa, !ladderWins);
+      renderCard(el.cardLadder, model.ladder, ladderWins);
+      $('[data-sub]', el.cardLadder).textContent = model.ladder.sub;
+
+      // delta
+      const diff = Math.abs(model.ladder.endAfterTax - model.hisa.endAfterTax);
+      const yrs = model.N + (model.N === 1 ? ' year' : ' years');
+      let deltaMsg;
+      if (diff < 5) {
+        deltaMsg = 'Both strategies land within a few dollars over ' + yrs + ' — choose based on how much access you need, not the yield.';
+      } else if (ladderWins) {
+        deltaMsg = 'The GIC ladder projects ' + cad(diff) + ' more after tax over ' + yrs + ' (' + pctOf(model.ladder.yield) + ' vs ' + pctOf(model.hisa.yield) + ' effective yield) — in exchange for locking part of the principal.';
+      } else {
+        deltaMsg = 'Staying this liquid costs about ' + cad(diff) + ' in forgone after-tax interest over ' + yrs + ' — the price of keeping the money accessible.';
+      }
+      el.delta.textContent = deltaMsg;
+
+      // CDIC banner
+      const anyCdic = model.hisa.cdic || model.ladder.cdic;
+      el.cdicAlert.classList.toggle('hidden', !anyCdic);
+      if (anyCdic) {
+        const bits = [];
+        if (model.hisa.cdic) bits.push('HISA-only strategy concentrates ~' + cad(model.hisa.cdicPeak) + ' at one institution');
+        if (model.ladder.cdic) bits.push('the GIC ladder places ~' + cad(model.ladder.cdicPeak) + ' at a single institution');
+        el.cdicDetail.textContent = 'Triggered because ' + bits.join('; ') + '. Spreading deposits across separate CDIC members (e.g. EQ Bank, Neo, Oaken, Peoples Trust, Tangerine) restores full coverage.';
+      }
+
+      renderTimeline(model.timeline);
+      renderReco(model.reco);
+    }
+
+    /* ---------------- init ---------------- */
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    paintLiq();
+    el.panel.addEventListener('input', recalc);
+    el.panel.addEventListener('change', recalc);
+    recalc();
+  })();
+  </script>
+</body>
+</html>
