@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- (1) Pre-paint theme script: stops a flash of the wrong theme. Keep it first in <head>. -->
+  <script>try{if(localStorage.getItem('cv-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+  <title>Universal Header — standalone test</title>
+
+  <!-- (2) Tailwind must be told to use the .dark CLASS (its default is the OS setting), otherwise every dark: variant below is ignored. -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- ===================== UNIVERSAL HEADER (self-contained: no external CSS/JS) ===================== -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <!-- Brand -->
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Calcuvelo</span>
+      </a>
+
+      <!-- Dropdown: `absolute` menu that is `hidden` until the button is clicked.
+           Phones: wrapper isn't positioned, so the menu spans the sticky header (16px gutters).
+           sm and up: wrapper is `relative`, so the menu hangs under the button. -->
+      <div class="sm:relative">
+        <button id="cv-dd-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="cv-dd-menu"
+                class="inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">
+          Calculators
+          <svg id="cv-dd-caret" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+
+        <div id="cv-dd-menu" role="menu"
+             class="hidden absolute inset-x-4 top-full z-50 mt-2 rounded-md border border-slate-200 bg-white p-2 shadow-lg sm:inset-x-auto sm:left-0 sm:w-[32rem] dark:border-slate-800 dark:bg-slate-900">
+          <div class="grid gap-1 sm:grid-cols-2 sm:gap-3">
+
+            <div>
+              <p class="px-2 pb-1 pt-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Financial</p>
+              <a role="menuitem" data-nav href="compound-interest.html"     class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Compound Interest</a>
+              <a role="menuitem" data-nav href="mortgage-calculator.html"   class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Mortgage</a>
+              <a role="menuitem" data-nav href="retirement-calculator.html" class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Retirement / 401(k)</a>
+              <a role="menuitem" data-nav href="auto-loan.html"             class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Auto Loan</a>
+              <a role="menuitem" data-nav href="debt-payoff.html"           class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Debt Payoff</a>
+              <a role="menuitem" data-nav href="debt-consolidation.html"    class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Debt Consolidation</a>
+              <a role="menuitem" data-nav href="payoff-vs-interest.html"    class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Payoff vs. Interest</a>
+              <a role="menuitem" data-nav href="mortgage-affordability.html" class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Mortgage Affordability</a>
+              <a role="menuitem" data-nav href="401k-split-distribution.html" class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">401(k) Split Distribution</a>
+              <a role="menuitem" data-nav href="debt-snowball.html"         class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Debt Snowball &amp; EF</a>
+            </div>
+
+            <div>
+              <p class="px-2 pb-1 pt-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Economic</p>
+              <a role="menuitem" data-nav href="inflation-calculator.html"  class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Inflation</a>
+              <a role="menuitem" data-nav href="present-value.html"         class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Present &amp; Future Value</a>
+              <a role="menuitem" data-nav href="real-roi.html"              class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Real ROI</a>
+              <a role="menuitem" data-nav href="salary-converter.html"      class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Salary &rarr; Hourly</a>
+              <a role="menuitem" data-nav href="rule-of-72.html"            class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">Rule of 72</a>
+              <a role="menuitem" data-nav href="gic-ladder-optimizer.html"  class="block whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">GIC &amp; Cash Ladder</a>
+            </div>
+
+          </div>
+          <a role="menuitem" href="index.html" class="mt-1 block border-t border-slate-100 px-2 pb-1.5 pt-2.5 text-[13px] font-semibold text-indigo-600 hover:text-indigo-700 dark:border-slate-800 dark:text-indigo-300 dark:hover:text-indigo-200">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Right side: tagline + light/dark switch -->
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <span class="hidden whitespace-nowrap text-xs font-medium text-slate-400 sm:inline dark:text-slate-500">Free &bull; No sign-up &bull; Private</span>
+
+        <button id="cv-theme-btn" type="button" role="switch" aria-checked="false" aria-label="Toggle dark mode"
+                class="inline-flex h-7 w-12 shrink-0 items-center rounded-full border border-slate-300 bg-slate-100 p-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-slate-700 dark:bg-slate-800">
+          <span id="cv-theme-knob" class="flex h-5 w-5 items-center justify-center rounded-full bg-white text-slate-500 shadow dark:bg-slate-950 dark:text-slate-300">
+            <!-- sun (light mode) -->
+            <svg class="h-3.5 w-3.5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <!-- moon (dark mode) -->
+            <svg class="hidden h-3.5 w-3.5 dark:block" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== HEADER SCRIPT (paste right after the </header> tag) ===================== -->
+  <script>
+  (function () {
+    function init() {
+      var root = document.documentElement;
+      var KEY = 'cv-theme';
+
+      /* ---------- Dropdown ---------- */
+      var btn = document.getElementById('cv-dd-btn');
+      var menu = document.getElementById('cv-dd-menu');
+      var caret = document.getElementById('cv-dd-caret');
+      var open = false;
+
+      function setOpen(next) {
+        open = next;
+        /* inline display wins over any class-injection quirks of the Tailwind CDN */
+        menu.style.display = open ? 'block' : 'none';
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        caret.style.transform = open ? 'rotate(180deg)' : 'none';
+      }
+      setOpen(false);
+
+      btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!open); });
+      menu.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+      document.addEventListener('click', function (e) {
+        if (open && !menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && open) { setOpen(false); btn.focus(); }
+      });
+
+      /* highlight the page you are on */
+      var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      menu.querySelectorAll('a[data-nav]').forEach(function (a) {
+        if ((a.getAttribute('href') || '').toLowerCase() === here) {
+          a.setAttribute('aria-current', 'page');
+          a.classList.add('font-semibold', 'text-indigo-600', 'dark:text-indigo-300');
+        }
+      });
+
+      /* ---------- Light / dark toggle ---------- */
+      var themeBtn = document.getElementById('cv-theme-btn');
+      var knob = document.getElementById('cv-theme-knob');
+
+      function setTheme(dark, persist) {
+        root.classList.toggle('dark', dark);
+        themeBtn.setAttribute('aria-checked', dark ? 'true' : 'false');
+        knob.style.marginLeft = dark ? '22px' : '0px';   /* track 48px - 2px border - 4px padding - 20px knob */
+        if (persist) { try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch (e) {} }
+      }
+
+      setTheme(root.classList.contains('dark'), false);   /* sync with the pre-paint <head> script */
+      themeBtn.addEventListener('click', function () { setTheme(!root.classList.contains('dark'), true); });
+      window.addEventListener('storage', function (e) { if (e.key === KEY) setTheme(e.newValue === 'dark', false); });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
+
+  <!-- ===================== TEST CONTENT (delete in your real page) ===================== -->
+  <main class="mx-auto max-w-4xl px-4 py-10">
+    <h1 class="text-3xl font-bold tracking-tight">Page heading the dropdown must never overlap</h1>
+    <p class="mt-3 text-slate-600 dark:text-slate-400">Open the Calculators menu: it should float above this text, and close on outside-click or Esc.</p>
+  </main>
+
+</body>
+</html>
