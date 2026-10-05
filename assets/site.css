@@ -129,18 +129,6 @@ input[type="range"].range:focus-visible { outline: 2px solid #6366f1; outline-of
 .chart-box.is-pie { max-width: 22rem; margin-left: auto; margin-right: auto; height: 16rem; }
 @media (min-width: 640px) { .chart-box.is-pie { height: 18rem; } }
 
-/* ---------- Advertisement placeholders ---------- */
-.ad-slot {
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 0.75rem; border: 1px dashed #cbd5e1; background: #f1f5f9;
-  color: #94a3b8; font-size: 0.625rem; font-weight: 600;
-  letter-spacing: 0.25em; text-transform: uppercase; user-select: none;
-  text-align: center;
-}
-.ad-leaderboard { height: 90px; }
-.ad-inline { height: 100px; margin-top: 1.5rem; margin-bottom: 1.5rem; }
-.ad-rail { height: 600px; }
-
 /* ---------- SEO content block ---------- */
 .formula {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
@@ -214,8 +202,7 @@ input[type="range"].range:focus-visible { outline: 2px solid #6366f1; outline-of
 /* ==========================================================================
    PRINT — produce a clean one-page report:
    keep the logo, the user's inputs, the summary numbers and the active view
-   (chart OR table); drop the sidebar nav, all ad slots, the SEO copy and the
-   footer.
+   (chart OR table); drop the sidebar nav, the SEO copy and the footer.
    ========================================================================== */
 @media print {
   @page { margin: 1.4cm; }
@@ -225,9 +212,7 @@ input[type="range"].range:focus-visible { outline: 2px solid #6366f1; outline-of
 
   /* Hide site chrome */
   .no-print,
-  .ad-slot,
   .site-nav,
-  .site-rail,
   .seo,
   footer,
   noscript { display: none !important; }
@@ -255,4 +240,132 @@ input[type="range"].range:focus-visible { outline: 2px solid #6366f1; outline-of
 
   .result-toolbar { display: none !important; }
   a[href]::after { content: "" !important; }
+}
+
+/* ==========================================================================
+   DARK THEME  (activated by `.dark` on <html>, toggled from the header)
+   Overrides the component classes above plus the handful of Tailwind utility
+   classes the pages rely on, so every content page inherits dark mode with
+   no per-page markup changes.
+   ========================================================================== */
+:root { color-scheme: light; }
+:root.dark { color-scheme: dark; }
+
+:root.dark body { background-color: #020617; color: #cbd5e1; }
+
+/* generic Tailwind surfaces used across the pages */
+.dark .bg-white { background-color: #0f172a; }
+.dark .bg-slate-50\/50 { background-color: rgba(15, 23, 42, 0.6); }
+.dark .bg-slate-100 { background-color: #1e293b; }
+.dark .border-slate-200 { border-color: #1e293b; }
+.dark .border-slate-100 { border-color: #1e293b; }
+.dark .text-slate-900 { color: #f1f5f9; }
+.dark .text-slate-800 { color: #e2e8f0; }
+.dark .text-slate-700 { color: #cbd5e1; }
+.dark .text-slate-600 { color: #94a3b8; }
+.dark .text-slate-500 { color: #94a3b8; }
+.dark .text-slate-400 { color: #64748b; }
+.dark .hover\:text-slate-900:hover { color: #f1f5f9; }
+.dark .hover\:bg-slate-100:hover { background-color: #1e293b; }
+.dark .hover\:bg-slate-50:hover { background-color: #1e293b; }
+
+/* status / callout boxes */
+.dark .bg-amber-50 { background-color: rgba(245, 158, 11, 0.12); }
+.dark .text-amber-800 { color: #fcd34d; }
+.dark .bg-rose-50 { background-color: rgba(244, 63, 94, 0.12); }
+.dark .text-rose-700 { color: #fda4af; }
+
+/* component classes */
+.dark .card {
+  background: #0f172a;
+  box-shadow: 0 0 0 1px rgba(30, 41, 59, 0.9), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+}
+.dark .calc-title { color: #f1f5f9; }
+.dark .calc-sub { color: #94a3b8; }
+.dark .disclaimer { color: #64748b; }
+.dark .label { color: #cbd5e1; }
+
+.dark input.field,
+.dark select.field,
+.dark textarea.field {
+  background: #1e293b; border-color: #334155; color: #f1f5f9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.dark input.field:focus,
+.dark select.field:focus,
+.dark textarea.field:focus { border-color: #818cf8; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35); }
+.dark .affix { color: #64748b; }
+
+.dark input[type="range"].range { background: #334155; }
+.dark input[type="range"].range::-webkit-slider-thumb { border-color: #020617; }
+.dark input[type="range"].range::-moz-range-thumb { border-color: #020617; }
+
+.dark .stat { background: #1e293b; box-shadow: inset 0 0 0 1px #334155; }
+.dark .stat-label { color: #94a3b8; }
+.dark .stat-value { color: #f1f5f9; }
+.dark .stat-pos { color: #34d399; }
+.dark .stat-neg { color: #fb7185; }
+
+.dark .seg { background: #1e293b; }
+.dark .seg-btn { color: #94a3b8; }
+.dark .seg-btn-active { background: #0f172a; color: #a5b4fc; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+
+.dark .nav-group { color: #64748b; }
+
+.dark .formula { background: #0b1220; border-color: #1e293b; color: #e2e8f0; }
+
+.dark .data-table thead th { background: #0f172a; color: #94a3b8; border-bottom-color: #1e293b; }
+.dark .data-table tbody td { color: #cbd5e1; border-bottom-color: #1e293b; }
+.dark .data-table tbody td:first-child { color: #f1f5f9; }
+.dark .data-table tbody tr:nth-child(even) { background: rgba(148, 163, 184, 0.04); }
+.dark .data-table .col-interest { color: #34d399; }
+.dark .data-table .col-neg { color: #fb7185; }
+.dark .data-table .col-end { color: #f1f5f9; }
+.dark .table-wrap { box-shadow: inset 0 0 0 1px #334155; }
+
+.dark .btn-print { background: #334155; }
+.dark .btn-print:hover { background: #475569; }
+
+/* homepage hub */
+.dark .hub-hero h1 { color: #f1f5f9; }
+.dark .hub-hero p { color: #94a3b8; }
+.dark .hub-section-title { color: #64748b; }
+.dark .calc-card {
+  background: #0f172a;
+  box-shadow: 0 0 0 1px rgba(30, 41, 59, 0.9), 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.dark .calc-card:hover { box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.5), 0 14px 28px -14px rgba(0, 0, 0, 0.6); }
+.dark .calc-card .num { background: rgba(99, 102, 241, 0.18); color: #a5b4fc; }
+.dark .calc-card h3 { color: #f1f5f9; }
+.dark .calc-card p { color: #94a3b8; }
+.dark .calc-card .go { color: #a5b4fc; }
+
+/* Tailwind Typography (prose prose-slate) — SEO blocks + legal pages */
+.dark .prose {
+  --tw-prose-body: #cbd5e1;
+  --tw-prose-headings: #f1f5f9;
+  --tw-prose-lead: #94a3b8;
+  --tw-prose-links: #a5b4fc;
+  --tw-prose-bold: #f1f5f9;
+  --tw-prose-counters: #94a3b8;
+  --tw-prose-bullets: #475569;
+  --tw-prose-hr: #1e293b;
+  --tw-prose-quotes: #e2e8f0;
+  --tw-prose-quote-borders: #334155;
+  --tw-prose-code: #f1f5f9;
+  --tw-prose-pre-code: #e2e8f0;
+  --tw-prose-pre-bg: #0b1220;
+  --tw-prose-th-borders: #334155;
+  --tw-prose-td-borders: #1e293b;
+}
+.dark .seo a { color: #a5b4fc; }
+.dark .seo a:hover { color: #c7d2fe; }
+
+/* footer */
+.dark footer { background: #020617; border-color: #1e293b; }
+
+/* print stays light regardless of theme */
+@media print {
+  :root.dark { color-scheme: light; }
+  :root.dark body { background: #fff !important; color: #0f172a !important; }
 }
