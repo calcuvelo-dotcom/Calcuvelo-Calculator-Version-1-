@@ -1,96 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Calcuvelo sitemap. Update <lastmod> when you change a page, then submit
-  https://calcuvelo.com/sitemap.xml in Google Search Console.
+  Calcuvelo sitemap. Add every new page here and update <lastmod> when you change a page,
+  then resubmit https://calcuvelo.com/sitemap.xml in Google Search Console.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://calcuvelo.com/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-
   <url>
     <loc>https://calcuvelo.com/compound-interest.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/mortgage-calculator.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/retirement-calculator.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/auto-loan.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/debt-payoff.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://calcuvelo.com/gic-ladder-optimizer.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calcuvelo.com/debt-consolidation.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calcuvelo.com/payoff-vs-interest.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calcuvelo.com/mortgage-affordability.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calcuvelo.com/401k-split-distribution.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://calcuvelo.com/debt-snowball.html</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://calcuvelo.com/inflation-calculator.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/present-value.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/real-roi.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/salary-converter.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/rule-of-72.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://calcuvelo.com/contact.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/privacy.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://calcuvelo.com/terms.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
 </urlset>
