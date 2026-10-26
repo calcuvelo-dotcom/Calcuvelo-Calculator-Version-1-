@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>try{if(localStorage.getItem('cv-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
+  <title>CPP Start Age Calculator: 60 vs. 65 vs. 70 — Calcuvelo</title>
+  <meta name="description" content="Compare starting the Canada Pension Plan at 60, 65 or 70: monthly amounts, cumulative benefits, and the breakeven ages, in today’s dollars." />
+  <link rel="canonical" href="https://calcuvelo.com/cpp-start-age-calculator.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CPP Start Age Calculator: 60 vs. 65 vs. 70 — Calcuvelo" />
+  <meta property="og:description" content="Compare starting the Canada Pension Plan at 60, 65 or 70: monthly amounts, cumulative benefits, and the breakeven ages, in today’s dollars." />
+  <meta property="og:url" content="https://calcuvelo.com/cpp-start-age-calculator.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/provinces.js?v=202610262"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "CPP Start Age Breakeven Calculator",
+        "url": "https://calcuvelo.com/cpp-start-age-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CAD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is it better to take CPP at 60, 65 or 70?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on how long you expect to collect, your other income and your health. With no investment return, starting at 70 overtakes starting at 65 at about age 82, and starting at 65 overtakes starting at 60 at about age 74. Live beyond those ages and waiting pays more in total."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much is CPP reduced if I start at 60?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "By 0.6% for each month before 65, so up to 36% less if you start at 60. The reduction is permanent for the rest of your life, though it is adjusted each year for inflation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much more do I get for waiting until 70?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "0.7% more for each month after 65, so 42% more at 70. There is no increase for delaying beyond age 70."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this apply in every province?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CPP applies everywhere except Quebec, where the Quebec Pension Plan applies instead. QPP has similar early and late adjustments but with its own percentages and amounts, so use the QPP estimate if you contributed in Quebec."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a realistic number to enter for my pension at 65?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the estimate from your My Service Canada Account. The 2026 maximum at 65 is $1,507.65 a month, but most people receive less, depending on years of contributions and earnings. Enter your own figure rather than the maximum unless you have contributed at the maximum for nearly all of your working life."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ===================== UNIVERSAL HEADER  (assets/header.css + assets/header.js) ===================== -->
+  <header class="site-header">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="site-brand">Calcuvelo</span>
+      </a>
+
+      <div class="site-nav" data-dropdown>
+        <button type="button" class="site-nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-menu">
+          Calculators
+          <svg class="site-nav-caret" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="site-nav-menu" id="site-nav-menu" role="menu">
+          <div class="site-nav-cols">
+            <div>
+              <p class="site-nav-heading">Financial</p>
+              <a href="compound-interest.html" data-nav class="site-nav-link" role="menuitem">Compound Interest</a>
+              <a href="mortgage-calculator.html" data-nav class="site-nav-link" role="menuitem">Mortgage</a>
+              <a href="retirement-calculator.html" data-nav class="site-nav-link" role="menuitem">Retirement / 401(k)</a>
+              <a href="auto-loan.html" data-nav class="site-nav-link" role="menuitem">Auto Loan</a>
+              <a href="debt-payoff.html" data-nav class="site-nav-link" role="menuitem">Debt Payoff</a>
+              <a href="debt-consolidation.html" data-nav class="site-nav-link" role="menuitem">Debt Consolidation</a>
+              <a href="payoff-vs-interest.html" data-nav class="site-nav-link" role="menuitem">Payoff vs. Interest</a>
+              <a href="mortgage-affordability.html" data-nav class="site-nav-link" role="menuitem">Mortgage Affordability</a>
+              <a href="401k-split-distribution.html" data-nav class="site-nav-link" role="menuitem">401(k) Split Distribution</a>
+              <a href="debt-snowball.html" data-nav class="site-nav-link" role="menuitem">Debt Snowball &amp; EF</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Economic</p>
+              <a href="inflation-calculator.html" data-nav class="site-nav-link" role="menuitem">Inflation</a>
+              <a href="present-value.html" data-nav class="site-nav-link" role="menuitem">Present &amp; Future Value</a>
+              <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
+              <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
+              <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
+              <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
+            </div>
+          </div>
+          <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
+
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
+        <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle-knob">
+            <svg class="theme-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <svg class="theme-ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block">
+
+      <div class="min-w-0">
+        <div class="print-block">
+          <main class="min-w-0">
+
+            <section x-data="cppStart()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">CPP Start Age Breakeven Calculator</h1>
+              <p class="calc-sub">Compare taking CPP at 60, 65 or 70 &mdash; monthly amounts, cumulative totals and breakeven ages.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+<p class="mt-2"><span class="rules-chip">Applies in every province (Quebec: QPP differs) &middot; Rules as of <span x-text="taxYear"></span></span></p>
+              <div class="mt-6 grid gap-5 sm:grid-cols-3">
+                <div class="">
+                  <label class="label" for="cp-65">Monthly CPP pension at 65 (today&rsquo;s dollars)</label>
+                  <div class="relative"><span class="affix affix-left">$</span><input id="cp-65" type="number" min="0" step="10" x-model.number="at65" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="1600" step="10" x-model.number="at65" class="range" aria-label="Monthly CPP pension at 65 (today’s dollars)" />
+                </div>
+                <div class="">
+                  <label class="label" for="cp-ret">Real return on money received early</label>
+                  <div class="relative"><input id="cp-ret" type="number" min="0" step="0.5" x-model.number="ret" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="8" step="0.5" x-model.number="ret" class="range" aria-label="Real return on money received early" />
+                  <p class="mt-1 text-xs text-slate-400">0% = just add up the payments.</p>
+                </div>
+                <div class="">
+                  <label class="label" for="cp-live">Plan to live to age</label>
+                  <div class="relative"><input id="cp-live" type="number" min="0" step="1" x-model.number="liveTo" class="field with-suffix" /><span class="affix affix-right">yrs</span></div>
+                  <input type="range" min="62" max="95" step="1" x-model.number="liveTo" class="range" aria-label="Plan to live to age" />
+                </div>
+              </div>
+              <div x-show="out.overMax" class="mt-5 rounded-xl bg-amber-50 p-4 text-sm text-amber-800 ring-1 ring-amber-200">The 2026 maximum CPP retirement pension at 65 is <span x-text="money(out.max, 2)"></span> a month. Check your estimate on My Service Canada Account.</div>
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+              <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                <div class="stat"><p class="stat-label">Monthly if you start at 60</p><p class="stat-value " x-text="money(out.monthly[0], 2)"></p></div>
+                <div class="stat"><p class="stat-label">Monthly if you start at 65</p><p class="stat-value " x-text="money(out.monthly[1], 2)"></p></div>
+                <div class="stat"><p class="stat-label">Monthly if you start at 70</p><p class="stat-value " x-text="money(out.monthly[2], 2)"></p></div>
+              </div>
+              <div class="mt-3 grid gap-3 sm:grid-cols-3">
+                <div class="stat"><p class="stat-label">Breakeven: 65 overtakes 60</p><p class="stat-value " x-text="'Age ' + out.t6065"></p></div>
+                <div class="stat"><p class="stat-label">Breakeven: 70 overtakes 65</p><p class="stat-value " x-text="'Age ' + out.t6570"></p></div>
+                <div class="stat"><p class="stat-label">Breakeven: 70 overtakes 60</p><p class="stat-value " x-text="'Age ' + out.t6070"></p></div>
+              </div>
+              <div class="mt-5 rounded-xl p-4 text-sm ring-1" :class="'bg-indigo-50 text-indigo-900 ring-indigo-200'"><strong>By age <span x-text="out.liveTo"></span>, starting at <span x-text="out.best"></span> collects the most.</strong>
+                <span x-text="'Totals by then: ' + money(out.atLive[0]) + ' if you start at 60, ' + money(out.atLive[1]) + ' at 65, and ' + money(out.atLive[2]) + ' at 70.'"></span></div>
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Line chart of cumulative CPP received by age for starting at 60, 65 and 70"></canvas></div>
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="disclaimer">Today&rsquo;s dollars; CPP is indexed to inflation. Early-start reduction 0.6% a month (max 36%), late-start increase 0.7% a month (max 42%). Ignores tax, survivor benefits and other income. Estimates only.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+<h2>What is the CPP Start Age Breakeven Calculator?</h2>
+<p>You can start your Canada Pension Plan retirement pension as early as 60 or as late as 70, and the choice is permanent. Start early and you get a smaller cheque for more years; start late and you get a bigger cheque for fewer. The breakeven age is the point at which the larger, later pension has caught up on the total collected. This calculator finds those breakeven ages for your own pension amount, and shows who comes out ahead at the age you plan to live to.</p>
+<p>It is for people within a decade of retirement who are weighing &ldquo;take it now&rdquo; against &ldquo;wait for more.&rdquo;</p>
+
+<h2>What to enter</h2>
+<ul>
+<li><strong>Monthly pension at 65.</strong> Your estimate from your My Service Canada Account, in today&rsquo;s dollars. For reference, the maximum at 65 in 2026 is $1,507.65 a month, and most people receive less than the maximum because it depends on how many years you contributed and how much you earned.</li>
+<li><strong>Return on money received early.</strong> Optional. Leave it at 0% for the plain &ldquo;add up the payments&rdquo; comparison, or enter a real (after-inflation) return to model investing the payments you collect early. A positive return pushes the breakeven ages later.</li>
+<li><strong>Plan to live to.</strong> The age used in the &ldquo;who wins&rdquo; comparison. Nobody knows this, so test a few.</li>
+</ul>
+
+<h2>How does the underlying math work?</h2>
+<p>The pension is adjusted for each month you start before or after your 65th birthday. Starting early reduces it by 0.6% for each month before 65, to a maximum of 36% at age 60. Starting late increases it by 0.7% for each month after 65, to a maximum of 42% at age 70:</p><div class="not-prose my-4"><div class="formula">pension at 60 = pension at 65 &times; (1 &minus; 0.006 &times; 60) = 64%</div></div><div class="not-prose my-4"><div class="formula">pension at 70 = pension at 65 &times; (1 + 0.007 &times; 60) = 142%</div></div>
+<p>The calculator then adds up payments month by month for each start age, optionally compounding what has been received at your chosen return, and finds the first month in which the later starter&rsquo;s running total overtakes the earlier starter&rsquo;s. Everything is in today&rsquo;s dollars, which works because CPP payments are adjusted for inflation each year.</p>
+
+<h2>Worked example: a $1,000-a-month pension at 65</h2>
+<p>The three monthly amounts are $640 (start at 60), $1,000 (65) and $1,420 (70).</p>
+<ul>
+<li><strong>60 versus 65.</strong> The 60-starter collects 60 months of head start, $38,400, then falls behind by $360 a month. The 65-starter catches up at about age <strong>73 and 11 months</strong>.</li>
+<li><strong>65 versus 70.</strong> The 65-starter is ahead by $60,000 at 70, then loses $420 a month. The 70-starter overtakes at about <strong>81 and 11 months</strong>.</li>
+<li><strong>60 versus 70.</strong> The 70-starter overtakes the 60-starter at about <strong>78 and 3 months</strong>.</li>
+</ul>
+<p>If you live to 88, the cumulative totals are about $215,040 (start at 60), $276,000 (65) and $306,720 (70) &mdash; so waiting wins. But treat the answer carefully: add a 3% real return on early payments and the breakevens move out to about 76 and 4 months, 86 and 3 months, and 81 and 4 months; at age 85 the 65-starter then comes out ahead of both, with about $328,302 versus $285,445 and $322,301.</p>
+<p>At the 2026 maximum of $1,507.65, the same percentages give about $965 at 60, $1,508 at 65 and $2,141 at 70.</p>
+
+<h2>Real-world practical application</h2>
+<p>The breakeven view turns an abstract choice into a bet on longevity, and the age to compare is usually your realistic planning age, not the average lifespan. People with health problems or a need for cash now often start early, accepting the lower amount. People with good health, family longevity, or enough savings to bridge the gap may wait. Some also use the delay as insurance: a larger inflation-adjusted pension is protection against outliving savings. The calculator lets you test your own number against each of these stories, and the table view shows exact cumulative totals by age.</p>
+
+<h2>What the breakeven does not tell you</h2>
+<p>Breakeven is a good first cut but not the whole decision. It ignores taxes (CPP is taxable income, and a bigger pension can push you toward Old Age Security recovery thresholds), survivor benefits for a spouse, and the value of having more income early in retirement when you are most active. It assumes your pension at 65 stays the same whichever age you start, but if you keep working and contributing between 60 and 65 the later amounts can differ. And it uses a single future lifespan when what you really face is a range. Early-start reductions and late-start increases are set by law and can change; the official rules and your personal estimate are on your My Service Canada Account. Quebec residents belong to the Quebec Pension Plan, which follows a similar structure with its own figures, so use its estimates there.</p>
+<p>The figures on this page are for the 2026 year.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is it better to take CPP at 60, 65 or 70?</h3>
+<p>It depends on how long you expect to collect, your other income and your health. With no investment return, starting at 70 overtakes starting at 65 at about age 82, and starting at 65 overtakes starting at 60 at about age 74. Live beyond those ages and waiting pays more in total.</p>
+<h3>How much is CPP reduced if I start at 60?</h3>
+<p>By 0.6% for each month before 65, so up to 36% less if you start at 60. The reduction is permanent for the rest of your life, though it is adjusted each year for inflation.</p>
+<h3>How much more do I get for waiting until 70?</h3>
+<p>0.7% more for each month after 65, so 42% more at 70. There is no increase for delaying beyond age 70.</p>
+<h3>Does this apply in every province?</h3>
+<p>CPP applies everywhere except Quebec, where the Quebec Pension Plan applies instead. QPP has similar early and late adjustments but with its own percentages and amounts, so use the QPP estimate if you contributed in Quebec.</p>
+<h3>What is a realistic number to enter for my pension at 65?</h3>
+<p>Use the estimate from your My Service Canada Account. The 2026 maximum at 65 is $1,507.65 a month, but most people receive less, depending on years of contributions and earnings. Enter your own figure rather than the maximum unless you have contributed at the maximum for nearly all of your working life.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="retirement-calculator.html">Retirement / 401(k) Calculator</a> &mdash; project the rest of your retirement income.</li>
+<li><a href="inflation-calculator.html">Inflation Calculator</a> &mdash; why the inflation adjustment on CPP matters over decades.</li>
+<li><a href="guide-start-early-vs-contribute-more.html">Guide: start early or contribute more later?</a> &mdash; the same trade of time against amount.</li>
+<li><a href="rrsp-vs-tfsa-calculator.html">RRSP vs. TFSA Calculator</a> &mdash; how to hold the savings that top up your pension.</li>
+</ul>
+            </article>
+
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

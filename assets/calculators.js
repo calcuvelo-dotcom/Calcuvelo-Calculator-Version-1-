@@ -1016,17 +1016,22 @@ function payoffVsInterest() {
       const payoffDate = new Date();
       payoffDate.setMonth(payoffDate.getMonth() + months);
 
+      // Equal-cash-flow comparison over the loan's remaining life, same alt rate on both sides:
+      //  ride   = keep paying the loan from cash flow, invest the lump sum today
+      //  payoff = pay the loan off today, invest the freed-up payment every month
       const altRate = (this.altReturn || 0) / 100 / 12;
-      const fv = B * Math.pow(1 + altRate, feasible ? months : 0);
-      const investGain = fv - B;
-      const investmentWins = feasible && investGain > interest;
+      const fvRide = B * Math.pow(1 + altRate, months);
+      let fvPayoff = 0;
+      rows.forEach((row, idx) => { fvPayoff += row.payment * Math.pow(1 + altRate, months - (idx + 1)); });
+      const investDiff = fvRide - fvPayoff;
+      const investmentWins = feasible && investDiff > 0.5;
 
       this.rows = rows;
       this.out = {
         feasible, months, interest, totalPaidRiding,
         payoffAmount: B, savings: feasible ? interest : 0,
         equity: (this.carValue || 0) - B,
-        investGain, investmentWins,
+        fvRide, fvPayoff, investDiff, investmentWins,
         payoffDate: feasible ? payoffDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '—'
       };
 
@@ -1209,6 +1214,7 @@ function debtSnowball() {
       if (giftToDebt > 0) {
         debts.sort((a, b) => a.bal - b.bal);
         for (const d of debts) { if (giftToDebt <= 0) break; const pay = Math.min(giftToDebt, d.bal); d.bal -= pay; giftToDebt -= pay; }
+        for (const d of debts) { if (d.bal <= 0.005) d.cleared = true; }
       }
 
       let m = 0;
@@ -1228,7 +1234,17 @@ function debtSnowball() {
 
         // cascade the disposable pool through debts smallest-balance-first,
         // rolling any leftover (because a debt cleared mid-month) to the next one
-        let pool = disposable;
+        // minimums of debts that are already cleared roll into the pool (the "snowball")
+        const freedMinimums = debts.reduce((s, d) => s + (d.bal <= 0.005 && d.cleared ? d.min : 0), 0);
+        let pool = disposable + freedMinimums;
+
+        // starter emergency fund comes first: divert spare cash until it is funded
+        const starterTarget = Math.min(STARTER_EF, this.efGoal || 0);
+        if (ef < starterTarget && debts.some(d => d.bal > 0.005)) {
+          const put = Math.min(pool, starterTarget - ef);
+          ef += put; pool -= put;
+          if (monthsToEfGoal === null && ef >= (this.efGoal || 0)) monthsToEfGoal = m;
+        }
         for (const d of debts) {
           if (pool <= 0) break;
           if (d.bal <= 0.005) continue;
@@ -1236,6 +1252,8 @@ function debtSnowball() {
           d.bal -= pay;
           pool -= pay;
         }
+
+        for (const d of debts) { if (d.bal <= 0.005) d.cleared = true; }
 
         const stillOwed = debts.reduce((s, d) => s + d.bal, 0);
         if (stillOwed <= 0.005 && monthsToDebtFree === 0) monthsToDebtFree = m;
@@ -1264,6 +1282,492 @@ function debtSnowball() {
       chart.data.labels = labels;
       chart.data.datasets[0].data = debtSeries;
       chart.data.datasets[1].data = efSeries;
+      chart.update('none');
+    }
+  };
+}
+
+/* ======================================================================
+   CANADIAN TAX ENGINE
+   Pure functions over window.CV_TAX (assets/provinces.js). No numbers are
+   hard-coded here: change the data file, not this code, each year.
+   ====================================================================== */
+function cvBracketTax(income, brackets) {
+  let tax = 0, prev = 0;
+  for (const [limit, rate] of brackets) {
+    if (income > prev) tax += (Math.min(income, limit) - prev) * rate;
+    if (income <= limit) break;
+    prev = limit;
+  }
+  return tax;
+}
+
+function cvHealthPremium(taxable, prov) {
+  if (!prov.healthPremium) return 0;
+  for (const [from, to, base, rate, cap] of prov.healthPremium) {
+    if (taxable >= from && taxable < to) return Math.min(cap, base + rate * (taxable - from));
+  }
+  return 0;
+}
+
+// Income tax for a given taxable income. `employment` limits the Canada employment amount.
+function cvIncomeTax(taxable, employment, cppBasePart, eiPremium, code, withPremium) {
+  const T = CV_TAX, F = T.federal, P = T.provinces[code];
+  const bpa = taxable <= F.bpaPhaseStart ? F.bpaMax
+    : taxable >= F.bpaPhaseEnd ? F.bpaMin
+    : F.bpaMax - (F.bpaMax - F.bpaMin) * (taxable - F.bpaPhaseStart) / (F.bpaPhaseEnd - F.bpaPhaseStart);
+  const fedCredits = (bpa + Math.min(F.canadaEmploymentAmount, employment) + cppBasePart + eiPremium) * F.creditRate;
+  const fed = Math.max(cvBracketTax(taxable, F.brackets) - fedCredits, 0);
+
+  const provCredits = (P.bpa + cppBasePart + eiPremium) * P.creditRate;
+  const provBasic = Math.max(cvBracketTax(taxable, P.brackets) - provCredits, 0);
+  const reduction = P.taxReduction ? Math.min(Math.max(2 * P.taxReduction - provBasic, 0), provBasic) : 0;
+  const surtax = (P.surtax || []).reduce((s, [limit, rate]) => s + Math.max(provBasic - limit, 0) * rate, 0);
+  const premium = withPremium === false ? 0 : cvHealthPremium(taxable, P);
+  return { fed, provBasic, reduction, surtax, premium, prov: provBasic - reduction + surtax + premium };
+}
+
+function cvPayrollParts(gross, rrsp) {
+  const C = CV_TAX.cpp, E = CV_TAX.ei;
+  const g = Math.max(gross || 0, 0);
+  const cppEarnings = Math.max(Math.min(g, C.ympe) - C.exemption, 0);
+  const cpp1 = cppEarnings * C.rate;
+  const cppBasePart = cppEarnings * C.baseRate;
+  const cpp2 = Math.max(Math.min(g, C.yampe) - C.ympe, 0) * C.cpp2Rate;
+  const ei = Math.min(g, E.maxInsurable) * E.rate;
+  const rr = Math.min(Math.max(rrsp || 0, 0), g);
+  // the 1.00% enhanced CPP portion and CPP2 are deductions; the 4.95% base portion and EI are credits
+  const taxable = Math.max(g - rr - (cpp1 - cppBasePart) - cpp2, 0);
+  return { g, cpp1, cppBasePart, cpp2, ei, rr, taxable };
+}
+
+function cvTakeHome(gross, rrsp, code) {
+  const p = cvPayrollParts(gross, rrsp);
+  const t = cvIncomeTax(p.taxable, p.g, p.cppBasePart, p.ei, code);
+  const net = p.g - p.rr - p.cpp1 - p.cpp2 - p.ei - t.fed - t.prov;
+  return Object.assign({}, p, { tax: t, net });
+}
+
+// Combined federal + provincial income-tax rate on the next dollar (excludes the small Health Premium steps)
+function cvMarginalRate(gross, code) {
+  const p = cvPayrollParts(gross, 0);
+  const at = (x) => { const t = cvIncomeTax(Math.max(x, 0), p.g, p.cppBasePart, p.ei, code, false); return t.fed + t.provBasic - t.reduction + t.surtax; };
+  return (at(p.taxable + 500) - at(p.taxable - 500)) / 1000;
+}
+
+/* ======================================================================
+   16. MORTGAGE PREPAYMENT PENALTY (Canada)
+   Fixed: greater of 3 months' interest and the interest rate differential (IRD).
+   Variable: typically 3 months' interest.
+   ====================================================================== */
+function mortgagePenalty() {
+  return {
+    type: 'fixed', method: 'posted',
+    balance: 350000, rate: 5.19, remaining: 30,
+    postedNow: 5.49, discount: 1.8, currentRate: 4.69,
+    newRate: 4.69,
+    out: {},
+    update() {
+      const B = Math.max(this.balance || 0, 0);
+      const r = (this.rate || 0) / 100;
+      const n = Math.max(this.remaining || 0, 0);
+      const threeMonths = B * r / 12 * 3;
+
+      const comparison = this.method === 'posted'
+        ? Math.max((this.postedNow || 0) - (this.discount || 0), 0) / 100
+        : (this.currentRate || 0) / 100;
+      const ird = Math.max(r - comparison, 0) * B * n / 12;
+      const isFixed = this.type === 'fixed';
+      const penalty = isFixed ? Math.max(threeMonths, ird) : threeMonths;
+
+      const newR = (this.newRate || 0) / 100;
+      const savings = Math.max(r - newR, 0) * B * n / 12;
+      const net = savings - penalty;
+      this.out = {
+        threeMonths, ird, penalty, comparison: comparison * 100, isFixed,
+        usesIrd: isFixed && ird > threeMonths,
+        savings, net, worthIt: net > 0,
+        breakEvenMonths: (r - newR) > 0 && B > 0 ? penalty / (B * (r - newR) / 12) : Infinity,
+        pctOfBalance: B > 0 ? penalty / B : 0
+      };
+    }
+  };
+}
+
+/* ======================================================================
+   17. ONTARIO TAKE-HOME PAY
+   Employment income -> CPP, CPP2, EI, federal tax, Ontario tax (surtax,
+   Health Premium, low-income reduction). Rates from assets/provinces.js.
+   ====================================================================== */
+function takeHome() {
+  let chart = null;
+  return {
+    code: 'ON',
+    gross: 85000, rrsp: 0, periods: 26,
+    view: 'chart',
+    out: {},
+    rows: [],
+    tableCols: [
+      { key: 'item', label: 'Item' },
+      { key: 'annual', label: 'Per year', money: true },
+      { key: 'period', label: 'Per pay period', money: true, dec: 2 }
+    ],
+    get taxYear() { return CV_TAX.year; },
+    init() {
+      this.$nextTick(() => {
+        chart = new Chart(this.$refs.cv, {
+          type: 'doughnut',
+          data: { labels: ['Take-home pay', 'Income tax', 'CPP + CPP2', 'EI', 'RRSP (saved)'],
+                  datasets: [{ data: [1, 1, 1, 1, 1], backgroundColor: [C.emerald, C.rose, C.indigo, C.sky, C.slate], borderWidth: 0, hoverOffset: 6 }] },
+          options: doughnutOpts()
+        });
+        this.update();
+      });
+    },
+    setView(v) { this.view = v; if (v === 'chart') this.$nextTick(() => { if (chart) chart.resize(); }); },
+    update() {
+      const h = cvTakeHome(this.gross, this.rrsp, this.code);
+      const per = Math.max(this.periods || 26, 1);
+      const incomeTax = h.tax.fed + h.tax.prov;
+      const gross = h.g;
+      const row = (item, annual) => ({ item, annual, period: annual / per });
+      this.rows = [
+        row('Gross employment income', gross),
+        row('RRSP contribution (pre-tax)', -h.rr),
+        row('CPP contributions', -h.cpp1),
+        row('CPP2 contributions', -h.cpp2),
+        row('EI premiums', -h.ei),
+        row('Federal income tax', -h.tax.fed),
+        row('Ontario income tax (after credits)', -(h.tax.provBasic - h.tax.reduction)),
+        row('Ontario surtax', -h.tax.surtax),
+        row('Ontario Health Premium', -h.tax.premium),
+        row('Take-home pay', h.net)
+      ];
+      const marginal = cvMarginalRate(gross, this.code);
+      this.out = {
+        gross, net: h.net, netPeriod: h.net / per, netMonthly: h.net / 12,
+        incomeTax, fed: h.tax.fed, prov: h.tax.prov, cpp: h.cpp1 + h.cpp2, ei: h.ei,
+        taxable: h.taxable,
+        avgRate: gross > 0 ? incomeTax / gross : 0,
+        deductionsRate: gross > 0 ? (gross - h.rr - h.net) / gross : 0,
+        marginal
+      };
+      if (!chart) return;
+      chart.data.datasets[0].data = [Math.max(h.net, 0), incomeTax, h.cpp1 + h.cpp2, h.ei, h.rr];
+      chart.update('none');
+    }
+  };
+}
+
+/* ======================================================================
+   18. OSAP REPAYMENT (standard schedule vs. Repayment Assistance Plan)
+   Federal portion: 0% interest. Ontario portion: prime + 1%, accruing
+   during the 6-month grace period and added to principal.
+   RAP: payment is never more than 10% of family income (federal
+   regulation); this tool uses that cap as an upper-bound estimate unless
+   you enter the payment you were actually assigned.
+   ====================================================================== */
+function osapRepayment() {
+  let chart = null;
+  return {
+    fedBalance: 12000, onBalance: 8000,
+    onRate: Math.round((CV_TAX.osap.primeRate + CV_TAX.osap.ontarioRateOverPrime) * 10000) / 100,
+    termYears: 9.5,
+    familyIncome: 34000, familySize: 1, rapPayment: '',
+    needPerYear: 10000, studyYears: 1, onSharePct: Math.round(CV_TAX.osap.illustrativeOntarioShareOfLoan * 100),
+    view: 'chart',
+    out: {},
+    rows: [],
+    tableCols: [
+      { key: 'period', label: 'Year of repayment' },
+      { key: 'stdBal', label: 'Balance — standard', money: true },
+      { key: 'stdPaid', label: 'Paid so far — standard', money: true },
+      { key: 'rapBal', label: 'Balance — RAP (est.)', money: true, cls: 'col-end' },
+      { key: 'rapPaid', label: 'Paid so far — RAP (est.)', money: true }
+    ],
+    get taxYear() { return CV_TAX.year; },
+    get primeNote() { return `Prime was ${(CV_TAX.osap.primeRate * 100).toFixed(2)}% on ${CV_TAX.osap.primeAsOf}, so prime + 1% = ${((CV_TAX.osap.primeRate + CV_TAX.osap.ontarioRateOverPrime) * 100).toFixed(2)}%.`; },
+    init() {
+      this.$nextTick(() => {
+        chart = new Chart(this.$refs.cv, {
+          type: 'line',
+          data: { labels: [], datasets: [
+            { label: 'Standard repayment', data: [], borderColor: C.indigo, backgroundColor: C.indigoFill, fill: true, tension: 0.2, pointRadius: 0, borderWidth: 2 },
+            { label: 'RAP (estimate)', data: [], borderColor: C.emerald, backgroundColor: C.emeraldFill, fill: true, tension: 0.2, pointRadius: 0, borderWidth: 2 }
+          ] },
+          options: lineOpts({
+            scales: {
+              y: { beginAtZero: true, ticks: { callback: (v) => compact(v) }, grid: { color: '#f1f5f9' }, border: { display: false } },
+              x: { grid: { display: false }, border: { display: false }, title: { display: true, text: 'Years since repayment started' } }
+            }
+          })
+        });
+        this.update();
+      });
+    },
+    setView(v) { this.view = v; if (v === 'chart') this.$nextTick(() => { if (chart) chart.resize(); }); },
+    update() {
+      const S = CV_TAX.osap;
+      const F = Math.max(this.fedBalance || 0, 0);
+      const O = Math.max(this.onBalance || 0, 0);
+      const i = Math.max(this.onRate || 0, 0) / 100 / 12;
+      const n = Math.min(Math.max(Math.round((this.termYears || S.standardYears) * 12), 12), Math.round(S.maxYears * 12));
+
+      const graceInterest = O * i * S.graceMonths;
+      const O0 = O + graceInterest;
+      const start = F + O0;
+      const payFed = F / n;
+      const payOn = i > 0 ? O0 * i * Math.pow(1 + i, n) / (Math.pow(1 + i, n) - 1) : O0 / n;
+      const std = payFed + payOn;
+      const totalPaidStd = std * n;
+      const totalInterest = totalPaidStd - F - O;     // includes grace-period interest
+
+      // RAP
+      const X = Math.max(this.familyIncome || 0, 0) / 12;
+      const size = Math.max(Math.round(this.familySize || 1), 1);
+      const tFed = S.rapFederalZeroThreshold[Math.min(size, S.rapFederalZeroThreshold.length) - 1];
+      const tOn = S.rapOntarioZeroThreshold[Math.min(size, S.rapOntarioZeroThreshold.length) - 1];
+      const zeroFed = X <= tFed, zeroOn = X <= tOn;
+      const userP = this.rapPayment === '' || this.rapPayment === null ? null : Number(this.rapPayment);
+      const hasUser = userP !== null && Number.isFinite(userP) && userP >= 0;
+      const cap = X * S.rapFederalCapOfIncome;
+      // Upper-bound estimate per portion: $0 under that program's threshold, otherwise at most the standard
+      // payment on that portion; combined never more than Ontario's stated 20%-of-income ceiling.
+      const fedUpper = zeroFed ? 0 : Math.min(payFed, cap);
+      const onUpper = zeroOn ? 0 : Math.min(payOn, X * S.rapOntarioCapOfIncome);
+      const upper = Math.min(fedUpper + onUpper, X * S.rapOntarioCapOfIncome);
+      const rapP = Math.min(std, hasUser ? userP : upper);
+      const rapMonths = S.rapMaxMonthsSinceSchool - S.graceMonths;   // months of payments before the debt is eliminated
+      const rapApplies = rapP < std - 0.005;      // RAP only helps when the affordable payment is below the standard payment
+      const rapPaid = rapApplies ? (rapP > 0 ? Math.min(rapP * rapMonths, start) : 0) : totalPaidStd;
+      const covered = rapApplies ? Math.max(start - rapPaid, 0) : 0;
+
+      // New-assessment planner: how the grant/loan mix changes the standard monthly payment
+      const needTotal = Math.max(this.needPerYear || 0, 0) * Math.max(Math.round(this.studyYears || 1), 1);
+      const onShare = Math.min(Math.max((this.onSharePct || 0) / 100, 0), 1);
+      const plan = [
+        { label: '50% grant / 50% loan', grant: 0.5, note: 'a more generous mix, for comparison' },
+        { label: '25% grant / 75% loan', grant: 0.25, note: 'announced maximum grant share for new borrowers' },
+        { label: '0% grant / 100% loan', grant: 0, note: 'private career college students (no OSAP grants)' }
+      ].map((r) => {
+        const loan = needTotal * (1 - r.grant);
+        const fl = loan * (1 - onShare), ol = loan * onShare;
+        const og = ol + ol * i * S.graceMonths;
+        const pay = fl / n + (i > 0 ? og * i * Math.pow(1 + i, n) / (Math.pow(1 + i, n) - 1) : og / n);
+        return Object.assign({}, r, { grants: needTotal * r.grant, loan, grace: ol * i * S.graceMonths, owedAtStart: fl + og, pay, interest: pay * n - loan });
+      });
+
+      // yearly rows + chart series
+      const years = Math.ceil(Math.max(n, rapMonths) / 12);
+      const rows = [], labels = [], stdSeries = [], rapSeries = [];
+      let fBal = F, oBal = O0, stdPaid = 0;
+      for (let m = 0; m <= years * 12; m++) {
+        if (m > 0) {
+          if (m <= n) {
+            fBal = Math.max(fBal - payFed, 0);
+            oBal = Math.max(oBal + oBal * i - payOn, 0);
+            stdPaid += std;
+          }
+        }
+        if (m % 12 === 0) {
+          const rapBal = !rapApplies ? fBal + oBal : (m >= rapMonths ? 0 : Math.max(start - rapP * m, 0));
+          const rapSoFar = !rapApplies ? stdPaid : (rapP > 0 ? Math.min(rapP * Math.min(m, rapMonths), start) : 0);
+          labels.push(String(m / 12));
+          stdSeries.push(Math.round(fBal + oBal));
+          rapSeries.push(Math.round(rapBal));
+          if (m > 0) rows.push({ period: `Year ${m / 12}`, stdBal: fBal + oBal, stdPaid, rapBal, rapPaid: rapSoFar });
+        }
+      }
+      this.rows = rows;
+      this.out = {
+        graceInterest, start, fedStart: F, onStart: O0, onBefore: O, std, payFed, payOn, totalPaidStd, totalInterest, n,
+        X, size, tFed, tOn, zeroFed, zeroOn, hasUser, cap, fedUpper, onUpper, upper, rapApplies, rapP, rapPaid, covered, rapMonths,
+        savedVsStd: Math.max(totalPaidStd - rapPaid, 0),
+        plan, needTotal
+      };
+      if (!chart) return;
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = stdSeries;
+      chart.data.datasets[1].data = rapSeries;
+      chart.update('none');
+    }
+  };
+}
+
+/* ======================================================================
+   19. RRSP vs. TFSA
+   Same pre-tax income either way. RRSP: nothing taxed now, withdrawals taxed
+   at the retirement marginal rate. TFSA: taxed now, tax-free later.
+   ====================================================================== */
+function rrspVsTfsa() {
+  let chart = null;
+  return {
+    code: 'ON', income: 85000, useEstimate: true, manualNow: 30, retireRate: 22,
+    amount: 5000, ret: 6, years: 25,
+    view: 'chart',
+    out: {},
+    rows: [],
+    tableCols: [
+      { key: 'period', label: 'Year' },
+      { key: 'rrsp', label: 'RRSP, after tax on withdrawal', money: true },
+      { key: 'tfsa', label: 'TFSA, tax-free', money: true },
+      { key: 'diff', label: 'RRSP minus TFSA', money: true, cls: 'col-end' }
+    ],
+    get provinces() { return Object.entries(CV_TAX.provinces).map(([k, v]) => ({ code: k, name: v.name })); },
+    get taxYear() { return CV_TAX.year; },
+    init() {
+      try { const saved = localStorage.getItem('cv-province'); if (saved && CV_TAX.provinces[saved]) this.code = saved; } catch (e) {}
+      this.$nextTick(() => {
+        chart = new Chart(this.$refs.cv, {
+          type: 'line',
+          data: { labels: [], datasets: [
+            { label: 'RRSP (after tax on withdrawal)', data: [], borderColor: C.indigo, backgroundColor: C.indigoFill, fill: false, tension: 0.25, pointRadius: 0, borderWidth: 2 },
+            { label: 'TFSA (tax-free)', data: [], borderColor: C.emerald, backgroundColor: C.emeraldFill, fill: false, tension: 0.25, pointRadius: 0, borderWidth: 2, borderDash: [5, 4] }
+          ] },
+          options: lineOpts({
+            scales: {
+              y: { beginAtZero: true, ticks: { callback: (v) => compact(v) }, grid: { color: '#f1f5f9' }, border: { display: false } },
+              x: { grid: { display: false }, border: { display: false }, title: { display: true, text: 'Years invested' } }
+            }
+          })
+        });
+        this.update();
+      });
+    },
+    setProvince(c) { this.code = c; try { localStorage.setItem('cv-province', c); } catch (e) {} },
+    setView(v) { this.view = v; if (v === 'chart') this.$nextTick(() => { if (chart) chart.resize(); }); },
+    update() {
+      const A = Math.max(this.amount || 0, 0);
+      const est = cvMarginalRate(this.income || 0, this.code);
+      const tNow = Math.min(Math.max(this.useEstimate ? est : (this.manualNow || 0) / 100, 0), 0.6);
+      const tLater = Math.min(Math.max((this.retireRate || 0) / 100, 0), 0.6);
+      const r = (this.ret || 0) / 100;
+      const N = Math.max(Math.round(this.years || 0), 0);
+
+      const rows = [], labels = ['0'], rrspS = [A * (1 - tLater)], tfsaS = [A * (1 - tNow)];
+      for (let y = 1; y <= N; y++) {
+        const g = Math.pow(1 + r, y);
+        const rr = A * g * (1 - tLater), tf = A * (1 - tNow) * g;
+        rows.push({ period: `Year ${y}`, rrsp: rr, tfsa: tf, diff: rr - tf });
+        labels.push(String(y)); rrspS.push(Math.round(rr)); tfsaS.push(Math.round(tf));
+      }
+      const g = Math.pow(1 + r, N);
+      const rrspEnd = A * g * (1 - tLater), tfsaEnd = A * (1 - tNow) * g;
+      const sens = [];
+      for (let t = 10; t <= 50; t += 5) {
+        const e = A * g * (1 - t / 100);
+        sens.push({ rate: t, rrsp: e, tfsa: tfsaEnd, winner: Math.abs(e - tfsaEnd) < 1 ? 'Tie' : (e > tfsaEnd ? 'RRSP' : 'TFSA') });
+      }
+      const limits = CV_TAX.registered;
+      this.rows = rows;
+      this.out = {
+        est, tNow, tLater, rrspEnd, tfsaEnd, diff: rrspEnd - tfsaEnd,
+        winner: Math.abs(rrspEnd - tfsaEnd) < 1 ? 'tie' : (rrspEnd > tfsaEnd ? 'rrsp' : 'tfsa'),
+        taxSaved: A * tNow, tfsaContribution: A * (1 - tNow), sens,
+        overRrsp: A > limits.rrspDollarLimit, overTfsa: A * (1 - tNow) > limits.tfsaAnnual,
+        rrspLimit: limits.rrspDollarLimit, tfsaLimit: limits.tfsaAnnual
+      };
+      if (!chart) return;
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = rrspS;
+      chart.data.datasets[1].data = tfsaS;
+      chart.update('none');
+    }
+  };
+}
+
+/* ======================================================================
+   20. CPP START AGE BREAKEVEN (60 vs. 65 vs. 70)
+   Today's dollars. Starting before 65 cuts the pension by 0.6% a month
+   (max 36%); starting after 65 raises it by 0.7% a month (max 42%).
+   ====================================================================== */
+function cppStart() {
+  let chart = null;
+  return {
+    at65: 1000, ret: 0, liveTo: 88,
+    view: 'chart',
+    out: {},
+    rows: [],
+    tableCols: [
+      { key: 'period', label: 'Age' },
+      { key: 'a60', label: 'Start at 60', money: true },
+      { key: 'a65', label: 'Start at 65', money: true },
+      { key: 'a70', label: 'Start at 70', money: true, cls: 'col-end' }
+    ],
+    get taxYear() { return CV_TAX.year; },
+    init() {
+      this.$nextTick(() => {
+        chart = new Chart(this.$refs.cv, {
+          type: 'line',
+          data: { labels: [], datasets: [
+            { label: 'Start at 60', data: [], borderColor: C.rose, fill: false, tension: 0, pointRadius: 0, borderWidth: 2 },
+            { label: 'Start at 65', data: [], borderColor: C.indigo, fill: false, tension: 0, pointRadius: 0, borderWidth: 2 },
+            { label: 'Start at 70', data: [], borderColor: C.emerald, fill: false, tension: 0, pointRadius: 0, borderWidth: 2 }
+          ] },
+          options: lineOpts({
+            scales: {
+              y: { beginAtZero: true, ticks: { callback: (v) => compact(v) }, grid: { color: '#f1f5f9' }, border: { display: false } },
+              x: { grid: { display: false }, border: { display: false }, title: { display: true, text: 'Age' } }
+            }
+          })
+        });
+        this.update();
+      });
+    },
+    setView(v) { this.view = v; if (v === 'chart') this.$nextTick(() => { if (chart) chart.resize(); }); },
+    update() {
+      const B = CV_TAX.cppBenefit;
+      const base = Math.max(this.at65 || 0, 0);
+      const factor = (age) => age < 65
+        ? 1 - B.earlyPerMonth * Math.min((65 - age) * 12, B.maxMonthsEitherWay)
+        : 1 + B.latePerMonth * Math.min((age - 65) * 12, B.maxMonthsEitherWay);
+      const starts = [60, 65, 70];
+      const monthly = starts.map((a) => base * factor(a));
+      const rm = (this.ret || 0) / 100 / 12;
+      const last = 95, months = (last - 60) * 12;
+
+      const cum = starts.map(() => 0);
+      const series = starts.map(() => [0]);
+      const monthlySeries = [];              // [m] -> [c60,c65,c70] at the end of month m
+      for (let m = 1; m <= months; m++) {
+        const age = 60 + (m - 1) / 12;
+        for (let s = 0; s < 3; s++) {
+          cum[s] = cum[s] * (1 + rm) + (age >= starts[s] ? monthly[s] : 0);
+        }
+        monthlySeries.push(cum.slice());
+        if (m % 12 === 0) for (let s = 0; s < 3; s++) series[s].push(cum[s]);
+      }
+      const breakeven = (later, earlier) => {      // indices into starts
+        for (let m = 0; m < monthlySeries.length; m++) {
+          if (monthlySeries[m][later] >= monthlySeries[m][earlier] && 60 + (m + 1) / 12 > starts[later]) return 60 + (m + 1) / 12;
+        }
+        return Infinity;
+      };
+      const ageText = (a) => {
+        if (!Number.isFinite(a)) return 'after 95';
+        const y = Math.floor(a + 1e-9), mo = Math.round((a - y) * 12);
+        return mo === 0 || mo === 12 ? `${mo === 12 ? y + 1 : y}` : `${y} and ${mo} mo`;
+      };
+      const rows = [], labels = [];
+      for (let k = 0; k <= last - 60; k++) {
+        labels.push(String(60 + k));
+        if (k > 0) rows.push({ period: `Age ${60 + k}`, a60: series[0][k], a65: series[1][k], a70: series[2][k] });
+      }
+      const at = Math.min(Math.max(Math.round(this.liveTo || 85), 61), last) - 60;
+      const atLive = series.map((s) => s[at]);
+      const best = atLive.indexOf(Math.max(...atLive));
+      const be6065 = breakeven(1, 0), be6570 = breakeven(2, 1), be6070 = breakeven(2, 0);
+
+      this.rows = rows;
+      this.out = {
+        monthly, pct: starts.map(factor), atLive, best: starts[best], liveTo: at + 60,
+        be6065, be6570, be6070,
+        t6065: ageText(be6065), t6570: ageText(be6570), t6070: ageText(be6070),
+        overMax: base > B.maxAt65 + 0.005, max: B.maxAt65
+      };
+      if (!chart) return;
+      chart.data.labels = labels;
+      for (let s = 0; s < 3; s++) chart.data.datasets[s].data = series[s].map(Math.round);
       chart.update('none');
     }
   };

@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Compound Interest Calculator — Calcuvelo</title>
-  <meta name="description" content="Free compound interest calculator with monthly contributions. See your ending balance, total interest earned, and a chart of principal vs. interest growth over time." />
+  <title>Compound Interest Calculator with Monthly Deposits — Calcuvelo</title>
+  <meta name="description" content="Project what a starting balance plus monthly deposits grows to, and how much of it is your money versus interest. Includes a year-by-year table." />
   <link rel="canonical" href="https://calcuvelo.com/compound-interest.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Compound Interest Calculator — Calcuvelo" />
-  <meta property="og:description" content="See your ending balance, total interest earned, and a chart of principal vs. interest growth over time." />
+  <meta property="og:title" content="Compound Interest Calculator with Monthly Deposits — Calcuvelo" />
+  <meta property="og:description" content="Project what a starting balance plus monthly deposits grows to, and how much of it is your money versus interest. Includes a year-by-year table." />
   <meta property="og:url" content="https://calcuvelo.com/compound-interest.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -28,13 +28,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <!-- Chart.js, then the shared calculator logic, then Alpine (order matters) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <!-- Structured data: helps Google show this tool + FAQ rich results -->
@@ -48,25 +48,54 @@
         "url": "https://calcuvelo.com/compound-interest.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is a good interest rate to assume?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Be conservative. Over long periods the S&P 500 has returned roughly 10% per year before inflation and about 7% after inflation. For cash savings, 4-5% is realistic in a higher-rate environment. Using a lower number builds in a safety margin." }
+            "name": "Does it matter how often interest compounds?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A little, but less than people expect. A 6% nominal rate works out to about 6.17% a year with monthly compounding and 6.18% with daily compounding. Whether you save or borrow, the headline rate and the time horizon matter far more than the compounding schedule."
+            }
           },
           {
             "@type": "Question",
-            "name": "How much difference does compounding frequency make?",
-            "acceptedAnswer": { "@type": "Answer", "text": "More frequent compounding always helps, but the effect is modest at ordinary rates. $10,000 at 7% for 30 years grows to about $76,123 compounded annually versus about $81,165 compounded monthly. This tool uses monthly compounding, matching most savings and brokerage accounts." }
+            "name": "Why does growth feel so slow in the first decade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Interest is calculated on the balance, and the balance starts small. In the worked example above, the account earns only about $400 of interest in year one but nearly $9,000 a year by year twenty. Most of the dramatic growth is back-loaded, which is why quitting early is so costly."
+            }
           },
           {
             "@type": "Question",
-            "name": "Does this account for taxes and inflation?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. The result is a nominal, pre-tax figure. Use the Inflation / Purchasing Power calculator to see the value in today's dollars, and the Real ROI calculator to factor in capital-gains tax." }
+            "name": "What return should I assume for a savings goal under five years?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the rate your savings account or certificate actually pays today, not a stock-market average. Money you need within a few years should not be exposed to a market drop, so the realistic return is the safe one."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I find the monthly amount needed to reach a target?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no target box, but you can solve it by trial: set the years and return, then adjust the monthly contribution until the ending balance meets your goal. Because the result moves in a straight line with the contribution, two or three guesses usually get you within a few dollars."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the result adjusted for inflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. To see what the money is worth in today’s terms, take the ending balance to the Inflation Calculator, or use the Real ROI Calculator to convert your assumed return into an after-inflation return first."
+            }
           }
         ]
       }
@@ -115,12 +144,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -150,6 +189,7 @@
             <section x-data="compound()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Compound Interest Calculator</h1>
               <p class="calc-sub">See how monthly contributions and compounding growth stack up over time.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -235,48 +275,58 @@
 
             <!-- ================= SEO CONTENT ================= -->
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Compound Interest Calculator?</h2>
-              <p>The Compound Interest Calculator projects how a starting balance and recurring monthly deposits grow once interest is reinvested and starts earning interest of its own. Unlike simple interest, which only ever pays on the original principal, compounding means every dollar of growth becomes part of next month's balance &mdash; the reason small, consistent contributions can outgrow a single larger deposit over a long enough horizon.</p>
+<h2>What is the Compound Interest Calculator?</h2>
+<p>Every savings plan eventually runs into the same question: if I put this much away now and this much every month, what will it be worth in a few years &mdash; and how much of that did I actually earn? This calculator answers it for a single account growing at a steady rate. It is meant for people comparing a savings account with an index fund, sizing a down-payment goal, or deciding whether an extra $50 a month is worth the squeeze.</p>
+<p>It splits the ending balance into two layers, the money you deposited and the interest that piled on top, because that split is the whole story of compounding: early on, your deposits do nearly all the work; late in the game, the interest does.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter your initial principal</strong> — the amount you are investing today.</li>
-                <li><strong>Set your monthly contribution</strong> — money you will add automatically every month.</li>
-                <li><strong>Enter the expected annual return.</strong> A diversified stock portfolio has historically returned about 7% per year after inflation; high-yield savings accounts currently pay roughly 4–5%.</li>
-                <li><strong>Choose your time horizon</strong> in years and months.</li>
-                <li><strong>Read the results.</strong> The tiles show your ending balance, how much of it came from your own deposits, and how much is pure compound interest. Use <strong>View Graph</strong> to see contributions and interest stacked over time (and spot the "crossover" year when growth outpaces your deposits), or <strong>View Table</strong> for the exact year-by-year numbers. <strong>Print / Save PDF</strong> produces a clean one-page report of your inputs, the summary and the current view.</li>
-              </ol>
+<h2>How to use it, input by input</h2>
+<ul>
+<li><strong>Starting amount.</strong> What is in the account today. Zero is a perfectly valid answer if you are starting from scratch.</li>
+<li><strong>Monthly contribution.</strong> The amount you add at the end of every month. Be honest here; a number you can sustain beats an ambitious one you abandon in month four.</li>
+<li><strong>Annual return.</strong> The big lever. A high-yield savings account might pay 3&ndash;4%, a bond fund a point or two more, and a broad stock-market index has historically averaged somewhere around 7% a year <em>before</em> inflation, with wild swings along the way. Avoid plugging in 10&ndash;12% because a pitch deck said so.</li>
+<li><strong>Years and months.</strong> Your horizon. Use the months box for goals like &ldquo;a down payment in 4 years and 8 months.&rdquo;</li>
+</ul>
+<p>Switch to the table view to see each year&rsquo;s opening balance, interest earned and contributions, which is handy for checking the numbers against a statement.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>This calculator compounds <strong>monthly</strong>. Each month the running balance earns one-twelfth of the annual rate, and then your contribution is added:</p>
-              <div class="not-prose my-4"><div class="formula">balanceₙₑw = balanceₒₗd × (1 + r ÷ 12) + PMT</div></div>
-              <p>Repeated over <em>n</em> compounding periods, this is equivalent to the future value of a lump sum plus the future value of an ordinary annuity:</p>
-              <div class="not-prose my-4"><div class="formula">FV = P (1 + i)ⁿ  +  PMT × [ ((1 + i)ⁿ − 1) ÷ i ]</div></div>
-              <ul>
-                <li><strong>P</strong> — initial principal</li>
-                <li><strong>PMT</strong> — monthly contribution</li>
-                <li><strong>i</strong> — monthly rate = annual rate ÷ 12</li>
-                <li><strong>n</strong> — total months = (years × 12) + months</li>
-              </ul>
-              <p>Interest earned is simply <strong>FV − (P + PMT × n)</strong>: the ending balance minus every dollar you put in.</p>
+<h2>How does the underlying math work?</h2>
+<p>The balance is updated once a month: last month&rsquo;s balance grows by one-twelfth of the annual rate, then your deposit lands.</p><div class="not-prose my-4"><div class="formula">balance<sub>n</sub> = balance<sub>n&minus;1</sub> &times; (1 + r &divide; 12) + deposit</div></div>
+<p>Run that for every month and you get the closed form for the ending balance, where <strong>P</strong> is the starting amount, <strong>i</strong> is the monthly rate (annual rate &divide; 12), <strong>c</strong> the monthly deposit and <strong>n</strong> the number of months:</p><div class="not-prose my-4"><div class="formula">FV = P &times; (1 + i)<sup>n</sup> + c &times; [ (1 + i)<sup>n</sup> &minus; 1 ] &divide; i</div></div>
+<p>The first term is your starting amount compounding on its own; the second is the stream of deposits, each one compounding for however many months it has been in the account.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>Savers use this calculator to compare a high-yield savings account against a taxable brokerage account, to size the monthly contribution needed to hit a house down-payment goal by a target date, or to show how starting ten years earlier can matter more than contributing twice as much later. It is also a common classroom tool for demonstrating why "pay yourself first" works.</p>
+<h2>Worked example: $5,000 plus $300 a month for 25 years</h2>
+<p>Enter a $5,000 starting amount, $300 a month, 6% a year and 25 years. The calculator returns about <strong>$230,223</strong>. You deposited $95,000 of that ($5,000 + 300 &times; 300 months), so roughly <strong>$135,223</strong> &mdash; 59% of the total &mdash; is interest.</p>
+<p>Now keep everything the same and change only the return:</p>
+<ul>
+<li>At <strong>4%</strong> the account reaches about $167,808 (interest: $72,808).</li>
+<li>At <strong>8%</strong> it reaches about $322,009 (interest: $227,009).</li>
+</ul>
+<p>Four percentage points either side of the middle case moves the result by roughly $62,000 down or $92,000 up, on identical deposits. That asymmetry is why the return assumption deserves more of your skepticism than the contribution amount does.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>What is a good interest rate to assume?</h3>
-              <p>Be conservative. Over long periods the S&amp;P 500 has returned roughly 10% per year before inflation and about 7% after inflation. For cash savings, 4–5% is realistic in a higher-rate environment. Using a lower number builds in a safety margin — and if reality turns out better, that is a bonus rather than a shortfall.</p>
-              <h3>How much difference does compounding frequency make?</h3>
-              <p>More frequent compounding always helps, but the effect is modest at ordinary rates. $10,000 at 7% for 30 years grows to about $76,123 compounded annually versus about $81,165 compounded monthly. This tool uses monthly compounding, which matches how most brokerage and savings accounts actually credit growth.</p>
-              <h3>Does this account for taxes and inflation?</h3>
-              <p>No. The result is a nominal, pre-tax figure. To see what your future balance is worth in today's dollars, use the <a href="inflation-calculator.html">Inflation / Purchasing Power calculator</a>. To factor in capital-gains tax on your gains, use the <a href="real-roi.html">Real ROI calculator</a>.</p>
+<h2>Real-world practical application</h2>
+<p>Because the tool shows the interest share explicitly, it is good at settling arguments. Is it better to put a $20,000 windfall into a savings account or an index fund? Run both rates. How much do you need to set aside each month to have $40,000 for a house in six years? Nudge the monthly box until the ending balance clears the target. Teaching a teenager why a Roth IRA or an early savings habit matters? Let them drag the years slider and watch the interest layer overtake the deposit layer.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="retirement-calculator.html">Retirement / 401(k) Estimator</a> — apply compounding to a full career of contributions.</li>
-                <li><a href="rule-of-72.html">Rule of 72</a> — a quick estimate of how long your money takes to double.</li>
-                <li><a href="present-value.html">Present &amp; Future Value</a> — the general time-value-of-money formula.</li>
-              </ul>
+<h2>What the result leaves out</h2>
+<p>The balance is a <strong>nominal</strong> figure: it does not subtract inflation, so $230,000 in 25 years will buy considerably less than $230,000 does today (the <a href="inflation-calculator.html">Inflation Calculator</a> quantifies that). It also ignores taxes on interest, account fees, and the fact that real investments do not earn a smooth 6% &mdash; a bad year early in the plan hurts more than a bad year late. Finally, deposits are assumed to arrive at the end of each month; depositing at the start would add a little.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Does it matter how often interest compounds?</h3>
+<p>A little, but less than people expect. A 6% nominal rate works out to about 6.17% a year with monthly compounding and 6.18% with daily compounding. Whether you save or borrow, the headline rate and the time horizon matter far more than the compounding schedule.</p>
+<h3>Why does growth feel so slow in the first decade?</h3>
+<p>Interest is calculated on the balance, and the balance starts small. In the worked example above, the account earns only about $400 of interest in year one but nearly $9,000 a year by year twenty. Most of the dramatic growth is back-loaded, which is why quitting early is so costly.</p>
+<h3>What return should I assume for a savings goal under five years?</h3>
+<p>Use the rate your savings account or certificate actually pays today, not a stock-market average. Money you need within a few years should not be exposed to a market drop, so the realistic return is the safe one.</p>
+<h3>How do I find the monthly amount needed to reach a target?</h3>
+<p>There is no target box, but you can solve it by trial: set the years and return, then adjust the monthly contribution until the ending balance meets your goal. Because the result moves in a straight line with the contribution, two or three guesses usually get you within a few dollars.</p>
+<h3>Is the result adjusted for inflation?</h3>
+<p>No. To see what the money is worth in today&rsquo;s terms, take the ending balance to the Inflation Calculator, or use the Real ROI Calculator to convert your assumed return into an after-inflation return first.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="guide-start-early-vs-contribute-more.html">Guide: start early or contribute more later?</a> &mdash; the same math, applied to the most common savings dilemma.</li>
+<li><a href="rule-of-72.html">Rule of 72</a> &mdash; a mental shortcut for how long the balance takes to double.</li>
+<li><a href="real-roi.html">Real ROI Calculator</a> &mdash; what the return is worth after tax and inflation.</li>
+<li><a href="inflation-calculator.html">Inflation Calculator</a> &mdash; the purchasing power of the ending balance.</li>
+<li><a href="rrsp-vs-tfsa-calculator.html">RRSP vs. TFSA Calculator</a> &mdash; the tax side of the same savings plan.</li>
+</ul>
             </article>
 
           </main>
@@ -291,6 +341,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

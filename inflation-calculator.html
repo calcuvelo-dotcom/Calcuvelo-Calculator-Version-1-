@@ -8,14 +8,14 @@
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
   <title>Inflation &amp; Purchasing Power Calculator — Calcuvelo</title>
-  <meta name="description" content="Free inflation calculator. See how much a fixed sum of money will be worth in the future after X years of Y% inflation, and how much you would need to keep pace." />
+  <meta name="description" content="See what a sum of money will really buy after years of inflation, and how much you would need in the future to keep the same purchasing power as today." />
   <link rel="canonical" href="https://calcuvelo.com/inflation-calculator.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Inflation &amp; Purchasing Power Calculator — Calcuvelo" />
-  <meta property="og:description" content="How much a fixed sum of money will actually be worth after years of inflation." />
+  <meta property="og:description" content="See what a sum of money will really buy after years of inflation, and how much you would need in the future to keep the same purchasing power as today." />
   <meta property="og:url" content="https://calcuvelo.com/inflation-calculator.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/inflation-calculator.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is a normal rate of inflation?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Many central banks, including the U.S. Federal Reserve, target about 2% annual inflation. The long-run historical average in the United States is closer to 3%. Individual years can be far higher or lower, and the price of specific things like healthcare or tuition often rises faster than the overall average." }
+            "name": "Which inflation rate should I use for long-term planning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many planners use 2.5–3% as a base case and test 4% as a stress case. Using your local central bank’s target rate is reasonable for a mild scenario, but history says to leave room for higher."
+            }
           },
           {
             "@type": "Question",
-            "name": "How is inflation measured?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The most common gauge is the Consumer Price Index (CPI), which tracks the price of a fixed basket of goods and services that a typical household buys. The percentage change in that index over a year is the headline inflation rate." }
+            "name": "Why does the calculator show two different numbers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They answer opposite questions. Purchasing power asks “what will today’s money be worth then?” The amount needed asks “how much money then equals today’s buying power?” Both use the same compounding factor in opposite directions."
+            }
           },
           {
             "@type": "Question",
-            "name": "How do I protect my savings from inflation?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Holding only cash guarantees a loss of purchasing power over time. Historically, owning a diversified mix of stocks and real assets has outpaced inflation over long periods. Inflation-protected government bonds such as TIPS and I-bonds are designed specifically to keep up with the CPI." }
+            "name": "Does inflation help borrowers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, with fixed-rate debt: you repay with dollars that are worth less than the ones you borrowed. That benefit mostly goes to people with long fixed-rate loans, such as a 30-year mortgage, and does not apply to variable-rate debt that rises with prices."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my savings account rate enough to stay ahead of inflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only if the rate is higher than inflation. Subtract the inflation rate from your rate: a 4% account with 3% inflation gains about 1% in real terms, before tax. After tax it may be zero or negative."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for past inflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The compounding math is the same, but past inflation is better looked up from official price-index data, which varies year by year, rather than approximated with a steady average."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="inflation()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Inflation &amp; Purchasing Power Calculator</h1>
               <p class="calc-sub">See how much a fixed sum of money will actually be worth in the future.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -212,46 +252,55 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Inflation Calculator?</h2>
-              <p>The Inflation Calculator shows how much a fixed sum of money will really be able to buy in the future after a given number of years of price increases, and how much larger that sum would need to grow just to keep pace.</p>
+<h2>What is the Inflation Calculator?</h2>
+<p>Money has two values: the number printed on it and what it will buy. Inflation is the slow gap between the two. This calculator takes an amount, a number of years and an assumed inflation rate and shows both sides of that gap &mdash; what today&rsquo;s sum will be worth in future purchasing power, and how large the future sum must be to buy what today&rsquo;s buys.</p>
+<p>It is a tool for retirement planners, savers sitting on cash, and anyone looking at a future salary, pension or settlement figure and wondering what it really means.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter the amount of money</strong> you want to track — for example a savings balance, a fixed pension, or a price.</li>
-                <li><strong>Enter the number of years</strong> into the future.</li>
-                <li><strong>Set an average annual inflation rate.</strong> Around 2–3% reflects long-run norms; try a higher figure to stress-test.</li>
-                <li><strong>Read the results.</strong> "Future purchasing power" is what today's amount will buy in future dollars. "Value lost" and "% lost" quantify the erosion. "Needed to keep pace" is how large the sum must grow just to stand still. The chart shows the decline year by year.</li>
-              </ol>
+<h2>Choosing the inputs</h2>
+<ul>
+<li><strong>Amount.</strong> A sum in today&rsquo;s dollars: a savings balance, an annual budget, a fixed pension payment.</li>
+<li><strong>Years and months.</strong> The gap between now and the moment you care about.</li>
+<li><strong>Inflation rate.</strong> Central banks in many countries aim for around 2% a year; US consumer prices have averaged roughly 3% over the long run, but spiked above 9% in 2022. A three-scenario approach &mdash; 2%, 3%, 4% &mdash; is more honest than a single guess.</li>
+</ul>
 
-              <h2>How does the underlying math work?</h2>
-              <p>Inflation compounds, just like interest. The future purchasing power of a fixed amount is:</p>
-              <div class="not-prose my-4"><div class="formula">PurchasingPower = A ÷ (1 + f)ʸ</div></div>
-              <p>And the amount you would need in the future to buy what <strong>A</strong> buys today is:</p>
-              <div class="not-prose my-4"><div class="formula">AmountNeeded = A × (1 + f)ʸ</div></div>
-              <ul>
-                <li><strong>A</strong> — amount of money today</li>
-                <li><strong>f</strong> — average annual inflation rate (as a decimal)</li>
-                <li><strong>y</strong> — number of years</li>
-              </ul>
-              <p>The share of value lost is <strong>1 − 1 ÷ (1 + f)ʸ</strong>.</p>
+<h2>How does the underlying math work?</h2>
+<p>Prices compound just like interest does. If prices rise by <strong>f</strong> per year for <strong>t</strong> years, the two figures the calculator reports are:</p><div class="not-prose my-4"><div class="formula">purchasing power = amount &divide; (1 + f)<sup>t</sup></div></div><div class="not-prose my-4"><div class="formula">amount needed to keep pace = amount &times; (1 + f)<sup>t</sup></div></div>
+<p>The two are mirror images: the first divides, the second multiplies by the same growth factor. The &ldquo;value lost&rdquo; figure is simply the amount minus its future purchasing power.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>People use it to check whether a fixed pension or annuity payment will still cover expenses in twenty years, to translate a salary offer or savings goal into today's purchasing power, and to see why cash sitting in a low-interest account quietly loses value every single year.</p>
+<h2>Worked example: $50,000 over 25 years</h2>
+<p>Suppose a fixed $50,000 is meant to cover a year of living costs, 25 years from now.</p>
+<ul>
+<li>At <strong>2%</strong> inflation it buys the equivalent of about $30,477 today; you would need about $82,030 to keep pace.</li>
+<li>At <strong>3%</strong> it buys about <strong>$23,880</strong> (a loss of 52%); you would need about <strong>$104,689</strong>.</li>
+<li>At <strong>4%</strong> it buys about $18,756; you would need about $133,292.</li>
+</ul>
+<p>The difference between 2% and 4% is not &ldquo;twice as bad&rdquo; &mdash; it is more than $50,000 of required future income, because the effect compounds. This is why a fixed-dollar pension with no cost-of-living adjustment is far weaker than its headline number suggests.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>What is a normal rate of inflation?</h3>
-              <p>Many central banks, including the U.S. Federal Reserve, target about <strong>2%</strong>. The long-run historical average in the United States is closer to <strong>3%</strong>. Individual years vary widely, and categories like healthcare and tuition often rise faster than the overall index.</p>
-              <h3>How is inflation measured?</h3>
-              <p>The headline figure usually comes from the <strong>Consumer Price Index (CPI)</strong>, which tracks the cost of a fixed basket of goods and services a typical household buys. The year-over-year percentage change in that index is the inflation rate.</p>
-              <h3>How do I protect my savings from inflation?</h3>
-              <p>Holding only cash locks in a slow loss of purchasing power. Over long periods a diversified mix of stocks and real assets has outpaced inflation, and <strong>TIPS</strong> and <strong>I-bonds</strong> are government bonds designed specifically to track the CPI.</p>
+<h2>Real-world practical application</h2>
+<p>Three situations come up again and again. <strong>Retirement budgeting:</strong> convert today&rsquo;s spending into the future figure you need to cover it. <strong>Salary negotiation:</strong> a 3% raise in a 3% inflation year is no raise at all in purchasing-power terms. <strong>Cash holding:</strong> money in an account paying less than inflation is shrinking in real terms even though the statement balance rises; the <a href="real-roi.html">Real ROI Calculator</a> measures that gap precisely.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="real-roi.html">Real ROI</a> — combine inflation with taxes to find your true investment return.</li>
-                <li><a href="present-value.html">Present &amp; Future Value</a> — discount future cash flows to today's dollars.</li>
-                <li><a href="rule-of-72.html">Rule of 72</a> — divide 72 by the inflation rate to see how fast prices double.</li>
-              </ul>
+<h2>A caution about averages</h2>
+<p>A single inflation rate is a simplification. Your own inflation depends on what you buy: housing, healthcare and education have often outpaced the headline index, while electronics and some goods have fallen in price. And inflation can swing sharply from year to year, so a steady-rate projection is best read as one scenario among several.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Which inflation rate should I use for long-term planning?</h3>
+<p>Many planners use 2.5&ndash;3% as a base case and test 4% as a stress case. Using your local central bank&rsquo;s target rate is reasonable for a mild scenario, but history says to leave room for higher.</p>
+<h3>Why does the calculator show two different numbers?</h3>
+<p>They answer opposite questions. Purchasing power asks &ldquo;what will today&rsquo;s money be worth then?&rdquo; The amount needed asks &ldquo;how much money then equals today&rsquo;s buying power?&rdquo; Both use the same compounding factor in opposite directions.</p>
+<h3>Does inflation help borrowers?</h3>
+<p>Yes, with fixed-rate debt: you repay with dollars that are worth less than the ones you borrowed. That benefit mostly goes to people with long fixed-rate loans, such as a 30-year mortgage, and does not apply to variable-rate debt that rises with prices.</p>
+<h3>Is my savings account rate enough to stay ahead of inflation?</h3>
+<p>Only if the rate is higher than inflation. Subtract the inflation rate from your rate: a 4% account with 3% inflation gains about 1% in real terms, before tax. After tax it may be zero or negative.</p>
+<h3>Can I use this for past inflation?</h3>
+<p>The compounding math is the same, but past inflation is better looked up from official price-index data, which varies year by year, rather than approximated with a steady average.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="real-roi.html">Real ROI Calculator</a> &mdash; your return after both tax and inflation.</li>
+<li><a href="retirement-calculator.html">Retirement / 401(k) Calculator</a> &mdash; a projection you can deflate with this tool.</li>
+<li><a href="guide-gic-ladder-canada.html">Guide: how a GIC ladder works</a> &mdash; whether a fixed-rate deposit actually beats inflation.</li>
+<li><a href="rule-of-72.html">Rule of 72</a> &mdash; prices double in about 72 &divide; inflation-rate years.</li>
+<li><a href="cpp-start-age-calculator.html">CPP Start Age Calculator</a> &mdash; inflation-adjusted pension timing.</li>
+</ul>
             </article>
 
           </main>
@@ -265,6 +314,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

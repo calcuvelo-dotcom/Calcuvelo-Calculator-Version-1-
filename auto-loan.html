@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Auto Loan Calculator with Tax &amp; Fees — Calcuvelo</title>
-  <meta name="description" content="Free auto loan calculator. Roll sales tax, fees and a trade-in into the loan to see your monthly car payment, total interest, and the full cost of financing." />
+  <title>Auto Loan Calculator with Tax, Fees &amp; Trade-In — Calcuvelo</title>
+  <meta name="description" content="Find the true monthly payment and total cost of a car loan after sales tax, fees, down payment and trade-in, and compare 60- and 84-month terms." />
   <link rel="canonical" href="https://calcuvelo.com/auto-loan.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Auto Loan Calculator with Tax &amp; Fees — Calcuvelo" />
-  <meta property="og:description" content="See your monthly car payment and the full cost of financing, including tax, fees and interest." />
+  <meta property="og:title" content="Auto Loan Calculator with Tax, Fees &amp; Trade-In — Calcuvelo" />
+  <meta property="og:description" content="Find the true monthly payment and total cost of a car loan after sales tax, fees, down payment and trade-in, and compare 60- and 84-month terms." />
   <meta property="og:url" content="https://calcuvelo.com/auto-loan.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/auto-loan.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How long should my auto loan be?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Shorter is cheaper. A common guideline is to finance a car for no more than 60 months. Longer terms of 72 or 84 months lower the monthly payment but you pay much more interest and are likely to owe more than the car is worth for years." }
+            "name": "How long should a car loan be?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many consumer-finance writers suggest keeping the term to 60 months or less so the loan is paid off while the car still has value. A common guideline is the “20/4/10” rule: 20% down, a loan of no more than four years, and total transportation costs under 10% of gross income."
+            }
           },
           {
             "@type": "Question",
-            "name": "Does a trade-in reduce the sales tax I pay?",
-            "acceptedAnswer": { "@type": "Answer", "text": "In most U.S. states, yes — sales tax is charged on the price of the new vehicle minus the trade-in allowance, not the full sticker price. A few states tax the full price. This calculator applies tax to price minus trade-in." }
+            "name": "Is it better to finance through the dealer or a bank?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Get a pre-approval from a bank or credit union first. Dealers sometimes beat it, especially with manufacturer promotional rates, and sometimes mark the rate up. Having a benchmark in hand lets you compare honestly."
+            }
           },
           {
             "@type": "Question",
-            "name": "What APR can I expect on a car loan?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Your rate depends mostly on your credit score, the loan term, and whether the car is new or used. Borrowers with excellent credit often see single-digit rates on new cars, while subprime borrowers can pay 15% or more. Get pre-approved by a bank or credit union before visiting the dealer." }
+            "name": "Does a trade-in reduce sales tax?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In many states, yes: tax is charged only on the difference between the price and the trade-in value. Some states do not give this credit, so verify locally."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is my monthly payment higher than the advertised one?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Advertised payments often assume a large down payment, a long term and excellent credit, and they exclude tax and fees. Enter your real numbers to see the payment you would actually owe."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I pay a car loan off early?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most auto loans allow it, but check for a prepayment penalty. The Payoff vs. Interest Calculator shows how much interest an early payoff would avoid."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="autoLoan()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Auto Loan Calculator</h1>
               <p class="calc-sub">Roll taxes and fees into the loan and see the full cost of financing.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -231,47 +271,55 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Auto Loan Calculator?</h2>
-              <p>The Auto Loan Calculator estimates your true monthly payment and total cost of financing a vehicle, rolling in sales tax, dealer fees and any trade-in value &mdash; not just the sticker price and the advertised APR.</p>
+<h2>What is the Auto Loan Calculator?</h2>
+<p>The sticker price is rarely the amount you finance. By the time sales tax, dealer fees and any trade-in are settled, the loan balance can be several thousand dollars different from the price on the windshield, and the advertised &ldquo;$399 a month&rdquo; depends heavily on how long the loan runs. This calculator rebuilds the real numbers so you can compare a deal on total cost instead of on the monthly payment alone.</p>
+<p>It is most useful at the dealership-adjacent stage: you have a price in mind, a quote or two on the interest rate, and you want to know what it will actually cost.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter the negotiated vehicle price</strong> (not the sticker price).</li>
-                <li><strong>Add your down payment and any trade-in value.</strong> Both reduce the amount you finance; the trade-in also reduces the taxable amount.</li>
-                <li><strong>Enter your state/local sales-tax rate and any dealer fees</strong> for title, documentation and registration.</li>
-                <li><strong>Pick a loan term and enter the APR</strong> from your lender or pre-approval.</li>
-                <li><strong>Review the results.</strong> You get the monthly payment, the amount financed, total interest, and total cash cost (down payment plus every scheduled payment). The doughnut chart splits that total cash cost into the car, taxes, fees, and interest.</li>
-              </ol>
+<h2>Using each input</h2>
+<ul>
+<li><strong>Vehicle price.</strong> The negotiated price before tax and fees.</li>
+<li><strong>Down payment and trade-in.</strong> Both reduce the amount borrowed. In many states the trade-in also reduces the amount that is taxed; the calculator assumes it does, so check your state&rsquo;s rule.</li>
+<li><strong>Sales tax %.</strong> Your combined state and local rate. Some states tax at registration, some at the dealership.</li>
+<li><strong>Fees.</strong> Documentation, title and registration. Ask for these in writing before you agree on a price.</li>
+<li><strong>Term and APR.</strong> Use the rate from a real offer. A pre-approval from a bank or credit union is a good benchmark to hold against the dealer&rsquo;s financing.</li>
+</ul>
 
-              <h2>How does the underlying math work?</h2>
-              <p>First the amount financed is assembled:</p>
-              <div class="not-prose my-4"><div class="formula">Financed = Price + SalesTax + Fees − DownPayment − TradeIn
-SalesTax = (Price − TradeIn) × taxRate</div></div>
-              <p>Then the monthly payment uses the same amortizing-loan formula as a mortgage:</p>
-              <div class="not-prose my-4"><div class="formula">M = Financed × [ i (1 + i)ⁿ ] ÷ [ (1 + i)ⁿ − 1 ]</div></div>
-              <ul>
-                <li><strong>i</strong> — monthly rate = APR ÷ 12</li>
-                <li><strong>n</strong> — number of monthly payments (the term)</li>
-              </ul>
-              <p>Total interest is <strong>(M × n) − Financed</strong>, and total cash cost is <strong>DownPayment + (M × n)</strong>.</p>
+<h2>How does the underlying math work?</h2>
+<p>First the amount financed is assembled, then the standard installment-loan formula turns it into a payment.</p><div class="not-prose my-4"><div class="formula">financed = price + sales tax + fees &minus; down payment &minus; trade-in</div></div><div class="not-prose my-4"><div class="formula">payment = financed &times; i &times; (1 + i)<sup>n</sup> &divide; [ (1 + i)<sup>n</sup> &minus; 1 ]</div></div>
+<p>Here <strong>i</strong> is the APR divided by 12 and <strong>n</strong> the number of months. Total interest is the payment times n, minus the amount financed. Note that the payment formula is the same for every installment loan, which is why the same math appears in the <a href="mortgage-calculator.html">Mortgage Calculator</a>.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>Shoppers use it to compare dealer financing against a credit-union pre-approval, to see how a 72- or 84-month term quietly inflates total interest compared with a 60-month term, and to check whether a trade-in is worth more toward the purchase price or sold privately.</p>
+<h2>Worked example: a $32,000 car, 60 months versus 84</h2>
+<p>Price $32,000, down payment $3,000, no trade-in, 6% sales tax ($1,920), fees $600, APR 7.2%. The amount financed is 32,000 + 1,920 + 600 &minus; 3,000 = <strong>$31,520</strong>.</p>
+<ul>
+<li><strong>60 months:</strong> payment about <strong>$627.11</strong>, total interest about $6,107, total cost of the car (including the down payment) about $40,627.</li>
+<li><strong>84 months:</strong> payment about <strong>$478.81</strong>, total interest about $8,700, total cost about $43,220.</li>
+</ul>
+<p>Stretching the loan by two years lowers the payment by roughly $148 a month but adds about $2,593 in interest. The longer loan is also where owners most often end up &ldquo;upside-down&rdquo; (owing more than the car is worth), because the car depreciates faster than a slow-amortizing loan is paid down.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>How long should my auto loan be?</h3>
-              <p>Shorter is cheaper. A common guideline is to finance a car for <strong>no more than 60 months</strong>. Terms of 72 or 84 months shrink the monthly payment but add a lot of interest, and you are likely to be "upside down" — owing more than the car is worth — for years.</p>
-              <h3>Does a trade-in reduce the sales tax I pay?</h3>
-              <p>In most U.S. states, yes: tax is charged on the new vehicle's price <em>minus</em> the trade-in allowance. A handful of states tax the full price. This calculator uses the more common price-minus-trade-in method.</p>
-              <h3>What APR can I expect on a car loan?</h3>
-              <p>Rate depends mostly on your credit score, the term, and whether the vehicle is new or used. Strong credit can mean single-digit rates on a new car; subprime borrowers may pay 15% or more. Getting pre-approved by a bank or credit union first gives you a benchmark to negotiate against.</p>
+<h2>Real-world practical application</h2>
+<p>Use it to put two financing offers side by side &mdash; say, 5.9% from a credit union versus 7.4% from the dealer &mdash; and see the dollar difference over the term, not just the rate gap. It also helps you test how much a larger down payment or a longer-lasting trade-in is really worth, and whether the dealer&rsquo;s &ldquo;add the extended warranty to the loan&rdquo; suggestion is as cheap per month as it sounds once it is financed for six years.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="debt-payoff.html">Debt Payoff Timeframe</a> — model paying the loan off faster.</li>
-                <li><a href="mortgage-calculator.html">Mortgage Calculator</a> — the same amortization math for a home.</li>
-                <li><a href="real-roi.html">Real ROI</a> — the opportunity cost of a big down payment vs. investing it.</li>
-              </ul>
+<h2>Limits worth knowing</h2>
+<p>The calculator assumes a simple-interest loan with equal monthly payments and does not model rebates that apply only to certain financing, negative equity rolled in from a previous car, or gap insurance. Because several fees and tax treatments vary by state, treat the output as a close estimate and confirm every line with the dealer&rsquo;s buyer&rsquo;s order.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>How long should a car loan be?</h3>
+<p>Many consumer-finance writers suggest keeping the term to 60 months or less so the loan is paid off while the car still has value. A common guideline is the &ldquo;20/4/10&rdquo; rule: 20% down, a loan of no more than four years, and total transportation costs under 10% of gross income.</p>
+<h3>Is it better to finance through the dealer or a bank?</h3>
+<p>Get a pre-approval from a bank or credit union first. Dealers sometimes beat it, especially with manufacturer promotional rates, and sometimes mark the rate up. Having a benchmark in hand lets you compare honestly.</p>
+<h3>Does a trade-in reduce sales tax?</h3>
+<p>In many states, yes: tax is charged only on the difference between the price and the trade-in value. Some states do not give this credit, so verify locally.</p>
+<h3>Why is my monthly payment higher than the advertised one?</h3>
+<p>Advertised payments often assume a large down payment, a long term and excellent credit, and they exclude tax and fees. Enter your real numbers to see the payment you would actually owe.</p>
+<h3>Can I pay a car loan off early?</h3>
+<p>Most auto loans allow it, but check for a prepayment penalty. The <a href="payoff-vs-interest.html">Payoff vs. Interest Calculator</a> shows how much interest an early payoff would avoid.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="payoff-vs-interest.html">Payoff vs. Interest Calculator</a> &mdash; whether to pay this loan off early.</li>
+<li><a href="debt-payoff.html">Debt Payoff Calculator</a> &mdash; the same payoff math for a revolving balance.</li>
+<li><a href="guide-how-much-house-can-i-afford.html">Guide: debt-to-income ratios explained</a> &mdash; how a car payment affects the mortgage you can get.</li>
+<li><a href="salary-converter.html">Salary to Hourly Converter</a> &mdash; what the car costs in hours of work.</li>
+</ul>
             </article>
 
           </main>
@@ -285,6 +333,8 @@ SalesTax = (Price − TradeIn) × taxRate</div></div>
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

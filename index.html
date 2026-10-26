@@ -8,14 +8,14 @@
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
   <title>Calcuvelo — Free Financial &amp; Economic Calculators</title>
-  <meta name="description" content="Sixteen free, privacy-friendly calculators for compound interest, mortgages, retirement, auto loans, debt payoff, debt consolidation, GIC ladders, 401(k) rollovers, mortgage affordability, inflation, present value, real ROI, salary conversion and the Rule of 72. Everything runs in your browser." />
+  <meta name="description" content="Twenty-one free, privacy-friendly calculators for mortgages, retirement, debt, Ontario take-home pay, RRSP vs. TFSA, CPP timing, OSAP and more. Everything runs in your browser." />
   <link rel="canonical" href="https://calcuvelo.com/" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Calcuvelo — Free Financial &amp; Economic Calculators" />
-  <meta property="og:description" content="Sixteen free, privacy-friendly calculators. Everything runs in your browser." />
+  <meta property="og:description" content="Twenty-one free, privacy-friendly calculators. Everything runs in your browser." />
   <meta property="og:url" content="https://calcuvelo.com/" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,9 +27,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
-  <script defer src="assets/header.js"></script>
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
+  <script defer src="assets/header.js?v=202610262"></script>
 
   <script type="application/ld+json">
   {
@@ -60,7 +60,12 @@
           { "@type": "ListItem", "position": 13, "name": "Payoff vs. Interest Calculator", "url": "https://calcuvelo.com/payoff-vs-interest.html" },
           { "@type": "ListItem", "position": 14, "name": "Mortgage Affordability Calculator", "url": "https://calcuvelo.com/mortgage-affordability.html" },
           { "@type": "ListItem", "position": 15, "name": "Roth 401(k) Split Distribution Stress Relief Calculator", "url": "https://calcuvelo.com/401k-split-distribution.html" },
-          { "@type": "ListItem", "position": 16, "name": "Debt Snowball and Emergency Fund Calculator", "url": "https://calcuvelo.com/debt-snowball.html" }
+          { "@type": "ListItem", "position": 16, "name": "Debt Snowball and Emergency Fund Calculator", "url": "https://calcuvelo.com/debt-snowball.html" },
+          { "@type": "ListItem", "position": 17, "name": "Ontario Take-Home Pay Calculator", "url": "https://calcuvelo.com/ontario-take-home-pay.html" },
+          { "@type": "ListItem", "position": 18, "name": "Mortgage Prepayment Penalty Calculator", "url": "https://calcuvelo.com/mortgage-prepayment-penalty.html" },
+          { "@type": "ListItem", "position": 19, "name": "RRSP vs. TFSA Calculator", "url": "https://calcuvelo.com/rrsp-vs-tfsa-calculator.html" },
+          { "@type": "ListItem", "position": 20, "name": "CPP Start Age Breakeven Calculator", "url": "https://calcuvelo.com/cpp-start-age-calculator.html" },
+          { "@type": "ListItem", "position": 21, "name": "OSAP Repayment Calculator", "url": "https://calcuvelo.com/osap-repayment-calculator.html" }
         ]
       }
     ]
@@ -108,12 +113,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
@@ -133,7 +148,7 @@
     <section class="hub-hero">
       <h1>Free financial &amp; economic calculators</h1>
       <p>
-        Sixteen focused tools for the numbers that matter — savings growth, mortgages, retirement, debt, inflation and more.
+        Twenty-one focused tools for the numbers that matter — savings growth, mortgages, retirement, debt, inflation and more.
         Every calculation runs entirely in your browser: nothing you type is uploaded, stored, or shared.
       </p>
       <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500">
@@ -188,16 +203,8 @@
             <span class="go">Open calculator →</span>
           </span>
         </a>
-        <a href="gic-ladder-optimizer.html" class="calc-card">
-          <span class="num">6</span>
-          <span>
-            <h3>GIC &amp; Cash Ladder Optimizer</h3>
-            <p>Compare a high-interest savings account against a GIC ladder on an after-tax, after-fee basis.</p>
-            <span class="go">Open calculator →</span>
-          </span>
-        </a>
         <a href="debt-consolidation.html" class="calc-card">
-          <span class="num">7</span>
+          <span class="num">6</span>
           <span>
             <h3>Debt Consolidation Calculator</h3>
             <p>A 0% balance-transfer card vs. a 401(k) loan — see total cost and payoff time side by side.</p>
@@ -205,7 +212,7 @@
           </span>
         </a>
         <a href="payoff-vs-interest.html" class="calc-card">
-          <span class="num">8</span>
+          <span class="num">7</span>
           <span>
             <h3>Payoff vs. Interest Calculator</h3>
             <p>Pay off your car loan today, or keep riding the payments and invest the cash instead?</p>
@@ -213,7 +220,7 @@
           </span>
         </a>
         <a href="mortgage-affordability.html" class="calc-card">
-          <span class="num">9</span>
+          <span class="num">8</span>
           <span>
             <h3>Mortgage Affordability Calculator</h3>
             <p>Check a home purchase against standard income and debt-to-income affordability guidelines.</p>
@@ -221,7 +228,7 @@
           </span>
         </a>
         <a href="401k-split-distribution.html" class="calc-card">
-          <span class="num">10</span>
+          <span class="num">9</span>
           <span>
             <h3>401(k) Split Distribution Calculator</h3>
             <p>Net proceeds from cashing out part of a 401(k) while rolling over the rest — and the cushion it buys you.</p>
@@ -229,10 +236,65 @@
           </span>
         </a>
         <a href="debt-snowball.html" class="calc-card">
-          <span class="num">11</span>
+          <span class="num">10</span>
           <span>
             <h3>Debt Snowball &amp; Emergency Fund Calculator</h3>
             <p>Simulate paying off several debts smallest-first while building an emergency fund.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ---------- CANADIAN ---------- -->
+    <section>
+      <h2 class="hub-section-title">Canadian calculators</h2>
+      <div class="calc-grid mt-3">
+        <a href="ontario-take-home-pay.html" class="calc-card">
+          <span class="num">11</span>
+          <span>
+            <h3>Ontario Take-Home Pay Calculator</h3>
+            <p>Your salary after CPP, EI, federal tax and Ontario tax, surtax and Health Premium.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="mortgage-prepayment-penalty.html" class="calc-card">
+          <span class="num">12</span>
+          <span>
+            <h3>Mortgage Prepayment Penalty Calculator</h3>
+            <p>Three months&rsquo; interest versus the IRD &mdash; and whether breaking your mortgage pays off.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="rrsp-vs-tfsa-calculator.html" class="calc-card">
+          <span class="num">13</span>
+          <span>
+            <h3>RRSP vs. TFSA Calculator</h3>
+            <p>Which account first? Compare them using your tax rate now and in retirement.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="cpp-start-age-calculator.html" class="calc-card">
+          <span class="num">14</span>
+          <span>
+            <h3>CPP Start Age Breakeven Calculator</h3>
+            <p>Take CPP at 60, 65 or 70? Monthly amounts, cumulative totals and breakeven ages.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="osap-repayment-calculator.html" class="calc-card">
+          <span class="num">15</span>
+          <span>
+            <h3>OSAP Repayment Calculator</h3>
+            <p>Standard OSAP payments, grace-period interest and the Repayment Assistance Plan.</p>
+            <span class="go">Open calculator →</span>
+          </span>
+        </a>
+        <a href="gic-ladder-optimizer.html" class="calc-card">
+          <span class="num">16</span>
+          <span>
+            <h3>GIC &amp; Cash Ladder Optimizer</h3>
+            <p>Compare a high-interest savings account against a GIC ladder on an after-tax, after-fee basis.</p>
             <span class="go">Open calculator →</span>
           </span>
         </a>
@@ -244,7 +306,7 @@
       <h2 class="hub-section-title">Economic calculators</h2>
       <div class="calc-grid mt-3">
         <a href="inflation-calculator.html" class="calc-card">
-          <span class="num">12</span>
+          <span class="num">17</span>
           <span>
             <h3>Inflation Calculator</h3>
             <p>How much a fixed sum of money will be worth after years of rising prices.</p>
@@ -252,7 +314,7 @@
           </span>
         </a>
         <a href="present-value.html" class="calc-card">
-          <span class="num">13</span>
+          <span class="num">18</span>
           <span>
             <h3>Present &amp; Future Value</h3>
             <p>The time value of money — solve for present or future value, with optional recurring payments.</p>
@@ -260,7 +322,7 @@
           </span>
         </a>
         <a href="real-roi.html" class="calc-card">
-          <span class="num">14</span>
+          <span class="num">19</span>
           <span>
             <h3>Real ROI Calculator</h3>
             <p>Your true investment return after capital-gains tax and the drag of inflation.</p>
@@ -268,7 +330,7 @@
           </span>
         </a>
         <a href="salary-converter.html" class="calc-card">
-          <span class="num">15</span>
+          <span class="num">20</span>
           <span>
             <h3>Salary to Hourly Converter</h3>
             <p>Convert an annual salary to hourly, weekly and monthly pay — or work backwards from a rate.</p>
@@ -276,7 +338,7 @@
           </span>
         </a>
         <a href="rule-of-72.html" class="calc-card">
-          <span class="num">16</span>
+          <span class="num">21</span>
           <span>
             <h3>Rule of 72 Calculator</h3>
             <p>Estimate how long money, an economy or a population takes to double at a steady growth rate.</p>
@@ -286,14 +348,54 @@
       </div>
     </section>
 
+    <!-- ---------- GUIDES ---------- -->
+    <section class="mt-10">
+      <h2 class="hub-section-title">Guides</h2>
+      <div class="calc-grid mt-3">
+        <a href="guide-debt-snowball-vs-avalanche.html" class="calc-card">
+          <span class="num"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h12"/></svg></span>
+          <span>
+            <h3>Debt snowball vs. debt avalanche: which pays off faster?</h3>
+            <p>One set of three debts, paid two ways, compared in months and dollars &mdash; plus the case where the order matters a lot.</p>
+            <span class="go">Read the guide &rarr;</span>
+          </span>
+        </a>
+        <a href="guide-gic-ladder-canada.html" class="calc-card">
+          <span class="num"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h12"/></svg></span>
+          <span>
+            <h3>How a GIC ladder works in Canada, with a five-rung example</h3>
+            <p>A $30,000 ladder built rung by rung, with the interest arithmetic, the price of flexibility and the CDIC limit.</p>
+            <span class="go">Read the guide &rarr;</span>
+          </span>
+        </a>
+        <a href="guide-how-much-house-can-i-afford.html" class="calc-card">
+          <span class="num"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h12"/></svg></span>
+          <span>
+            <h3>How much house can I afford? Debt-to-income ratios explained</h3>
+            <p>Three buyers with the same income and different debts, and the home-price ceiling each one reaches.</p>
+            <span class="go">Read the guide &rarr;</span>
+          </span>
+        </a>
+        <a href="guide-start-early-vs-contribute-more.html" class="calc-card">
+          <span class="num"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h12"/></svg></span>
+          <span>
+            <h3>Start early or contribute more later? What the compounding math says</h3>
+            <p>Emma invests for ten years and stops. Liam invests for thirty. The result depends on the rate, and on whether Liam can contribute more.</p>
+            <span class="go">Read the guide &rarr;</span>
+          </span>
+        </a>
+      </div>
+      <p class="mt-3 text-sm"><a href="guides.html" class="font-medium text-indigo-600 hover:underline">All guides &rarr;</a></p>
+    </section>
+
     <!-- ---------- SUPPORTING CONTENT ---------- -->
     <section class="card seo prose prose-slate mt-12 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3">
       <h2>About Calcuvelo</h2>
       <p>
         Calcuvelo is an independent, ad-supported project that publishes free financial and economic calculators.
-        The tools are split into two groups. The <strong>financial calculators</strong> handle the everyday money
+        The tools are split into three groups. The <strong>financial calculators</strong> handle the everyday money
         decisions most households face — growing savings, comparing mortgages, projecting a 401(k), financing a car,
-        paying down debt, and optimizing a GIC or cash ladder. The <strong>economic calculators</strong> deal with the
+        and paying down debt. The <strong>Canadian calculators</strong> apply Canadian rules &mdash; Ontario take-home pay, mortgage prepayment penalties, RRSP versus TFSA, CPP start age, OSAP repayment and GIC ladders. The <strong>economic calculators</strong> deal with the
         forces that shape wealth over the long run — inflation, the time value of money, real (after-tax,
         after-inflation) returns, converting salaries to hourly wages, and the Rule of 72.
       </p>
@@ -330,6 +432,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

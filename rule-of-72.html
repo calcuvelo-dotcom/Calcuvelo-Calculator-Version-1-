@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Rule of 72 Calculator — How Long to Double — Calcuvelo</title>
-  <meta name="description" content="Free Rule of 72 calculator. Estimate how many years it takes an investment, economy or population to double at a given growth rate, with an exact figure and a chart." />
+  <title>Rule of 72 Calculator: How Long Until Money Doubles — Calcuvelo</title>
+  <meta name="description" content="Estimate how many years it takes money, prices or an economy to double with the Rule of 72, compare it with the exact answer, and see a doubling chart." />
   <link rel="canonical" href="https://calcuvelo.com/rule-of-72.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Rule of 72 Calculator — How Long to Double — Calcuvelo" />
-  <meta property="og:description" content="Estimate how long money, an economy or a population takes to double at a steady growth rate." />
+  <meta property="og:title" content="Rule of 72 Calculator: How Long Until Money Doubles — Calcuvelo" />
+  <meta property="og:description" content="Estimate how many years it takes money, prices or an economy to double with the Rule of 72, compare it with the exact answer, and see a doubling chart." />
   <meta property="og:url" content="https://calcuvelo.com/rule-of-72.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/rule-of-72.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How accurate is the Rule of 72?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Very accurate for the growth rates people use most. Between about 6% and 10%, the Rule of 72 is usually within a few weeks to a couple of months of the exact doubling time. It drifts a little at very low or very high rates, which is why this calculator also shows the exact figure." }
+            "name": "Why 72 and not 69 or 70?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The exact figure for small rates is about 69.3. Seventy-two is slightly higher but divides cleanly into many common rates, and it is more accurate for rates in the 6–10% range most investors care about. Seventy is a middle-ground alternative."
+            }
           },
           {
             "@type": "Question",
-            "name": "When should I use 70 or 69.3 instead of 72?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The mathematically exact base for continuous compounding is 100 x ln(2), about 69.3. Use 69.3 or 70 for continuously compounded rates or for lower rates where you want more precision. 72 stays popular because it divides cleanly by 2, 3, 4, 6, 8, 9 and 12 for quick mental math." }
+            "name": "Does the rule work for money I owe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, in reverse: debt at 18% APR left alone doubles in about four years. That is a quick way to feel how dangerous a high-interest balance becomes."
+            }
           },
           {
             "@type": "Question",
-            "name": "Can the Rule of 72 be used for inflation?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Divide 72 by the inflation rate to estimate how many years it takes for prices to double — equivalently, for the purchasing power of a fixed sum of money to be cut in half. At 3% inflation that is about 24 years." }
+            "name": "Can I use it for GDP or population growth?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. An economy growing 3% a year doubles in roughly 24 years; a population growing 1% takes about 72. The math is the same for anything that compounds."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I find the rate needed to double in a given number of years?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Divide 72 by the number of years. To double in 12 years you need about 6%; in 8 years, about 9%. The exact figure is 21/years − 1."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it work with monthly contributions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It describes a single lump sum compounding. For a plan with regular deposits, use the Compound Interest Calculator."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="rule72()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Rule of 72 Calculator</h1>
               <p class="calc-sub">How long a portfolio, economy, or population takes to double at a steady growth rate.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -219,45 +259,57 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Rule of 72 Calculator?</h2>
-              <p>The Rule of 72 Calculator applies the classic mental-math shortcut &mdash; divide 72 by a growth rate to estimate how many years it takes money, a population or an economy to double &mdash; alongside the mathematically exact figure for comparison.</p>
+<h2>What is the Rule of 72 Calculator?</h2>
+<p>Here is a trick bankers have used for centuries: divide 72 by an annual growth rate and you get, roughly, the number of years it takes something to double. Earn 8% and you double in about nine years; inflate at 4% and prices double in about eighteen. This calculator runs that shortcut next to the exact answer, so you can see how good the approximation is and how much a given rate compounds over a longer horizon.</p>
+<p>It is as much a teaching aid as a calculator: it lets you build the intuition that growth rates are not &ldquo;small numbers&rdquo; when they run for decades.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter an annual growth rate</strong> — an investment return, GDP growth, a population growth rate, or an inflation rate.</li>
-                <li><strong>Pick a rule variant.</strong> 72 is the classic choice; 70 and 69.3 are slightly more accurate for low or continuously compounded rates.</li>
-                <li><strong>Optionally set a starting value and a time horizon</strong> to see a real projection.</li>
-                <li><strong>Read the results:</strong> the approximate doubling time from the rule, the exact doubling time, how many times the amount doubles over your horizon, and the projected ending value. The chart shows the exponential curve.</li>
-              </ol>
+<h2>Using it</h2>
+<ul>
+<li><strong>Growth rate.</strong> An investment return, an inflation rate, an economy&rsquo;s GDP growth, a population growth rate, a rate of interest on debt &mdash; anything that compounds.</li>
+<li><strong>Rule number.</strong> Defaults to 72. Try 69.3 (the continuous-compounding version) or 70 (a common alternative) to see how they compare with the exact answer.</li>
+<li><strong>Starting value and horizon.</strong> Optional context: see what an amount grows to over a chosen number of years, and how many doublings that represents.</li>
+</ul>
 
-              <h2>How does the underlying math work?</h2>
-              <p>The Rule of 72 is a shortcut for the doubling time of anything that grows at a compound rate:</p>
-              <div class="not-prose my-4"><div class="formula">yearsToDouble ≈ 72 ÷ ratePercent</div></div>
-              <p>The exact answer comes from solving (1 + r)ᵗ = 2 for t:</p>
-              <div class="not-prose my-4"><div class="formula">yearsToDouble = ln(2) ÷ ln(1 + r)</div></div>
-              <ul>
-                <li><strong>ratePercent</strong> — the growth rate written as a number, e.g. 8 for 8%</li>
-                <li><strong>r</strong> — the same rate as a decimal, e.g. 0.08</li>
-              </ul>
-              <p>Related shortcuts: divide <strong>114</strong> by the rate to estimate a tripling, and <strong>144</strong> for a quadrupling.</p>
+<h2>How does the underlying math work?</h2>
+<p>The exact doubling time solves (1 + r)<sup>t</sup> = 2 for t:</p><div class="not-prose my-4"><div class="formula">t = ln 2 &divide; ln(1 + r)</div></div>
+<p>For small r, ln(1 + r) is close to r, and ln 2 is about 0.693, so t &asymp; 69.3 &divide; (rate in percent). The number 72 is a convenient nudge upward: it divides evenly by 2, 3, 4, 6, 8, 9 and 12, which makes mental arithmetic easy, and it happens to be the most accurate for rates around 8%. At very low rates 70 is closer; at very high rates, the rule loses precision.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>It is a quick way to sanity-check an investment pitch promising a certain annual return, to compare how fast two different growth rates compound over a decade, and to teach the intuition behind compounding without running a full year-by-year projection.</p>
+<h2>Worked example: how good is the shortcut?</h2>
+<table>
+<thead><tr><th>Rate</th><th>Rule of 72</th><th>Exact</th></tr></thead>
+<tbody>
+<tr><td>2%</td><td>36 years</td><td>35.0 years</td></tr>
+<tr><td>6%</td><td>12 years</td><td>11.9 years</td></tr>
+<tr><td>8%</td><td>9 years</td><td>9.01 years</td></tr>
+<tr><td>12%</td><td>6 years</td><td>6.12 years</td></tr>
+</tbody>
+</table>
+<p>At 8%, $10,000 over 30 years becomes about <strong>$100,627</strong> &mdash; roughly three and a third doublings (30 &divide; 9.01), a tenfold increase. At 6% the same 30 years yields about $57,435, little more than five times the start. Two points of return, in other words, turn a 5.7&times; outcome into a 10&times; one.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>How accurate is the Rule of 72?</h3>
-              <p>Between roughly 6% and 10% — the range most investors care about — it is usually within a few weeks to a couple of months of the exact doubling time. It drifts slightly at very low or very high rates, which is why the exact figure is shown alongside it.</p>
-              <h3>When should I use 70 or 69.3 instead of 72?</h3>
-              <p>The mathematically exact base for continuous compounding is <strong>100 × ln(2) ≈ 69.3</strong>. Use 69.3 or 70 for continuously compounded or lower rates. 72 endures because it divides evenly by 2, 3, 4, 6, 8, 9 and 12, which makes the mental arithmetic easy.</p>
-              <h3>Can the Rule of 72 be used for inflation?</h3>
-              <p>Yes. Divide 72 by the inflation rate to estimate how long until prices double — equivalently, until a fixed sum of money loses half its purchasing power. At 3% inflation that is about 24 years.</p>
+<h2>Real-world practical application</h2>
+<p>The rule is best used to sanity-check claims and plans. A pitch promising 12% a year implies money doubling in six years &mdash; ask yourself whether that is credible. Run it backwards: to double in ten years you need about 7.2% a year. Apply it to fees: moving from a 6% net return to a 7% one shortens the doubling time from 12 years to about 10.3, so a one-point fee costs you more than a year and a half per doubling. And apply it to cost of living: at 3% inflation, prices double in about 24 years, which is why a retirement plan must outpace it.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="compound-interest.html">Compound Interest</a> — the full growth curve with contributions.</li>
-                <li><a href="inflation-calculator.html">Inflation Calculator</a> — apply the doubling idea to rising prices.</li>
-                <li><a href="retirement-calculator.html">Retirement / 401(k)</a> — see how many doublings fit before you retire.</li>
-              </ul>
+<h2>Where it breaks down</h2>
+<p>The Rule of 72 assumes a single steady compounding rate and no deposits or withdrawals, so it does not handle regular contributions. It becomes less accurate above about 20% (an interest rate on a payday-style loan, for example), where the exact formula should be used instead. It also says nothing about risk: a rate of 8% is a long-run average, not a promise that your money doubles on schedule.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why 72 and not 69 or 70?</h3>
+<p>The exact figure for small rates is about 69.3. Seventy-two is slightly higher but divides cleanly into many common rates, and it is more accurate for rates in the 6&ndash;10% range most investors care about. Seventy is a middle-ground alternative.</p>
+<h3>Does the rule work for money I owe?</h3>
+<p>Yes, in reverse: debt at 18% APR left alone doubles in about four years. That is a quick way to feel how dangerous a high-interest balance becomes.</p>
+<h3>Can I use it for GDP or population growth?</h3>
+<p>Yes. An economy growing 3% a year doubles in roughly 24 years; a population growing 1% takes about 72. The math is the same for anything that compounds.</p>
+<h3>How do I find the rate needed to double in a given number of years?</h3>
+<p>Divide 72 by the number of years. To double in 12 years you need about 6%; in 8 years, about 9%. The exact figure is 2<sup>1/years</sup> &minus; 1.</p>
+<h3>Does it work with monthly contributions?</h3>
+<p>No. It describes a single lump sum compounding. For a plan with regular deposits, use the <a href="compound-interest.html">Compound Interest Calculator</a>.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="guide-start-early-vs-contribute-more.html">Guide: start early or contribute more later?</a> &mdash; doubling time explains why the first decade counts.</li>
+<li><a href="compound-interest.html">Compound Interest Calculator</a> &mdash; add regular deposits to the picture.</li>
+<li><a href="inflation-calculator.html">Inflation Calculator</a> &mdash; when will prices double?</li>
+<li><a href="debt-payoff.html">Debt Payoff Calculator</a> &mdash; the same compounding working against you.</li>
+</ul>
             </article>
 
           </main>
@@ -271,6 +323,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

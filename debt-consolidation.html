@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>High-Interest Debt Consolidation Calculator — Calcuvelo</title>
-  <meta name="description" content="Compare a 0% intro-APR balance-transfer card against a 401(k) loan for consolidating high-interest credit card debt. See total cost, fees and payoff timelines side by side." />
+  <title>Debt Consolidation: 0% Card vs. 401(k) Loan — Calcuvelo</title>
+  <meta name="description" content="Compare a 0% balance-transfer card with a 401(k) loan for paying off credit card debt, with fees, promo expiry and total cost side by side." />
   <link rel="canonical" href="https://calcuvelo.com/debt-consolidation.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="High-Interest Debt Consolidation Calculator — Calcuvelo" />
-  <meta property="og:description" content="0% balance-transfer card vs. a 401(k) loan — compare total cost and payoff time." />
+  <meta property="og:title" content="Debt Consolidation: 0% Card vs. 401(k) Loan — Calcuvelo" />
+  <meta property="og:description" content="Compare a 0% balance-transfer card with a 401(k) loan for paying off credit card debt, with fees, promo expiry and total cost side by side." />
   <meta property="og:url" content="https://calcuvelo.com/debt-consolidation.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/debt-consolidation.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Will opening a balance-transfer card hurt my credit score?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A new account and credit inquiry typically dock a score by roughly 10-20 points in the short term, mostly from the hard inquiry and a lower average account age. Scores usually recover within several months as you make on-time payments and the balance drops." }
+            "name": "Is a balance-transfer fee worth paying?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Usually, if you can clear the balance during the promo. In the example above, a $360 fee avoided over $1,000 of interest on a 24-month alternative. It stops being worth it if you cannot finish in time, because the remaining balance returns to a high APR."
+            }
           },
           {
             "@type": "Question",
-            "name": "What happens if I don't pay off the card before the 0% period ends?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Any balance left when the promotional window expires starts accruing interest at the card's regular go-to APR, which is often as high as the debt you were trying to escape. Set the payoff period at or below the promo length to avoid this." }
+            "name": "Will a balance transfer hurt my credit score?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A new account and a hard inquiry typically cause a small, temporary dip, often cited as around 10–20 points, and a higher card limit can improve your utilization ratio over time. The effect varies by credit profile."
+            }
           },
           {
             "@type": "Question",
-            "name": "Is a 401(k) loan risk-free since I'm borrowing from myself?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. The money stops growing tax-deferred while it's out, and most plans require the full balance to be repaid quickly if you leave or lose your job — often within 60-90 days. An unpaid balance is then treated as a taxable distribution, plus a 10% early-withdrawal penalty if you're under 59½." }
+            "name": "What happens to a 401(k) loan if I leave my job?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The outstanding balance usually becomes due in full by a set deadline (often your next tax filing date under current rules, though plans vary). If you cannot repay, the unpaid amount is treated as a distribution, which is taxed and may carry a penalty."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the interest I pay on a 401(k) loan really “paid to myself”?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, it is credited to your account, but it is not extra return. The dollars you borrowed are not invested in the market while they are out, so you give up that growth, and you repay the loan with after-tax money."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there other options for consolidating?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes: a fixed-rate personal loan, a home-equity loan (which puts your house at risk), or a nonprofit debt-management plan. This calculator compares only the two options named; it does not rank every alternative."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
@@ -142,6 +181,7 @@
             <section x-data="debtConsolidation()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">High-Interest Debt Consolidation Calculator</h1>
               <p class="calc-sub">A 0% intro-APR balance-transfer card vs. a 401(k) loan — which actually costs less?</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -261,29 +301,55 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the High-Interest Debt Consolidation Calculator?</h2>
-              <p>This calculator compares two common ways to escape a high-APR credit-card balance: transferring it to a new card with a 0% introductory APR for a limited promotional window, or borrowing against a 401(k) to pay it off in one shot. It lines up the total cost, fees, and payoff timeline for both so you can see which one is actually cheaper for your numbers — not just which one feels simpler.</p>
+<h2>What is the High-Interest Debt Consolidation Calculator?</h2>
+<p>When a credit card balance has outgrown your monthly budget, two escape routes come up quickly: move the balance to a card that charges 0% for a while, or borrow from your own 401(k) and repay yourself. They feel similar &mdash; &ldquo;borrow cheaply to kill an expensive debt&rdquo; &mdash; but they cost very different things. One costs a fee and a credit-score dip; the other costs future growth and exposes you to a repayment cliff if you change jobs.</p>
+<p>This calculator puts the measurable costs of each route side by side, so the decision rests on numbers rather than on which option sounds friendlier.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>For the balance-transfer card, the calculator adds the one-time transfer fee to the balance, then simulates equal monthly payments across your chosen payoff period. If that period is within the 0% promo window, no interest accrues at all; any months beyond the promo window accrue interest at your current card's APR, since most issuers send an unpaid transferred balance back to a standard rate. For the 401(k) loan, it uses the standard installment-loan formula — the same one behind the site's <a href="auto-loan.html">Auto Loan Calculator</a> — to amortize the loan amount over your chosen term at the rate your plan charges, then adds a one-time origination fee.</p>
+<h2>Filling it in</h2>
+<ul>
+<li><strong>Debt, current APR, desired payoff period.</strong> The balance you want to eliminate and how many months you would like to take. The APR matters because it is what a transferred balance reverts to when the promo ends.</li>
+<li><strong>Promo window and transfer fee.</strong> Typical 0% offers run 12&ndash;21 months with a 3&ndash;5% fee on the amount moved.</li>
+<li><strong>401(k) loan rate, term and origination fee.</strong> Plans set these; the rate is often prime plus one point, and the loan is repaid with interest into your own account. Most plans cap loans at the lesser of $50,000 or half your vested balance.</li>
+<li><strong>Expected credit-score impact.</strong> A user-entered estimate (the tool displays it, it does not calculate it) for the hard inquiry and new account.</li>
+</ul>
 
-              <h2>Real-world practical application</h2>
-              <p>People facing a large card balance use this to decide between two options that feel similar ("borrow to pay off debt") but carry very different risks: a 0% card risks a go-to APR if the balance isn't cleared in time and dings your credit score with a new account, while a 401(k) loan avoids a credit check entirely but must usually be repaid in full within 60&ndash;90 days of leaving your job or it becomes a taxable, penalized distribution. Running both scenarios side by side turns an emotional decision into a numbers-first one.</p>
+<h2>How does the underlying math work?</h2>
+<p><strong>Card:</strong> the fee is added to the balance, and the total is paid in equal monthly amounts across your chosen payoff period. Months inside the promo window accrue no interest; any months after it accrue interest on the remaining balance at your current APR.</p>
+<p><strong>401(k) loan:</strong> a standard installment payment, where <strong>L</strong> is the loan, <strong>i</strong> the monthly rate and <strong>n</strong> the term in months:</p><div class="not-prose my-4"><div class="formula">payment = L &times; i &times; (1 + i)<sup>n</sup> &divide; [ (1 + i)<sup>n</sup> &minus; 1 ]</div></div>
+<p>The origination fee is added to the total cost. The interest on a 401(k) loan goes into your own account, so in a literal sense it is not &ldquo;lost&rdquo;; the real cost is the investment growth the borrowed money does not earn while it is out.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>Will opening a balance-transfer card hurt my credit score?</h3>
-              <p>A new account and credit inquiry typically dock a score by roughly 10&ndash;20 points in the short term, mostly from the hard inquiry and a lower average account age. Scores usually recover within several months as you make on-time payments and the balance drops.</p>
-              <h3>What happens if I don't pay off the card before the 0% period ends?</h3>
-              <p>Any balance left when the promotional window expires starts accruing interest at the card's regular go-to APR, which is often as high as the debt you were trying to escape. Set the payoff period at or below the promo length to avoid this.</p>
-              <h3>Is a 401(k) loan risk-free since I'm borrowing from myself?</h3>
-              <p>No. The money stops growing tax-deferred while it's out, and most plans require the full balance to be repaid quickly if you leave or lose your job &mdash; often within 60&ndash;90 days. An unpaid balance is then treated as a taxable distribution, plus a 10% early-withdrawal penalty if you're under 59&frac12;.</p>
+<h2>Worked example: $12,000 at 24%</h2>
+<p>Take a $12,000 balance at 24% APR, a 3% transfer fee, an 18-month promo, and a 401(k) loan at 8.5% over 24 months with a 1% origination fee.</p>
+<ul>
+<li><strong>Card, paid off in 12 months:</strong> fee $360, payment about $1,030, interest <strong>$0</strong>, total about <strong>$12,360</strong>.</li>
+<li><strong>401(k) loan:</strong> payment about $545, interest about $1,091 (paid to yourself), fee $120, total about <strong>$13,211</strong>.</li>
+</ul>
+<p>On pure cost, the card wins by about $851 &mdash; but only because the payoff finishes inside the promo. Now stretch the card payoff to 30 months: the payment drops to about $412, but months 19&ndash;30 accrue 24% interest, adding about $744, and the card&rsquo;s total rises to about $13,104. The advantage over the 401(k) loan shrinks to roughly $107, and then credit-score and job-risk factors decide it.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="debt-payoff.html">Debt Payoff Calculator</a> — the payoff math for a single fixed-rate balance.</li>
-                <li><a href="debt-snowball.html">Debt Snowball &amp; Emergency Fund Calculator</a> — a plan for paying off several debts at once.</li>
-                <li><a href="retirement-calculator.html">Retirement / 401(k) Calculator</a> — see the long-run cost of pausing contributions.</li>
-              </ul>
+<h2>Real-world practical application</h2>
+<p>The tool is most useful as a reality check on the promo: can you actually afford the monthly amount that clears the balance in time? If $1,030 a month is out of reach, the 0% card is a smaller win than the ad suggests, and a longer-term fixed-rate personal loan may be a better comparison to run elsewhere. It is equally useful for the 401(k) route: the repayment is a fixed obligation that continues, often within weeks, if you leave your employer, so a plan that assumes a stable job should say so out loud.</p>
+
+<h2>What the numbers cannot tell you</h2>
+<p>Neither option fixes the habit that created the balance; both will feel like a clean slate, and a card can fill up again. The 401(k) route has an opportunity cost the page cannot price: if the market rises sharply while your money is out of it, you miss that growth. Interest on a 401(k) loan is not tax-deductible, and an unpaid balance after a job change is treated as a taxable distribution, plus a 10% penalty if you are under 59&frac12;. Treat the comparison as one input and talk to a nonprofit credit counselor if the balance is large.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is a balance-transfer fee worth paying?</h3>
+<p>Usually, if you can clear the balance during the promo. In the example above, a $360 fee avoided over $1,000 of interest on a 24-month alternative. It stops being worth it if you cannot finish in time, because the remaining balance returns to a high APR.</p>
+<h3>Will a balance transfer hurt my credit score?</h3>
+<p>A new account and a hard inquiry typically cause a small, temporary dip, often cited as around 10&ndash;20 points, and a higher card limit can improve your utilization ratio over time. The effect varies by credit profile.</p>
+<h3>What happens to a 401(k) loan if I leave my job?</h3>
+<p>The outstanding balance usually becomes due in full by a set deadline (often your next tax filing date under current rules, though plans vary). If you cannot repay, the unpaid amount is treated as a distribution, which is taxed and may carry a penalty.</p>
+<h3>Is the interest I pay on a 401(k) loan really &ldquo;paid to myself&rdquo;?</h3>
+<p>Yes, it is credited to your account, but it is not extra return. The dollars you borrowed are not invested in the market while they are out, so you give up that growth, and you repay the loan with after-tax money.</p>
+<h3>Are there other options for consolidating?</h3>
+<p>Yes: a fixed-rate personal loan, a home-equity loan (which puts your house at risk), or a nonprofit debt-management plan. This calculator compares only the two options named; it does not rank every alternative.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="debt-payoff.html">Debt Payoff Calculator</a> &mdash; the cost of leaving the balance where it is.</li>
+<li><a href="guide-debt-snowball-vs-avalanche.html">Guide: debt snowball vs. avalanche</a> &mdash; a payoff strategy that needs no new loan.</li>
+<li><a href="401k-split-distribution.html">401(k) Split Distribution Calculator</a> &mdash; the taxable cost of cashing out instead.</li>
+<li><a href="retirement-calculator.html">Retirement / 401(k) Calculator</a> &mdash; what the borrowed money would have grown to.</li>
+</ul>
             </article>
 
           </main>
@@ -297,6 +363,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

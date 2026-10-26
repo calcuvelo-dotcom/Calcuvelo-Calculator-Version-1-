@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Mortgage Calculator with Amortization — Calcuvelo</title>
-  <meta name="description" content="Free mortgage calculator. Estimate your monthly principal &amp; interest payment, total interest over the life of the loan, and see a principal-vs-interest breakdown chart." />
+  <title>Mortgage Calculator: Payment, Interest &amp; Schedule — Calcuvelo</title>
+  <meta name="description" content="Estimate your monthly mortgage payment with tax, insurance and HOA, see lifetime interest, and compare 15- and 30-year loans year by year." />
   <link rel="canonical" href="https://calcuvelo.com/mortgage-calculator.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Mortgage Calculator with Amortization — Calcuvelo" />
-  <meta property="og:description" content="Estimate your monthly payment and total interest, with a principal-vs-interest breakdown chart." />
+  <meta property="og:title" content="Mortgage Calculator: Payment, Interest &amp; Schedule — Calcuvelo" />
+  <meta property="og:description" content="Estimate your monthly mortgage payment with tax, insurance and HOA, see lifetime interest, and compare 15- and 30-year loans year by year." />
   <meta property="og:url" content="https://calcuvelo.com/mortgage-calculator.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/mortgage-calculator.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How much of a down payment do I need?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A 20% down payment lets you avoid private mortgage insurance (PMI) on a conventional loan. Conventional loans can go as low as 3-5% down, and FHA loans as low as 3.5%, but a smaller down payment means a larger loan, PMI, and more interest paid overall." }
+            "name": "Why is so little of my early payment going to principal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Interest is charged on the remaining balance, and the balance is largest at the start. On the $320,000 loan above, interest consumes about 86% of the first payment. The split gradually flips over the life of the loan, with the crossover point around year 19 for a 30-year mortgage at this rate."
+            }
           },
           {
             "@type": "Question",
-            "name": "What is included in my monthly mortgage payment?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Lenders call it PITI: Principal, Interest, property Taxes and homeowners Insurance, often collected together in an escrow account. HOA dues and, if your down payment is under 20%, PMI are additional. This calculator shows principal and interest plus optional tax, insurance and HOA lines." }
+            "name": "Is a 15-year mortgage always better than a 30-year?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It saves a great deal of interest, but it demands a larger fixed payment and leaves less room for emergencies. Some borrowers take the 30-year loan for flexibility and make extra principal payments when they can, which captures part of the savings without the obligation."
+            }
           },
           {
             "@type": "Question",
-            "name": "Should I choose a 15-year or 30-year mortgage?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A 15-year loan has a higher monthly payment but a lower rate and dramatically less total interest. A 30-year loan has a lower, more flexible payment but costs far more over time. Many borrowers take a 30-year loan and make extra principal payments when they can." }
+            "name": "Does this include PMI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. If you put down less than 20% on a conventional loan, expect to pay PMI until you reach about 20% equity. Add a rough monthly estimate to the all-in figure shown here."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should my payment include property tax and insurance?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For budgeting, yes. Lenders usually collect them through escrow, so your actual monthly bill will include them, and the all-in figure is the one to compare with your income."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does one extra payment a year really save?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Quite a lot on a long loan. On the $320,000 example, one additional principal-only payment a year shortens the loan by about five and a half years and saves roughly $89,000 in interest, because every extra dollar stops accruing interest for the remaining decades."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -144,6 +183,7 @@
             <section x-data="mortgage()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Mortgage Calculator with Amortization</h1>
               <p class="calc-sub">Estimate your monthly payment and how much of the loan goes to interest.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -235,46 +275,53 @@
 
             <!-- ================= SEO CONTENT ================= -->
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Mortgage Calculator?</h2>
-              <p>The Mortgage Calculator estimates your monthly principal-and-interest payment and the total interest you will pay over the life of the loan from the home price, down payment, rate and term you enter. With the optional fields it also builds a realistic "all-in" monthly cost once property tax, homeowners insurance and HOA dues are added on top.</p>
+<h2>What is the Mortgage Calculator?</h2>
+<p>A mortgage payment looks like one number on a lender&rsquo;s quote, but it is really three or four numbers added together: the principal and interest on the loan, a monthly share of your property tax, a monthly share of homeowners insurance, and any HOA dues. This calculator builds all of them from the home price, down payment, rate and term, and then shows what the loan will cost over its life.</p>
+<p>It is aimed at the stage between &ldquo;browsing listings&rdquo; and &ldquo;talking to a lender,&rdquo; when you want to know whether a $400,000 house means a $2,000 payment or a $2,800 one. (If your real question is whether you can <em>afford</em> it, the <a href="mortgage-affordability.html">Mortgage Affordability Calculator</a> checks the payment against your income.)</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter the home price</strong> you are considering.</li>
-                <li><strong>Set your down payment</strong> as a percentage. The helper text shows the dollar amount and the resulting loan size.</li>
-                <li><strong>Enter the interest rate</strong> your lender quoted and pick a <strong>loan term</strong>.</li>
-                <li><strong>Add property tax, insurance and HOA</strong> if you want a full "all-in" monthly figure.</li>
-                <li><strong>Review the results.</strong> "Payment (P&amp;I)" is principal and interest only; "Monthly all-in" adds taxes, insurance and HOA. The doughnut chart shows how much of every dollar you repay over the life of the loan is principal versus interest.</li>
-              </ol>
+<h2>Filling it in</h2>
+<ul>
+<li><strong>Home price and down payment %.</strong> Putting down less than 20% usually adds private mortgage insurance (PMI), which this calculator does not model; budget roughly 0.3&ndash;1.5% of the loan per year on top.</li>
+<li><strong>Interest rate and term.</strong> Use the rate from an actual quote, not an advertised &ldquo;as low as&rdquo; rate, which often assumes excellent credit and discount points. Shorter terms normally carry lower rates, so compare 15- and 30-year quotes separately.</li>
+<li><strong>Property tax %.</strong> Your county&rsquo;s effective rate, often between 0.5% and 2.5% of value a year. The listing or the county assessor&rsquo;s site will have the last bill.</li>
+<li><strong>Insurance and HOA.</strong> Annual premium and monthly dues. Insurance quotes vary enormously by region, so get a real number if you can.</li>
+</ul>
 
-              <h2>How does the underlying math work?</h2>
-              <p>The monthly principal-and-interest payment comes from the standard amortizing-loan formula:</p>
-              <div class="not-prose my-4"><div class="formula">M = L × [ i (1 + i)ⁿ ] ÷ [ (1 + i)ⁿ − 1 ]</div></div>
-              <ul>
-                <li><strong>M</strong> — monthly principal &amp; interest payment</li>
-                <li><strong>L</strong> — loan amount = home price − down payment</li>
-                <li><strong>i</strong> — monthly interest rate = annual rate ÷ 12</li>
-                <li><strong>n</strong> — number of payments = term in years × 12</li>
-              </ul>
-              <p>Total interest is <strong>(M × n) − L</strong>. Property tax is applied as a percentage of the home price and divided by 12; insurance and HOA are added directly to the monthly figure.</p>
+<h2>How does the underlying math work?</h2>
+<p>The principal-and-interest payment comes from the standard amortization formula, where <strong>L</strong> is the loan amount, <strong>i</strong> the monthly rate (annual &divide; 12) and <strong>n</strong> the number of monthly payments:</p><div class="not-prose my-4"><div class="formula">M = L &times; i &times; (1 + i)<sup>n</sup> &divide; [ (1 + i)<sup>n</sup> &minus; 1 ]</div></div>
+<p>Each month the lender charges interest on whatever you still owe, and the rest of the payment reduces the balance. Because the balance is highest at the start, interest takes the biggest bite early. The year-by-year table makes that visible: principal paid creeps upward every year while interest shrinks.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>Buyers use it to sanity-check what a lender's pre-approval actually costs per month, to compare a 15-year term against a 30-year term before signing, and to see how much a larger down payment reduces lifetime interest. Current homeowners use the same numbers to judge whether refinancing at a lower rate is worth the closing costs.</p>
+<h2>Worked example: a $400,000 home, two ways</h2>
+<p><strong>Scenario 1 &mdash; 30 years.</strong> 20% down ($80,000) leaves a $320,000 loan. At 6.5% the principal-and-interest payment is <strong>$2,022.62</strong>. Add property tax at 1.1% ($367 a month) and $1,800 a year of insurance ($150 a month), and the all-in payment is about <strong>$2,539</strong>. Over 30 years you will pay roughly $408,142 in interest &mdash; more than the amount you borrowed.</p>
+<p>Look at month one: interest is $320,000 &times; 0.065 &divide; 12 = $1,733, so only about $289 of that first $2,022 payment reduces what you owe.</p>
+<p><strong>Scenario 2 &mdash; 15 years.</strong> Same house and down payment, but a 15-year loan at 6.0% (an assumed, typically lower rate). Principal and interest rise to <strong>$2,700.34</strong>, the all-in payment to about $3,217 &mdash; but total interest falls to roughly <strong>$166,062</strong>.</p>
+<p>The trade: about $678 more per month buys roughly $242,000 less interest and a mortgage-free home 15 years sooner. Whether that is a good deal depends on whether you can carry the higher payment comfortably and what else that $678 could do.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>How much of a down payment do I need?</h3>
-              <p>A 20% down payment lets you avoid private mortgage insurance (PMI) on a conventional loan. Conventional loans can go as low as 3–5% down, and FHA loans as low as 3.5%, but a smaller down payment means a larger loan balance, an added PMI premium, and more interest over the life of the loan.</p>
-              <h3>What is included in my monthly mortgage payment?</h3>
-              <p>Lenders call it <strong>PITI</strong>: Principal, Interest, property Taxes, and homeowners Insurance — the last two often collected in an escrow account. HOA dues and, if you put down less than 20%, PMI are on top of that. This calculator breaks out principal &amp; interest and lets you add tax, insurance and HOA lines.</p>
-              <h3>Should I choose a 15-year or 30-year mortgage?</h3>
-              <p>A 15-year loan has a higher monthly payment but a lower rate and dramatically less total interest. A 30-year loan keeps the required payment low and flexible but costs far more over time. A common middle path is a 30-year loan with extra principal payments whenever your budget allows.</p>
+<h2>Real-world practical application</h2>
+<p>Beyond estimating a payment, the calculator is useful for three decisions. First, <strong>comparing offers</strong>: a quarter-point difference in rate on a $320,000 loan is worth around $50 a month. Second, <strong>testing the down payment</strong>: slide it from 10% to 20% and watch both the payment and the lifetime interest drop. Third, <strong>planning an early payoff</strong>: the amortization table shows exactly how much principal you will have cleared by any given year, which helps when deciding between extra payments and investing.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="debt-payoff.html">Debt Payoff Timeframe</a> — see how extra payments shorten any loan.</li>
-                <li><a href="compound-interest.html">Compound Interest</a> — what the down payment could earn if invested instead.</li>
-                <li><a href="inflation-calculator.html">Inflation Calculator</a> — how a fixed mortgage payment shrinks in real terms over 30 years.</li>
-              </ul>
+<h2>Limits worth knowing</h2>
+<p>The figures assume a fixed rate for the whole term, so an adjustable-rate loan will not match. Property tax and insurance are held constant, although in reality both tend to rise, so your all-in payment will likely creep up even though the principal-and-interest portion is fixed. Closing costs, moving costs and maintenance (a common rule of thumb is 1% of the home&rsquo;s value a year) are not included but belong in your budget.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why is so little of my early payment going to principal?</h3>
+<p>Interest is charged on the remaining balance, and the balance is largest at the start. On the $320,000 loan above, interest consumes about 86% of the first payment. The split gradually flips over the life of the loan, with the crossover point around year 19 for a 30-year mortgage at this rate.</p>
+<h3>Is a 15-year mortgage always better than a 30-year?</h3>
+<p>It saves a great deal of interest, but it demands a larger fixed payment and leaves less room for emergencies. Some borrowers take the 30-year loan for flexibility and make extra principal payments when they can, which captures part of the savings without the obligation.</p>
+<h3>Does this include PMI?</h3>
+<p>No. If you put down less than 20% on a conventional loan, expect to pay PMI until you reach about 20% equity. Add a rough monthly estimate to the all-in figure shown here.</p>
+<h3>Should my payment include property tax and insurance?</h3>
+<p>For budgeting, yes. Lenders usually collect them through escrow, so your actual monthly bill will include them, and the all-in figure is the one to compare with your income.</p>
+<h3>How much does one extra payment a year really save?</h3>
+<p>Quite a lot on a long loan. On the $320,000 example, one additional principal-only payment a year shortens the loan by about five and a half years and saves roughly $89,000 in interest, because every extra dollar stops accruing interest for the remaining decades.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="mortgage-affordability.html">Mortgage Affordability Calculator</a> &mdash; check this payment against your income and savings.</li>
+<li><a href="guide-how-much-house-can-i-afford.html">Guide: how much house can I afford?</a> &mdash; debt-to-income ratios explained with worked numbers.</li>
+<li><a href="compound-interest.html">Compound Interest Calculator</a> &mdash; see what the same extra payments would earn if invested instead.</li>
+<li><a href="payoff-vs-interest.html">Payoff vs. Interest Calculator</a> &mdash; the pay-down-versus-invest question for any loan.</li>
+<li><a href="mortgage-prepayment-penalty.html">Mortgage Prepayment Penalty Calculator</a> &mdash; what breaking a Canadian mortgage early would cost.</li>
+</ul>
             </article>
 
           </main>
@@ -288,6 +335,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Payoff vs. Interest Calculator (Auto Loan) — Calcuvelo</title>
-  <meta name="description" content="Should you pay off your car loan today or keep riding the payment schedule? Compare the interest you'd save against what that lump sum could earn invested elsewhere." />
+  <title>Payoff vs. Interest Calculator: Car Loan or Invest? — Calcuvelo</title>
+  <meta name="description" content="Decide whether to pay off a car loan now or keep the payments and invest the cash, using an equal-cash-flow comparison and payoff date." />
   <link rel="canonical" href="https://calcuvelo.com/payoff-vs-interest.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Payoff vs. Interest Calculator — Calcuvelo" />
-  <meta property="og:description" content="Pay off your car loan today, or keep riding the payments? Compare the two." />
+  <meta property="og:title" content="Payoff vs. Interest Calculator: Car Loan or Invest? — Calcuvelo" />
+  <meta property="og:description" content="Decide whether to pay off a car loan now or keep the payments and invest the cash, using an equal-cash-flow comparison and payoff date." />
   <meta property="og:url" content="https://calcuvelo.com/payoff-vs-interest.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/payoff-vs-interest.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Is paying off a car loan early always the right move?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Paying off the loan guarantees you avoid every dollar of remaining interest, which is a certain, risk-free return equal to the loan's APR. It is usually the right move unless you could reliably earn a higher after-tax return elsewhere, or you'd be left without any cash cushion." }
+            "name": "Is paying off a car loan early always smart?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is a guaranteed return equal to the loan’s APR, which is attractive when the rate is high and less so when it is very low. It is a poor idea if it drains your emergency cushion."
+            }
           },
           {
             "@type": "Question",
-            "name": "What does it mean to be \"upside-down\" on a car loan?",
-            "acceptedAnswer": { "@type": "Answer", "text": "You're upside-down when the loan balance is higher than the car's current market value. It doesn't change the math on whether to pay off the loan, but it matters if you're considering selling or trading the car in, since you'd owe more than a buyer or dealer would pay for it." }
+            "name": "What does “upside-down” mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You owe more than the car is worth. It does not change the payoff math, but it matters if you plan to sell or trade the car, because the sale will not cover the loan."
+            }
           },
           {
             "@type": "Question",
-            "name": "Are there early-payoff penalties on auto loans?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Most modern auto loans don't charge a prepayment penalty, but a small number of older or subprime contracts do. Check your loan agreement for a \"prepayment penalty\" or \"rule of 78s\" clause before paying it off in full." }
+            "name": "Why does the calculator invest the freed-up payment in the payoff case?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because otherwise the comparison would be lopsided: one side keeps its cash invested while the other loses it. Paying off frees the monthly payment, and fair accounting gives that money somewhere to go."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How should I choose the alternative return?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Match it to where you would actually put the money. A savings account rate is a safe floor; an equity return is an expectation, not a guarantee. If investing wins only under the optimistic assumption, treat that as a tie and lean toward the sure thing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do early-payoff penalties exist on auto loans?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rarely on modern loans, but some contracts include one or use precomputed interest. Read the payoff terms or ask the lender for a written payoff quote before sending any money."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
@@ -142,6 +181,7 @@
             <section x-data="payoffVsInterest()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Payoff vs. Interest Calculator</h1>
               <p class="calc-sub">Pay off your car loan today, or keep riding the payments?</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -210,10 +250,10 @@
               <div class="mt-5 rounded-xl p-4 text-sm ring-1" :class="out.investmentWins ? 'bg-sky-50 text-sky-900 ring-sky-200' : 'bg-emerald-50 text-emerald-900 ring-emerald-200'">
                 <template x-if="out.feasible && altReturn > 0">
                   <span>
-                    <strong x-text="out.investmentWins ? 'Investing the lump sum could win: ' : 'Paying off today still wins: '"></strong>
-                    investing <span x-text="money(out.payoffAmount)"></span> at <span x-text="nfmt(altReturn)"></span>% for <span x-text="out.months"></span> months could grow to roughly
-                    <strong x-text="money(out.payoffAmount + out.investGain)"></strong> (a gain of <span x-text="money(out.investGain)"></span>), versus
-                    <strong x-text="money(out.savings)"></strong> in guaranteed interest saved by paying off now.
+                    <strong x-text="out.investmentWins ? 'Keeping the loan and investing could win by about ' + money(Math.abs(out.investDiff)) + '.' : 'Paying off today wins by about ' + money(Math.abs(out.investDiff)) + '.'"></strong>
+                    Over the next <span x-text="out.months"></span> months, keeping the loan and investing <span x-text="money(out.payoffAmount)"></span> at
+                    <span x-text="nfmt(altReturn)"></span>% grows to roughly <strong x-text="money(out.fvRide)"></strong>; paying off today and investing the freed-up
+                    payment each month at the same rate grows to roughly <strong x-text="money(out.fvPayoff)"></strong>.
                   </span>
                 </template>
                 <template x-if="!(out.feasible && altReturn > 0)">
@@ -238,29 +278,53 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Payoff vs. Interest Calculator?</h2>
-              <p>This calculator helps you decide whether to pay off a car loan in a single lump-sum payment today or keep making the scheduled monthly payments. It shows exactly how much interest you'd avoid by paying off now, and — if you'd rather use that cash elsewhere — compares it against what the same lump sum could grow to if invested instead.</p>
+<h2>What is the Payoff vs. Interest Calculator?</h2>
+<p>You have a lump of cash and a car loan. Paying the loan off feels responsible; keeping the cash invested feels clever. Which one is right depends on one comparison &mdash; the loan&rsquo;s interest rate against what the cash could earn elsewhere &mdash; and on being fair about what each choice does to your monthly budget. This calculator makes that comparison with equal cash flows on both sides, so neither option gets a hidden advantage.</p>
+<p>It also shows when the loan would end if you simply kept paying, and whether the car is worth more than you owe.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>The calculator first simulates your loan month by month at the current balance, APR and payment to find how long it would take to reach zero and how much total interest that accrues — the same amortization logic behind the site's <a href="debt-payoff.html">Debt Payoff Calculator</a>. Paying off today eliminates every remaining interest charge, so the guaranteed savings equal that projected total interest. For the investment comparison, it grows today's payoff amount at your entered rate, compounded monthly, over the same number of months the loan would otherwise run, then compares the gain to the interest you'd save.</p>
+<h2>What to enter</h2>
+<ul>
+<li><strong>Loan balance, APR and monthly payment.</strong> Take them from your latest loan statement; the balance should be the payoff amount.</li>
+<li><strong>Car value.</strong> A market estimate; used only to flag negative equity (owing more than the car is worth).</li>
+<li><strong>Alternative annual return.</strong> The return you would realistically expect on the cash if you kept it: a savings rate, a bond yield, or an equity assumption. Be conservative &mdash; a stock return is not guaranteed, while the loan interest you avoid is.</li>
+</ul>
 
-              <h2>Real-world practical application</h2>
-              <p>This comes up whenever a windfall arrives — a bonus, tax refund, or inheritance — and you're deciding what to do with it. It's also useful for comparing a low-rate auto loan against a higher-rate debt elsewhere (pay off the higher-rate debt first) or against a savings account or investment with a meaningfully higher expected return, where keeping the loan and investing the cash can sometimes come out ahead.</p>
+<h2>How does the underlying math work?</h2>
+<p>The calculator first simulates the loan month by month to find how long it would run and how much interest it would charge. It then compares two ways of using the same resources over that period:</p>
+<ul>
+<li><strong>Keep the loan.</strong> You keep paying the monthly bill from your income and invest the lump sum today. It grows to B &times; (1 + j)<sup>n</sup>, where j is the monthly alternative return.</li>
+<li><strong>Pay it off.</strong> The loan disappears today, and each month you invest the payment you no longer owe. That stream grows to the sum of each payment compounded from the month it is invested.</li>
+</ul>
+<p>When the alternative return equals the loan&rsquo;s APR, the two come out exactly equal &mdash; the test that confirms the comparison is fair. Below the APR, paying off wins; above it, investing wins.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>Is paying off a car loan early always the right move?</h3>
-              <p>Paying off the loan guarantees you avoid every dollar of remaining interest, which is a certain, risk-free return equal to the loan's APR. It is usually the right move unless you could reliably earn a higher after-tax return elsewhere, or you'd be left without any cash cushion.</p>
-              <h3>What does it mean to be "upside-down" on a car loan?</h3>
-              <p>You're upside-down when the loan balance is higher than the car's current market value. It doesn't change the math on whether to pay off the loan, but it matters if you're considering selling or trading the car in, since you'd owe more than a buyer or dealer would pay for it.</p>
-              <h3>Are there early-payoff penalties on auto loans?</h3>
-              <p>Most modern auto loans don't charge a prepayment penalty, but a small number of older or subprime contracts do. Check your loan agreement for a "prepayment penalty" or "rule of 78s" clause before paying it off in full.</p>
+<h2>Worked example: two loans, two answers</h2>
+<p><strong>A 7.5% loan.</strong> Balance $14,000, payment $420, so about 38 months remain and the loan would cost about $1,748 in interest. If you could earn 4.5% on the cash, keeping the loan and investing ends at about $16,140, while paying off and investing the freed-up $420 a month ends at about $16,907 &mdash; <strong>paying off wins by roughly $767</strong>. Only if the investment returned more than about 7.5% would keeping the loan come out ahead, and that return is anything but guaranteed.</p>
+<p><strong>A 4.9% loan.</strong> Balance $9,000, payment $300, about 33 months left, interest about $620. With a 7% alternative return, keeping the loan and investing ends about $302 ahead ($10,904 versus $10,603). That small edge depends on a 7% return arriving on schedule over a short window &mdash; a much weaker case than it looks, and a worse deal if the market falls.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="auto-loan.html">Auto Loan Calculator</a> — the true monthly cost of financing a vehicle.</li>
-                <li><a href="debt-payoff.html">Debt Payoff Calculator</a> — the same payoff math for a credit-card balance.</li>
-                <li><a href="real-roi.html">Real ROI Calculator</a> — your true after-tax, after-inflation return on an investment.</li>
-              </ul>
+<h2>Real-world practical application</h2>
+<p>The calculator is built for windfalls: a bonus, a tax refund, an inheritance. It frames the choice as a rate comparison, which also tells you where the money goes first if you have several debts: the highest APR first, the car loan only if its rate beats what your other options earn. It is also a good way to see how little a very low-rate loan costs, which is often a reason to leave it alone and keep your emergency cushion intact.</p>
+
+<h2>Cautions</h2>
+<p>Liquidity matters in a way the math does not show. Cash you use to pay off a loan is gone; cash you keep can cover a job loss or repair bill. Many people reasonably keep a three- to six-month cushion before prepaying anything. Also check the loan agreement for a prepayment penalty, which is rare but exists, and remember that the returns you assume on an investment are estimates, not promises.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is paying off a car loan early always smart?</h3>
+<p>It is a guaranteed return equal to the loan&rsquo;s APR, which is attractive when the rate is high and less so when it is very low. It is a poor idea if it drains your emergency cushion.</p>
+<h3>What does &ldquo;upside-down&rdquo; mean?</h3>
+<p>You owe more than the car is worth. It does not change the payoff math, but it matters if you plan to sell or trade the car, because the sale will not cover the loan.</p>
+<h3>Why does the calculator invest the freed-up payment in the payoff case?</h3>
+<p>Because otherwise the comparison would be lopsided: one side keeps its cash invested while the other loses it. Paying off frees the monthly payment, and fair accounting gives that money somewhere to go.</p>
+<h3>How should I choose the alternative return?</h3>
+<p>Match it to where you would actually put the money. A savings account rate is a safe floor; an equity return is an expectation, not a guarantee. If investing wins only under the optimistic assumption, treat that as a tie and lean toward the sure thing.</p>
+<h3>Do early-payoff penalties exist on auto loans?</h3>
+<p>Rarely on modern loans, but some contracts include one or use precomputed interest. Read the payoff terms or ask the lender for a written payoff quote before sending any money.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="auto-loan.html">Auto Loan Calculator</a> &mdash; what the loan cost to begin with.</li>
+<li><a href="guide-debt-snowball-vs-avalanche.html">Guide: debt snowball vs. avalanche</a> &mdash; ranking several debts by rate.</li>
+<li><a href="compound-interest.html">Compound Interest Calculator</a> &mdash; what the invested cash could grow to.</li>
+<li><a href="debt-payoff.html">Debt Payoff Calculator</a> &mdash; the same payoff math for a credit card.</li>
+</ul>
             </article>
 
           </main>
@@ -274,6 +338,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

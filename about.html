@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>try{if(localStorage.getItem('cv-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
+  <title>About Calcuvelo — Who We Are and How the Calculators Work</title>
+  <meta name="description" content="Calcuvelo is an independent project in Toronto, Ontario. How the calculators are built and checked, how the site is funded, and how to get in touch." />
+  <link rel="canonical" href="https://calcuvelo.com/about.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About Calcuvelo — Who We Are and How the Calculators Work" />
+  <meta property="og:description" content="Calcuvelo is an independent project in Toronto, Ontario. How the calculators are built and checked, how the site is funded, and how to get in touch." />
+  <meta property="og:url" content="https://calcuvelo.com/about.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
+  <script defer src="assets/header.js?v=202610262"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Calcuvelo",
+    "url": "https://calcuvelo.com/about.html",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Calcuvelo",
+      "url": "https://calcuvelo.com/",
+      "email": "Calcuvelo@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Toronto",
+        "addressRegion": "ON",
+        "addressCountry": "CA"
+      }
+    }
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ===================== UNIVERSAL HEADER  (assets/header.css + assets/header.js) ===================== -->
+  <header class="site-header">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="site-brand">Calcuvelo</span>
+      </a>
+
+      <div class="site-nav" data-dropdown>
+        <button type="button" class="site-nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-menu">
+          Calculators
+          <svg class="site-nav-caret" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="site-nav-menu" id="site-nav-menu" role="menu">
+          <div class="site-nav-cols">
+            <div>
+              <p class="site-nav-heading">Financial</p>
+              <a href="compound-interest.html" data-nav class="site-nav-link" role="menuitem">Compound Interest</a>
+              <a href="mortgage-calculator.html" data-nav class="site-nav-link" role="menuitem">Mortgage</a>
+              <a href="retirement-calculator.html" data-nav class="site-nav-link" role="menuitem">Retirement / 401(k)</a>
+              <a href="auto-loan.html" data-nav class="site-nav-link" role="menuitem">Auto Loan</a>
+              <a href="debt-payoff.html" data-nav class="site-nav-link" role="menuitem">Debt Payoff</a>
+              <a href="debt-consolidation.html" data-nav class="site-nav-link" role="menuitem">Debt Consolidation</a>
+              <a href="payoff-vs-interest.html" data-nav class="site-nav-link" role="menuitem">Payoff vs. Interest</a>
+              <a href="mortgage-affordability.html" data-nav class="site-nav-link" role="menuitem">Mortgage Affordability</a>
+              <a href="401k-split-distribution.html" data-nav class="site-nav-link" role="menuitem">401(k) Split Distribution</a>
+              <a href="debt-snowball.html" data-nav class="site-nav-link" role="menuitem">Debt Snowball &amp; EF</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Economic</p>
+              <a href="inflation-calculator.html" data-nav class="site-nav-link" role="menuitem">Inflation</a>
+              <a href="present-value.html" data-nav class="site-nav-link" role="menuitem">Present &amp; Future Value</a>
+              <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
+              <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
+              <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
+              <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
+            </div>
+          </div>
+          <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
+
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
+        <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle-knob">
+            <svg class="theme-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <svg class="theme-ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+
+    <main class="min-w-0">
+      <article class="card seo prose prose-slate max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-h3:text-base">
+        <h1>About Calcuvelo</h1>
+        <p>
+          Calcuvelo is a small, free collection of calculators for everyday money questions: how fast savings grow, what
+          a mortgage really costs, whether a debt payoff plan works, what a salary is worth after tax. We try to explain
+          every calculator well enough that you never have to take our word for the answer.
+        </p>
+
+        <h2>Who we are</h2>
+        <p>
+          Calcuvelo is an independent project based in Toronto, Ontario. The site is built by people with a background in
+          economics and personal finance who wanted clean, honest calculators without sign-ups or clutter.
+        </p>
+
+        <h2>Why we built it</h2>
+        <p>
+          Many calculator sites are cluttered, US-only, or do not explain their math. So on every page we show the formula,
+          worked examples and the assumptions behind the numbers, with a focus on Canadian rules where they apply &mdash;
+          Ontario take-home pay, RRSPs and TFSAs, CPP, OSAP, GIC ladders and mortgage prepayment penalties. Our
+          <a href="guides.html">guides</a> go a step further and walk through the thinking behind several of the decisions.
+        </p>
+
+        <h2>How the calculators are built</h2>
+        <p>
+          Every tool is built on a standard, documented formula &mdash; the loan amortization formula for mortgages and car
+          loans, compound growth for savings, the annuity formulas for present and future value, the Fisher relationship
+          for real returns, and the published tax and benefit rules for the Canadian tools. The page for each calculator
+          explains its method in plain language with the variables defined, so you can verify any result by hand or in a
+          spreadsheet.
+        </p>
+        <p>
+          The calculators run entirely in your web browser. The numbers you type are not sent to a server, there are no
+          accounts, and nothing you enter is stored by the site. (Our <a href="privacy.html">Privacy Policy</a> explains
+          what advertising partners can collect, which is separate from your calculator inputs.)
+        </p>
+
+        <h2>How we check accuracy</h2>
+        <p>
+          We start from standard formulas. The worked examples on each page are generated by the calculators themselves, so
+          the explanation and the tool always agree. Tax rules, limits and benefit amounts are dated by tax year on the
+          page, and we update them when they change. Where a rule of thumb is involved, such as the 28/36 housing ratios or
+          the 4% withdrawal rule, the page says it is a guideline and not a law.
+        </p>
+        <p>
+          Corrections are always welcome. If a result looks wrong, please use the <a href="contact.html">contact page</a>
+          and tell us the calculator name and the exact inputs you used, and we will look into it.
+        </p>
+
+        <h2>Independence</h2>
+        <p>
+          We do not accept payment from lenders or financial companies, and advertising never influences what the
+          calculators show. Calcuvelo is free to use and supported by advertising from Google AdSense; ads are placed by the
+          ad network, not chosen by us.
+        </p>
+
+        <h2>What the calculators can and can&rsquo;t do</h2>
+        <p>
+          These are estimates built on the assumptions you enter. They do not know your full tax situation, your
+          lender&rsquo;s fine print or what markets will do. They are good for comparing options and getting your bearings,
+          and they are not a substitute for a professional who can see your whole picture. Calcuvelo is for educational
+          purposes only and is not financial, investment, tax or legal advice; the
+          <a href="terms.html">Terms of Service</a> say so in more detail.
+        </p>
+
+        <h2>Get in touch</h2>
+        <p>
+          Questions, corrections and ideas for new calculators are all welcome. Use the
+          <a href="contact.html">contact page</a> or write to <a href="mailto:Calcuvelo@gmail.com">Calcuvelo@gmail.com</a>.
+        </p>
+      </article>
+    </main>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

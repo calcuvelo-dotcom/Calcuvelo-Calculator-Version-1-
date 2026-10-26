@@ -36,7 +36,7 @@
 
 .site-nav-menu {
   position: absolute; left: 0; top: calc(100% + 0.4rem); z-index: 50;
-  width: min(92vw, 32rem);
+  width: min(92vw, 44rem);
   border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #ffffff;
   padding: 0.5rem;
   box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(15, 23, 42, 0.02);
@@ -49,6 +49,12 @@
 
 .site-nav-cols { display: grid; grid-template-columns: 1fr; gap: 0.25rem; }
 @media (min-width: 480px) { .site-nav-cols { grid-template-columns: 1fr 1fr; gap: 0.75rem; } }
+@media (min-width: 680px) { .site-nav-cols { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 680px) { .site-nav-cols { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 680px) { .site-nav-cols { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 680px) { .site-nav-cols { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 680px) { .site-nav-cols { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 680px) { .site-nav-cols { grid-template-columns: 1fr 1fr 1fr; } }
 
 .site-nav-heading {
   padding: 0.5rem 0.5rem 0.25rem;

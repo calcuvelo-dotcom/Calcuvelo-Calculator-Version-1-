@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Real Rate of Return (Real ROI) Calculator — Calcuvelo</title>
-  <meta name="description" content="Free real ROI calculator. Convert a nominal investment return into your true return after capital-gains tax and inflation, with an annualized real rate and a chart." />
+  <title>Real Rate of Return Calculator: After Tax &amp; Inflation — Calcuvelo</title>
+  <meta name="description" content="Turn a headline investment return into your real return after capital-gains tax and inflation, with annualized rates for each stage." />
   <link rel="canonical" href="https://calcuvelo.com/real-roi.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Real Rate of Return (Real ROI) Calculator — Calcuvelo" />
-  <meta property="og:description" content="Your true investment return after capital-gains tax and the drag of inflation." />
+  <meta property="og:title" content="Real Rate of Return Calculator: After Tax &amp; Inflation — Calcuvelo" />
+  <meta property="og:description" content="Turn a headline investment return into your real return after capital-gains tax and inflation, with annualized rates for each stage." />
   <meta property="og:url" content="https://calcuvelo.com/real-roi.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/real-roi.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is the difference between a nominal and a real return?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A nominal return is the raw percentage gain. A real return subtracts inflation, so it measures how much more your money can actually buy. If an investment returns 8% in a year when inflation is 3%, the real return is roughly 5%." }
+            "name": "Why not just subtract inflation from the return?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is close, but not exact. With an 8% return and 3% inflation, the simple subtraction gives 5.00%, while the exact figure is (1.08 ÷ 1.03) − 1 = 4.85%. The gap is small at low rates and grows as inflation rises."
+            }
           },
           {
             "@type": "Question",
-            "name": "How are capital gains taxed?",
-            "acceptedAnswer": { "@type": "Answer", "text": "In the United States, assets held longer than a year are taxed at long-term capital-gains rates of 0%, 15% or 20% depending on income, sometimes plus a 3.8% net investment income tax. Assets held a year or less are taxed as ordinary income. Rates and rules vary by country and account type." }
+            "name": "Which tax rate should I enter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the rate that applies to the kind of gain you expect: long-term capital gains for most stock and fund holdings held over a year, ordinary income rates for interest. Enter 0 if the money is in a Roth account, TFSA or similar. Rules change, so check the current ones."
+            }
           },
           {
             "@type": "Question",
-            "name": "Does this calculator include dividends and fees?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. Enter a return figure that already reflects reinvested dividends and is net of fund fees. The calculator then applies capital-gains tax to the total gain and discounts the result for inflation." }
+            "name": "What is a good real rate of return?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Long-run stock-market real returns have often been quoted around 5–7% before tax; bonds and cash have historically been much lower, sometimes near zero or below. The real return you need depends on your goal, not a benchmark."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this work for a savings account?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Enter the account’s rate as the nominal return and your marginal income tax rate as the tax rate. Many savings accounts have a real after-tax return near zero or slightly negative in higher-inflation periods."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does tax matter more over longer periods?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because the gain, and therefore the tax, grows with the holding period. The dollar cost of tax on a 15-year investment is much larger than on a 3-year one, which is why tax-sheltered accounts matter most for long-term savings."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="realRoi()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Real Rate of Return (Real ROI) Calculator</h1>
               <p class="calc-sub">Your true return after capital-gains tax and the drag of inflation.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -226,49 +266,56 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Real ROI Calculator?</h2>
-              <p>The Real ROI Calculator converts a nominal investment return into your true, after-tax, after-inflation return &mdash; the number that actually determines how much extra purchasing power you end up with.</p>
+<h2>What is the Real ROI Calculator?</h2>
+<p>When a fund advertises &ldquo;8% a year,&rdquo; that figure is the starting line, not the finish. Tax takes a share of the gain, and inflation quietly reduces what the remaining dollars will buy. This calculator walks the headline return through both so you can see the number that actually matters: how much more you will be able to <em>buy</em> at the end than at the start.</p>
+<p>It is built for investors comparing an account that is taxed with one that is not, and for anyone who suspects their &ldquo;safe&rdquo; return is not outrunning prices.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter your initial investment</strong> and the <strong>nominal annual return</strong> you expect (or achieved).</li>
-                <li><strong>Enter how many years</strong> the money is invested.</li>
-                <li><strong>Enter your expected inflation rate</strong> and your <strong>capital-gains tax rate</strong>.</li>
-                <li><strong>Read the results.</strong> "Nominal ending value" ignores tax and inflation. "After-tax value" subtracts tax on the gain. "Real value" restates that in today's purchasing power. "Real annualized return" is the compound yearly rate that actually matters. The bar chart lines up all three ending values.</li>
-              </ol>
+<h2>Inputs</h2>
+<ul>
+<li><strong>Initial investment and years.</strong> The amount invested once, and the holding period.</li>
+<li><strong>Nominal annual return.</strong> The return before tax and inflation.</li>
+<li><strong>Inflation rate.</strong> Your assumption for the average yearly price rise over the period.</li>
+<li><strong>Capital-gains tax rate.</strong> The percentage of the gain paid in tax when you sell. Enter 0 for a tax-sheltered account such as a Roth IRA or a TFSA. Long-term US rates are 0%, 15% or 20% depending on income; check the current brackets.</li>
+</ul>
 
-              <h2>How does the underlying math work?</h2>
-              <p>Grow the investment, tax the gain, then deflate for inflation:</p>
-              <div class="not-prose my-4"><div class="formula">NominalEnd  = P × (1 + g)ʸ
-Tax         = (NominalEnd − P) × taxRate
-AfterTax    = NominalEnd − Tax
-RealEnd     = AfterTax ÷ (1 + f)ʸ
-RealCAGR    = (RealEnd ÷ P)^(1 / y) − 1</div></div>
-              <ul>
-                <li><strong>P</strong> — initial investment</li>
-                <li><strong>g</strong> — nominal annual return</li>
-                <li><strong>f</strong> — annual inflation rate</li>
-                <li><strong>y</strong> — years held</li>
-              </ul>
-              <p>A quick shortcut, the Fisher approximation, is <strong>real ≈ nominal − inflation</strong>; the calculator uses the exact division above.</p>
+<h2>How does the underlying math work?</h2>
+<p>There are three stages. First the investment grows to its nominal ending value, then tax is taken from the gain, and finally the result is deflated by inflation back to today&rsquo;s dollars:</p><div class="not-prose my-4"><div class="formula">nominal = P &times; (1 + g)<sup>y</sup></div></div><div class="not-prose my-4"><div class="formula">after tax = nominal &minus; tax rate &times; (nominal &minus; P)</div></div><div class="not-prose my-4"><div class="formula">real value = after tax &divide; (1 + inflation)<sup>y</sup></div></div>
+<p>The annualized real rate is found by taking the y-th root of (real value &divide; P) and subtracting one. Note it is not simply &ldquo;return minus inflation&rdquo;: the exact relationship is (1 + g) &divide; (1 + f) &minus; 1, which is slightly lower than g &minus; f.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>Investors use it to see how much capital-gains tax and inflation together erode a headline return, to compare holding an investment in a taxable account versus a tax-advantaged one, and to judge whether a "safe" return is actually outpacing inflation at all.</p>
+<h2>Worked example: $20,000 at 8% for 15 years</h2>
+<p>Assume 3% inflation and a 15% capital-gains tax on the gain at sale.</p>
+<ul>
+<li>Nominal ending value: about <strong>$63,443</strong>.</li>
+<li>Tax on the $43,443 gain: about $6,517, leaving about <strong>$56,927</strong> (7.22% a year after tax).</li>
+<li>In today&rsquo;s purchasing power: about <strong>$36,539</strong>, a real return of about <strong>4.10% a year</strong>.</li>
+</ul>
+<p>Put the same money in a tax-free account and the real value is about $40,722, or 4.85% a year &mdash; roughly $4,183 more, all from the wrapper. The headline 8% has shrunk to about half in real terms in the taxable case, which is why practitioners talk about &ldquo;real&rdquo; returns when planning.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>What is the difference between a nominal and a real return?</h3>
-              <p>A nominal return is the raw percentage gain. A <strong>real return</strong> removes inflation, so it measures how much more your money can actually buy. An 8% nominal return in a year of 3% inflation is roughly a 5% real return.</p>
-              <h3>How are capital gains taxed?</h3>
-              <p>In the U.S., assets held over a year are taxed at long-term rates of <strong>0%, 15% or 20%</strong> depending on income (sometimes plus a 3.8% surtax); assets held a year or less are taxed as ordinary income. Rules differ by country and by account type — tax-advantaged accounts may owe nothing at sale.</p>
-              <h3>Does this calculator include dividends and fees?</h3>
-              <p>No. Enter a return that already reflects reinvested dividends and is net of fund fees. The tool then applies capital-gains tax to the total gain and adjusts for inflation.</p>
+<h2>Real-world practical application</h2>
+<p>Use it to settle a few recurring debates: is a 4% certificate of deposit actually positive after 3% inflation and tax on the interest? How much extra does a tax-advantaged account really deliver on the same investment? Is a fund&rsquo;s 6.5% worth holding in a taxable account against a bond ladder? Entering the options side by side makes the answer visible in a single chart.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="inflation-calculator.html">Inflation Calculator</a> — isolate the inflation piece.</li>
-                <li><a href="compound-interest.html">Compound Interest</a> — the nominal growth engine on its own.</li>
-                <li><a href="present-value.html">Present &amp; Future Value</a> — discount any future cash flow to today.</li>
-              </ul>
+<h2>What this model simplifies</h2>
+<p>Tax is applied once, at sale, on the total gain. Funds that pay taxable dividends or distributions each year pay tax along the way, which lowers compounding a little more than this model shows. Interest income is taxed at ordinary income rates rather than capital-gains rates. Fees are not included: a 1% annual fund fee is a real cost that belongs in the return you enter. Treat the output as a good approximation for a buy-and-hold investment.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why not just subtract inflation from the return?</h3>
+<p>It is close, but not exact. With an 8% return and 3% inflation, the simple subtraction gives 5.00%, while the exact figure is (1.08 &divide; 1.03) &minus; 1 = 4.85%. The gap is small at low rates and grows as inflation rises.</p>
+<h3>Which tax rate should I enter?</h3>
+<p>Use the rate that applies to the kind of gain you expect: long-term capital gains for most stock and fund holdings held over a year, ordinary income rates for interest. Enter 0 if the money is in a Roth account, TFSA or similar. Rules change, so check the current ones.</p>
+<h3>What is a good real rate of return?</h3>
+<p>Long-run stock-market real returns have often been quoted around 5&ndash;7% before tax; bonds and cash have historically been much lower, sometimes near zero or below. The real return you need depends on your goal, not a benchmark.</p>
+<h3>Does this work for a savings account?</h3>
+<p>Yes. Enter the account&rsquo;s rate as the nominal return and your marginal income tax rate as the tax rate. Many savings accounts have a real after-tax return near zero or slightly negative in higher-inflation periods.</p>
+<h3>Why does tax matter more over longer periods?</h3>
+<p>Because the gain, and therefore the tax, grows with the holding period. The dollar cost of tax on a 15-year investment is much larger than on a 3-year one, which is why tax-sheltered accounts matter most for long-term savings.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="inflation-calculator.html">Inflation Calculator</a> &mdash; the deflation step on its own.</li>
+<li><a href="compound-interest.html">Compound Interest Calculator</a> &mdash; the nominal growth before tax and inflation.</li>
+<li><a href="guide-gic-ladder-canada.html">Guide: how a GIC ladder works</a> &mdash; a fixed-income example with after-tax numbers.</li>
+<li><a href="guide-start-early-vs-contribute-more.html">Guide: start early or contribute more later?</a> &mdash; why the return you assume matters so much.</li>
+<li><a href="rrsp-vs-tfsa-calculator.html">RRSP vs. TFSA Calculator</a> &mdash; registered-account tax treatment.</li>
+</ul>
             </article>
 
           </main>
@@ -282,6 +329,8 @@ RealCAGR    = (RealEnd ÷ P)^(1 / y) − 1</div></div>
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

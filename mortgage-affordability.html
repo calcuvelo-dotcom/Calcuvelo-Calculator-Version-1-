@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Mortgage Affordability Calculator — Calcuvelo</title>
-  <meta name="description" content="Free mortgage affordability calculator. Check your home purchase against standard front-end and back-end debt-to-income guidelines, and whether your savings cover the down payment and closing costs." />
+  <title>Mortgage Affordability Calculator (28/36 Rule) — Calcuvelo</title>
+  <meta name="description" content="Test a home price against the 28/36 income rules lenders use, and check that your savings cover the down payment and closing costs." />
   <link rel="canonical" href="https://calcuvelo.com/mortgage-affordability.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Mortgage Affordability Calculator — Calcuvelo" />
-  <meta property="og:description" content="Check a home purchase against standard income and debt-to-income affordability guidelines." />
+  <meta property="og:title" content="Mortgage Affordability Calculator (28/36 Rule) — Calcuvelo" />
+  <meta property="og:description" content="Test a home price against the 28/36 income rules lenders use, and check that your savings cover the down payment and closing costs." />
   <meta property="og:url" content="https://calcuvelo.com/mortgage-affordability.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/mortgage-affordability.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is a good front-end and back-end debt-to-income ratio?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Lenders commonly use 28% as the comfortable ceiling for housing costs alone (front-end ratio) and 36% for total debt including housing (back-end ratio, or DTI). Many conventional loan programs will approve a DTI up to 43%, and some government-backed programs go higher, but staying under 36% leaves more breathing room." }
+            "name": "Do lenders really use 28% and 36%?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They are long-standing guidelines. Many conventional lenders will go higher, often to a back-end DTI of 43% or more with strong credit and reserves, and government-backed programs allow higher still. Treat 28/36 as a comfort zone, not a hard stop."
+            }
           },
           {
             "@type": "Question",
-            "name": "Does this calculator check if I'll actually get approved for a mortgage?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. It checks your numbers against the general guidelines lenders use, not a specific lender's underwriting rules, which also weigh credit score, employment history, assets and loan program. Treat the result as a sanity check before you apply, not a pre-approval." }
+            "name": "Should I use gross or take-home income?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lenders use gross, so the calculator does too. But when budgeting for yourself, check the payment against your actual take-home pay; a payment that is 28% of gross can be 35% or more of what lands in your account."
+            }
           },
           {
             "@type": "Question",
-            "name": "Why do closing costs matter if I already have the down payment saved?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Closing costs — lender fees, title insurance, appraisal, taxes and more — typically run 2%-5% of the purchase price and are due on top of the down payment at closing. Savings that cover the down payment alone can still leave you short of the cash actually needed to close." }
+            "name": "Why does the tool check savings as well as income?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because many buyers are approved on income and then run short at closing. Cash needed is the down payment plus closing costs, and spending the very last dollar leaves nothing for repairs or a bad month."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the biggest levers for improving the verdict?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lower other debt, increase the down payment, pick a lower-priced home, or find a lower rate. The fastest improvement per dollar is often paying off a high-payment debt, such as a car loan."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this replace a mortgage pre-approval?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It is a self-check before you apply. A pre-approval verifies your income and credit and is what sellers expect to see with an offer."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
@@ -142,6 +181,7 @@
             <section x-data="mortgageAffordability()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Mortgage Affordability Calculator</h1>
               <p class="calc-sub">Can you afford this home, based on standard income and debt-to-income guidelines?</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -235,29 +275,54 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Mortgage Affordability Calculator?</h2>
-              <p>This calculator checks whether a specific home purchase fits comfortably within your income by applying the same front-end and back-end debt-to-income ratios mortgage lenders use during underwriting. It also checks whether your available savings actually cover the down payment plus closing costs — a step many "can I afford it" estimates skip.</p>
+<h2>What is the Mortgage Affordability Calculator?</h2>
+<p>Most mortgage tools start from the house and ask what the payment is. This one starts from you. You enter your income, your existing monthly debts and your savings, plus a home you are considering, and it checks three things lenders care about: whether the housing payment is a reasonable share of your income, whether all your debts together are, and whether you can fund the down payment and closing costs without emptying your accounts.</p>
+<p>The answer is a plain verdict &mdash; comfortable, borderline or not yet &mdash; along with the reason, so you know which lever to pull.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>The calculator first computes the monthly principal-and-interest payment with the standard amortization formula used across the site's <a href="mortgage-calculator.html">Mortgage Calculator</a>, then adds estimated property tax, homeowners insurance and HOA dues to get your total monthly housing cost. The <strong>front-end ratio</strong> divides that housing cost by your gross monthly income; the <strong>back-end ratio (DTI)</strong> adds in your other monthly debt payments before dividing by income. A home is flagged as affordable when the front-end ratio stays at or under 28%, the back-end ratio stays at or under 36%, and your savings cover the down payment plus an estimated 3% of the price in closing costs.</p>
+<h2>Entering your numbers</h2>
+<ul>
+<li><strong>Annual household income.</strong> Gross (before tax), all borrowers on the loan combined.</li>
+<li><strong>Other monthly debt payments.</strong> Car loans, student loans, minimum card payments and any other recurring debt. Do not include rent you will stop paying or utilities.</li>
+<li><strong>Available savings.</strong> Cash you are willing to commit to the purchase, not your emergency fund.</li>
+<li><strong>Price, down payment %, rate, years.</strong> Use a real rate quote. Property tax and insurance default to typical figures; replace them with local ones.</li>
+<li><strong>Closing costs.</strong> The tool uses 3% of the price, a middle estimate; lenders, title fees and prepaid taxes typically fall between 2% and 5%.</li>
+</ul>
 
-              <h2>Real-world practical application</h2>
-              <p>Buyers use this before house-hunting to set a realistic price ceiling, before making an offer to sanity-check a listing against their own numbers (not just what a lender pre-approved), and to see how much a larger down payment or a shorter amortization period changes the monthly cost and the ratios. It's also a quick way to see whether a tempting price range is being driven more by income or by other existing debt.</p>
+<h2>How does the underlying math work?</h2>
+<p>First the monthly principal-and-interest payment comes from the standard amortization formula. Property tax, insurance and any HOA dues are added to get the total housing cost. Then two ratios, both against gross monthly income, are computed:</p><div class="not-prose my-4"><div class="formula">front-end ratio = housing cost &divide; gross monthly income</div></div><div class="not-prose my-4"><div class="formula">back-end ratio (DTI) = (housing cost + other monthly debt) &divide; gross monthly income</div></div>
+<p>The traditional benchmarks are 28% for the front-end ratio and 36% for the back-end ratio, with many conventional loans allowed up to roughly 43% and some programs more. The verdict is &ldquo;comfortable&rdquo; when all three tests pass (both ratios within 28/36 and cash to close covered), &ldquo;borderline&rdquo; when the back-end ratio is within 43% and cash is covered, and &ldquo;not yet&rdquo; otherwise.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>What is a good front-end and back-end debt-to-income ratio?</h3>
-              <p>Lenders commonly use 28% as the comfortable ceiling for housing costs alone (front-end ratio) and 36% for total debt including housing (back-end ratio, or DTI). Many conventional loan programs will approve a DTI up to 43%, and some government-backed programs go higher, but staying under 36% leaves more breathing room.</p>
-              <h3>Does this calculator check if I'll actually get approved for a mortgage?</h3>
-              <p>No. It checks your numbers against the general guidelines lenders use, not a specific lender's underwriting rules, which also weigh credit score, employment history, assets and loan program. Treat the result as a sanity check before you apply, not a pre-approval.</p>
-              <h3>Why do closing costs matter if I already have the down payment saved?</h3>
-              <p>Closing costs — lender fees, title insurance, appraisal, taxes and more — typically run 2%-5% of the purchase price and are due on top of the down payment at closing. Savings that cover the down payment alone can still leave you short of the cash actually needed to close.</p>
+<h2>Worked example: $160,000 of income, two homes</h2>
+<p>Income $160,000 (monthly $13,333), $715 a month in other debt, savings of $70,000, a 6.5% 30-year loan, 1.1% property tax and $2,000 of insurance.</p>
+<p><strong>A $650,000 home, 20% down.</strong> The loan is $520,000, principal and interest about $3,287, total housing about <strong>$4,049</strong>. That is 30.4% of income (front-end) and 35.7% with the other debt (back-end). The back-end ratio squeaks under 36%, but the front-end ratio breaks the 28% line, and cash to close is about $149,500 against $70,000 saved. Verdict: <strong>not yet</strong>.</p>
+<p><strong>A $450,000 home, 20% down, savings of $120,000.</strong> Principal and interest are about $2,275, total housing about <strong>$2,855</strong>: front-end 21.4%, back-end 26.8%. Cash needed is about $103,500, which $120,000 covers. Verdict: <strong>comfortably affordable</strong>.</p>
+<p>The gap between the two answers is the whole point: the same income supports a $450,000 purchase far more easily than a $650,000 one.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="mortgage-calculator.html">Mortgage Calculator</a> — full year-by-year amortization for a given loan.</li>
-                <li><a href="debt-snowball.html">Debt Snowball &amp; Emergency Fund Calculator</a> — clear other debt before taking on a mortgage.</li>
-                <li><a href="rule-of-72.html">Rule of 72</a> — how fast a down-payment fund could grow while you save.</li>
-              </ul>
+<h2>Real-world practical application</h2>
+<p>Use it to find your ceiling by trial: adjust the price until the verdict flips. Then change one thing at a time to see what moves the result. Paying off a $400-a-month car loan reduces the back-end ratio by 3 points; a larger down payment lowers the payment and the ratios together but raises cash needed; a higher rate or longer horizon changes the monthly cost sharply. Running three or four versions in ten minutes is far more instructive than any single estimate.</p>
+
+<h2>Limits worth knowing</h2>
+<p>A lender will look at your credit score, employment history, assets and the specific loan program, none of which this tool sees. Rates differ by down payment and score, mortgage insurance is not included for down payments below 20%, and maintenance, utilities and moving costs sit outside both ratios yet belong in your budget. The 28/36 pair is a conservative convention; the right limit for you depends on your other priorities and how stable your income is.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Do lenders really use 28% and 36%?</h3>
+<p>They are long-standing guidelines. Many conventional lenders will go higher, often to a back-end DTI of 43% or more with strong credit and reserves, and government-backed programs allow higher still. Treat 28/36 as a comfort zone, not a hard stop.</p>
+<h3>Should I use gross or take-home income?</h3>
+<p>Lenders use gross, so the calculator does too. But when budgeting for yourself, check the payment against your actual take-home pay; a payment that is 28% of gross can be 35% or more of what lands in your account.</p>
+<h3>Why does the tool check savings as well as income?</h3>
+<p>Because many buyers are approved on income and then run short at closing. Cash needed is the down payment plus closing costs, and spending the very last dollar leaves nothing for repairs or a bad month.</p>
+<h3>What are the biggest levers for improving the verdict?</h3>
+<p>Lower other debt, increase the down payment, pick a lower-priced home, or find a lower rate. The fastest improvement per dollar is often paying off a high-payment debt, such as a car loan.</p>
+<h3>Does this replace a mortgage pre-approval?</h3>
+<p>No. It is a self-check before you apply. A pre-approval verifies your income and credit and is what sellers expect to see with an offer.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="guide-how-much-house-can-i-afford.html">Guide: how much house can I afford?</a> &mdash; the full walkthrough of DTI with three worked buyers.</li>
+<li><a href="mortgage-calculator.html">Mortgage Calculator</a> &mdash; the amortization schedule for the loan you choose.</li>
+<li><a href="salary-converter.html">Salary to Hourly Converter</a> &mdash; what your income is per month and per hour.</li>
+<li><a href="debt-snowball.html">Debt Snowball Calculator</a> &mdash; clear other debts to improve your ratios.</li>
+<li><a href="ontario-take-home-pay.html">Ontario Take-Home Pay Calculator</a> &mdash; your pay after tax, CPP and EI.</li>
+</ul>
             </article>
 
           </main>
@@ -271,6 +336,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

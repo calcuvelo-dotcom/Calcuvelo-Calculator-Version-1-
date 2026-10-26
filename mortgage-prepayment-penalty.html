@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>try{if(localStorage.getItem('cv-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
+  <title>Mortgage Prepayment Penalty Calculator (Canada) — Calcuvelo</title>
+  <meta name="description" content="Compare 3 months’ interest with the interest rate differential (IRD) on your Canadian mortgage, and see whether breaking it early to refinance actually pays off." />
+  <link rel="canonical" href="https://calcuvelo.com/mortgage-prepayment-penalty.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mortgage Prepayment Penalty Calculator (Canada) — Calcuvelo" />
+  <meta property="og:description" content="Compare 3 months’ interest with the interest rate differential (IRD) on your Canadian mortgage, and see whether breaking it early to refinance actually pays off." />
+  <meta property="og:url" content="https://calcuvelo.com/mortgage-prepayment-penalty.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/provinces.js?v=202610262"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Mortgage Prepayment Penalty Calculator",
+        "url": "https://calcuvelo.com/mortgage-prepayment-penalty.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CAD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is a mortgage penalty the same in every province?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The two methods in this calculator, three months’ interest and the interest rate differential, come from your mortgage contract and are used by lenders across Canada, so there is one calculator for the whole country rather than one per province. Local rules can change the surrounding costs, such as legal fees and registration, so confirm those with your lender and lawyer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is the IRD so much higher at some lenders?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because of the comparison rate. A lender using posted rates can compare your rate with a comparison figure that is very different from the discounted rates it actually offers today. Both calculations are legal if disclosed, which is why reading the prepayment clause before you sign matters as much as the rate."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a variable-rate mortgage always have a three-month penalty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Typically, yes, though contracts differ. A few lenders attach a different formula or a higher figure to certain products, so check your own agreement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I avoid the penalty altogether?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sometimes. Options include waiting until the term ends, using annual prepayment privileges, a blend-and-extend, porting the mortgage to a new home, or timing a sale to the end of the term. If a lender does not clearly explain how it calculates the charge, federally regulated lenders are required by the FCAC’s code of conduct to do so."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the Interest Act say about prepaying after five years?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A federal rule in the Interest Act applies to mortgages with a term longer than five years that are held by individuals (not corporations). After the fifth year, it caps the prepayment penalty at three months’ interest. Most Canadian terms are five years or shorter, so it rarely applies. If your term is longer than five years, confirm with your lender or a lawyer how the rule applies to your mortgage."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ===================== UNIVERSAL HEADER  (assets/header.css + assets/header.js) ===================== -->
+  <header class="site-header">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="site-brand">Calcuvelo</span>
+      </a>
+
+      <div class="site-nav" data-dropdown>
+        <button type="button" class="site-nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-menu">
+          Calculators
+          <svg class="site-nav-caret" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="site-nav-menu" id="site-nav-menu" role="menu">
+          <div class="site-nav-cols">
+            <div>
+              <p class="site-nav-heading">Financial</p>
+              <a href="compound-interest.html" data-nav class="site-nav-link" role="menuitem">Compound Interest</a>
+              <a href="mortgage-calculator.html" data-nav class="site-nav-link" role="menuitem">Mortgage</a>
+              <a href="retirement-calculator.html" data-nav class="site-nav-link" role="menuitem">Retirement / 401(k)</a>
+              <a href="auto-loan.html" data-nav class="site-nav-link" role="menuitem">Auto Loan</a>
+              <a href="debt-payoff.html" data-nav class="site-nav-link" role="menuitem">Debt Payoff</a>
+              <a href="debt-consolidation.html" data-nav class="site-nav-link" role="menuitem">Debt Consolidation</a>
+              <a href="payoff-vs-interest.html" data-nav class="site-nav-link" role="menuitem">Payoff vs. Interest</a>
+              <a href="mortgage-affordability.html" data-nav class="site-nav-link" role="menuitem">Mortgage Affordability</a>
+              <a href="401k-split-distribution.html" data-nav class="site-nav-link" role="menuitem">401(k) Split Distribution</a>
+              <a href="debt-snowball.html" data-nav class="site-nav-link" role="menuitem">Debt Snowball &amp; EF</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Economic</p>
+              <a href="inflation-calculator.html" data-nav class="site-nav-link" role="menuitem">Inflation</a>
+              <a href="present-value.html" data-nav class="site-nav-link" role="menuitem">Present &amp; Future Value</a>
+              <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
+              <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
+              <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
+              <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
+            </div>
+          </div>
+          <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
+
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
+        <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle-knob">
+            <svg class="theme-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <svg class="theme-ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block">
+
+      <div class="min-w-0">
+        <div class="print-block">
+          <main class="min-w-0">
+
+            <section x-data="mortgagePenalty()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">Mortgage Prepayment Penalty Calculator</h1>
+              <p class="calc-sub">Three months&rsquo; interest versus the interest rate differential &mdash; and whether breaking your mortgage pays off.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+<p class="mt-2"><span class="rules-chip">Applies in every province &middot; Methods reviewed 2026</span></p>
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div class="">
+                  <label class="label" for="mp-type">Mortgage type</label>
+                  <select id="mp-type" x-model="type" class="field"><option value="fixed">Fixed rate</option><option value="variable">Variable rate</option></select>
+                </div>
+                <div class="">
+                  <label class="label" for="mp-method">How your lender calculates the IRD</label>
+                  <select id="mp-method" x-model="method" class="field"><option value="posted">Posted-rate method (many large banks)</option><option value="current">Current-rate method (many monoline lenders)</option></select>
+                </div>
+                <div class="">
+                  <label class="label" for="mp-bal">Mortgage balance</label>
+                  <div class="relative"><span class="affix affix-left">$</span><input id="mp-bal" type="number" min="0" step="1000" x-model.number="balance" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="1500000" step="1000" x-model.number="balance" class="range" aria-label="Mortgage balance" />
+                </div>
+                <div class="">
+                  <label class="label" for="mp-rate">Your mortgage rate</label>
+                  <div class="relative"><input id="mp-rate" type="number" min="0" step="0.01" x-model.number="rate" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="10" step="0.01" x-model.number="rate" class="range" aria-label="Your mortgage rate" />
+                </div>
+                <div class="">
+                  <label class="label" for="mp-rem">Months left in your term</label>
+                  <div class="relative"><input id="mp-rem" type="number" min="0" step="1" x-model.number="remaining" class="field with-suffix" /><span class="affix affix-right">mo</span></div>
+                  <input type="range" min="0" max="60" step="1" x-model.number="remaining" class="range" aria-label="Months left in your term" />
+                </div>
+                <div class="">
+                  <label class="label" for="mp-new">Rate you could get if you break it</label>
+                  <div class="relative"><input id="mp-new" type="number" min="0" step="0.01" x-model.number="newRate" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="10" step="0.01" x-model.number="newRate" class="range" aria-label="Rate you could get if you break it" />
+                </div>
+                <template x-if="method === 'posted'">
+                  <div class="grid gap-5 sm:col-span-2 sm:grid-cols-2">
+                <div class="">
+                  <label class="label" for="mp-posted">Lender&rsquo;s posted rate today for your remaining term</label>
+                  <div class="relative"><input id="mp-posted" type="number" min="0" step="0.01" x-model.number="postedNow" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="10" step="0.01" x-model.number="postedNow" class="range" aria-label="Lender’s posted rate today for your remaining term" />
+                </div>
+                <div class="">
+                  <label class="label" for="mp-disc">Discount you got from the posted rate when you signed</label>
+                  <div class="relative"><input id="mp-disc" type="number" min="0" step="0.01" x-model.number="discount" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="4" step="0.01" x-model.number="discount" class="range" aria-label="Discount you got from the posted rate when you signed" />
+                </div>
+                  </div>
+                </template>
+                <template x-if="method === 'current'">
+                  <div class="sm:col-span-2">
+                <div class="">
+                  <label class="label" for="mp-cur">Lender&rsquo;s current rate for your remaining term</label>
+                  <div class="relative"><input id="mp-cur" type="number" min="0" step="0.01" x-model.number="currentRate" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="10" step="0.01" x-model.number="currentRate" class="range" aria-label="Lender’s current rate for your remaining term" />
+                </div>
+                  </div>
+                </template>
+              </div>
+
+              <div class="mt-7 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">3 months&rsquo; interest</p><p class="stat-value " x-text="money(out.threeMonths)"></p></div>
+                <div class="stat"><p class="stat-label">Interest rate differential</p><p class="stat-value " x-text="out.isFixed ? money(out.ird) : 'n/a (variable)'"></p></div>
+                <div class="stat"><p class="stat-label">Estimated penalty</p><p class="stat-value stat-neg" x-text="money(out.penalty)"></p></div>
+                <div class="stat"><p class="stat-label">Penalty as % of balance</p><p class="stat-value " x-text="pct(out.pctOfBalance)"></p></div>
+              </div>
+              <div class="mt-5 rounded-xl p-4 text-sm ring-1" :class="out.isFixed && out.usesIrd ? 'bg-amber-50 text-amber-900 ring-amber-200' : 'bg-indigo-50 text-indigo-900 ring-indigo-200'"><strong x-text="out.isFixed ? (out.usesIrd ? 'The IRD is larger, so it sets your penalty.' : 'Three months&rsquo; interest is larger, so it sets your penalty.') : 'Variable-rate mortgages typically charge three months&rsquo; interest.'"></strong>
+                <span x-show="out.isFixed" x-text="' The comparison rate used was ' + nfmt(out.comparison, 2) + '%.'"></span></div>
+              <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                <div class="stat"><p class="stat-label">Interest saved at the new rate (approx.)</p><p class="stat-value stat-pos" x-text="money(out.savings)"></p></div>
+                <div class="stat"><p class="stat-label">Savings minus penalty</p><p class="stat-value " x-text="money(out.net)"></p></div>
+                <div class="stat"><p class="stat-label">Months to recover the penalty</p><p class="stat-value " x-text="Number.isFinite(out.breakEvenMonths) ? nfmt(out.breakEvenMonths, 1) + ' mo' : '—'"></p></div>
+              </div>
+              <div class="mt-5 rounded-xl p-4 text-sm ring-1" :class="out.worthIt ? 'bg-emerald-50 text-emerald-900 ring-emerald-200' : 'bg-rose-50 text-rose-700 ring-rose-200'"><strong x-text="out.worthIt ? 'Breaking could pay off.' : 'Breaking probably does not pay off.'"></strong>
+                <span x-text="out.worthIt ? ' Estimated interest savings exceed the penalty by ' + money(out.net) + ', recovered in about ' + nfmt(out.breakEvenMonths, 1) + ' months.' : ' The penalty is larger than the interest you would save over the remaining term, or the new rate is not lower than yours.'"></span></div>
+              <p class="disclaimer">Estimate only. Lenders may add administration, legal and appraisal fees, and your contract controls the exact calculation. Confirm with a written payout statement.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+<h2>What is the Mortgage Prepayment Penalty Calculator?</h2>
+<p>Break a Canadian mortgage before the term ends and the lender will usually charge a penalty. On a variable-rate mortgage that penalty is normally three months of interest. On a fixed-rate mortgage it is the <em>greater</em> of three months of interest and something called the interest rate differential, or IRD. The IRD is where people get surprised: depending on how a lender calculates it, the bill on the same mortgage can differ by thousands of dollars.</p>
+<p>This calculator lets you put in your own mortgage and see both numbers, the one you would actually pay, and whether refinancing at a lower rate saves more than the penalty costs. It is built for homeowners deciding whether to refinance, sell, or switch lenders partway through a term.</p>
+
+<h2>Filling it in</h2>
+<ul>
+<li><strong>Mortgage type.</strong> Fixed or variable. The type decides which penalty rule applies.</li>
+<li><strong>Balance, contract rate and months left.</strong> Take the balance you would be prepaying, the rate on your mortgage, and the number of months remaining in the current term from your latest statement.</li>
+<li><strong>IRD method.</strong> Lenders fall into two camps. Many large banks use a <em>posted-rate</em> method: they take the lender&rsquo;s current posted rate for a term matching your remaining time, subtract the discount you originally received, and use that as the comparison rate. Many monoline lenders use a <em>current-rate</em> method: they simply compare your rate with what they charge today for that remaining term. Your mortgage contract says which one applies; if it is unclear, ask the lender to show the calculation in writing.</li>
+<li><strong>Posted rate, discount and current rate.</strong> The posted rate and discount are the extra inputs for the posted-rate method; the current rate is the extra input for the current-rate method.</li>
+<li><strong>Rate you could get after breaking.</strong> Used only for the &ldquo;is it worth it?&rdquo; comparison.</li>
+</ul>
+
+<h2>How does the underlying math work?</h2>
+<p>Two formulas drive everything. Three months of interest is the balance times the annual rate, divided by twelve, times three. The interest rate differential multiplies the rate gap by the balance and by the time left, in years:</p><div class="not-prose my-4"><div class="formula">3 months&rsquo; interest = balance &times; rate &divide; 12 &times; 3</div></div><div class="not-prose my-4"><div class="formula">IRD = (contract rate &minus; comparison rate) &times; balance &times; (months left &divide; 12)</div></div>
+<p>The comparison rate is where lenders differ. With the posted-rate method it is the current posted rate minus your original discount; with the current-rate method it is simply today&rsquo;s rate for the remaining term. If the gap is zero or negative, the IRD is zero and a fixed-rate penalty falls back to three months&rsquo; interest. The refinance test then estimates the interest you would save at the new rate over the remaining months and subtracts the penalty.</p>
+
+<h2>Worked example: $350,000 with 30 months left</h2>
+<p>Take a fixed-rate mortgage at 5.19%, with 30 months left. Three months of interest is <strong>$4,541</strong>.</p>
+<ul>
+<li><strong>Posted-rate lender.</strong> You originally received a 1.80-point discount, and the lender&rsquo;s current posted rate for a 2.5-year term is 5.49%. The comparison rate is 5.49% &minus; 1.80% = 3.69%. The IRD is (5.19% &minus; 3.69%) &times; $350,000 &times; 2.5 = <strong>$13,125</strong>, so that is your penalty &mdash; 3.75% of the balance.</li>
+<li><strong>Current-rate lender.</strong> The same lender charges 4.69% today for a comparable term. The IRD is only (5.19% &minus; 4.69%) &times; $350,000 &times; 2.5 = $4,375, below three months&rsquo; interest, so the penalty is <strong>$4,541</strong>.</li>
+<li><strong>Variable rate.</strong> The same balance at a variable rate: <strong>$4,541</strong>, since the IRD does not apply.</li>
+</ul>
+<p>Same balance, same rate, same months left &mdash; a spread of about $8,600 depending on the method. Now test whether breaking it pays. If you could refinance at 4.69%, you would save about $4,375 in interest over the 30 months. With the posted-rate penalty that is a net loss of roughly $8,750; even with the lower penalty it is about $166 short.</p>
+<p>A contrasting case: 18 months left, a rate of 5.19%, and a new rate of 4.19% (a full point lower). The IRD is small, so the penalty is three months&rsquo; interest, $4,541, while the interest saved is about $5,250 &mdash; a net gain of roughly <strong>$709</strong>, recovered in about 16 months. The bigger the rate drop and the more time left, the better the case for breaking.</p>
+
+<h2>Real-world practical application</h2>
+<p>The most common use is the refinance decision: rates have fallen, a lender offers a lower rate, and you want to know whether the penalty swallows the savings. It is also useful before selling a home, since a buyer rarely takes over your mortgage unless it is portable or assumable, and the penalty is a real cost of the sale. And it is a quick way to sanity-check a lender&rsquo;s quote: if the number on the payout statement is far from either figure here, ask for the working.</p>
+
+<h2>What this estimate does not include</h2>
+<p>Lenders can add fees on top of the penalty: an administration or discharge fee, an appraisal, legal costs for a new mortgage, and sometimes a reinvestment fee. Prepayment privileges matter too &mdash; many contracts let you pay down 10&ndash;20% of the original principal each year without penalty, which can reduce the balance the penalty applies to. Some lenders offer a blend-and-extend, which rolls your old rate into a new longer term at a blended rate and avoids the penalty entirely, and some mortgages are portable to a new home. The refinance test here uses your current balance for the whole remaining term, a simplification that slightly overstates savings.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is a mortgage penalty the same in every province?</h3>
+<p>The two methods in this calculator, three months&rsquo; interest and the interest rate differential, come from your mortgage contract and are used by lenders across Canada, so there is one calculator for the whole country rather than one per province. Local rules can change the surrounding costs, such as legal fees and registration, so confirm those with your lender and lawyer.</p>
+<h3>Why is the IRD so much higher at some lenders?</h3>
+<p>Because of the comparison rate. A lender using posted rates can compare your rate with a comparison figure that is very different from the discounted rates it actually offers today. Both calculations are legal if disclosed, which is why reading the prepayment clause before you sign matters as much as the rate.</p>
+<h3>Does a variable-rate mortgage always have a three-month penalty?</h3>
+<p>Typically, yes, though contracts differ. A few lenders attach a different formula or a higher figure to certain products, so check your own agreement.</p>
+<h3>Can I avoid the penalty altogether?</h3>
+<p>Sometimes. Options include waiting until the term ends, using annual prepayment privileges, a blend-and-extend, porting the mortgage to a new home, or timing a sale to the end of the term. If a lender does not clearly explain how it calculates the charge, federally regulated lenders are required by the FCAC&rsquo;s code of conduct to do so.</p>
+<h3>What does the Interest Act say about prepaying after five years?</h3>
+<p>A federal rule in the Interest Act applies to mortgages with a term longer than five years that are held by individuals (not corporations). After the fifth year, it caps the prepayment penalty at three months&rsquo; interest. Most Canadian terms are five years or shorter, so it rarely applies. If your term is longer than five years, confirm with your lender or a lawyer how the rule applies to your mortgage.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="mortgage-calculator.html">Mortgage Calculator</a> &mdash; payments and interest on the loan you are deciding to break.</li>
+<li><a href="mortgage-affordability.html">Mortgage Affordability Calculator</a> &mdash; check a new mortgage against your income before refinancing.</li>
+<li><a href="guide-how-much-house-can-i-afford.html">Guide: how much house can I afford?</a> &mdash; what a lower rate does to the price you can carry.</li>
+<li><a href="payoff-vs-interest.html">Payoff vs. Interest Calculator</a> &mdash; the same pay-down-versus-invest question for other loans.</li>
+</ul>
+            </article>
+
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

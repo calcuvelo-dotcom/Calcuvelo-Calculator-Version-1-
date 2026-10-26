@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Roth 401(k) Split Distribution Stress Relief Calculator — Calcuvelo</title>
-  <meta name="description" content="Splitting a 401(k) between a cashed-out distribution and a tax-free rollover? See the net amount after tax and penalties, and how many months of expenses it covers." />
+  <title>401(k) Split Distribution Calculator — Calcuvelo</title>
+  <meta name="description" content="See the net cash from cashing out part of an old 401(k) after tax and penalty while rolling the rest over, and how many months of bills it covers." />
   <link rel="canonical" href="https://calcuvelo.com/401k-split-distribution.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Roth 401(k) Split Distribution Stress Relief Calculator — Calcuvelo" />
-  <meta property="og:description" content="Net proceeds from a split 401(k) distribution, and the financial cushion it buys you." />
+  <meta property="og:title" content="401(k) Split Distribution Calculator — Calcuvelo" />
+  <meta property="og:description" content="See the net cash from cashing out part of an old 401(k) after tax and penalty while rolling the rest over, and how many months of bills it covers." />
   <meta property="og:url" content="https://calcuvelo.com/401k-split-distribution.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/401k-split-distribution.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Why is the rolled-over portion not taxed, but the cashed-out portion is?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A rollover moves money directly between tax-deferred retirement accounts, so the IRS doesn't treat it as income. Cashing out a portion instead — taking a distribution — is treated as ordinary income in the year you receive it, and if you're under 59½ it typically adds a 10% early-withdrawal penalty on top." }
+            "name": "Why is the rolled-over part not taxed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A direct rollover between tax-advantaged retirement accounts is not treated as income, so the full balance continues to grow tax-deferred. Only money you take as a distribution is taxed in the year you receive it."
+            }
           },
           {
             "@type": "Question",
-            "name": "How much should I assume gets withheld for taxes?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Plans are generally required to withhold 20% for federal taxes on a cashed-out distribution, and your state may withhold more. The withholding is just an estimate toward what you'll actually owe — your real tax bill depends on your total income and bracket for the year, so set the tax-rate input to your best estimate of your combined marginal rate." }
+            "name": "How much will actually be withheld?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Plans generally withhold 20% for federal tax on a cashed-out distribution from a traditional 401(k), and some states add their own. Withholding is only an advance; your real tax depends on your total income for the year, and the 10% penalty is typically settled at tax time."
+            }
           },
           {
             "@type": "Question",
-            "name": "What counts toward my \"runway\" in this calculator?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Runway is the net cash from the distribution plus any emergency fund and checking/savings balance you enter, divided by your total monthly expenses. It estimates how many months you could cover your bills from cash on hand alone, a standard way financial planners gauge how much cushion a household has." }
+            "name": "Does the Roth part of a 401(k) change the numbers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Possibly a lot. Qualified Roth distributions are tax-free, and for non-qualified ones only the earnings are taxed, not the contributions. If your account is a Roth and mostly contributions, the tax rate you enter should be lower than for a traditional account."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many months of runway should I aim for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Financial planners commonly suggest three to six months of expenses in an emergency fund, more with variable income or a single earner. Use the score as a rough guide, then adjust for how stable your income is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a way to avoid the 10% penalty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There are exceptions, including some medical costs, total disability and, in some cases, leaving your employer after a certain age. They have strict conditions, so confirm yours before assuming one applies."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
@@ -142,6 +181,7 @@
             <section x-data="k401SplitDistribution()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Roth 401(k) Split Distribution Stress Relief Calculator</h1>
               <p class="calc-sub">Cashing out part of an old 401(k) while rolling the rest into a new plan — see the net cash and the cushion it buys you.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -256,29 +296,55 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Roth 401(k) Split Distribution Stress Relief Calculator?</h2>
-              <p>When you leave an employer, you can split an old 401(k): roll most of it tax-free into a new plan or IRA, and cash out a portion to cover an immediate need. This calculator figures out exactly how much of the cashed-out portion survives taxes and penalties, and translates that net cash — combined with whatever savings you already have — into how many months of expenses it actually covers.</p>
+<h2>What is the Roth 401(k) Split Distribution Stress Relief Calculator?</h2>
+<p>Leaving a job often leaves an old 401(k) sitting there, and sometimes also leaves a cash-flow gap. A &ldquo;split&rdquo; is a middle path: roll most of the balance into a new plan or IRA, where it stays tax-deferred, and cash out only the portion you need now. This calculator shows what the cashed-out slice is worth after tax and penalty, what happens to the rolled-over slice, and &mdash; the part that gives the tool its name &mdash; how many months of your actual bills the net cash would cover.</p>
+<p>It exists to make one trade-off visible: the cost of relief today, measured in retirement dollars you will not have later.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>Only the cashed-out distribution is a taxable event: the calculator reduces it by your combined federal-plus-state tax-rate estimate, an early-withdrawal penalty if you're under 59&frac12; (10% by default), and a flat plan processing fee. The amount rolled directly into a new 401(k) keeps its tax-deferred status, so it is reduced only by the flat fee, never by tax or penalty. The resulting net distribution is added to your existing emergency fund and checking/savings balances to form a total cushion, which is then divided by your total monthly expenses to get a <strong>runway in months</strong> — a standard way to measure how long cash on hand would last if nothing else changed.</p>
+<h2>How to use it</h2>
+<ul>
+<li><strong>The split.</strong> Enter how much you will cash out and how much you will roll over. They need not add up to anything particular; each is calculated on its own.</li>
+<li><strong>Penalty and tax rate.</strong> The early-withdrawal penalty is 10% for most people under 59&frac12;, with some exceptions. For taxes, estimate your combined federal and state marginal rate for the year; a distribution is added to your income, so it can push you into a higher bracket.</li>
+<li><strong>Processing fee.</strong> A flat fee some plans charge per disbursement. Enter 0 if yours charges none.</li>
+<li><strong>Monthly budget.</strong> Income, housing, insurance, other debt payments and other expenses. Together they define your monthly &ldquo;burn&rdquo; that the cash must cover.</li>
+<li><strong>Existing cash.</strong> Emergency fund and checking/savings balances, so the runway reflects everything you actually have.</li>
+</ul>
 
-              <h2>Real-world practical application</h2>
-              <p>This is built for the specific, stressful moment of a job change: you need some cash now — to cover a gap between paychecks, a medical bill, or moving costs — but don't want to sacrifice your whole retirement balance to taxes and penalties by cashing out everything. Running the numbers before deciding how much to split off shows whether a smaller distribution still buys enough breathing room, so you can roll over more and keep it growing tax-deferred.</p>
+<h2>How does the underlying math work?</h2>
+<p>Only the cashed-out slice faces tax and penalty. The rolled-over slice moves directly between tax-deferred accounts, which is not a taxable event, so it loses only the flat fee.</p><div class="not-prose my-4"><div class="formula">net distribution = distribution &times; (1 &minus; tax rate &minus; penalty) &minus; fee</div></div><div class="not-prose my-4"><div class="formula">runway (months) = (net distribution + emergency fund + savings) &divide; monthly expenses</div></div>
+<p>The stress-relief score scales runway against a six-month cushion: six months of expenses or more scores 100, three months about 50. It is a way to read the result at a glance, not an official measure.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>Why is the rolled-over portion not taxed, but the cashed-out portion is?</h3>
-              <p>A rollover moves money directly between tax-deferred retirement accounts, so the IRS doesn't treat it as income. Cashing out a portion instead &mdash; taking a distribution &mdash; is treated as ordinary income in the year you receive it, and if you're under 59&frac12; it typically adds a 10% early-withdrawal penalty on top.</p>
-              <h3>How much should I assume gets withheld for taxes?</h3>
-              <p>Plans are generally required to withhold 20% for federal taxes on a cashed-out distribution, and your state may withhold more. The withholding is just an estimate toward what you'll actually owe &mdash; your real tax bill depends on your total income and bracket for the year, so set the tax-rate input to your best estimate of your combined marginal rate.</p>
-              <h3>What counts toward my "runway" in this calculator?</h3>
-              <p>Runway is the net cash from the distribution plus any emergency fund and checking/savings balance you enter, divided by your total monthly expenses. It estimates how many months you could cover your bills from cash on hand alone, a standard way financial planners gauge how much cushion a household has.</p>
+<h2>Worked example: how big should the split be?</h2>
+<p>Take a $59,722 account being split, with a 24% combined tax rate, a 10% penalty, a $75 fee, monthly expenses of $2,553 (mortgage $1,515, insurance $323, other debt $715) and no other savings.</p>
+<ul>
+<li><strong>Cash out $20,943.</strong> About $7,121 goes to tax and penalty; the net is about <strong>$13,747</strong>. The rolled-over $38,780 stays intact (about $38,705 after the flat fee). Runway: about <strong>5.4 months</strong>.</li>
+<li><strong>Cash out $12,000 instead.</strong> The net is about $7,845, runway about <strong>3.1 months</strong>, and about $8,900 more stays invested for retirement (rolled over: roughly $47,648).</li>
+</ul>
+<p>The calculator makes the exchange rate explicit: in this case every $1 of net cash costs about $1.52 of retirement savings, because 34 cents of each distributed dollar disappears to tax and penalty. Whether 5.4 months of runway is worth roughly $8,900 of future retirement balance is your call; the point is to see the trade.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="retirement-calculator.html">Retirement / 401(k) Calculator</a> — see the long-run cost of cashing out instead of rolling over.</li>
-                <li><a href="debt-snowball.html">Debt Snowball &amp; Emergency Fund Calculator</a> — build a cushion without touching retirement savings.</li>
-                <li><a href="debt-consolidation.html">Debt Consolidation Calculator</a> — another way to free up cash without a taxable 401(k) withdrawal.</li>
-              </ul>
+<h2>Real-world practical application</h2>
+<p>This is for the planning conversation you should have <em>before</em> requesting a distribution. Is a shorter runway acceptable if you have a new job starting next month? Could a smaller split plus a temporary budget cut do the same job? The runway result also acts as a sanity check on the size of the problem: a gap of one or two months of expenses may not justify a 34% haircut on retirement savings, while a genuine emergency might.</p>
+
+<h2>What to confirm before you act</h2>
+<p>Tax rules for distributions are specific: withholding rates, exceptions to the 10% penalty (such as certain medical expenses, disability or separation from service after a certain age), and the treatment of Roth contributions versus earnings all matter, and a Roth 401(k) distribution can be partly tax-free depending on your contributions and how long the account has been open. The calculator applies one blended rate to the whole distribution, so a Roth account with a large share of contributions may cost less than shown. Check with your plan administrator or a tax professional, and look at alternatives such as a hardship exception or a short-term loan.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why is the rolled-over part not taxed?</h3>
+<p>A direct rollover between tax-advantaged retirement accounts is not treated as income, so the full balance continues to grow tax-deferred. Only money you take as a distribution is taxed in the year you receive it.</p>
+<h3>How much will actually be withheld?</h3>
+<p>Plans generally withhold 20% for federal tax on a cashed-out distribution from a traditional 401(k), and some states add their own. Withholding is only an advance; your real tax depends on your total income for the year, and the 10% penalty is typically settled at tax time.</p>
+<h3>Does the Roth part of a 401(k) change the numbers?</h3>
+<p>Possibly a lot. Qualified Roth distributions are tax-free, and for non-qualified ones only the earnings are taxed, not the contributions. If your account is a Roth and mostly contributions, the tax rate you enter should be lower than for a traditional account.</p>
+<h3>How many months of runway should I aim for?</h3>
+<p>Financial planners commonly suggest three to six months of expenses in an emergency fund, more with variable income or a single earner. Use the score as a rough guide, then adjust for how stable your income is.</p>
+<h3>Is there a way to avoid the 10% penalty?</h3>
+<p>There are exceptions, including some medical costs, total disability and, in some cases, leaving your employer after a certain age. They have strict conditions, so confirm yours before assuming one applies.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="retirement-calculator.html">Retirement / 401(k) Calculator</a> &mdash; what the money would have grown to if left alone.</li>
+<li><a href="guide-start-early-vs-contribute-more.html">Guide: start early or contribute more later?</a> &mdash; why early retirement dollars carry the most weight.</li>
+<li><a href="debt-consolidation.html">Debt Consolidation Calculator</a> &mdash; a different route to relieve a cash squeeze.</li>
+<li><a href="debt-snowball.html">Debt Snowball & Emergency Fund Calculator</a> &mdash; build a cushion without touching retirement money.</li>
+</ul>
             </article>
 
           </main>
@@ -292,6 +358,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

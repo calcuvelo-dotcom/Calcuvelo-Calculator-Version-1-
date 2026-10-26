@@ -8,14 +8,14 @@
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
   <title>Debt Snowball &amp; Emergency Fund Calculator — Calcuvelo</title>
-  <meta name="description" content="Simulate the debt snowball method across multiple debts — a starter emergency fund first, then smallest balance first — and see when you'll be debt-free and when your emergency fund hits its goal." />
+  <meta name="description" content="Plan a month-by-month payoff: fund a $1,000 starter cushion, clear up to three debts smallest first, then build your emergency fund." />
   <link rel="canonical" href="https://calcuvelo.com/debt-snowball.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Debt Snowball &amp; Emergency Fund Calculator — Calcuvelo" />
-  <meta property="og:description" content="Smallest balance first, then build your emergency fund — see your full payoff timeline." />
+  <meta property="og:description" content="Plan a month-by-month payoff: fund a $1,000 starter cushion, clear up to three debts smallest first, then build your emergency fund." />
   <meta property="og:url" content="https://calcuvelo.com/debt-snowball.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/debt-snowball.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Why pay off the smallest balance first instead of the highest interest rate?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The debt snowball method (smallest balance first) usually costs a bit more in total interest than the debt avalanche method (highest rate first), but it produces a payoff win faster, which research on behavior change shows helps many people stick with the plan. Either method beats paying only minimums." }
+            "name": "Why start with only $1,000 in the emergency fund?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is a small buffer that stops a minor surprise, like a car repair, from sending you back to a credit card. The larger fund is built after the debts are gone, when more cash is available each month."
+            }
           },
           {
             "@type": "Question",
-            "name": "Why build a starter emergency fund before attacking debt at all?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A small starter cushion, commonly $1,000, exists so an unexpected car repair or medical bill doesn't force you back onto a credit card while you're trying to pay one off. This calculator sets that cushion aside first, before any extra money goes toward the snowball." }
+            "name": "What does the snowball method do differently from the avalanche?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The snowball sorts debts by balance, smallest first, so you eliminate accounts quickly; the avalanche sorts by interest rate, highest first, which minimizes interest. Total cost is usually close, and the guide on this site compares them on one set of numbers."
+            }
           },
           {
             "@type": "Question",
-            "name": "What happens to a debt's minimum payment once it's paid off?",
-            "acceptedAnswer": { "@type": "Answer", "text": "It rolls forward. The dollars that used to cover that debt's minimum payment get added to the amount attacking the next-smallest balance, so your total monthly debt payment stays the same throughout — only where it's pointed changes. That's the \"snowball\" effect." }
+            "name": "Can I add a fourth debt?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not in this version: it handles three. If you have more, combine small ones with similar rates, or run the tool in stages."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the 401(k) loan count as debt here?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because you owe the payments. It is a loan to yourself, with a payroll-deducted or scheduled repayment and often an interest rate that goes back into your account, so it competes with other debts for your cash."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if my income is irregular?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use a conservative monthly average, or run the calculator with a low month and a high month to see the range of outcomes."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
@@ -142,6 +181,7 @@
             <section x-data="debtSnowball()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Debt Snowball &amp; Emergency Fund Calculator</h1>
               <p class="calc-sub">Smallest balance first, then build your emergency fund — see the full timeline.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -246,29 +286,61 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Debt Snowball and Emergency Fund Calculator?</h2>
-              <p>This calculator simulates paying off several debts at once using the debt snowball method — attack the smallest balance first while paying minimums on everything else, then roll each freed-up minimum payment into the next-smallest balance — alongside building a starter and then full emergency fund. It turns a multi-debt household budget into a single month-by-month timeline.</p>
+<h2>What is the Debt Snowball and Emergency Fund Calculator?</h2>
+<p>Paying off several debts at once is a sequencing problem, not just an arithmetic one: which debt gets the extra money, what happens when one disappears, and when do you start building a safety net? This calculator answers it with a month-by-month simulation of the snowball method and then carries the plan through to a funded emergency account.</p>
+<p>It handles three debts at once &mdash; a credit card, a 401(k) loan and a car loan &mdash; each with its own balance, rate and minimum payment, and shows the timeline as a chart or a table.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>Each month, every open debt accrues interest at its own APR. The calculator pays the minimum on every debt except the current smallest-balance target, which receives its minimum plus all of your disposable income (income minus living expenses minus every debt's minimum payment). The moment a debt reaches zero, its minimum payment is added to the pool attacking the next-smallest balance — the "snowball" rolling forward. Any one-time gift first tops up a $1,000 starter emergency fund, then goes straight onto the smallest balance. Once every debt is cleared, the full amount that used to service debt redirects to the emergency fund until it reaches your goal.</p>
+<h2>Setting it up</h2>
+<ul>
+<li><strong>Monthly income and living expenses.</strong> Take-home income, and everything you spend that is not debt service. Their difference, less all minimum payments, is the &ldquo;extra&rdquo; that powers the snowball.</li>
+<li><strong>The three debts.</strong> Balance, APR and minimum payment for each. Leave a balance at zero to skip a debt.</li>
+<li><strong>Gift or windfall.</strong> A one-time amount. It tops up the starter emergency fund first, then goes to the smallest debt.</li>
+<li><strong>Emergency-fund goal and current balance.</strong> The target you want to reach after the debts are gone, and what you already have.</li>
+</ul>
 
-              <h2>Real-world practical application</h2>
-              <p>Households juggling a credit card, a 401(k) loan and a car loan at the same time use this to get a single, concrete order of operations instead of splitting extra payments evenly across everything (which usually takes longer and doesn't change behavior). It's also useful for testing how a tax refund, bonus, or gift changes the payoff date, and for seeing how soon a real safety net exists after the debt is gone.</p>
+<h2>How does the underlying math work?</h2>
+<p>The plan follows three phases that repeat each month:</p>
+<ol>
+<li><strong>Starter cushion.</strong> If the emergency fund is below $1,000 (or your goal, if smaller), spare cash goes there first.</li>
+<li><strong>Snowball.</strong> Every debt gets its minimum payment. All remaining spare cash goes to the debt with the smallest balance, and if that debt is cleared mid-month, the leftover rolls straight on to the next smallest. In later months, the minimums of debts already cleared are added to the pool &mdash; that is the &ldquo;snowball.&rdquo;</li>
+<li><strong>Emergency fund.</strong> Once every debt is gone, the entire amount that used to go to debts flows into the emergency fund until it hits the goal.</li>
+</ol>
+<p>Interest is added to each open balance every month at its APR, which is why paying a debt off sooner reduces total interest.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>Why pay off the smallest balance first instead of the highest interest rate?</h3>
-              <p>The debt snowball method (smallest balance first) usually costs a bit more in total interest than the debt avalanche method (highest rate first), but it produces a payoff win faster, which research on behavior change shows helps many people stick with the plan. Either method beats paying only minimums.</p>
-              <h3>Why build a starter emergency fund before attacking debt at all?</h3>
-              <p>A small starter cushion, commonly $1,000, exists so an unexpected car repair or medical bill doesn't force you back onto a credit card while you're trying to pay one off. This calculator sets that cushion aside first, before any extra money goes toward the snowball.</p>
-              <h3>What happens to a debt's minimum payment once it's paid off?</h3>
-              <p>It rolls forward. The dollars that used to cover that debt's minimum payment get added to the amount attacking the next-smallest balance, so your total monthly debt payment stays the same throughout — only where it's pointed changes. That's the "snowball" effect.</p>
+<h2>Worked example: a household with two debts</h2>
+<p>Income $4,600, living expenses $3,300, a $3,200 credit card at 24% (minimum $95), a $9,500 car loan at 7% (minimum $285), and an emergency-fund goal of $6,000 starting from zero. Spare cash after minimums: <strong>$920</strong> a month.</p>
+<ul>
+<li>The first $1,000 builds the starter fund, which takes the first couple of months.</li>
+<li>The credit card (smallest balance) is cleared first, then its $95 minimum rolls into the car loan.</li>
+<li>Result: debt-free in about <strong>12 months</strong>, about $628 total interest, emergency goal reached about <strong>month 15</strong>.</li>
+</ul>
+<p>Now change one thing. A one-time $1,500 gift fills the starter fund and puts $500 on the card: debt-free in about <strong>10 months</strong>, interest about $461, goal at about month 13. If monthly expenses instead run $200 higher, spare cash falls to $720 and the plan stretches to about 14 months and $746 of interest, with the emergency fund reached around month 18. Small changes in spare cash move the schedule more than you would guess.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="debt-payoff.html">Debt Payoff Calculator</a> — the same payoff math for a single balance.</li>
-                <li><a href="debt-consolidation.html">Debt Consolidation Calculator</a> — compare consolidating versus snowballing.</li>
-                <li><a href="401k-split-distribution.html">401(k) Split Distribution Calculator</a> — build a cushion without touching retirement savings.</li>
-              </ul>
+<h2>Real-world practical application</h2>
+<p>Beyond getting a single date, the calculator is a budgeting stress-test. Raise or lower expenses to see how much a particular habit costs in months of debt. Add a windfall to see whether it is better spent on debt or on the starter fund. Compare the order of payoff it produces with an alternative: if your largest debt has the highest interest, the <a href="guide-debt-snowball-vs-avalanche.html">snowball-versus-avalanche guide</a> shows how much the order really matters.</p>
+
+<h2>Assumptions and limits</h2>
+<p>The simulation assumes a constant income and expense level, fixed interest rates and that no new debt is added. It does not model taxes, penalties or the loss of 401(k) growth while a loan is outstanding. The snowball order here is strictly smallest balance first, which can cost slightly more interest than paying the highest APR first; the guide quantifies the difference.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why start with only $1,000 in the emergency fund?</h3>
+<p>It is a small buffer that stops a minor surprise, like a car repair, from sending you back to a credit card. The larger fund is built after the debts are gone, when more cash is available each month.</p>
+<h3>What does the snowball method do differently from the avalanche?</h3>
+<p>The snowball sorts debts by balance, smallest first, so you eliminate accounts quickly; the avalanche sorts by interest rate, highest first, which minimizes interest. Total cost is usually close, and the guide on this site compares them on one set of numbers.</p>
+<h3>Can I add a fourth debt?</h3>
+<p>Not in this version: it handles three. If you have more, combine small ones with similar rates, or run the tool in stages.</p>
+<h3>Why does the 401(k) loan count as debt here?</h3>
+<p>Because you owe the payments. It is a loan to yourself, with a payroll-deducted or scheduled repayment and often an interest rate that goes back into your account, so it competes with other debts for your cash.</p>
+<h3>What if my income is irregular?</h3>
+<p>Use a conservative monthly average, or run the calculator with a low month and a high month to see the range of outcomes.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="guide-debt-snowball-vs-avalanche.html">Guide: debt snowball vs. avalanche</a> &mdash; the same debts, two orders, compared in dollars.</li>
+<li><a href="debt-payoff.html">Debt Payoff Calculator</a> &mdash; a closer look at one balance at a time.</li>
+<li><a href="debt-consolidation.html">Debt Consolidation Calculator</a> &mdash; when a single new loan beats a plan.</li>
+<li><a href="401k-split-distribution.html">401(k) Split Distribution Calculator</a> &mdash; the cost of raiding retirement savings instead.</li>
+<li><a href="osap-repayment-calculator.html">OSAP Repayment Calculator</a> &mdash; plan student loans alongside other debts.</li>
+</ul>
             </article>
 
           </main>
@@ -282,6 +354,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

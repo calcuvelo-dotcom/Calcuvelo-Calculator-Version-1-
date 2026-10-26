@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Present Value &amp; Future Value Calculator — Calcuvelo</title>
-  <meta name="description" content="Free time value of money calculator. Solve for present value or future value with an optional recurring payment, and see the value grow period by period on a chart." />
+  <title>Present Value &amp; Future Value Calculator (TVM) — Calcuvelo</title>
+  <meta name="description" content="Solve the time value of money: grow a sum or a payment stream to a future value, or discount a future target back to what you need to set aside today." />
   <link rel="canonical" href="https://calcuvelo.com/present-value.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Present Value &amp; Future Value Calculator — Calcuvelo" />
-  <meta property="og:description" content="Solve for present or future value with an optional recurring payment." />
+  <meta property="og:title" content="Present Value &amp; Future Value Calculator (TVM) — Calcuvelo" />
+  <meta property="og:description" content="Solve the time value of money: grow a sum or a payment stream to a future value, or discount a future target back to what you need to set aside today." />
   <meta property="og:url" content="https://calcuvelo.com/present-value.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/present-value.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
+            "name": "Why is present value always smaller than future value?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because money you hold today can earn a return, so a given future amount needs less than that amount today. The higher the rate and the longer the wait, the bigger the gap."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "What discount rate should I use?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Use the return you could earn on a comparable alternative investment — your opportunity cost. For personal decisions that is often the expected return of a diversified portfolio (around 6-8%). A business typically uses its weighted average cost of capital. A higher discount rate makes future money worth less today." }
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For a personal goal, the rate you expect to earn on a comparable-risk investment. For comparing a settlement, a rate near what you could safely earn elsewhere. Run the calculation at two or three rates to see how sensitive the answer is."
+            }
           },
           {
             "@type": "Question",
-            "name": "What is the difference between present value and net present value?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Present value discounts a single future amount or a stream of equal payments back to today. Net present value (NPV) does the same for an irregular series of cash flows and then subtracts the upfront cost, giving a single number that is positive when an investment adds value." }
+            "name": "What is the difference between an ordinary annuity and an annuity due?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An ordinary annuity pays at the end of each period; an annuity due pays at the start. This calculator uses the ordinary form. Moving every payment one period earlier would multiply the annuity part by (1 + i)."
+            }
           },
           {
             "@type": "Question",
-            "name": "Why is a dollar today worth more than a dollar tomorrow?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Three reasons: a dollar today can be invested and earn a return, inflation erodes the buying power of future dollars, and a promised future payment carries the risk it may not arrive. Together these make money have a time value." }
+            "name": "How do I compare a lump sum with monthly payments?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pick a discount rate, bring each payment back to today’s value, and add them up. Compare that total with the lump sum on offer; if the lump sum is larger, it is the better deal at that rate."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does compounding frequency matter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A little. Moving from annual to monthly compounding at 6% raises the effective rate from 6.00% to about 6.17%. Over long periods the gap grows, but the rate and the number of years dominate."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="tvm()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Present Value &amp; Future Value Calculator</h1>
               <p class="calc-sub">The time value of money, with an optional recurring payment.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -223,46 +263,50 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Present &amp; Future Value Calculator?</h2>
-              <p>The Present &amp; Future Value Calculator applies the core time-value-of-money formula: grow a lump sum, plus an optional recurring payment, forward to a future value &mdash; or discount a future target back to what it is worth today.</p>
+<h2>What is the Present &amp; Future Value Calculator?</h2>
+<p>A dollar today is worth more than a dollar next year, because today&rsquo;s dollar can be put to work. This calculator turns that idea into two practical questions. <strong>Future value:</strong> if I invest this much now (and perhaps add a regular payment), what will it become? <strong>Present value:</strong> if I need a specific amount at a future date, how much must I have now to get there?</p>
+<p>It is the general-purpose engine behind most savings goals, tuition plans and valuation questions, which is why the controls are deliberately simple.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Pick what to solve for.</strong> "Grow a lump sum → FV" turns a starting amount into a future value. "Discount a future sum → PV" tells you what a future target is worth today.</li>
-                <li><strong>Enter the amount</strong> — a starting balance in FV mode, or the future target in PV mode.</li>
-                <li><strong>Add a payment per period</strong> if money is added (FV) or set aside (PV) every period. Leave it at 0 for a pure lump-sum calculation.</li>
-                <li><strong>Enter the annual rate, the number of periods, and the compounding frequency.</strong></li>
-                <li><strong>Read the results:</strong> the solved value, your total contributions, and the portion that is interest or growth. The chart traces the running value over every period.</li>
-              </ol>
+<h2>Using the two modes</h2>
+<ul>
+<li><strong>Grow a lump sum &rarr; FV.</strong> Enter a starting amount, an optional payment each period, the annual rate, the number of periods and the compounding frequency (monthly, quarterly or annually). The result is the value at the end.</li>
+<li><strong>Discount a future sum &rarr; PV.</strong> Enter the future target, an optional payment each period, the rate and the periods. The result is the amount you need to have <em>today</em>. Adding a payment lowers it, since the payments do part of the work.</li>
+</ul>
+<p>The &ldquo;periods&rdquo; box counts in compounding periods: for 10 years of monthly compounding, enter 120; for 10 years compounded annually, enter 10.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>Future value of a present amount plus an ordinary annuity of payments:</p>
-              <div class="not-prose my-4"><div class="formula">FV = PV (1 + i)ⁿ  +  PMT × [ ((1 + i)ⁿ − 1) ÷ i ]</div></div>
-              <p>Rearranged to solve for the present value that reaches a future target:</p>
-              <div class="not-prose my-4"><div class="formula">PV = ( FV − PMT × [ ((1 + i)ⁿ − 1) ÷ i ] ) ÷ (1 + i)ⁿ</div></div>
-              <ul>
-                <li><strong>i</strong> — rate per period = annual rate ÷ compounding frequency</li>
-                <li><strong>n</strong> — total number of periods</li>
-                <li><strong>PMT</strong> — payment made at the end of each period</li>
-              </ul>
+<h2>How does the underlying math work?</h2>
+<p>With a periodic rate <strong>i</strong> (annual rate &divide; periods per year), <strong>n</strong> periods and a payment <strong>c</strong> at the end of each period:</p><div class="not-prose my-4"><div class="formula">FV = PV &times; (1 + i)<sup>n</sup> + c &times; [ (1 + i)<sup>n</sup> &minus; 1 ] &divide; i</div></div><div class="not-prose my-4"><div class="formula">PV = [ FV &minus; c &times; ((1 + i)<sup>n</sup> &minus; 1) &divide; i ] &divide; (1 + i)<sup>n</sup></div></div>
+<p>Present value is just the future-value equation rearranged: divide a future amount by the growth factor to bring it back to today. The rate used in that division is called the discount rate, and choosing it is the real judgment call.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>It is the tool behind comparing a lump-sum settlement to a stream of payments, valuing a future obligation such as a balloon payment or a tuition bill, and working out how much to invest today to reach a specific dollar target by a specific date.</p>
+<h2>Worked example: one of each</h2>
+<p><strong>Future value.</strong> You have $15,000 and add $200 a month for 10 years at 6%, compounded monthly (120 periods). The result is about <strong>$60,067</strong>. You put in $39,000 ($15,000 + 120 &times; $200); the other roughly $21,067 is growth.</p>
+<p><strong>Present value.</strong> You want $50,000 in 10 years and expect 5% a year, compounded annually (10 periods, no payments). You need about <strong>$30,696</strong> today. Now add $1,000 a year of contributions in the payment box: the present value needed falls to about <strong>$22,974</strong>, because the payments supply about $12,578 of the $50,000 target by themselves.</p>
+<p>Same goal, different mixes of &ldquo;money now&rdquo; and &ldquo;money along the way&rdquo; &mdash; the calculator lets you see the trade-off directly.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>What discount rate should I use?</h3>
-              <p>Use your <strong>opportunity cost</strong> — the return available on a comparable alternative. For personal decisions that is often the expected return of a diversified portfolio (roughly 6–8%); a business usually uses its weighted average cost of capital. A higher rate makes future dollars worth less today.</p>
-              <h3>What is the difference between present value and net present value?</h3>
-              <p>Present value discounts one future amount or a stream of equal payments to today. <strong>Net present value (NPV)</strong> does this for an irregular series of cash flows and subtracts the upfront cost, producing one number that is positive when a project adds value.</p>
-              <h3>Why is a dollar today worth more than a dollar tomorrow?</h3>
-              <p>A dollar today can be invested and earn a return, inflation eats into the buying power of future dollars, and any promised future payment carries some risk of not arriving. Those three forces give money its time value.</p>
+<h2>Real-world practical application</h2>
+<p>Present value is the quiet workhorse of financial decisions. It shows up when comparing a lump-sum settlement with a stream of payments (discount the stream and compare), when valuing a promised future payout such as a bonus or buyout, when setting aside money for a known future bill like a tuition payment, and when a business estimates what a future cash flow is worth today. The method is the same each time: pick a sensible discount rate, then bring everything to the same date.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="compound-interest.html">Compound Interest</a> — the FV case with a friendlier, savings-focused interface.</li>
-                <li><a href="inflation-calculator.html">Inflation Calculator</a> — discounting driven purely by rising prices.</li>
-                <li><a href="real-roi.html">Real ROI</a> — turn a nominal return into an inflation- and tax-adjusted one.</li>
-              </ul>
+<h2>Reading the result carefully</h2>
+<p>The result is only as good as the rate. A high discount rate makes future money look small; a low one makes it look large. For a savings goal, use the return you realistically expect on the money; for a settlement offer, use a rate that reflects your alternatives and the risk of the payer. Also note that payments here are assumed to occur at the end of each period (an ordinary annuity); payments at the start of each period would be slightly more valuable.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why is present value always smaller than future value?</h3>
+<p>Because money you hold today can earn a return, so a given future amount needs less than that amount today. The higher the rate and the longer the wait, the bigger the gap.</p>
+<h3>What discount rate should I use?</h3>
+<p>For a personal goal, the rate you expect to earn on a comparable-risk investment. For comparing a settlement, a rate near what you could safely earn elsewhere. Run the calculation at two or three rates to see how sensitive the answer is.</p>
+<h3>What is the difference between an ordinary annuity and an annuity due?</h3>
+<p>An ordinary annuity pays at the end of each period; an annuity due pays at the start. This calculator uses the ordinary form. Moving every payment one period earlier would multiply the annuity part by (1 + i).</p>
+<h3>How do I compare a lump sum with monthly payments?</h3>
+<p>Pick a discount rate, bring each payment back to today&rsquo;s value, and add them up. Compare that total with the lump sum on offer; if the lump sum is larger, it is the better deal at that rate.</p>
+<h3>Does compounding frequency matter?</h3>
+<p>A little. Moving from annual to monthly compounding at 6% raises the effective rate from 6.00% to about 6.17%. Over long periods the gap grows, but the rate and the number of years dominate.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="compound-interest.html">Compound Interest Calculator</a> &mdash; a monthly-deposit version with a year-by-year table.</li>
+<li><a href="guide-start-early-vs-contribute-more.html">Guide: start early or contribute more later?</a> &mdash; time value of money applied to a real choice.</li>
+<li><a href="inflation-calculator.html">Inflation Calculator</a> &mdash; a discount rate in disguise.</li>
+<li><a href="real-roi.html">Real ROI Calculator</a> &mdash; what the growth is worth after tax and inflation.</li>
+</ul>
             </article>
 
           </main>
@@ -276,6 +320,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

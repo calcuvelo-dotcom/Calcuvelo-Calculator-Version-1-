@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Credit Card Debt Payoff Calculator — Calcuvelo</title>
-  <meta name="description" content="Free debt payoff calculator. Find out how many months it takes to clear a credit card balance at a fixed monthly payment, and how much an extra payment saves." />
+  <title>Credit Card Debt Payoff Calculator: Months to Zero — Calcuvelo</title>
+  <meta name="description" content="Find out how many months a fixed payment takes to clear a credit card balance, how much interest you will pay, and what a small extra payment saves." />
   <link rel="canonical" href="https://calcuvelo.com/debt-payoff.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Credit Card Debt Payoff Calculator — Calcuvelo" />
-  <meta property="og:description" content="How many months to clear a balance at a fixed payment, and what an extra payment saves." />
+  <meta property="og:title" content="Credit Card Debt Payoff Calculator: Months to Zero — Calcuvelo" />
+  <meta property="og:description" content="Find out how many months a fixed payment takes to clear a credit card balance, how much interest you will pay, and what a small extra payment saves." />
   <meta property="og:url" content="https://calcuvelo.com/debt-payoff.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/debt-payoff.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Why does my balance barely go down each month?",
-            "acceptedAnswer": { "@type": "Answer", "text": "On a high-APR card, most of a minimum payment goes to interest. At 22% APR a $6,000 balance accrues about $110 of interest in the first month, so a $150 payment only reduces the principal by about $40. Paying more than the minimum is what breaks the cycle." }
+            "name": "Why does my balance barely drop when I pay on a high-APR card?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because most of the payment is interest. At 21.9% on $8,000, about $146 of the first $250 payment is interest and only about $104 reduces the balance. The principal share grows slowly, which is why paying a little more has an outsized effect."
+            }
           },
           {
             "@type": "Question",
-            "name": "Should I use the debt avalanche or debt snowball method?",
-            "acceptedAnswer": { "@type": "Answer", "text": "With multiple debts, the avalanche method (pay extra toward the highest APR first) minimizes total interest. The snowball method (pay off the smallest balance first) costs slightly more but delivers quick wins that help some people stay motivated. Both beat paying only minimums." }
+            "name": "How much does paying twice a month help?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Slightly. Cards compute interest on a daily balance, so paying half the amount mid-cycle lowers the average balance a little. The effect is small compared with simply raising the total you pay each month."
+            }
           },
           {
             "@type": "Question",
-            "name": "Will a 0% balance transfer card help?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A 0% introductory APR balance transfer can pause interest for 12-21 months, so nearly every dollar goes to principal. Watch for a transfer fee of 3-5% and make sure you can clear the balance before the promotional rate ends and the standard APR applies." }
+            "name": "Should I pay off the card or invest the money?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "With a 20%+ APR, paying the card is nearly always the better return, since it is a guaranteed saving that very few investments can match. At low rates, the question is closer; the Payoff vs. Interest Calculator compares the two."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does a 0% balance transfer beat this plan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It can, if you clear the balance before the promo ends and the transfer fee (typically 3–5%) is smaller than the interest you would otherwise pay. The Debt Consolidation Calculator runs that comparison."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if I have more than one card?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enter each card separately for its timeline, then decide an order. The snowball-versus-avalanche guide walks through both methods with real numbers."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="debt()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Credit Card Debt Payoff Calculator</h1>
               <p class="calc-sub">How long until a credit-card balance is clear at a fixed monthly payment?</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -214,45 +254,56 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Debt Payoff Calculator?</h2>
-              <p>The Debt Payoff Calculator tells you how many months it will take to clear a credit-card or loan balance at a fixed monthly payment, and how much of that total is interest versus principal.</p>
+<h2>What is the Debt Payoff Calculator?</h2>
+<p>Credit card statements print a &ldquo;minimum payment&rdquo; and, in small type, a warning about how long that minimum would take. This calculator does that arithmetic for any payment you choose: enter the balance, the APR and what you plan to pay each month, and it returns the number of months to zero, the total interest and the grand total you will have paid.</p>
+<p>The optional extra-payment box is the real point. It lets you see, in dollars and months, what a modest increase does to a balance that otherwise feels permanent.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter your current balance</strong> and the card's <strong>APR</strong> (shown on your statement).</li>
-                <li><strong>Enter the fixed monthly payment</strong> you plan to make every month.</li>
-                <li><strong>Optionally add an extra monthly payment</strong> to compare an accelerated plan.</li>
-                <li><strong>Read the results.</strong> You get the payoff time in months and years, the total interest you will pay, the total amount repaid, and — if you added an extra payment — how much interest and time that extra money saves. The chart shows both payoff curves side by side.</li>
-              </ol>
-              <p>If your payment is too small to cover the monthly interest, the calculator warns you: the balance would grow forever.</p>
+<h2>How to use it</h2>
+<ol>
+<li><strong>Balance and APR.</strong> Copy both from your latest statement. Cards often quote a few different APRs; use the one that applies to purchases or the one on the balance you are paying down.</li>
+<li><strong>Monthly payment.</strong> Enter what you can truly pay every month, not a one-time burst.</li>
+<li><strong>Extra payment.</strong> Optional. Try $25, $50, $100 and see how the payoff curve moves; the second line on the chart is the accelerated plan.</li>
+</ol>
+<p>If the payment you enter is no larger than a month&rsquo;s interest, the calculator tells you so instead of showing a number, because the balance would never fall.</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>The number of months to pay off a fixed-rate balance with a fixed payment is:</p>
-              <div class="not-prose my-4"><div class="formula">n = − ln( 1 − (i × B) ÷ P ) ÷ ln( 1 + i )</div></div>
-              <ul>
-                <li><strong>B</strong> — starting balance</li>
-                <li><strong>P</strong> — fixed monthly payment</li>
-                <li><strong>i</strong> — monthly interest rate = APR ÷ 12</li>
-              </ul>
-              <p>The result only exists when <strong>P &gt; i × B</strong> — the payment must exceed the first month's interest. The calculator also runs a month-by-month simulation so the total interest and the chart match real statement rounding.</p>
+<h2>How does the underlying math work?</h2>
+<p>Each month the card adds one-twelfth of the APR to the balance, then your payment comes off. With a balance <strong>B</strong>, monthly rate <strong>i</strong> (APR &divide; 12) and fixed payment <strong>P</strong>, the number of months to reach zero is:</p><div class="not-prose my-4"><div class="formula">n = &minus; ln( 1 &minus; (i &times; B) &divide; P ) &divide; ln( 1 + i )</div></div>
+<p>The logarithm exists only when P is larger than <strong>i &times; B</strong>, the first month&rsquo;s interest &mdash; the same condition as the warning above. The calculator also runs a month-by-month simulation so the table and the totals match how statements round to the cent.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>It is used to compare the avalanche method (extra payments toward the highest-APR balance first) against the snowball method, to see exactly how many months an extra $50 a month saves, and to decide whether a 0% balance-transfer offer is worth its fee before the promotional rate expires.</p>
+<h2>Worked example: $8,000 at 21.9% APR</h2>
+<p>The first month&rsquo;s interest on $8,000 at 21.9% is $8,000 &times; 0.219 &divide; 12 = <strong>$146</strong>. Compare three payments:</p>
+<ul>
+<li><strong>$160 a month</strong> barely clears the interest. It takes about 135 months &mdash; over 11 years &mdash; and roughly $13,550 in interest, far more than the original balance.</li>
+<li><strong>$250 a month</strong> takes <strong>49 months</strong> and costs about $4,125 in interest ($12,125 total).</li>
+<li><strong>$350 a month</strong> (the $250 plus $100 extra) clears the debt in about 30 months and saves roughly <strong>$1,677</strong> in interest and 19 months compared with the $250 plan.</li>
+</ul>
+<p>The first $100 per month beyond the interest-only level does vastly more good than the next $100, because the balance shrinks quickly and so does the interest charged on it.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>Why does my balance barely go down each month?</h3>
-              <p>On a high-APR card, most of a minimum payment is interest. At 22% APR a $6,000 balance accrues about $110 in the first month, so a $150 payment cuts the principal by only about $40. Paying <strong>more than the minimum</strong> is what breaks that cycle — and every extra dollar goes straight to principal.</p>
-              <h3>Should I use the debt avalanche or debt snowball method?</h3>
-              <p>With several debts, the <strong>avalanche</strong> (extra money toward the highest APR first) minimizes total interest. The <strong>snowball</strong> (smallest balance first) costs a little more but produces fast, motivating wins. Either is far better than paying only minimums.</p>
-              <h3>Will a 0% balance transfer card help?</h3>
-              <p>A 0% introductory APR can pause interest for 12–21 months so nearly every payment reduces principal. Budget for the 3–5% transfer fee and make sure you can clear the balance before the promotional period ends and the regular APR kicks in.</p>
+<h2>Real-world practical application</h2>
+<p>People most often use this when deciding how aggressive to be with a tax refund or bonus, or when weighing a balance transfer: put the current plan in, note the interest total, and compare it with the cost of a transfer fee. It is also a sobering way to audit a &ldquo;minimum payment only&rdquo; habit. Many minimums are set near 1% of the balance plus interest, which stretches payoff across decades.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="compound-interest.html">Compound Interest</a> — the same math working for you instead of against you.</li>
-                <li><a href="auto-loan.html">Auto Loan Calculator</a> — payoff math for an installment loan.</li>
-                <li><a href="rule-of-72.html">Rule of 72</a> — how fast debt at a given APR would otherwise double.</li>
-              </ul>
+<h2>Assumptions to keep in mind</h2>
+<p>The calculator assumes no new purchases, a constant APR and a payment made on schedule every month. Variable-rate cards can change the APR under you, and a missed payment can trigger penalty rates. If you carry several balances, use this tool for each one and then plan the order with the <a href="debt-snowball.html">Debt Snowball Calculator</a>.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why does my balance barely drop when I pay on a high-APR card?</h3>
+<p>Because most of the payment is interest. At 21.9% on $8,000, about $146 of the first $250 payment is interest and only about $104 reduces the balance. The principal share grows slowly, which is why paying a little more has an outsized effect.</p>
+<h3>How much does paying twice a month help?</h3>
+<p>Slightly. Cards compute interest on a daily balance, so paying half the amount mid-cycle lowers the average balance a little. The effect is small compared with simply raising the total you pay each month.</p>
+<h3>Should I pay off the card or invest the money?</h3>
+<p>With a 20%+ APR, paying the card is nearly always the better return, since it is a guaranteed saving that very few investments can match. At low rates, the question is closer; the <a href="payoff-vs-interest.html">Payoff vs. Interest Calculator</a> compares the two.</p>
+<h3>Does a 0% balance transfer beat this plan?</h3>
+<p>It can, if you clear the balance before the promo ends and the transfer fee (typically 3&ndash;5%) is smaller than the interest you would otherwise pay. The <a href="debt-consolidation.html">Debt Consolidation Calculator</a> runs that comparison.</p>
+<h3>What if I have more than one card?</h3>
+<p>Enter each card separately for its timeline, then decide an order. The <a href="guide-debt-snowball-vs-avalanche.html">snowball-versus-avalanche guide</a> walks through both methods with real numbers.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="guide-debt-snowball-vs-avalanche.html">Guide: debt snowball vs. avalanche</a> &mdash; which payoff order wins, with a worked three-debt example.</li>
+<li><a href="debt-snowball.html">Debt Snowball Calculator</a> &mdash; plan several debts at once.</li>
+<li><a href="debt-consolidation.html">Debt Consolidation Calculator</a> &mdash; compare a 0% transfer with a 401(k) loan.</li>
+<li><a href="rule-of-72.html">Rule of 72</a> &mdash; how fast a balance at your APR would double if left alone.</li>
+<li><a href="osap-repayment-calculator.html">OSAP Repayment Calculator</a> &mdash; repayment and assistance for Ontario student loans.</li>
+</ul>
             </article>
 
           </main>
@@ -266,6 +317,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Salary to Hourly Wage Converter — Calcuvelo</title>
-  <meta name="description" content="Free salary to hourly calculator. Convert an annual salary to hourly, daily, weekly, bi-weekly and monthly pay — or work backwards from an hourly rate." />
+  <title>Salary to Hourly Converter: Weekly &amp; Monthly Pay — Calcuvelo</title>
+  <meta name="description" content="Turn an annual salary into hourly, daily, weekly, bi-weekly and monthly pay, or start from an hourly wage, with hours and time off built in." />
   <link rel="canonical" href="https://calcuvelo.com/salary-converter.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Salary to Hourly Wage Converter — Calcuvelo" />
-  <meta property="og:description" content="Convert an annual salary into every pay cadence, or an hourly rate into an annual salary." />
+  <meta property="og:title" content="Salary to Hourly Converter: Weekly &amp; Monthly Pay — Calcuvelo" />
+  <meta property="og:description" content="Turn an annual salary into hourly, daily, weekly, bi-weekly and monthly pay, or start from an hourly wage, with hours and time off built in." />
   <meta property="og:url" content="https://calcuvelo.com/salary-converter.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/salary-converter.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How many working hours are in a year?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The standard assumption is 2,080 hours: 40 hours per week times 52 weeks. Subtracting two weeks of unpaid time off would give 2,000 hours. This calculator lets you set hours per week, weeks per year and paid time off so the effective hourly rate matches your situation." }
+            "name": "Why is 2,080 hours used so often?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is 40 hours × 52 weeks, the number of scheduled hours in a standard full-time year. It treats paid holidays and vacation as hours worked, so it yields the lowest hourly equivalent for a given salary."
+            }
           },
           {
             "@type": "Question",
-            "name": "Is paid time off included in the hourly rate?",
-            "acceptedAnswer": { "@type": "Answer", "text": "For a salaried employee, paid vacation and holidays are still paid, so your paycheck figures use the full year. The 'effective hourly' rate divides your salary by the hours you actually work, which is slightly higher because you are paid for weeks you take off." }
+            "name": "Should vacation and holidays count as worked hours?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For comparing salaried pay with hourly pay for the same job, many people count them as paid hours (2,080). For deciding what your time is worth when you actually work, the time-off adjustment gives the more telling number."
+            }
           },
           {
             "@type": "Question",
-            "name": "How do I convert an hourly wage to an annual salary?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Multiply the hourly rate by the hours you work per week and then by the number of weeks you work per year. At 40 hours a week for 52 weeks, multiply by 2,080. Switch this tool to 'Hourly to annual' mode to do it automatically." }
+            "name": "How do I turn an hourly wage into a comparable salary?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Multiply by hours per week and by the number of weeks you are paid. Remember to subtract any unpaid time off and to account for benefits the salaried role includes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do two months a year have three bi-weekly paychecks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bi-weekly means every two weeks, which is 26 pay periods a year, so two months contain three paychecks. Semi-monthly pay (twice a month) gives 24 equal checks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this include taxes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Everything is gross pay. Use it to compare offers and rates; for take-home pay, apply your own tax and deduction estimates."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="wage()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Salary to Hourly Wage Converter</h1>
               <p class="calc-sub">Break an annual salary into every pay cadence — or work backwards from an hourly rate.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -220,44 +260,55 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Salary to Hourly Converter?</h2>
-              <p>The Salary to Hourly Converter turns an annual salary into hourly, daily, weekly, bi-weekly and monthly figures &mdash; or works in the other direction, turning an hourly rate into an equivalent annual salary.</p>
+<h2>What is the Salary to Hourly Converter?</h2>
+<p>Job offers arrive in one unit and bills arrive in another. A recruiter quotes an annual salary; a freelance client asks for a day rate; a side gig pays by the hour; your rent is due monthly. This converter translates between all of them, in either direction, and lets you say how many hours you work and how many weeks you are actually paid for.</p>
+<p>That last part is what separates it from the back-of-the-envelope divide-by-2,080 calculation, and it matters more than most people expect.</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Choose a direction.</strong> "Annual → rates" starts from a salary; "Hourly → annual" starts from an hourly wage.</li>
-                <li><strong>Enter the salary or hourly rate.</strong></li>
-                <li><strong>Set your schedule:</strong> hours per week, days per week, weeks per year, and paid time-off weeks.</li>
-                <li><strong>Read the breakdown.</strong> You get effective hourly, daily, weekly, bi-weekly, monthly and annual figures. The bar chart lines them up so you can see the scale of each pay period at a glance.</li>
-              </ol>
+<h2>How to use it</h2>
+<ul>
+<li><strong>Pick a direction.</strong> Start from an annual salary to see the hourly equivalent, or from an hourly wage to see the annual figure.</li>
+<li><strong>Hours per week and days per week.</strong> The standard full-time week is 40 hours over five days. Use your real hours if they differ.</li>
+<li><strong>Weeks per year and time off.</strong> Fifty-two weeks is the default. The time-off box removes weeks you are not working; for a salaried employee, those weeks are still paid, so the &ldquo;effective hourly&rdquo; rate shown is what you earn for each hour you actually put in.</li>
+</ul>
+<p>Set time off to zero if you want the textbook 2,080-hour convention (40 hours &times; 52 weeks).</p>
 
-              <h2>How does the underlying math work?</h2>
-              <p>Let <strong>workedWeeks = weeksPerYear − ptoWeeks</strong>. Then:</p>
-              <div class="not-prose my-4"><div class="formula">annual   = hourly × hoursPerWeek × workedWeeks      (hourly → annual)
-hourly   = annual ÷ (hoursPerWeek × workedWeeks)
-weekly   = annual ÷ weeksPerYear
-daily    = weekly ÷ daysPerWeek
-biweekly = weekly × 2
-monthly  = annual ÷ 12</div></div>
-              <p>Paycheck figures (weekly, bi-weekly, monthly) use the full <strong>weeksPerYear</strong> because paid time off is still paid. The <strong>effective hourly</strong> rate uses only the weeks you actually work, so it comes out slightly higher.</p>
+<h2>How does the underlying math work?</h2>
+<p>Everything is derived from the annual figure and the hours actually worked:</p><div class="not-prose my-4"><div class="formula">hourly = annual &divide; (hours per week &times; (weeks &minus; time-off weeks))</div></div><div class="not-prose my-4"><div class="formula">weekly = annual &divide; 52 &nbsp;&nbsp; bi-weekly = weekly &times; 2 &nbsp;&nbsp; monthly = annual &divide; 12</div></div>
+<p>Going the other way, annual pay is the hourly rate times hours per week times the number of weeks you are paid. Daily pay is the weekly figure divided by days worked per week.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>It is used to compare a salaried job offer against a contract or hourly rate, to figure out what an extra week of unpaid leave actually costs, and by freelancers setting an hourly rate that matches a target annual income once non-billable time is accounted for.</p>
+<h2>Worked example: a $78,000 offer</h2>
+<p>Enter $78,000, 40 hours a week and 3 weeks of time off:</p>
+<ul>
+<li>Weekly: <strong>$1,500</strong>; bi-weekly: <strong>$3,000</strong>; monthly: <strong>$6,500</strong>; daily: $300.</li>
+<li>Effective hourly: <strong>$39.80</strong> (78,000 &divide; 1,960 hours). Using the 2,080-hour convention instead gives <strong>$37.50</strong>.</li>
+</ul>
+<p>Now flip it. A contractor charging <strong>$42 an hour</strong>, working 40 hours a week for 50 weeks (two weeks off, unpaid), grosses <strong>$84,000</strong> a year, or $7,000 a month. That looks better than the $78,000 job &mdash; until you account for what the contractor must pay for and what the salaried employee gets: self-employment tax (about 15.3% in the US), health insurance, paid holidays and retirement matching. Benefits are commonly estimated at roughly 30% of total compensation, so the $42 contractor needs a considerably higher rate to match.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>How many working hours are in a year?</h3>
-              <p>The standard figure is <strong>2,080 hours</strong> — 40 hours × 52 weeks. Removing two unpaid weeks gives 2,000. Adjust the hours-per-week, weeks-per-year and PTO inputs to match your real schedule.</p>
-              <h3>Is paid time off included in the hourly rate?</h3>
-              <p>For a salaried role, vacation and holidays are paid, so the paycheck figures are based on the full year. The <strong>effective hourly</strong> number divides salary by the hours you truly work, which is a little higher because you are paid for the weeks you take off.</p>
-              <h3>How do I convert an hourly wage to an annual salary?</h3>
-              <p>Multiply the hourly rate by weekly hours, then by the weeks you work per year — at 40 hours for 52 weeks, that is × 2,080. The "Hourly → annual" mode does this for you and also shows every other cadence.</p>
+<h2>Real-world practical application</h2>
+<p>Freelancers use it to set a rate that hits a target income after unpaid weeks. Job seekers use it to compare a salaried offer against an hourly one on equal footing. Budgeters use the monthly and bi-weekly numbers to line up pay against rent and bills (a bi-weekly schedule means 26 paychecks a year, so two months of the year contain three). It is also a useful reality check on a side-gig idea: if the effective hourly rate comes out below what you can earn elsewhere, the gig is a bad trade.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="compound-interest.html">Compound Interest</a> — turn part of each paycheck into long-term savings.</li>
-                <li><a href="retirement-calculator.html">Retirement / 401(k)</a> — project what a contribution percentage becomes.</li>
-                <li><a href="inflation-calculator.html">Inflation Calculator</a> — how much of a raise is real after price increases.</li>
-              </ul>
+<h2>Things this does not capture</h2>
+<p>All figures are gross, before tax and deductions, so they will not match your paycheck. Overtime, bonuses and commission are not modeled. Unpaid lunch breaks, commute time and unbillable hours (for freelancers, often 20&ndash;30% of the week) lower the true hourly return on your time; an honest effective rate counts them.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Why is 2,080 hours used so often?</h3>
+<p>It is 40 hours &times; 52 weeks, the number of scheduled hours in a standard full-time year. It treats paid holidays and vacation as hours worked, so it yields the lowest hourly equivalent for a given salary.</p>
+<h3>Should vacation and holidays count as worked hours?</h3>
+<p>For comparing salaried pay with hourly pay for the same job, many people count them as paid hours (2,080). For deciding what your time is worth when you actually work, the time-off adjustment gives the more telling number.</p>
+<h3>How do I turn an hourly wage into a comparable salary?</h3>
+<p>Multiply by hours per week and by the number of weeks you are paid. Remember to subtract any unpaid time off and to account for benefits the salaried role includes.</p>
+<h3>Why do two months a year have three bi-weekly paychecks?</h3>
+<p>Bi-weekly means every two weeks, which is 26 pay periods a year, so two months contain three paychecks. Semi-monthly pay (twice a month) gives 24 equal checks.</p>
+<h3>Does this include taxes?</h3>
+<p>No. Everything is gross pay. Use it to compare offers and rates; for take-home pay, apply your own tax and deduction estimates.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="mortgage-affordability.html">Mortgage Affordability Calculator</a> &mdash; turn your income into a home-price ceiling.</li>
+<li><a href="guide-how-much-house-can-i-afford.html">Guide: how much house can I afford?</a> &mdash; why lenders look at gross monthly income.</li>
+<li><a href="inflation-calculator.html">Inflation Calculator</a> &mdash; what a raise is worth after price increases.</li>
+<li><a href="debt-snowball.html">Debt Snowball Calculator</a> &mdash; what your monthly cash flow can pay down.</li>
+<li><a href="ontario-take-home-pay.html">Ontario Take-Home Pay Calculator</a> &mdash; convert a salary to net pay after tax.</li>
+</ul>
             </article>
 
           </main>
@@ -271,6 +322,8 @@ monthly  = annual ÷ 12</div></div>
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>

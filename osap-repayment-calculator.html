@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>try{if(localStorage.getItem('cv-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
+  <title>OSAP Repayment Calculator with RAP (Ontario) — Calcuvelo</title>
+  <meta name="description" content="Estimate your monthly OSAP payment, total interest and grace-period interest, and see how the Repayment Assistance Plan could change what you pay." />
+  <link rel="canonical" href="https://calcuvelo.com/osap-repayment-calculator.html" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="OSAP Repayment Calculator with RAP (Ontario) — Calcuvelo" />
+  <meta property="og:description" content="Estimate your monthly OSAP payment, total interest and grace-period interest, and see how the Repayment Assistance Plan could change what you pay." />
+  <meta property="og:url" content="https://calcuvelo.com/osap-repayment-calculator.html" />
+  <meta name="twitter:card" content="summary" />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] } } } };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script defer src="assets/provinces.js?v=202610262"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "OSAP Repayment Calculator",
+        "url": "https://calcuvelo.com/osap-repayment-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CAD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does the federal part of my OSAP charge interest?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The Government of Canada stopped charging interest on the federal portion of Canada Student Loans effective April 1, 2023. The Ontario portion still charges interest at prime plus 1%."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens during the six-month grace period?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You do not have to make payments for six months after you finish full-time studies, but the Ontario portion of your OSAP loans accrues interest (prime plus 1%) during that time, and the interest is added to the loan before repayment starts. The federal portion stays at 0%. This calculator therefore grows the Ontario balance for six months and starts repayment from the higher figure. It assumes no interest accrues while you are studying full-time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long can I take to repay OSAP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The standard schedule is based on 9.5 years and can usually be extended to as long as 14.5 years. A longer schedule lowers the payment and raises the total interest on the Ontario portion."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who qualifies for the Repayment Assistance Plan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Borrowers in good standing who live in Canada and whose family income is low relative to their loan payments. You must re-apply every six months, and your payment depends on income and family size. Under RAP, interest not covered by your payment is paid by the government for up to 60 months, and the debt is eliminated within 15 years of leaving school (10 for borrowers with a permanent disability)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Did OSAP funding change for 2026/27?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ontario announced changes in February 2026 for programs starting on or after August 1, 2026. For new borrowers, grants are capped at 25% of OSAP funding, so up to 75% must be repaid as loans, and students at private career colleges no longer receive OSAP grants. These are announced changes as of October 26, 2026, so check ontario.ca/page/osap for your exact assessment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this the same in other provinces?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. OSAP is Ontario’s program. Other provinces run their own student loans alongside the federal portion, with different rates and assistance, so their rules and thresholds differ."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+
+  <!-- ===================== UNIVERSAL HEADER  (assets/header.css + assets/header.js) ===================== -->
+  <header class="site-header">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+
+      <a href="index.html" class="flex shrink-0 items-center gap-2.5">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><g transform="rotate(-11 12 12)"><rect x="4.5" y="7.5" width="13" height="3.2" rx="1.6" fill="currentColor"/><rect x="4.5" y="12.8" width="9" height="3.2" rx="1.6" fill="currentColor" opacity=".9"/><circle cx="17.3" cy="14.4" r="1.9" fill="#34d399"/></g></svg>
+        </span>
+        <span class="site-brand">Calcuvelo</span>
+      </a>
+
+      <div class="site-nav" data-dropdown>
+        <button type="button" class="site-nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="site-nav-menu">
+          Calculators
+          <svg class="site-nav-caret" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.24 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="site-nav-menu" id="site-nav-menu" role="menu">
+          <div class="site-nav-cols">
+            <div>
+              <p class="site-nav-heading">Financial</p>
+              <a href="compound-interest.html" data-nav class="site-nav-link" role="menuitem">Compound Interest</a>
+              <a href="mortgage-calculator.html" data-nav class="site-nav-link" role="menuitem">Mortgage</a>
+              <a href="retirement-calculator.html" data-nav class="site-nav-link" role="menuitem">Retirement / 401(k)</a>
+              <a href="auto-loan.html" data-nav class="site-nav-link" role="menuitem">Auto Loan</a>
+              <a href="debt-payoff.html" data-nav class="site-nav-link" role="menuitem">Debt Payoff</a>
+              <a href="debt-consolidation.html" data-nav class="site-nav-link" role="menuitem">Debt Consolidation</a>
+              <a href="payoff-vs-interest.html" data-nav class="site-nav-link" role="menuitem">Payoff vs. Interest</a>
+              <a href="mortgage-affordability.html" data-nav class="site-nav-link" role="menuitem">Mortgage Affordability</a>
+              <a href="401k-split-distribution.html" data-nav class="site-nav-link" role="menuitem">401(k) Split Distribution</a>
+              <a href="debt-snowball.html" data-nav class="site-nav-link" role="menuitem">Debt Snowball &amp; EF</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Economic</p>
+              <a href="inflation-calculator.html" data-nav class="site-nav-link" role="menuitem">Inflation</a>
+              <a href="present-value.html" data-nav class="site-nav-link" role="menuitem">Present &amp; Future Value</a>
+              <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
+              <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
+              <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
+              <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
+            </div>
+          </div>
+          <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
+        </div>
+      </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
+
+      <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+        <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
+        <span class="site-badge-text">Free &bull; No sign-up &bull; Private</span>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="theme-toggle-knob">
+            <svg class="theme-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+            <svg class="theme-ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="print-block">
+
+      <div class="min-w-0">
+        <div class="print-block">
+          <main class="min-w-0">
+
+            <section x-data="osapRepayment()" x-effect="update()" x-cloak class="card">
+              <h1 class="calc-title">OSAP Repayment Calculator</h1>
+              <p class="calc-sub">Standard OSAP repayment, grace-period interest and an estimate of how the Repayment Assistance Plan could change it.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
+
+              <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
+<p class="mt-2"><span class="rules-chip">Ontario &middot; Rules as of <span x-text="taxYear"></span></span></p>
+              <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                <div class="">
+                  <label class="label" for="os-fed">Federal (Canada Student Loan) balance</label>
+                  <div class="relative"><span class="affix affix-left">$</span><input id="os-fed" type="number" min="0" step="500" x-model.number="fedBalance" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="60000" step="500" x-model.number="fedBalance" class="range" aria-label="Federal (Canada Student Loan) balance" />
+                </div>
+                <div class="">
+                  <label class="label" for="os-on">Ontario Student Loan balance</label>
+                  <div class="relative"><span class="affix affix-left">$</span><input id="os-on" type="number" min="0" step="500" x-model.number="onBalance" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="40000" step="500" x-model.number="onBalance" class="range" aria-label="Ontario Student Loan balance" />
+                </div>
+                <div class="">
+                  <label class="label" for="os-rate">Ontario loan interest rate (prime + 1%)</label>
+                  <div class="relative"><input id="os-rate" type="number" min="0" step="0.05" x-model.number="onRate" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="12" step="0.05" x-model.number="onRate" class="range" aria-label="Ontario loan interest rate (prime + 1%)" />
+                  <p class="mt-1 text-xs text-slate-400"><span x-text="primeNote"></span> Enter the rate on your statement if it has changed.</p>
+                </div>
+                <div class="">
+                  <label class="label" for="os-term">Repayment term</label>
+                  <div class="relative"><input id="os-term" type="number" min="0" step="0.5" x-model.number="termYears" class="field with-suffix" /><span class="affix affix-right">yrs</span></div>
+                  <input type="range" min="1" max="14.5" step="0.5" x-model.number="termYears" class="range" aria-label="Repayment term" />
+                  <p class="mt-1 text-xs text-slate-400">Standard is 9.5 years; the longest standard schedule is 14.5.</p>
+                </div>
+              </div>
+              <h2 class="mt-7 text-sm font-semibold text-slate-700">Repayment Assistance Plan (RAP) estimate</h2>
+              <div class="mt-3 grid gap-5 sm:grid-cols-3">
+                <div class="">
+                  <label class="label" for="os-inc">Gross family income (per year)</label>
+                  <div class="relative"><span class="affix affix-left">$</span><input id="os-inc" type="number" min="0" step="1000" x-model.number="familyIncome" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="150000" step="1000" x-model.number="familyIncome" class="range" aria-label="Gross family income (per year)" />
+                </div>
+                <div class="">
+                  <label class="label" for="os-size">Family size</label>
+                  <select id="os-size" x-model.number="familySize" class="field"><option value="1">1 (just you)</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7 or more</option></select>
+                </div>
+                <div class="">
+                  <label class="label" for="os-rap">Your assigned RAP payment (optional)</label>
+                  <div class="relative"><span class="affix affix-left">$</span><input id="os-rap" type="number" min="0" step="5" x-model.number="rapPayment" class="field with-prefix" /></div>
+                  <p class="mt-1 text-xs text-slate-400">Leave blank for an upper-bound estimate.</p>
+                </div>
+              </div>
+              <div class="result-toolbar no-print mt-6">
+                <div class="seg seg-inline" role="tablist" aria-label="Result view">
+                  <button type="button" class="seg-btn" :class="view === 'chart' && 'seg-btn-active'" @click="setView('chart')" role="tab" :aria-selected="view === 'chart'">View Graph</button>
+                  <button type="button" class="seg-btn" :class="view === 'table' && 'seg-btn-active'" @click="setView('table')" role="tab" :aria-selected="view === 'table'">View Table</button>
+                </div>
+                <button type="button" class="btn-print" @click="window.print()">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+                  Print / Save PDF
+                </button>
+              </div>
+              <div class="mt-4 grid gap-3 sm:grid-cols-4">
+                <div class="stat"><p class="stat-label">Standard monthly payment</p><p class="stat-value " x-text="money(out.std, 2)"></p></div>
+                <div class="stat"><p class="stat-label">Total interest (incl. grace period)</p><p class="stat-value stat-neg" x-text="money(out.totalInterest)"></p></div>
+                <div class="stat"><p class="stat-label">Total repaid</p><p class="stat-value " x-text="money(out.totalPaidStd)"></p></div>
+                <div class="stat"><p class="stat-label">Ontario interest added in grace period</p><p class="stat-value " x-text="money(out.graceInterest)"></p></div>
+              </div>
+              <p class="mt-3 text-sm text-slate-500">The Ontario balance grows from <strong x-text="money(out.onBefore)"></strong> to <strong x-text="money(out.onStart)"></strong> during the 6-month grace period; the federal balance stays at <strong x-text="money(out.fedStart)"></strong>. You start repayment owing <strong x-text="money(out.start)"></strong>.</p>
+              <div class="mt-5 rounded-xl p-4 text-sm ring-1" :class="out.rapApplies ? 'bg-emerald-50 text-emerald-900 ring-emerald-200' : 'bg-indigo-50 text-indigo-900 ring-indigo-200'"><strong>RAP estimate:</strong>
+                <span x-show="out.rapApplies">you might pay about <strong x-text="money(out.rapP, 2)"></strong> a month (<span x-text="out.hasUser ? 'the amount you entered' : 'an upper-bound estimate'"></span>), roughly <strong x-text="money(out.rapPaid)"></strong> in total over <span x-text="out.rapMonths"></span> months, with about <strong x-text="money(out.covered)"></strong> of the balance covered by the governments.</span>
+                <span x-show="!out.rapApplies">at this income the affordable payment is not lower than your standard payment, so RAP would probably not reduce what you pay.</span>
+                <span class="block pt-1 text-xs opacity-80">Monthly family income <span x-text="money(out.X)"></span>. Published $0-payment thresholds for a family of this size: federal <span x-text="money(out.tFed)"></span> (<span x-text="out.zeroFed ? 'you are below it' : 'you are above it'"></span>), Ontario <span x-text="money(out.tOn)"></span> (<span x-text="out.zeroOn ? 'you are below it' : 'you are above it'"></span>).</span></div>
+              <div x-show="view === 'chart'" class="chart-box"><canvas x-ref="cv" role="img" aria-label="Line chart of loan balance over time on the standard schedule and under RAP"></canvas></div>
+              <div x-show="view === 'table'" class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><template x-for="col in tableCols" :key="col.key"><th scope="col" x-text="col.label"></th></template></tr></thead>
+                  <tbody>
+                    <template x-for="(row, i) in rows" :key="i">
+                      <tr><template x-for="col in tableCols" :key="col.key"><td :class="col.cls" x-text="col.money ? money(row[col.key], col.dec || 0) : row[col.key]"></td></template></tr>
+                    </template>
+                    <tr x-show="!rows.length"><td :colspan="tableCols.length" style="text-align:center;color:#94a3b8">Adjust the inputs above to see the breakdown.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h2 class="mt-8 text-sm font-semibold text-slate-700">Planning a new OSAP assessment? See how the grant/loan mix changes your payment</h2>
+              <p class="mt-1 text-xs text-slate-500">Announced changes (as of October 26, 2026): check ontario.ca/page/osap for your exact assessment. Uses the interest rate and repayment term entered above.</p>
+              <div class="mt-3 grid gap-5 sm:grid-cols-3">
+                <div class="">
+                  <label class="label" for="os-need">Assessed need per year</label>
+                  <div class="relative"><span class="affix affix-left">$</span><input id="os-need" type="number" min="0" step="500" x-model.number="needPerYear" class="field with-prefix" /></div>
+                  <input type="range" min="0" max="30000" step="500" x-model.number="needPerYear" class="range" aria-label="Assessed need per year" />
+                </div>
+                <div class="">
+                  <label class="label" for="os-yrs">Years of study</label>
+                  <div class="relative"><input id="os-yrs" type="number" min="1" step="1" x-model.number="studyYears" class="field with-suffix" /><span class="affix affix-right">yrs</span></div>
+                  <input type="range" min="1" max="6" step="1" x-model.number="studyYears" class="range" aria-label="Years of study" />
+                </div>
+                <div class="">
+                  <label class="label" for="os-share">Ontario share of your loans</label>
+                  <div class="relative"><input id="os-share" type="number" min="0" step="5" x-model.number="onSharePct" class="field with-suffix" /><span class="affix affix-right">%</span></div>
+                  <input type="range" min="0" max="100" step="5" x-model.number="onSharePct" class="range" aria-label="Ontario share of your loans" />
+                  <p class="mt-1 text-xs text-slate-400">Illustrative: your OSAP assessment shows the real federal/Ontario split.</p>
+                </div>
+              </div>
+              <div class="mt-4 table-wrap">
+                <table class="data-table">
+                  <thead><tr><th scope="col">Mix</th><th scope="col">Grants (not repaid)</th><th scope="col">Loans</th><th scope="col">Owed when repayment starts</th><th scope="col">Monthly payment</th><th scope="col">Total interest</th></tr></thead>
+                  <tbody>
+                    <template x-for="r in out.plan" :key="r.label"><tr><td x-text="r.label + ' — ' + r.note"></td><td x-text="money(r.grants)"></td><td x-text="money(r.loan)"></td><td x-text="money(r.owedAtStart)"></td><td x-text="money(r.pay, 2)" class="col-end"></td><td x-text="money(r.interest)"></td></tr></template>
+                  </tbody>
+                </table>
+              </div>
+              <p class="disclaimer">Estimate only. RAP payments are set by the National Student Loans Service Centre and may be lower than the upper bound shown. Re-apply every six months. Confirm thresholds and rates with OSAP and the NSLSC.</p>
+            </section>
+
+            <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
+<h2>What is the OSAP Repayment Calculator?</h2>
+<p>OSAP is really two loans in one: a federal Canada Student Loan and an Ontario Student Loan. They behave differently. Since April 1, 2023, the federal portion charges no interest at all, while the Ontario portion carries interest at prime plus one percent, and that interest builds during your six-month grace period before the first payment is due. This calculator separates the two, builds a standard repayment schedule, and then compares it with an estimate of what the Repayment Assistance Plan (RAP) might ask of you instead.</p>
+<p>It is written for recent graduates working out a budget, and for borrowers deciding whether it is worth applying for help.</p>
+
+<h2>Entering your loans</h2>
+<ul>
+<li><strong>Federal and Ontario balances.</strong> Your OSAP account and the National Student Loans Service Centre show the two amounts you owe. They are rarely equal.</li>
+<li><strong>Ontario interest rate.</strong> Prime plus 1%. Prime was 4.45% on October 23, 2026 (the Bank of Canada&rsquo;s policy rate was 2.25%), so the default is 5.45%. Enter the rate on your own loan statement if it has changed.</li>
+<li><strong>Repayment term.</strong> The standard schedule is 9.5 years and can be stretched to as long as 14.5 years, which lowers the monthly payment but raises total interest.</li>
+<li><strong>Family income and size.</strong> Used only for the RAP estimate. Family income is the household&rsquo;s gross income, and family size counts you, a spouse or partner, and dependants.</li>
+<li><strong>Your assigned RAP payment (optional).</strong> If you have already applied and been given an amount, enter it for a more accurate comparison.</li>
+</ul>
+
+<h2>How does the underlying math work?</h2>
+<p>The calculator first grows the Ontario balance for the six-month grace period. The Ontario portion accrues interest at prime plus 1% (this tool uses simple interest over the six months) and that interest is added to the loan before your first payment, so you start repayment owing more than you borrowed; the federal portion accrues nothing and stays exactly where it was. It then amortizes each portion separately over your chosen term. The federal part has no interest, so it is simply divided evenly. The Ontario part uses the standard loan payment formula, where <strong>L</strong> is the balance after grace-period interest, <strong>i</strong> the monthly rate and <strong>n</strong> the number of months:</p><div class="not-prose my-4"><div class="formula">Ontario payment = L &times; i &times; (1 + i)<sup>n</sup> &divide; [ (1 + i)<sup>n</sup> &minus; 1 ]</div></div><div class="not-prose my-4"><div class="formula">federal payment = federal balance &divide; n</div></div>
+<p>RAP works differently. Your monthly income is compared with a threshold for your family size. Below it, you may owe nothing for a six-month period; above it, the payment is a share of income that, under the federal regulation, can never exceed 10% (Ontario&rsquo;s own page says the affordable payment is never more than 20% of family income). During the first 60 months of RAP, governments cover any interest your payment does not; after that, they also cover principal so the debt is eliminated within 15 years of leaving school. Because the exact amount is set by the National Student Loans Service Centre, this tool shows an <em>upper-bound estimate</em> based on those caps and the published thresholds unless you enter your assigned payment.</p>
+
+<h2>Worked example: $12,000 federal plus $8,000 Ontario</h2>
+<p>Assume a 5.45% Ontario rate and the standard 9.5-year schedule (114 payments).</p>
+<ul>
+<li><strong>Grace period:</strong> during the six months after you leave full-time studies, the Ontario balance grows from $8,000 to about $8,218 (about <strong>$218</strong> of interest), while the federal $12,000 does not change. You start repayment owing about $20,218.</li>
+<li><strong>Monthly payment:</strong> about <strong>$197.78</strong> ($105.26 federal and $92.51 Ontario).</li>
+<li><strong>Total interest:</strong> about <strong>$2,546</strong> (all on the Ontario side), for a total repaid of about $22,546.</li>
+</ul>
+<p>Stretch the term to 14.5 years and the payment falls to about <strong>$137.39</strong>, but total interest rises to about <strong>$3,906</strong>.</p>
+<p>Now compare RAP. With a single borrower earning $34,000 (about $2,833 a month), income is under the federal threshold for a family of one ($3,866 a month) but above Ontario&rsquo;s ($2,083 a month). So the federal portion may be $0 and the Ontario portion could require a payment. Capped at the standard Ontario payment of $92.51, the calculator estimates you might pay about <strong>$16,097</strong> in total over the 174 months of repayment, versus $22,546 on the standard schedule, with about $4,121 of the balance covered by the governments. At $24,000 of family income, both portions fall under their thresholds and the estimate is $0. At $52,000, income is above both thresholds and the affordable payment would exceed the standard payment, so RAP would not reduce what you pay.</p>
+<p>These RAP numbers are deliberately cautious ceilings. Your real payment is calculated by the loan service centre and may be lower.</p>
+
+<h2>The 2026/27 funding change: more loan, less grant</h2>
+<p><em>Announced changes, as of October 26, 2026. Check <a href="https://www.ontario.ca/page/osap" rel="nofollow noopener" target="_blank">ontario.ca/page/osap</a> for your exact assessment.</em></p>
+<p>Ontario announced in February 2026 a change to how OSAP funding is divided between grants and loans, applying to programs that start on or after August 1, 2026. For new borrowers, grants are capped at 25% of funding, so at least 75% has to be repaid as loans, where a much larger share of the same aid could previously arrive as non-repayable grants. Students at private career colleges no longer receive OSAP grants, so their OSAP funding is entirely loans. Your assessed need is still based on need; what changes is how much of it you pay back.</p>
+<p>The planner under the calculator shows the effect on repayment. Take a $10,000 one-year assessment, the 5.45% rate and the 9.5-year schedule, and assume 40% of the loans are Ontario loans (an illustrative split; your assessment shows the real one, and this tool assumes no interest accrues while you are studying full-time):</p>
+<ul>
+<li><strong>50% grant / 50% loan:</strong> $5,000 of loans, a payment of about <strong>$49.44</strong> a month, about $637 of total interest.</li>
+<li><strong>25% grant / 75% loan:</strong> $7,500 of loans, about <strong>$74.17</strong> a month, about $955 of interest.</li>
+<li><strong>0% grant / 100% loan</strong> (private career college): $10,000 of loans, about <strong>$98.89</strong> a month, about $1,273 of interest.</li>
+</ul>
+<p>The effect compounds over a program. A $10,000-a-year assessment over four years at 25% grant builds about $30,000 of loans and a payment near $296.66 a month, with about $3,820 of interest; at a 50/50 mix the same four years would leave $20,000 of loans and a payment near $197.78. The 50/50 row is an illustration of a more generous mix, not a statement of any individual&rsquo;s earlier assessment.</p>
+
+<h2>Real-world practical application</h2>
+<p>The first use is budgeting: the payment line tells you what to set aside once your grace period ends. The second is the term decision: a longer schedule feels cheaper per month, but the table shows what it adds in interest. The third is the RAP decision. If your income is modest, the comparison shows whether applying could cut your payments substantially, and the tool reminds you that RAP must be renewed every six months. It also helps parents or partners understand how family income, not just your own, affects eligibility.</p>
+
+<h2>Limits and things to check</h2>
+<p>This is an estimate, not an OSAP statement. Interest on the Ontario portion follows prime, which changes; the payment is set from the rate on your first payment date and then stays fixed while the split between principal and interest shifts. The RAP rules include separate thresholds for the federal and Ontario portions, a six-month approval cycle, different treatment for borrowers with permanent disabilities (a shorter maximum period), and adjustments when a spouse also has student loans in repayment. The government pages publish thresholds that do not always match across sources, so confirm your figures with the National Student Loans Service Centre or OSAP before relying on them.</p>
+<p>The figures on this page are for the 2026 year.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Does the federal part of my OSAP charge interest?</h3>
+<p>No. The Government of Canada stopped charging interest on the federal portion of Canada Student Loans effective April 1, 2023. The Ontario portion still charges interest at prime plus 1%.</p>
+<h3>What happens during the six-month grace period?</h3>
+<p>You do not have to make payments for six months after you finish full-time studies, but the Ontario portion of your OSAP loans accrues interest (prime plus 1%) during that time, and the interest is added to the loan before repayment starts. The federal portion stays at 0%. This calculator therefore grows the Ontario balance for six months and starts repayment from the higher figure. It assumes no interest accrues while you are studying full-time.</p>
+<h3>How long can I take to repay OSAP?</h3>
+<p>The standard schedule is based on 9.5 years and can usually be extended to as long as 14.5 years. A longer schedule lowers the payment and raises the total interest on the Ontario portion.</p>
+<h3>Who qualifies for the Repayment Assistance Plan?</h3>
+<p>Borrowers in good standing who live in Canada and whose family income is low relative to their loan payments. You must re-apply every six months, and your payment depends on income and family size. Under RAP, interest not covered by your payment is paid by the government for up to 60 months, and the debt is eliminated within 15 years of leaving school (10 for borrowers with a permanent disability).</p>
+<h3>Did OSAP funding change for 2026/27?</h3>
+<p>Ontario announced changes in February 2026 for programs starting on or after August 1, 2026. For new borrowers, grants are capped at 25% of OSAP funding, so up to 75% must be repaid as loans, and students at private career colleges no longer receive OSAP grants. These are announced changes as of October 26, 2026, so check ontario.ca/page/osap for your exact assessment.</p>
+<h3>Is this the same in other provinces?</h3>
+<p>No. OSAP is Ontario&rsquo;s program. Other provinces run their own student loans alongside the federal portion, with different rates and assistance, so their rules and thresholds differ.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="debt-snowball.html">Debt Snowball & Emergency Fund Calculator</a> &mdash; plan student loans alongside other debts.</li>
+<li><a href="guide-debt-snowball-vs-avalanche.html">Guide: debt snowball vs. avalanche</a> &mdash; which debt to pay first when interest rates differ.</li>
+<li><a href="ontario-take-home-pay.html">Ontario Take-Home Pay Calculator</a> &mdash; know your after-tax income before budgeting a payment.</li>
+<li><a href="debt-payoff.html">Debt Payoff Calculator</a> &mdash; what an extra monthly payment saves on any loan.</li>
+</ul>
+            </article>
+
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
+          <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
+          <a href="contact.html" class="hover:text-slate-900">Contact</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Disclaimer: Calcuvelo provides free calculators for general educational purposes only and does not
+        constitute financial, investment, tax, or legal advice. All figures are estimates based on the assumptions you
+        provide and are not guarantees of future results. Consult a qualified professional before making financial decisions.
+      </p>
+    </div>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

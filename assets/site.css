@@ -3,7 +3,7 @@
    --------------------------------------------------------------------------
    Tailwind (via CDN) handles all utility classes used in the markup.
    This file defines the reusable component classes, form controls, range
-   sliders, nav, ad placeholders and the SEO "formula" block.
+   sliders, nav, ad slots and the SEO "formula" block.
    Plain CSS only — no build step required.
    ========================================================================== */
 
@@ -369,3 +369,20 @@ input[type="range"].range:focus-visible { outline: 2px solid #6366f1; outline-of
   :root.dark { color-scheme: light; }
   :root.dark body { background: #fff !important; color: #0f172a !important; }
 }
+
+/* ---------- Guides & About ---------- */
+.callout { margin: 1.5rem 0; border: 1px solid #c7d2fe; border-radius: 0.75rem; background: #eef2ff; padding: 0.85rem 1.1rem; font-size: 0.9rem; line-height: 1.55; color: #312e81; }
+.callout a { font-weight: 600; color: #4338ca; text-decoration: underline; }
+.dark .callout { border-color: rgba(99, 102, 241, 0.35); background: rgba(79, 70, 229, 0.14); color: #c7d2fe; }
+.dark .callout a { color: #a5b4fc; }
+.guide-meta { margin: 0 0 0.5rem; font-size: 0.8125rem; color: #64748b; }
+.dark .guide-meta { color: #94a3b8; }
+.dark .seo table { font-size: 0.9rem; }
+
+/* ---------- Byline / rules chip ---------- */
+.review-line { margin: 0.35rem 0 0; font-size: 0.75rem; color: #94a3b8; }
+.review-line a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.dark .review-line { color: #64748b; }
+.rules-chip { display: inline-flex; align-items: center; gap: 0.25rem; border: 1px solid #c7d2fe; border-radius: 9999px; background: #eef2ff; padding: 0.15rem 0.7rem; font-size: 0.72rem; font-weight: 600; color: #4338ca; }
+.dark .rules-chip { border-color: rgba(99, 102, 241, 0.35); background: rgba(79, 70, 229, 0.14); color: #c7d2fe; }
+.guide-meta a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }

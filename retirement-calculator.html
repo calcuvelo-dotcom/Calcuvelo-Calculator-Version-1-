@@ -7,15 +7,15 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3151204327110108" crossorigin="anonymous"></script>
-  <title>Retirement &amp; 401(k) Calculator — Calcuvelo</title>
-  <meta name="description" content="Free retirement calculator. Project your 401(k) balance at retirement from your age, salary, contribution rate and employer match, with a growth chart by age." />
+  <title>Retirement &amp; 401(k) Calculator with Employer Match — Calcuvelo</title>
+  <meta name="description" content="Project your 401(k) balance at retirement from age, salary, contribution rate, employer match and raises, then estimate the income it could support." />
   <link rel="canonical" href="https://calcuvelo.com/retirement-calculator.html" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Retirement &amp; 401(k) Calculator — Calcuvelo" />
-  <meta property="og:description" content="Project your 401(k) balance at retirement, including your employer match and annual raises." />
+  <meta property="og:title" content="Retirement &amp; 401(k) Calculator with Employer Match — Calcuvelo" />
+  <meta property="og:description" content="Project your 401(k) balance at retirement from age, salary, contribution rate, employer match and raises, then estimate the income it could support." />
   <meta property="og:url" content="https://calcuvelo.com/retirement-calculator.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -27,12 +27,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/site.css" />
-  <link rel="stylesheet" href="assets/header.css" />
+  <link rel="stylesheet" href="assets/site.css?v=202610262" />
+  <link rel="stylesheet" href="assets/header.css?v=202610262" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script defer src="assets/calculators.js"></script>
-  <script defer src="assets/header.js"></script>
+  <script defer src="assets/calculators.js?v=202610262"></script>
+  <script defer src="assets/header.js?v=202610262"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
   <script type="application/ld+json">
@@ -45,25 +45,54 @@
         "url": "https://calcuvelo.com/retirement-calculator.html",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How much should I contribute to my 401(k)?",
-            "acceptedAnswer": { "@type": "Answer", "text": "At an absolute minimum, contribute enough to capture your full employer match — that is an immediate 50-100% return. A widely used rule of thumb is to save about 15% of your gross income for retirement, including the employer match, increasing the rate over time as your income grows." }
+            "name": "How much of my salary should I be saving for retirement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A commonly cited target is 10–15% of gross income including any employer match, starting in your twenties or thirties. If you start later, the required percentage climbs. Use the calculator to test your own age and balance rather than relying on a single rule."
+            }
           },
           {
             "@type": "Question",
-            "name": "What rate of return should I assume?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A diversified stock-and-bond portfolio has historically returned roughly 6-7% per year after inflation over multi-decade periods. Using 6-7% keeps the projection conservative. Returns in any single year vary widely, so revisit the projection regularly." }
+            "name": "Is a 7% return realistic?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is a reasonable long-run average for a stock-heavy portfolio before inflation, but individual decades vary widely and some are far worse. Many planners use 5–6% for a more cautious projection. The honest answer is to run several rates and see how much the outcome changes."
+            }
           },
           {
             "@type": "Question",
-            "name": "What is the 4% rule?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The 4% rule is a rough guideline that says you can withdraw about 4% of your retirement portfolio in the first year, then adjust that dollar amount for inflation, with a good chance the money lasts 30 years. This calculator uses your chosen withdrawal rate to estimate monthly retirement income." }
+            "name": "What does “vesting” mean for my employer match?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vesting is the schedule on which employer contributions become fully yours. Your own contributions are always yours; the match may be forfeited in part if you leave before you are fully vested, so check your plan documents before a job change."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Pre-tax or Roth 401(k)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pre-tax contributions lower taxable income now and are taxed on withdrawal; Roth contributions are taxed now and grow tax-free. Which wins depends mostly on whether your tax rate will be higher now or in retirement. This calculator projects the balance and does not model either tax treatment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the projection include Social Security?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Social Security, a pension or part-time work would be on top of the monthly figure shown, which makes this tool a conservative picture of the 401(k) alone."
+            }
           }
         ]
       }
@@ -112,12 +141,22 @@
               <a href="real-roi.html" data-nav class="site-nav-link" role="menuitem">Real ROI</a>
               <a href="salary-converter.html" data-nav class="site-nav-link" role="menuitem">Salary &rarr; Hourly</a>
               <a href="rule-of-72.html" data-nav class="site-nav-link" role="menuitem">Rule of 72</a>
+            </div>
+            <div>
+              <p class="site-nav-heading">Canada</p>
+              <a href="ontario-take-home-pay.html" data-nav class="site-nav-link" role="menuitem">Ontario Take-Home Pay</a>
+              <a href="mortgage-prepayment-penalty.html" data-nav class="site-nav-link" role="menuitem">Mortgage Prepayment Penalty</a>
+              <a href="rrsp-vs-tfsa-calculator.html" data-nav class="site-nav-link" role="menuitem">RRSP vs. TFSA</a>
+              <a href="cpp-start-age-calculator.html" data-nav class="site-nav-link" role="menuitem">CPP Start Age</a>
+              <a href="osap-repayment-calculator.html" data-nav class="site-nav-link" role="menuitem">OSAP Repayment</a>
               <a href="gic-ladder-optimizer.html" data-nav class="site-nav-link" role="menuitem">GIC &amp; Cash Ladder</a>
             </div>
           </div>
           <a href="index.html" class="site-nav-all" role="menuitem">All calculators &rarr;</a>
         </div>
       </div>
+
+      <a href="guides.html" data-guides class="site-nav-trigger">Guides</a>
 
       <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- FLEXIBLE SLOT — swap for  <span class="site-badge-pill"><i></i>Benchmark data</span>  or delete -->
@@ -143,6 +182,7 @@
             <section x-data="retirement()" x-effect="update()" x-cloak class="card">
               <h1 class="calc-title">Retirement &amp; 401(k) Calculator</h1>
               <p class="calc-sub">Project your retirement balance from today's savings rate and expected returns.</p>
+              <p class="review-line">Reviewed by the <a href="about.html">Calcuvelo team</a> &middot; Last updated October 26, 2026</p>
 
               <noscript><p class="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 ring-1 ring-amber-200">This calculator needs JavaScript enabled to run.</p></noscript>
 
@@ -232,45 +272,60 @@
             </section>
 
             <article class="card seo prose prose-slate mt-8 max-w-none prose-headings:tracking-tight prose-a:font-medium prose-a:text-indigo-600 prose-h2:text-lg prose-h2:mb-3 prose-h2:mt-0 prose-h3:text-base">
-              <h2>What is the Retirement / 401(k) Calculator?</h2>
-              <p>The Retirement / 401(k) Calculator projects your account balance at retirement from your current age, balance, salary, contribution rate and employer match, compounding monthly at an assumed annual return and applying a raise to your salary each year.</p>
+<h2>What is the Retirement / 401(k) Calculator?</h2>
+<p>This calculator takes the unglamorous inputs of a workplace retirement plan &mdash; how old you are, what you earn, what you contribute, what your employer adds &mdash; and projects a balance at your retirement age. It then translates that balance into a rough monthly income so you can judge whether the destination looks like what you had in mind.</p>
+<p>It is designed for the question most 401(k) holders actually have: &ldquo;Am I on track, and what happens if I raise my contribution a few points?&rdquo;</p>
 
-              <h2>How to Use This Calculator</h2>
-              <ol>
-                <li><strong>Enter your current age and target retirement age</strong> — the gap between them is your investing runway.</li>
-                <li><strong>Enter your current retirement balance and annual salary.</strong></li>
-                <li><strong>Set your contribution rate</strong> (a percentage of salary) and your <strong>employer match</strong>.</li>
-                <li><strong>Choose an expected annual return</strong> and an <strong>annual raise</strong> so future contributions grow with your income.</li>
-                <li><strong>Read the projection.</strong> You get the projected balance at retirement, how much you contributed, how much is investment growth, and an estimate of monthly income using your chosen safe-withdrawal rate. The chart plots the balance year by year against your total contributions.</li>
-              </ol>
+<h2>What to enter in each box</h2>
+<ul>
+<li><strong>Current and retirement age.</strong> Retirement age sets the number of years of contributions and growth. Each extra working year does double duty: another year of contributions and one fewer year of withdrawals.</li>
+<li><strong>Current balance and salary.</strong> Use today&rsquo;s plan balance and your gross annual pay.</li>
+<li><strong>Your contribution % and employer match %.</strong> The match is the percentage of your salary your employer adds, not the match formula itself. If your plan matches 50% of the first 6% you contribute, the employer adds 3% of salary, so enter 3.</li>
+<li><strong>Expected return.</strong> Seven percent is a commonly used long-run stock-heavy assumption before inflation; a conservative planner may use 5&ndash;6%.</li>
+<li><strong>Annual raise.</strong> Contributions are a percentage of salary, so raises grow them automatically. Two to three percent is a modest assumption.</li>
+<li><strong>Withdrawal rate.</strong> The share of the balance you plan to draw down in the first year of retirement; 4% is the traditional rule of thumb.</li>
+</ul>
 
-              <h2>How does the underlying math work?</h2>
-              <p>The model steps forward one month at a time. Each month the balance earns one-twelfth of the expected annual return, then a contribution is added:</p>
-              <div class="not-prose my-4"><div class="formula">balanceₙₑw = balanceₒₗd × (1 + r ÷ 12) + (salary ÷ 12) × (c + m)</div></div>
-              <ul>
-                <li><strong>r</strong> — expected annual return</li>
-                <li><strong>c</strong> — your contribution rate (as a decimal)</li>
-                <li><strong>m</strong> — employer match rate (as a decimal)</li>
-              </ul>
-              <p>Once a year the salary is multiplied by (1 + raise) so contributions keep pace with your income. Estimated monthly retirement income is <strong>final balance × withdrawal rate ÷ 12</strong> — the withdrawal-rate box defaults to the 4% rule.</p>
+<h2>How does the underlying math work?</h2>
+<p>Each month the balance grows by one-twelfth of the annual return, and a contribution equal to (your % + employer %) of one-twelfth of your salary is added. Once a year the salary is increased by the raise percentage.</p><div class="not-prose my-4"><div class="formula">balance<sub>m</sub> = balance<sub>m&minus;1</sub> &times; (1 + r&divide;12) + salary &divide; 12 &times; (your % + match %)</div></div>
+<p>The monthly retirement income estimate is simply the final balance &times; withdrawal rate &divide; 12. It is a planning shortcut, not a guarantee: it ignores taxes on withdrawals, Social Security and the order of market returns.</p>
 
-              <h2>Real-world practical application</h2>
-              <p>It is commonly used to find the minimum contribution rate needed to capture a full employer match, to see the dollar impact of bumping contributions by a percentage point after a raise, and to translate a projected balance into an estimated monthly retirement income using the 4% withdrawal rule.</p>
+<h2>Worked example: a 35-year-old, 30 years to go</h2>
+<p>Take someone aged 35 with $40,000 in the plan, an $85,000 salary, contributing 6% with a 3% employer match, expecting 7% a year and 2% annual raises, retiring at 65.</p>
+<ul>
+<li>Projected balance at 65: about <strong>$1,277,275</strong>.</li>
+<li>Total contributed from now on: about $310,346; investment growth supplies the other roughly $926,929.</li>
+<li>At a 4% withdrawal rate: about <strong>$4,258 a month</strong>.</li>
+</ul>
+<p>Now raise the personal contribution from 6% to 10%, which costs about $3,400 more in the first year. The projection rises to roughly <strong>$1,700,659</strong>, or about $5,669 a month &mdash; around $423,000 more at retirement for an extra 4% of pay. Contributions rose by about $138,000 over the 30 years; growth did the rest.</p>
+<p>One honest caveat: those are nominal dollars. At 3% inflation, $1,277,275 in 30 years is worth roughly $526,000 in today&rsquo;s purchasing power. Compare any result with what you spend today, in today&rsquo;s dollars.</p>
 
-              <h2>Frequently Asked Questions</h2>
-              <h3>How much should I contribute to my 401(k)?</h3>
-              <p>At a minimum, contribute enough to capture your full employer match — that is an immediate 50–100% return on those dollars. A widely used target is to save about <strong>15% of gross income</strong> for retirement including the match, raising the percentage as your salary grows.</p>
-              <h3>What rate of return should I assume?</h3>
-              <p>A diversified stock-and-bond portfolio has historically returned roughly <strong>6–7% per year after inflation</strong> over multi-decade periods. Single-year returns swing far more than that, so treat the projection as a planning estimate and revisit it every year or two.</p>
-              <h3>What is the 4% rule?</h3>
-              <p>It is a rough guideline: withdraw about 4% of your portfolio in your first year of retirement, then adjust that dollar figure for inflation each year, and the money has historically had a good chance of lasting 30 years. Lower the withdrawal-rate input for a more cautious plan.</p>
+<h2>Real-world practical application</h2>
+<p>The most common use is the &ldquo;one more percent&rdquo; test: change the contribution box by a point and see the retirement balance move. The second is the match audit &mdash; if you are contributing less than the percentage that earns your full employer match, you are leaving part of your compensation on the table, and the calculator shows how large that gap becomes over decades. A third use is retirement-age planning: compare 62, 65 and 67 to see how much the extra years are worth.</p>
 
-              <h2>Related Calculators</h2>
-              <ul>
-                <li><a href="compound-interest.html">Compound Interest</a> — the growth engine behind this projection, in isolation.</li>
-                <li><a href="inflation-calculator.html">Inflation Calculator</a> — what your future balance is worth in today's dollars.</li>
-                <li><a href="rule-of-72.html">Rule of 72</a> — a fast estimate of how many times your savings will double before you retire.</li>
-              </ul>
+<h2>How to read the result sensibly</h2>
+<p>Treat the output as a range finder, not a forecast. Run it three times &mdash; at 5%, 7% and 9% &mdash; and plan around the low case. Remember that the 4% withdrawal rule comes from historical analysis of 30-year retirements; a longer retirement, or a very large share of your income coming from this account, argues for a lower rate. Annual contribution limits, catch-up rules for those over 50, and Roth versus pre-tax treatment change from year to year, so check the current IRS figures rather than relying on any article&rsquo;s numbers.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>How much of my salary should I be saving for retirement?</h3>
+<p>A commonly cited target is 10&ndash;15% of gross income including any employer match, starting in your twenties or thirties. If you start later, the required percentage climbs. Use the calculator to test your own age and balance rather than relying on a single rule.</p>
+<h3>Is a 7% return realistic?</h3>
+<p>It is a reasonable long-run average for a stock-heavy portfolio before inflation, but individual decades vary widely and some are far worse. Many planners use 5&ndash;6% for a more cautious projection. The honest answer is to run several rates and see how much the outcome changes.</p>
+<h3>What does &ldquo;vesting&rdquo; mean for my employer match?</h3>
+<p>Vesting is the schedule on which employer contributions become fully yours. Your own contributions are always yours; the match may be forfeited in part if you leave before you are fully vested, so check your plan documents before a job change.</p>
+<h3>Pre-tax or Roth 401(k)?</h3>
+<p>Pre-tax contributions lower taxable income now and are taxed on withdrawal; Roth contributions are taxed now and grow tax-free. Which wins depends mostly on whether your tax rate will be higher now or in retirement. This calculator projects the balance and does not model either tax treatment.</p>
+<h3>Does the projection include Social Security?</h3>
+<p>No. Social Security, a pension or part-time work would be on top of the monthly figure shown, which makes this tool a conservative picture of the 401(k) alone.</p>
+<h2>Related calculators &amp; guides</h2>
+<ul>
+<li><a href="guide-start-early-vs-contribute-more.html">Guide: start early or contribute more later?</a> &mdash; how much the first decade of contributions is really worth.</li>
+<li><a href="compound-interest.html">Compound Interest Calculator</a> &mdash; model a non-salary-linked account with fixed deposits.</li>
+<li><a href="inflation-calculator.html">Inflation Calculator</a> &mdash; convert the future balance to today&rsquo;s dollars.</li>
+<li><a href="401k-split-distribution.html">401(k) Split Distribution Calculator</a> &mdash; what an early cash-out really costs.</li>
+<li><a href="cpp-start-age-calculator.html">CPP Start Age Calculator</a> &mdash; when to take CPP: 60, 65 or 70.</li>
+<li><a href="rrsp-vs-tfsa-calculator.html">RRSP vs. TFSA Calculator</a> &mdash; which account to fill first.</li>
+</ul>
             </article>
 
           </main>
@@ -284,6 +339,8 @@
       <div class="flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; <span id="yr">2026</span> Calcuvelo. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
+          <a href="about.html" class="hover:text-slate-900">About</a>
+          <a href="guides.html" class="hover:text-slate-900">Guides</a>
           <a href="privacy.html" class="hover:text-slate-900">Privacy Policy</a>
           <a href="terms.html" class="hover:text-slate-900">Terms of Service</a>
           <a href="contact.html" class="hover:text-slate-900">Contact</a>
